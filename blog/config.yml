@@ -1,5 +1,5 @@
 languageCode: "en-us"
-baseUrl: "https://noloman.github.io/blog"
+baseUrl: "https://main--neon-halva-6e6e5f.netlify.app/blog/"
 title: "Anubis"
 theme: "anubis"
 paginate: 10
