@@ -1,5 +1,0 @@
-# blog netlify.toml
-[build]
-  base = "/blog/_site"
-  command = "bundle install && bundle exec jekyll build"
-  publish = "/blog/_site"
