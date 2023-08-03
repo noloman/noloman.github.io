@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Blog
-permalink: /docs
+permalink: /blog
 ---
 
 ## Posts
