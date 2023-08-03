@@ -1,5 +1,5 @@
 languageCode: "en-us"
-baseUrl: "https://manulorenzo.me/blog"
+baseUrl: ""
 title: "Anubis"
 theme: "anubis"
 paginate: 10
