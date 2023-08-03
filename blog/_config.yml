@@ -30,7 +30,7 @@ github_username: noloman
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 plugins:
   - jekyll-feed
-  - jekyll-remote-theme
+  - jekyll-include-cache
 
 include: [_pages]
 
