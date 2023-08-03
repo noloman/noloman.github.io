@@ -1,5 +1,5 @@
 languageCode: "en-us"
-baseUrl: "/blog"
+baseUrl: "https://noloman.github.io/blog"
 title: "Anubis"
 theme: "anubis"
 paginate: 10
