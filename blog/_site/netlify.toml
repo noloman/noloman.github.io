@@ -1,5 +1,5 @@
 # blog netlify.toml
 [build]
-  base = "/blog/_site"
+  base = "/blog"
   command = "jekyll build"
-  publish = "/blog"
+  publish = "/blog/_site"
