@@ -1,3 +1,6 @@
 [submodule "blog/themes/anubis"]
 	path = blog/themes/anubis
 	url = https://github.com/mitrichius/hugo-theme-anubis.git
+[submodule "blog/themes/risotto"]
+	path = blog/themes/risotto
+	url = https://github.com/joeroe/risotto.git
