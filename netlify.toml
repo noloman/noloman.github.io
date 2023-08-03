@@ -1,3 +1,4 @@
 # repository root netlify.toml
 [build]
-  base = ""
+  base = "/"
+  publish = "/"
