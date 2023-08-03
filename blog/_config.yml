@@ -27,7 +27,7 @@ twitter_username: noloman
 github_username: noloman
 
 # Build settings
-remote_theme: benbalter/retlab
+theme: minimal-mistakes-jekyll
 plugins:
   - jekyll-remote-theme
   - jekyll-feed
