@@ -26,12 +26,11 @@ url: 'http://manulorenzo.me' # the base hostname & protocol for your site, e.g. 
 twitter_username: noloman
 github_username: noloman
 
+theme: minimal-mistakes-jekyll
+
 # Build settings
-remote_theme: mmistakes/minimal-mistakes@4.24.0
 plugins:
   - jekyll-feed
-  - jekyll-remote-theme
-  - jekyll-include-cache
 
 include: [_pages]
 
