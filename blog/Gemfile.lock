@@ -260,7 +260,6 @@ DEPENDENCIES
   jekyll-feed (~> 0.12)
   jekyll-remote-theme (~> 0.4.3)
   jekyll-theme-awesome
-  minima (~> 2.5)
   tzinfo (>= 1, < 3)
   tzinfo-data
   wdm (~> 0.1.1)
