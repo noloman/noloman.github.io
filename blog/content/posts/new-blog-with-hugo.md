@@ -1,7 +1,7 @@
 ---
 title: 'New blog with Hugo'
 date: 2023-08-04T08:49:13+02:00
-draft: true
+draft: false
 tags: ['blogging']
 ---
 
