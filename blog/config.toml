@@ -23,8 +23,8 @@ mode = "dark-mode"
 
 # Sidebar: about/bio
 [params.about]
-title = "RAMBLING thoughts"
-description = "Software engineering thoughts: Android/iOS, Kotlin, Ruby on Rails, Golang"
+title = "Rambling thoughts"
+description = "Software engineering thoughts: Android/iOS, Kotlin, Swift, Ruby, Ruby on Rails, Golang"
 logo = "images/rice.svg"
 
 # Sidebar: social links
@@ -43,9 +43,9 @@ title = "Email"
 url = "mailto:manulorenzop@gmail.com"
 
 [[params.socialLinks]]
-icon = "ai ai-orcid"
-title = "ORCID"
-url = "https://orcid.org/0000-0001-2345-6789"
+icon = "fa-brands fa-linkedin"
+title = "LinkedIn"
+url = "https://www.linkedin/in/manulorenzo"
 
 [menu]
 
