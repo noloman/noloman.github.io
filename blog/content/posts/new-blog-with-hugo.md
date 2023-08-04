@@ -12,5 +12,6 @@ I have to say that I'm very satisfied with it. It is a publicly available in [Gi
 All the configuration needed for Netlify is [here](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/), and of course, there are two things I really love about it:
   - It is completely FREE
   - There are thousands of excellent and beautiful available themes that are very easy to set up.
+However, I also find it quite daunting to be able to properly configure the blog, as Hugo seems to have A LOT of customization options. Thankfully, they have it all [documented quite nicely](https://gohugo.io/documentation/).
 
 On the contrary, I have tried to setup a Jekyll blog and it really was painful to try to change the default theme while hosting it in Github Pages.
