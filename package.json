@@ -37,7 +37,7 @@
     "merge2": "^1.4.1",
     "micromatch": "^4.0.5",
     "minimist": "^1.2.6",
-    "nanoid": "^4.0.0",
+    "nanoid": "^5.0.0",
     "normalize-path": "^3.0.0",
     "object-hash": "^3.0.0",
     "path-parse": "^1.0.7",
