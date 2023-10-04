@@ -44,7 +44,7 @@
     "picocolors": "^1.0.0",
     "picomatch": "^2.3.1",
     "pify": "^6.0.0",
-    "postcss": "^8.4.14",
+    "postcss": "^8.4.31",
     "postcss-import": "^15.0.0",
     "postcss-js": "^4.0.0",
     "postcss-load-config": "^4.0.0",
