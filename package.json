@@ -42,7 +42,7 @@
     "object-hash": "^3.0.0",
     "path-parse": "^1.0.7",
     "picocolors": "^1.0.0",
-    "picomatch": "^2.3.1",
+    "picomatch": "^3.0.0",
     "pify": "^6.0.0",
     "postcss": "^8.4.31",
     "postcss-import": "^15.0.0",
