@@ -47,7 +47,7 @@
     "postcss": "^8.4.31",
     "postcss-import": "^15.0.0",
     "postcss-js": "^4.0.0",
-    "postcss-load-config": "^4.0.0",
+    "postcss-load-config": "^5.0.0",
     "postcss-nested": "^6.0.0",
     "postcss-selector-parser": "^6.0.10",
     "postcss-value-parser": "^4.2.0",
