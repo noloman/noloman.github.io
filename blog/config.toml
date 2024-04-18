@@ -1,4 +1,4 @@
-baseURL = "https://blog.manulorenzo.me"
+baseURL = "http://blog.manulorenzo.me"
 theme = "risotto"
 title = "Rambling thoughts"
 author = "Manuel Lorenzo"
