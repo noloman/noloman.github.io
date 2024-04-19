@@ -24,7 +24,7 @@ mode = "dark-mode"
 # Sidebar: about/bio
 [params.about]
 title = "Rambling thoughts"
-description = "Software engineering thoughts: Android/iOS, Kotlin, Swift, Ruby, Ruby on Rails, Golang"
+description = "Software engineering thoughts: Android/iOS, Kotlin, Swift, Go"
 logo = "images/rice.svg"
 
 # Sidebar: social links
