@@ -1,20 +1,3 @@
 # Local Netlify folder
 .netlify
-blog/public
-blog/public/categories/index.html
-blog/public/categories/index.html
-blog/public/posts/index.html
-blog/public/posts/new-blog-with-hugo/index.html
-blog/public/series/index.html
-blog/public/tags/index.html
-blog/public/index.html
-blog/public/index.xml
-blog/public/sitemap.xml
-blog/public/categories/index.html
-blog/public/posts/index.html
-blog/public/posts/new-blog-with-hugo/index.html
-blog/public/series/index.html
-blog/public/tags/index.html
-blog/public/index.html
-blog/public/index.xml
-blog/public/sitemap.xml
+**/public
