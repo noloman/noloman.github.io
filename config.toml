@@ -15,6 +15,8 @@ style = "github-dark"
   [services.googleAnalytics]
     ID = 'G-77L8ZHRRKG'
 
+[googleAnalytics]
+  trackingID = "G-77L8ZHRRKG"
 
 [params]
   author = "Manuel Lorenzo Parejo"
