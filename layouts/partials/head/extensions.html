@@ -1,20 +1,10 @@
-{{
-/*
-You can add further theme extensions or customizations here if they should
-appear in
+{{ template "_internal/google_analytics.html" . }}
+{{ template "_internal/google_analytics_async.html" . }}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-77L8ZHRRKG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
 
-<head>.
-  */
-  {{ template "_internal/google_analytics.html" . }}
-  {{ template "_internal/google_analytics_async.html" . }}
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-77L8ZHRRKG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-77L8ZHRRKG');
-  </script>
-
-  }}
+  gtag('config', 'G-77L8ZHRRKG');
+</script>
