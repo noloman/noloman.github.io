@@ -18,6 +18,8 @@ ID = 'G-77L8ZHRRKG'
 [googleAnalytics]
 trackingID = "G-77L8ZHRRKG"
 
+googleAnalytics = "G-77L8ZHRRKG"
+
 [googleTagManager]
 id = "G-77L8ZHRRKG"
 
