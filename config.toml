@@ -11,9 +11,8 @@ disqusShortname = "yourdiscussshortname"
 [markup.highlight]
 style = "github-dark"
 
-[services]
-  [services.googleAnalytics]
-  ID = 'G-77L8ZHRRKG'
+[services.googleAnalytics]
+ID = 'G-77L8ZHRRKG'
 
 [googleAnalytics]
 trackingID = "G-77L8ZHRRKG"
