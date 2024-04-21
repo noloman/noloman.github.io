@@ -18,6 +18,9 @@ style = "github-dark"
 [googleAnalytics]
   trackingID = "G-77L8ZHRRKG"
 
+[params.googleTagManager]
+    id = "G-77L8ZHRRKG"
+
 [params]
   author = "Manuel Lorenzo Parejo"
   info = "Android master, iOS journeyman and Golang apprentice"
