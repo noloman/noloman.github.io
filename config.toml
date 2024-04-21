@@ -8,8 +8,7 @@ paginate = 20
 
 disqusShortname = "yourdiscussshortname"
 
-[absLangURL]
-canonical = "http://www.manulorenzo.me"
+absLangURL = "http://www.manulorenzo.me"
 
 [markup.highlight]
 style = "github-dark"
