@@ -8,8 +8,6 @@ paginate = 20
 
 disqusShortname = "yourdiscussshortname"
 
-absLangURL = "http://www.manulorenzo.me"
-
 [markup.highlight]
 style = "github-dark"
 
@@ -36,7 +34,7 @@ faviconSVG = "/img/favicon.svg"
 favicon_32 = "/img/favicon-32x32.png"
 favicon_16 = "/img/favicon-16x16.png"
 
-since = 2019
+since = 2024
 
 enableTwemoji = true
 
