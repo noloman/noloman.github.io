@@ -6,20 +6,31 @@ aliases = ["about-us", "about-hugo", "contact"]
 author = "Hugo Authors"
 +++
 
-Written in Go, Hugo is an open source static site generator available under the [Apache Licence 2.0.](https://github.com/gohugoio/hugo/blob/master/LICENSE) Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.
+# About Me
 
-Hugo makes use of a variety of open source projects including:
+Hello! I'm [Manuel], a passionate software developer with a keen interest in building efficient and scalable web applications. With a strong foundation in various programming languages and frameworks, I enjoy solving complex problems and continuously learning new technologies.
 
-* https://github.com/yuin/goldmark
-* https://github.com/alecthomas/chroma
-* https://github.com/muesli/smartcrop
-* https://github.com/spf13/cobra
-* https://github.com/spf13/viper
+## My Background
 
-Hugo is ideal for blogs, corporate websites, creative portfolios, online magazines, single page applications or even a website with thousands of pages.
+I have a background in [Computer Science], and over [10] years of experience in the tech industry. I have worked on a variety of projects ranging from small business websites to large-scale enterprise applications.
 
-Hugo is for people who want to hand code their own website without worrying about setting up complicated runtimes, dependencies and databases.
+## Skills and Expertise
 
-Websites built with Hugo are extremely fast, secure and can be deployed anywhere including, AWS, GitHub Pages, Heroku, Netlify and any other hosting provider.
+- **Programming Languages**: Kotlin, Java, Swift, Go, Ruby.
+- **Frameworks**: Android, iOS.
+- **Tools and Technologies**: Git, Docker, etc.
+- **Other**: Agile methodologies, Test-driven development, etc.
 
-Learn more and contribute on [GitHub](https://github.com/gohugoio).
+## Projects
+
+Here are some of the projects I have worked on:
+
+- **Project 1**: A brief description of the project and your role in it.
+- **Project 2**: A brief description of the project and your role in it.
+- **Project 3**: A brief description of the project and your role in it.
+
+## Contact Me
+
+Feel free to reach out to me through any of the following platforms:
+
+[Contact Me](./contact/)
