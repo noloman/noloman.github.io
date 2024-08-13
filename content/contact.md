@@ -3,11 +3,6 @@ title = "Contact"
 slug = "contact"
 +++
 
-+++
-title = "Contact"
-slug = "contact"
-+++
-
 # Contact Me
 
 Feel free to reach out to me through any of the following platforms:
