@@ -28,7 +28,7 @@ In conclusion, Remoti is the go-to app for anyone seeking remote work opportunit
 About the iOS app, it's written entirely in Swift (of course) and SwiftUI and it relies heavily on Core Data.
 The Android app is the least mature of the three projects, and it just has jobs from two remote job boards, unlike the web and iOS app, that fetch content from 5 different job boards.
 
-- **Link:** [Live Demo](https://www.remotiapp.com)
+- **Link:** [Live Demo](https://remotiapp.com)
 - **Link:** [App Store link](https://apps.apple.com/us/app/remoti-remote-work/id1567902235)
 - **Link:** [Play Store link](https://play.google.com/store/apps/details?id=me.manulorenzo.remoti&pcampaignid=web_share)
 
