@@ -1,5 +1,0 @@
-<h1>Recent Posts</h1>
-{{ range where .Site.RegularPages "Section" "posts" }}
-<h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-<p>{{ .Summary }}</p>
-{{ end }}
