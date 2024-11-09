@@ -1,7 +1,7 @@
-+++
-title = "Contact"
-slug = "contact"
-+++
+---
+title: "Contact"
+slug: "contact"
+---
 
 # Contact Me
 
