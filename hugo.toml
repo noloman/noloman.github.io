@@ -47,7 +47,7 @@ sitename = "Rambling thoughts"
 # the default value is set to 'auto'.
 # You can take a look at layouts/index.html for more information.
 # additionalScripts = ['js/custom.js', 'js/custom-2.js']
-# description = "Minimal Hugo blog theme with light and dark mode support"
+description = "Minimal Hugo blog theme with light and dark mode support"
 goToTop = true                                                           # set to false to disable 'go to top' button
 mainSections = ['posts']
 toc = false                                                              # set to false to disable table of contents 'globally'
@@ -66,7 +66,7 @@ rssFeedDescription = "summary" # available options: 1) summary 2) full
 [Languages.en-gb.params.author]
 avatar = "avatar.jpg" # put the file in assets folder; also ensure that image has same height and width
 # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
-description = "A fast, minimalistic Hugo theme with light and dark mode support, for running a personal site or blog."
+# description = "A fast, minimalistic Hugo theme with light and dark mode support, for running a personal site or blog."
 intro = "Rambling thoughts"
 name = "Manuel Lorenzo"
 
