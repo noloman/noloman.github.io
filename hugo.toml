@@ -88,5 +88,9 @@ name = "twitter"
 url = "https://twitter.com/noloman"
 
 [[params.socialIcons]]
+name = "bluesky"
+url = "https://bsky.app/profile/noloman.bsky.social"
+
+[[params.socialIcons]]
 name = "Rss"
 url = "index.xml"
