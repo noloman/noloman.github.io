@@ -78,3 +78,15 @@ name = "sitename" # will use "params.sitename" or "title" by default
 short_name = "sitename" # same as name
 start_url = "/" # will use homepage url by default
 theme_color = "#434648" # default is "#434648" (base color of text). Also will override html `<meta name="theme-color" />`
+
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/noloman"
+
+[[params.socialIcons]]
+name = "twitter"
+url = "https://twitter.com/noloman"
+
+[[params.socialIcons]]
+name = "Rss"
+url = "index.xml"
