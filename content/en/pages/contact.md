@@ -1,6 +1,7 @@
 ---
 title: "Contact"
 slug: "contact"
+date: "2024-11-10"
 ---
 
 # Contact Me
