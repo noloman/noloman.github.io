@@ -1,9 +1,7 @@
 ---
 title: "About"
-description: "Hugo, the world's fastest framework for building websites"
-date: "2019-02-28"
-aliases: ["about-us", "about-hugo", "contact"]
-author: "Hugo Authors"
+date: "2024-11-10"
+author: "Manuel Lorenzo"
 ---
 
 # About Me
