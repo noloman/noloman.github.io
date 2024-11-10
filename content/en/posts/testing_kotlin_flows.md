@@ -1,7 +1,7 @@
 ---
 author: Manuel Lorenzo
 title: Testing Kotlin flows
-date: 2024-11-09
+date: "2024-11-09"
 categories:
   - Kotlin
 description: Testing Kotlin flows can be kind of tricky
