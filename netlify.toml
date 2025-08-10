@@ -1,0 +1,5 @@
+# Netlify configuration: no build, just deploy files in repo root
+[build]
+command = ""
+publish = "."
+
