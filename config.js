@@ -1,35 +1,23 @@
 window.PorfolioConfig = {
   name: 'Manuel Lorenzo Parejo',
   jobTitle: 'Software engineer',
-  jobDescription: 'Android engineer > iOS developer | Spring boot developer > Golang',
+  jobDescription: 'Android > iOS | Spring boot > Golang',
   skills: [
     {
-      name: 'Android',
-      description: 'Reprehenderit mollit id ad veniam.'
+      name: 'Android & Kotlin',
+      description: 'Expert in Android development with Kotlin, leveraging Material Design, Jetpack libraries, and modern architecture patterns. Proficient in Coroutines, Flow, and Kotlin Multiplatform, with strong focus on MVVM and Clean Architecture principles.'
     },
     {
-      name: 'iOS',
-      description: 'Fugiat veniam esse consequat quis cillum elit consequat Lorem pariatur ipsum veniam irure incididunt non.'
+      name: 'iOS & Swift',
+      description: 'Skilled iOS developer focused on SwiftUI framework for building modern iOS applications. Experienced in Swift programming with understanding of iOS app lifecycle, design patterns, and best practices for creating efficient mobile applications.'
     },
     {
-      name: 'Kotlin',
-      description: 'Elit tempor mollit consectetur laborum nostrud qui in.'
-    },
-    {
-      name: 'Java',
-      description: 'Elit tempor mollit consectetur laborum nostrud qui in.'
-    },
-    {
-      name: 'Swift',
-      description: 'Elit tempor mollit consectetur laborum nostrud qui in.'
+      name: 'Spring Boot & Java',
+      description: 'Full-stack expertise in Java and Spring Boot for building robust enterprise applications. Proficient in developing RESTful APIs, implementing security measures, and optimizing performance through effective multithreading and database integration.'
     },
     {
       name: 'Golang',
-      description: 'Elit tempor mollit consectetur laborum nostrud qui in.'
-    },
-    {
-      name: 'Spring Boot',
-      description: 'Elit tempor mollit consectetur laborum nostrud qui in.'
+      description: 'Working knowledge of Go programming language for building backend services, with experience in developing RESTful APIs and understanding of basic concurrent programming concepts.'
     }
   ],
   works: [
@@ -65,8 +53,8 @@ window.PorfolioConfig = {
   ],
   contacts: {
     email: 'manulorenzop@gmail.com',
-    mobileNo: '+639171234567',
-    phoneNo: '+12 345 6789',
+    // mobileNo: '+639171234567',
+    // phoneNo: '+12 345 6789',
     links: [
       {
         name: 'GitHub',

@@ -18,7 +18,7 @@
   <meta name="twitter:image:alt" content="Manuel Lorenzo Parejo">
   <meta name="twitter:title" content="Manuel Lorenzo Parejo | Software Engineer" />
   <meta name="twitter:description"
-    content="Software Engineer | Android Developer | iOS Developer | Spring Boot Developer | Golang Developer" />
+    content="Software Engineer | Android & Kotlin | iOS & Swift | Spring Boot & Java | Golang " />
   <title>
     Manuel Lorenzo Parejo | Software Engineer
   </title>
@@ -59,7 +59,8 @@
 
 <body>
   <div id="app">
-    <div data-app="true" class="v-application v-application--is-ltr theme--light" id="app">
+    <div data-app="true" :class="['v-application v-application--is-ltr', isDark ? 'theme--dark' : 'theme--light']"
+      id="app">
       <div class="v-application--wrap">
         <nav>
           <header
@@ -70,15 +71,26 @@
                 left: 0px;
                 right: 0px;
               ">
-            <div class="v-toolbar__content justify-center flex-wrap">
-              <a href="#skills" class="ma-1 v-btn v-btn--text theme--light v-size--large"><span
-                  class="v-btn__content">Skills</span></a>
-              <a href="#works" class="ma-1 v-btn v-btn--text theme--light v-size--large"><span
-                  class="v-btn__content">Recent Works</span></a>
-              <a href="#hobbies" class="ma-1 v-btn v-btn--text theme--light v-size--large"><span
-                  class="v-btn__content">Hobbies</span></a>
-              <a href="#contact" class="ma-1 v-btn v-btn--outlined v-btn--text theme--light v-size--large"><span
-                  class="v-btn__content">Let's Talk!</span></a>
+            <div class="v-toolbar__content justify-space-between flex-wrap px-4">
+              <div class="d-flex align-center">
+                <v-btn icon @click="toggleTheme">
+                  <v-icon>{{ isDark ? 'mdi-white-balance-sunny' : 'mdi-moon-waning-crescent' }}</v-icon>
+                </v-btn>
+              </div>
+              <div class="d-flex flex-wrap justify-center">
+                <a href="#skills" class="ma-1 v-btn v-btn--text v-size--large"><span
+                    class="v-btn__content">Skills</span></a>
+                <a href="#works" class="ma-1 v-btn v-btn--text v-size--large"><span class="v-btn__content">Recent
+                    Works</span></a>
+                <a href="#hobbies" class="ma-1 v-btn v-btn--text v-size--large"><span
+                    class="v-btn__content">Hobbies</span></a>
+                <a href="#contact" class="ma-1 v-btn v-btn--outlined v-btn--text v-size--large"><span
+                    class="v-btn__content">Let's Talk!</span></a>
+              </div>
+              <div class="d-flex align-center">
+                <!-- Spacer to balance the layout -->
+                <div style="width: 40px"></div>
+              </div>
             </div>
           </header>
           <!---->
@@ -194,6 +206,7 @@
       el: '#app',
       vuetify: new Vuetify({
         theme: {
+          dark: false,
           themes: {
             light: {
               primary: '#1976D2',
@@ -203,14 +216,44 @@
               info: '#2196F3',
               success: '#4CAF50',
               warning: '#FFC107',
+              background: '#FFFFFF'
             },
+            dark: {
+              primary: '#2196F3',
+              secondary: '#424242',
+              accent: '#FF4081',
+              error: '#FF5252',
+              info: '#2196F3',
+              success: '#4CAF50',
+              warning: '#FFC107',
+              background: '#121212'
+            }
           },
-        },
+          options: {
+            customProperties: true
+          }
+        }
       }),
       data() {
         return {
           menu: false,
+          isDark: false,
           ...window.PorfolioConfig,
+        }
+      },
+      created() {
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme')
+        if (savedTheme) {
+          this.isDark = savedTheme === 'dark'
+          this.$vuetify.theme.dark = this.isDark
+        }
+      },
+      methods: {
+        toggleTheme() {
+          this.isDark = !this.isDark
+          this.$vuetify.theme.dark = this.isDark
+          localStorage.setItem('theme', this.isDark ? 'dark' : 'light')
         }
       },
       computed: {
