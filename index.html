@@ -134,6 +134,7 @@
               </div>
             </div>
           </section>
+
           <section>
             <div class="container fill-height" id="works" style="height: auto; min-height: 100vh">
               <div class="row justify-center">
@@ -141,9 +142,8 @@
                   <h1 data-aos="fade-up">#Recent Works</h1>
                 </div>
                 <div v-for="work in works" :key="work.name" class="text-center col-sm-6 col-md-4 col-12">
-                  <a tabindex="0" :href="work.link" target="_blank"
-                    class="v-card v-card--hover v-card--link v-sheet theme--light" style="height: 100%"
-                    data-aos="fade-up">
+                  <a :href="work.link" target="_blank" class="v-card v-card--hover v-card--link v-sheet theme--light"
+                    style="height: 100%" data-aos="fade-up">
                     <div class="v-card__text">
                       <h2>{{ work.name }}</h2>
                       <br />
@@ -154,24 +154,7 @@
               </div>
             </div>
           </section>
-          <section>
-            <div class="container fill-height" id="hobbies" style="height: auto; min-height: 100vh">
-              <div class="row justify-center">
-                <div class="text-center col-md-10 col-12">
-                  <h1 data-aos="fade-up">#Hobbies</h1>
-                </div>
-                <div v-for="hobby in hobbies" :key="hobby.name" class="text-center col-sm-6 col-md-4 col-12">
-                  <div class="v-card v-card--hover v-sheet theme--light" style="height: 100%" data-aos="fade-up">
-                    <div class="v-card__text">
-                      <h2>{{ hobby.name }}</h2>
-                      <br />
-                      <p>{{ hobby.description }}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+
           <section>
             <div class="container fill-height" id="contact" style="height: auto; min-height: 100vh">
               <div class="row justify-center">
@@ -185,7 +168,7 @@
                     </div>
                     <div class="text-center col col-12" data-aos="fade-up">
                       <a v-for="link in contactLinks" :key="link.name" :href="link.link" target="_blank" :class="['ma-1 v-btn v-btn--outlined v-btn--rounded v-size--default',
-                        isDark ? 'theme--dark white--text' : 'theme--light']">
+                            isDark ? 'theme--dark white--text' : 'theme--light']">
                         <span class="v-btn__content">{{ link.name }}</span></a>
                     </div>
                   </div>
