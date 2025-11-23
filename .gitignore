@@ -17,3 +17,6 @@ hugo.linux
 /.hugo_build.lock
 
 # End of https://www.toptal.com/developers/gitignore/api/hugo
+
+# Snyk Security Extension - AI Rules (auto-generated)
+.github/instructions/snyk_rules.instructions.md
