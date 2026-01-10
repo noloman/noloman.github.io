@@ -755,119 +755,125 @@
     </style>
   </head>
 
-  <body id="app">
+  <body>
     <div class="bg-mesh"></div>
     <div class="grain"></div>
 
-    <nav id="navbar">
-      <div class="nav-content">
-        <button
-          class="theme-toggle"
-          @click="toggleTheme"
-          aria-label="Toggle dark mode"
-        >
-          <i
-            :class="isDark ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-moon-waning-crescent'"
-          ></i>
-        </button>
-        <div class="nav-links">
-          <a href="#skills" class="nav-link">Skills</a>
-          <a href="#works" class="nav-link">Projects</a>
-          <a href="#contact" class="nav-link cta">Let's Talk</a>
-        </div>
-      </div>
-    </nav>
-
-    <main>
-      <section class="hero">
-        <div class="hero-content">
-          <p class="hero-label">Software Engineer</p>
-          <h1 class="hero-title">{{ name }}</h1>
-          <p class="hero-subtitle">
-            Building exceptional mobile and backend experiences with modern
-            technologies and clean architecture.
-          </p>
-          <div class="hero-stack">
-            <span class="stack-tag">Android & Kotlin</span>
-            <span class="stack-tag">iOS & Swift</span>
-            <span class="stack-tag">Spring Boot</span>
-            <span class="stack-tag">Golang</span>
-          </div>
-        </div>
-        <div class="scroll-indicator">
-          <span></span>
-        </div>
-      </section>
-
-      <section id="skills">
-        <div class="section-header reveal">
-          <p class="section-label">Expertise</p>
-          <h2 class="section-title">Skills & Technologies</h2>
-        </div>
-        <div class="cards-grid stagger-children reveal">
-          <div v-for="(skill, index) in skills" :key="skill.name" class="card">
-            <div class="card-icon">
-              <i :class="getSkillIcon(skill.name)"></i>
-            </div>
-            <h3 class="card-title">{{ skill.name }}</h3>
-            <p class="card-description">{{ skill.description }}</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="works">
-        <div class="section-header reveal">
-          <p class="section-label">Portfolio</p>
-          <h2 class="section-title">Recent Projects</h2>
-        </div>
-        <div class="cards-grid stagger-children reveal">
-          <a
-            v-for="work in works"
-            :key="work.name"
-            :href="work.link"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="card project-card"
+    <div id="app">
+      <nav id="navbar">
+        <div class="nav-content">
+          <button
+            class="theme-toggle"
+            @click="toggleTheme"
+            aria-label="Toggle dark mode"
           >
-            <span class="card-tag">{{ getProjectType(work.link) }}</span>
-            <span class="card-arrow">
-              <i class="mdi mdi-arrow-top-right"></i>
-            </span>
-            <h3 class="card-title">{{ work.name }}</h3>
-            <p class="card-description">{{ work.description }}</p>
-          </a>
+            <i
+              :class="isDark ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-moon-waning-crescent'"
+            ></i>
+          </button>
+          <div class="nav-links">
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#works" class="nav-link">Projects</a>
+            <a href="#contact" class="nav-link cta">Let's Talk</a>
+          </div>
         </div>
-      </section>
+      </nav>
 
-      <section id="contact" class="contact-section">
-        <div class="section-header reveal">
-          <p class="section-label">Get in Touch</p>
-          <h2 class="section-title">Let's Build Something</h2>
-        </div>
-        <div class="reveal">
-          <a :href="'mailto:' + contacts.email" class="contact-email">
-            {{ contacts.email }}
-          </a>
-          <div class="contact-links">
+      <main>
+        <section class="hero">
+          <div class="hero-content">
+            <p class="hero-label">Software Engineer</p>
+            <h1 class="hero-title">{{ name }}</h1>
+            <p class="hero-subtitle">
+              Building exceptional mobile and backend experiences with modern
+              technologies and clean architecture.
+            </p>
+            <div class="hero-stack">
+              <span class="stack-tag">Android & Kotlin</span>
+              <span class="stack-tag">iOS & Swift</span>
+              <span class="stack-tag">Spring Boot</span>
+              <span class="stack-tag">Golang</span>
+            </div>
+          </div>
+          <div class="scroll-indicator">
+            <span></span>
+          </div>
+        </section>
+
+        <section id="skills">
+          <div class="section-header reveal">
+            <p class="section-label">Expertise</p>
+            <h2 class="section-title">Skills & Technologies</h2>
+          </div>
+          <div class="cards-grid stagger-children reveal">
+            <div
+              v-for="(skill, index) in skills"
+              :key="skill.name"
+              class="card"
+            >
+              <div class="card-icon">
+                <i :class="getSkillIcon(skill.name)"></i>
+              </div>
+              <h3 class="card-title">{{ skill.name }}</h3>
+              <p class="card-description">{{ skill.description }}</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="works">
+          <div class="section-header reveal">
+            <p class="section-label">Portfolio</p>
+            <h2 class="section-title">Recent Projects</h2>
+          </div>
+          <div class="cards-grid stagger-children reveal">
             <a
-              v-for="link in contactLinks"
-              :key="link.name"
-              :href="link.link"
+              v-for="work in works"
+              :key="work.name"
+              :href="work.link"
               target="_blank"
               rel="noopener noreferrer"
-              class="contact-link"
+              class="card project-card"
             >
-              <i :class="getContactIcon(link.name)"></i>
-              {{ link.name }}
+              <span class="card-tag">{{ getProjectType(work.link) }}</span>
+              <span class="card-arrow">
+                <i class="mdi mdi-arrow-top-right"></i>
+              </span>
+              <h3 class="card-title">{{ work.name }}</h3>
+              <p class="card-description">{{ work.description }}</p>
             </a>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
 
-    <footer>
-      <small> Designed & built by Manuel Lorenzo Parejo </small>
-    </footer>
+        <section id="contact" class="contact-section">
+          <div class="section-header reveal">
+            <p class="section-label">Get in Touch</p>
+            <h2 class="section-title">Let's Build Something</h2>
+          </div>
+          <div class="reveal">
+            <a :href="'mailto:' + contacts.email" class="contact-email">
+              {{ contacts.email }}
+            </a>
+            <div class="contact-links">
+              <a
+                v-for="link in contactLinks"
+                :key="link.name"
+                :href="link.link"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-link"
+              >
+                <i :class="getContactIcon(link.name)"></i>
+                {{ link.name }}
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <small> Designed & built by Manuel Lorenzo Parejo </small>
+      </footer>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
     <script src="config.js"></script>
