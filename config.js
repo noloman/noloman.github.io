@@ -26,22 +26,40 @@ window.PorfolioConfig = {
   ],
   works: [
     {
-      name: "Vue Stripe Checkout",
-      link: "https://jofftiquez.github.io/vue-stripe-checkout",
+      name: "Build Quota",
+      link: "https://www.buildquota.com",
       description:
-        "Mollit dolor tempor adipisicing non pariatur in tempor cillum do. In officia ullamco laborum ullamco voluptate. Laboris sunt quis enim Lorem laboris aliquip duis non magna excepteur voluptate. Pariatur velit aliquip officia nulla anim reprehenderit deserunt. Sint nostrud ipsum do aliquip.",
+        "A GitHub Actions monitoring platform that tracks CI/CD pipeline usage in real-time. Features predictive analytics for usage forecasting, email alerts before limits are exceeded, and a privacy-focused dashboard with encrypted data handling.",
     },
     {
-      name: "ToDo App",
-      link: "https://theuselessweb.com/",
+      name: "CrossFit Tracker",
+      link: "https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android",
       description:
-        "Esse magna anim incididunt enim sint aute consectetur ipsum id nostrud eu do. Pariatur et anim enim aliquip anim. Laboris labore incididunt labore enim nisi elit excepteur deserunt irure exercitation exercitation. Lorem sit ad laborum sit velit veniam sit nisi nostrud occaecat duis nulla duis.",
+        "An Android app for tracking weightlifting workouts. Record lifts with weight, reps, and sets, track personal records, monitor total volume, and visualize your strength progress with interactive charts.",
     },
     {
-      name: "A Mobile Game",
-      link: "https://theuselessweb.com/",
+      name: "Hacker News Reader",
+      link: "https://play.google.com/store/apps/details?id=me.manulorenzo.hackernewskmp",
       description:
-        "Incididunt non cupidatat deserunt ut commodo qui non do Lorem. Qui aute minim enim sit magna est consectetur incididunt. Ex est cupidatat tempor pariatur deserunt labore tempor minim laboris magna ipsum minim ea ea. Consectetur do anim laboris nulla nisi veniam sint qui.",
+        "A Hacker News reader built with Kotlin Multiplatform. Browse tech news and developer stories with offline reading support and dark mode.",
+    },
+    {
+      name: "Subscribi",
+      link: "https://play.google.com/store/apps/details?id=me.manulorenzo.subscribi.android",
+      description:
+        "A subscription management app to track all your recurring payments in one place. Get payment reminders, spending insights, and cancellation guides with cross-platform sync.",
+    },
+    {
+      name: "Remoti (Android)",
+      link: "https://play.google.com/store/apps/details?id=me.manulorenzo.remoti",
+      description:
+        "An Android app that aggregates remote job listings from multiple job boards. Search and filter opportunities by category, save listings, and apply directly—no registration required.",
+    },
+    {
+      name: "Remoti (iOS)",
+      link: "https://apps.apple.com/es/app/remoti-remote-work/id1567902235",
+      description:
+        "An iOS app for finding remote work opportunities. Browse job listings, use advanced filters to find the perfect match, and apply directly from your iPhone—no registration required.",
     },
   ],
   contacts: {

@@ -1,5 +1,13 @@
 {
   "permissions": {
-    "allow": ["Bash(git commit:*)", "Bash(trunk check:*)"]
+    "allow": [
+      "Bash(git commit:*)",
+      "Bash(trunk check:*)",
+      "WebFetch(domain:www.buildquota.com)",
+      "Bash(trunk fmt:*)",
+      "WebFetch(domain:play.google.com)",
+      "WebSearch",
+      "Skill(frontend-design)"
+    ]
   }
 }
