@@ -39,7 +39,6 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-77L8ZHRRKG");
     </script>
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -48,299 +47,911 @@
     <link rel="manifest" href="site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-    <link rel="preconnect" href="https://unpkg.com" />
     <link
-      href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap"
       rel="stylesheet"
     />
     <link
       href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
       rel="stylesheet"
     />
-    <link
-      href="https://cdn.jsdelivr.net/npm/vuetify@2.7.2/dist/vuetify.min.css"
-      rel="stylesheet"
-    />
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <style>
-      .v-application,
-      .v-application .body-1,
-      .v-application .body-2,
-      .v-application .caption,
-      .v-application .display-1,
-      .v-application .display-2,
-      .v-application .display-3,
-      .v-application .display-4,
-      .v-application .headline,
-      .v-application .overline,
-      .v-application .subtitle-1,
-      .v-application .subtitle-2,
-      .v-application .title {
-        font-family: "Fjalla One", sans-serif !important;
+      :root {
+        --bg-primary: #0a0a0f;
+        --bg-secondary: #12121a;
+        --bg-card: rgba(255, 255, 255, 0.03);
+        --bg-card-hover: rgba(255, 255, 255, 0.06);
+        --text-primary: #ffffff;
+        --text-secondary: rgba(255, 255, 255, 0.7);
+        --text-muted: rgba(255, 255, 255, 0.4);
+        --accent: #00d9ff;
+        --accent-glow: rgba(0, 217, 255, 0.3);
+        --border: rgba(255, 255, 255, 0.08);
+        --border-hover: rgba(0, 217, 255, 0.3);
+        --gradient-1: #0a0a0f;
+        --gradient-2: #0d1117;
+        --gradient-3: #0f0a1a;
       }
 
-      :-webkit-any(article, aside, nav, section) h1 {
-        font-size: 2em;
-        margin-block-start: 0.67em;
-        margin-block-end: 0.67em;
-        margin-top: 0;
-        margin-bottom: 0;
+      .light-mode {
+        --bg-primary: #fafafa;
+        --bg-secondary: #ffffff;
+        --bg-card: rgba(0, 0, 0, 0.02);
+        --bg-card-hover: rgba(0, 0, 0, 0.04);
+        --text-primary: #0a0a0f;
+        --text-secondary: rgba(10, 10, 15, 0.7);
+        --text-muted: rgba(10, 10, 15, 0.4);
+        --accent: #0066cc;
+        --accent-glow: rgba(0, 102, 204, 0.2);
+        --border: rgba(0, 0, 0, 0.08);
+        --border-hover: rgba(0, 102, 204, 0.3);
+        --gradient-1: #fafafa;
+        --gradient-2: #f0f4f8;
+        --gradient-3: #f5f0fa;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          "DM Sans",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Gradient mesh background */
+      .bg-mesh {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        background: var(--bg-primary);
+      }
+
+      .bg-mesh::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background:
+          radial-gradient(
+            ellipse at 20% 20%,
+            rgba(0, 217, 255, 0.08) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 20%,
+            rgba(139, 92, 246, 0.06) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 40% 80%,
+            rgba(0, 217, 255, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 80%,
+            rgba(236, 72, 153, 0.04) 0%,
+            transparent 50%
+          );
+        animation: meshMove 20s ease-in-out infinite;
+      }
+
+      .light-mode .bg-mesh::before {
+        background:
+          radial-gradient(
+            ellipse at 20% 20%,
+            rgba(0, 102, 204, 0.06) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 80% 20%,
+            rgba(139, 92, 246, 0.04) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            ellipse at 40% 80%,
+            rgba(0, 102, 204, 0.04) 0%,
+            transparent 50%
+          );
+      }
+
+      @keyframes meshMove {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        33% {
+          transform: translate(2%, 2%) rotate(1deg);
+        }
+        66% {
+          transform: translate(-1%, 1%) rotate(-1deg);
+        }
+      }
+
+      /* Grain texture overlay */
+      .grain {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0.03;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      }
+
+      /* Navigation */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 1rem 2rem;
+        background: transparent;
+        transition:
+          background 0.3s ease,
+          backdrop-filter 0.3s ease;
+      }
+
+      nav.scrolled {
+        background: rgba(10, 10, 15, 0.8);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .light-mode nav.scrolled {
+        background: rgba(250, 250, 250, 0.9);
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .nav-link {
+        font-family: "Syne", sans-serif;
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 100px;
+        transition: all 0.3s ease;
+        letter-spacing: 0.02em;
+      }
+
+      .nav-link:hover {
+        color: var(--text-primary);
+        background: var(--bg-card);
+      }
+
+      .nav-link.cta {
+        background: var(--accent);
+        color: #0a0a0f;
+        font-weight: 600;
+      }
+
+      .nav-link.cta:hover {
+        box-shadow: 0 0 30px var(--accent-glow);
+        transform: translateY(-1px);
+      }
+
+      .theme-toggle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background: var(--bg-card);
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        font-size: 1.25rem;
+      }
+
+      .theme-toggle:hover {
+        border-color: var(--border-hover);
+        color: var(--accent);
+        transform: rotate(15deg);
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6rem 2rem;
+        position: relative;
+      }
+
+      .hero-content {
+        max-width: 900px;
+        text-align: center;
+      }
+
+      .hero-label {
+        font-family: "Syne", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+        animation-delay: 0.2s;
+      }
+
+      .hero-title {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 800;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+        animation-delay: 0.4s;
+      }
+
+      .hero-subtitle {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+        animation-delay: 0.6s;
+      }
+
+      .hero-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease forwards;
+        animation-delay: 0.8s;
+      }
+
+      .stack-tag {
+        font-family: "Syne", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 100px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        transition: all 0.3s ease;
+      }
+
+      .stack-tag:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        animation:
+          fadeInUp 0.8s ease forwards,
+          bounce 2s ease-in-out infinite;
+        animation-delay: 1.2s, 2s;
+      }
+
+      .scroll-indicator span {
+        display: block;
+        width: 24px;
+        height: 40px;
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        position: relative;
+      }
+
+      .scroll-indicator span::before {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 2px;
+        animation: scrollDot 2s ease-in-out infinite;
+      }
+
+      @keyframes scrollDot {
+        0%,
+        100% {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          opacity: 0.3;
+          transform: translateX(-50%) translateY(10px);
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-5px);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Sections */
+      section {
+        padding: 6rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .section-label {
+        font-family: "Syne", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 1rem;
+      }
+
+      .section-title {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      /* Cards Grid */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .card:hover {
+        background: var(--bg-card-hover);
+        border-color: var(--border-hover);
+        transform: translateY(-4px);
+        box-shadow:
+          0 20px 40px rgba(0, 0, 0, 0.3),
+          0 0 60px var(--accent-glow);
+      }
+
+      .card:hover::before {
+        opacity: 1;
+      }
+
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: linear-gradient(
+          135deg,
+          var(--accent),
+          rgba(139, 92, 246, 0.8)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        color: #0a0a0f;
+      }
+
+      .card-title {
+        font-family: "Syne", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.01em;
+      }
+
+      .card-description {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      /* Project Cards */
+      .project-card {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .project-card .card-tag {
+        font-family: "Syne", sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .project-card .card-tag::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      .project-card .card-arrow {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        color: var(--text-muted);
+      }
+
+      .project-card:hover .card-arrow {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #0a0a0f;
+        transform: translate(4px, -4px);
+      }
+
+      /* Contact Section */
+      .contact-section {
+        text-align: center;
+        padding: 8rem 2rem;
+      }
+
+      .contact-email {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: 600;
+        color: var(--text-primary);
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        transition: color 0.3s ease;
+      }
+
+      .contact-email::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .contact-email:hover {
+        color: var(--accent);
+      }
+
+      .contact-email:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      .contact-links {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      .contact-link {
+        font-family: "Syne", sans-serif;
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .contact-link:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px var(--accent-glow);
+      }
+
+      /* Footer */
+      footer {
+        padding: 2rem;
+        text-align: center;
+        border-top: 1px solid var(--border);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+      }
+
+      footer a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      footer a:hover {
+        color: var(--accent);
+      }
+
+      /* Scroll animations */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Stagger children */
+      .stagger-children .card:nth-child(1) {
+        transition-delay: 0.1s;
+      }
+      .stagger-children .card:nth-child(2) {
+        transition-delay: 0.2s;
+      }
+      .stagger-children .card:nth-child(3) {
+        transition-delay: 0.3s;
+      }
+      .stagger-children .card:nth-child(4) {
+        transition-delay: 0.4s;
+      }
+      .stagger-children .card:nth-child(5) {
+        transition-delay: 0.5s;
+      }
+      .stagger-children .card:nth-child(6) {
+        transition-delay: 0.6s;
+      }
+
+      /* Mobile responsive */
+      @media (max-width: 768px) {
+        nav {
+          padding: 1rem;
+        }
+
+        .nav-links {
+          gap: 0.25rem;
+        }
+
+        .nav-link {
+          padding: 0.4rem 0.75rem;
+          font-size: 0.8rem;
+        }
+
+        .hero {
+          padding: 5rem 1.5rem;
+        }
+
+        section {
+          padding: 4rem 1.5rem;
+        }
+
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-links {
+          flex-direction: column;
+          align-items: center;
+        }
       }
     </style>
   </head>
 
-  <body>
-    <div id="app">
-      <div
-        data-app="true"
-        :class="['v-application v-application--is-ltr', isDark ? 'theme--dark' : 'theme--light']"
-      >
-        <div class="v-application--wrap">
-          <nav>
-            <header
-              class="v-sheet theme--light v-toolbar v-app-bar v-app-bar--elevate-on-scroll v-app-bar--fixed v-app-bar--hide-shadow white"
-              data-booted="true"
-              style="
-                margin-top: 0px;
-                transform: translateY(0px);
-                left: 0px;
-                right: 0px;
-              "
-            >
-              <div
-                class="v-toolbar__content justify-space-between flex-wrap px-4"
-              >
-                <div class="d-flex align-center">
-                  <v-btn
-                    icon
-                    @click="toggleTheme"
-                    aria-label="Toggle dark mode"
-                  >
-                    <v-icon
-                      >{{ isDark ? 'mdi-white-balance-sunny' :
-                      'mdi-moon-waning-crescent' }}</v-icon
-                    >
-                  </v-btn>
-                </div>
-                <div class="d-flex flex-wrap justify-center">
-                  <a href="#skills" class="ma-1 v-btn v-btn--text v-size--large"
-                    ><span class="v-btn__content">Skills</span></a
-                  >
-                  <a href="#works" class="ma-1 v-btn v-btn--text v-size--large"
-                    ><span class="v-btn__content">Recent Works</span></a
-                  >
-                  <a
-                    href="#contact"
-                    class="ma-1 v-btn v-btn--outlined v-btn--text v-size--large"
-                    ><span class="v-btn__content">Let's Talk!</span></a
-                  >
-                </div>
-                <div class="d-flex align-center">
-                  <!-- Spacer to balance the layout -->
-                  <div style="width: 40px"></div>
-                </div>
-              </div>
-            </header>
-            <!---->
-          </nav>
-          <header class="container fill-height" style="min-height: 100vh">
-            <div class="row align-center justify-center">
-              <div class="text-center col-md-10 col-12">
-                <h1 class="display-4" data-aos="fade-up">{{ name }}</h1>
-                <h2 data-aos="fade-up">{{ jobTitle }}</h2>
-              </div>
-              <div class="text-center col-md-5 col-12" data-aos="fade-up">
-                <p>{{ jobDescription }}</p>
-              </div>
-            </div>
-          </header>
-          <main>
-            <section>
-              <div
-                class="container fill-height"
-                id="skills"
-                style="height: auto; min-height: 100vh"
-              >
-                <div class="row justify-center">
-                  <div class="text-center col-md-10 col-12">
-                    <h1 data-aos="fade-up">#Skills</h1>
-                  </div>
-                  <div
-                    v-for="skill in skills"
-                    :key="skill.name"
-                    class="text-center col-sm-6 col-md-4 col-12"
-                  >
-                    <div
-                      class="v-card v-card--hover v-sheet theme--light"
-                      style="height: 100%"
-                      data-aos="fade-up"
-                    >
-                      <div class="v-card__text">
-                        <h2>{{ skill.name }}</h2>
-                        <br />
-                        <p>{{ skill.description }}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+  <body id="app">
+    <div class="bg-mesh"></div>
+    <div class="grain"></div>
 
-            <section>
-              <div
-                class="container fill-height"
-                id="works"
-                style="height: auto; min-height: 100vh"
-              >
-                <div class="row justify-center">
-                  <div class="text-center col-md-10 col-12">
-                    <h1 data-aos="fade-up">#Recent Works</h1>
-                  </div>
-                  <div
-                    v-for="work in works"
-                    :key="work.name"
-                    class="text-center col-sm-6 col-md-4 col-12"
-                  >
-                    <a
-                      :href="work.link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="v-card v-card--hover v-card--link v-sheet theme--light"
-                      style="height: 100%"
-                      data-aos="fade-up"
-                    >
-                      <div class="v-card__text">
-                        <h2>{{ work.name }}</h2>
-                        <br />
-                        <p>{{ work.description }}</p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section>
-              <div
-                class="container fill-height"
-                id="contact"
-                style="height: auto; min-height: 100vh"
-              >
-                <div class="row justify-center">
-                  <div class="text-center col-md-10 col-12">
-                    <h1 data-aos="fade-up">#Let's Talk!</h1>
-                  </div>
-                  <div class="text-center col-sm-6 col-md-4 col-12">
-                    <div class="row" data-aos="fade-up">
-                      <div class="text-center col col-12">
-                        <h3>{{ contacts.email }}</h3>
-                      </div>
-                      <div class="text-center col col-12" data-aos="fade-up">
-                        <a
-                          v-for="link in contactLinks"
-                          :key="link.name"
-                          :href="link.link"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          :class="['ma-1 v-btn v-btn--outlined v-btn--rounded v-size--default',
-                            isDark ? 'theme--dark white--text' : 'theme--light']"
-                        >
-                          <span class="v-btn__content">{{ link.name }}</span></a
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </main>
-          <footer data-booted="true" class="v-footer v-sheet theme--light">
-            <div class="spacer"></div>
-            <small
-              >Template made with
-              <i
-                aria-hidden="true"
-                class="v-icon notranslate red--text mdi mdi-heart theme--light"
-              ></i>
-              by
-              <a
-                href="https://twitter.com/jrtiquez"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Jofferson R Tiquez</a
-              ></small
-            >
-          </footer>
+    <nav id="navbar">
+      <div class="nav-content">
+        <button
+          class="theme-toggle"
+          @click="toggleTheme"
+          aria-label="Toggle dark mode"
+        >
+          <i
+            :class="isDark ? 'mdi mdi-white-balance-sunny' : 'mdi mdi-moon-waning-crescent'"
+          ></i>
+        </button>
+        <div class="nav-links">
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#works" class="nav-link">Projects</a>
+          <a href="#contact" class="nav-link cta">Let's Talk</a>
         </div>
       </div>
-    </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <p class="hero-label">Software Engineer</p>
+          <h1 class="hero-title">{{ name }}</h1>
+          <p class="hero-subtitle">
+            Building exceptional mobile and backend experiences with modern
+            technologies and clean architecture.
+          </p>
+          <div class="hero-stack">
+            <span class="stack-tag">Android & Kotlin</span>
+            <span class="stack-tag">iOS & Swift</span>
+            <span class="stack-tag">Spring Boot</span>
+            <span class="stack-tag">Golang</span>
+          </div>
+        </div>
+        <div class="scroll-indicator">
+          <span></span>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-header reveal">
+          <p class="section-label">Expertise</p>
+          <h2 class="section-title">Skills & Technologies</h2>
+        </div>
+        <div class="cards-grid stagger-children reveal">
+          <div v-for="(skill, index) in skills" :key="skill.name" class="card">
+            <div class="card-icon">
+              <i :class="getSkillIcon(skill.name)"></i>
+            </div>
+            <h3 class="card-title">{{ skill.name }}</h3>
+            <p class="card-description">{{ skill.description }}</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="works">
+        <div class="section-header reveal">
+          <p class="section-label">Portfolio</p>
+          <h2 class="section-title">Recent Projects</h2>
+        </div>
+        <div class="cards-grid stagger-children reveal">
+          <a
+            v-for="work in works"
+            :key="work.name"
+            :href="work.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="card project-card"
+          >
+            <span class="card-tag">{{ getProjectType(work.link) }}</span>
+            <span class="card-arrow">
+              <i class="mdi mdi-arrow-top-right"></i>
+            </span>
+            <h3 class="card-title">{{ work.name }}</h3>
+            <p class="card-description">{{ work.description }}</p>
+          </a>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section">
+        <div class="section-header reveal">
+          <p class="section-label">Get in Touch</p>
+          <h2 class="section-title">Let's Build Something</h2>
+        </div>
+        <div class="reveal">
+          <a :href="'mailto:' + contacts.email" class="contact-email">
+            {{ contacts.email }}
+          </a>
+          <div class="contact-links">
+            <a
+              v-for="link in contactLinks"
+              :key="link.name"
+              :href="link.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-link"
+            >
+              <i :class="getContactIcon(link.name)"></i>
+              {{ link.name }}
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <small> Designed & built by Manuel Lorenzo Parejo </small>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.7.2/dist/vuetify.min.js"></script>
     <script src="config.js"></script>
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
       var vm = new Vue({
         el: "#app",
-        vuetify: new Vuetify({
-          theme: {
-            dark: false,
-            themes: {
-              light: {
-                primary: "#1976D2",
-                secondary: "#424242",
-                accent: "#82B1FF",
-                error: "#FF5252",
-                info: "#2196F3",
-                success: "#4CAF50",
-                warning: "#FFC107",
-                background: "#FFFFFF",
-              },
-              dark: {
-                primary: "#2196F3",
-                secondary: "#424242",
-                accent: "#FF4081",
-                error: "#FF5252",
-                info: "#2196F3",
-                success: "#4CAF50",
-                warning: "#FFC107",
-                background: "#121212",
-              },
-            },
-            options: {
-              customProperties: true,
-            },
-          },
-        }),
         data() {
           return {
-            menu: false,
-            isDark: false,
+            isDark: true,
             ...window.PorfolioConfig,
           };
         },
         created() {
-          // Check for saved theme preference
           const savedTheme = localStorage.getItem("theme");
           if (savedTheme) {
             this.isDark = savedTheme === "dark";
-            this.$vuetify.theme.dark = this.isDark;
           }
+          this.applyTheme();
+        },
+        mounted() {
+          this.initScrollAnimations();
+          this.initNavScroll();
         },
         methods: {
           toggleTheme() {
             this.isDark = !this.isDark;
-            this.$vuetify.theme.dark = this.isDark;
             localStorage.setItem("theme", this.isDark ? "dark" : "light");
+            this.applyTheme();
+          },
+          applyTheme() {
+            if (this.isDark) {
+              document.body.classList.remove("light-mode");
+            } else {
+              document.body.classList.add("light-mode");
+            }
+          },
+          initScrollAnimations() {
+            const reveals = document.querySelectorAll(".reveal");
+            const observer = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                  }
+                });
+              },
+              { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+            );
+            reveals.forEach((el) => observer.observe(el));
+          },
+          initNavScroll() {
+            const nav = document.getElementById("navbar");
+            window.addEventListener("scroll", () => {
+              if (window.scrollY > 50) {
+                nav.classList.add("scrolled");
+              } else {
+                nav.classList.remove("scrolled");
+              }
+            });
+          },
+          getSkillIcon(name) {
+            const icons = {
+              "Android & Kotlin": "mdi mdi-android",
+              "iOS & Swift": "mdi mdi-apple",
+              "Spring Boot & Java": "mdi mdi-leaf",
+              Golang: "mdi mdi-language-go",
+            };
+            return icons[name] || "mdi mdi-code-tags";
+          },
+          getProjectType(link) {
+            if (link.includes("play.google.com")) return "Android App";
+            if (link.includes("apps.apple.com")) return "iOS App";
+            return "Web App";
+          },
+          getContactIcon(name) {
+            const icons = {
+              GitHub: "mdi mdi-github",
+              LinkedIn: "mdi mdi-linkedin",
+              Twitter: "mdi mdi-twitter",
+            };
+            return icons[name] || "mdi mdi-link";
           },
         },
         computed: {
-          $isMobile() {
-            return this.$vuetify.breakpoint.smAndDown;
-          },
-          sectionHeight() {
-            return { style: "min-height: 100vh", class: "fill-height" };
-          },
           contactLinks() {
             if (
               this.contacts &&
@@ -352,11 +963,6 @@
             return [];
           },
         },
-      });
-
-      AOS.init({
-        once: true,
-        delay: 0,
       });
     </script>
   </body>
