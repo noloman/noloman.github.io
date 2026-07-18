@@ -26,10 +26,10 @@ window.PorfolioConfig = {
   ],
   works: [
     {
-      name: "Build Quota",
-      link: "https://www.buildquota.com",
+      name: "Anywhere Roles",
+      link: "https://anywhereroles.com",
       description:
-        "A GitHub Actions monitoring platform that tracks CI/CD pipeline usage in real-time. Features predictive analytics for usage forecasting, email alerts before limits are exceeded, and a privacy-focused dashboard with encrypted data handling.",
+        "A web app for finding remote work opportunities. Browse remote job listings, filter by role and category, save interesting positions, and apply directly from the browser.",
     },
     {
       name: "CrossFit Tracker",
