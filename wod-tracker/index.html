@@ -1,0 +1,1471 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="WOD Tracker is a training log for CrossFit, weightlifting and hybrid athletes. 81 benchmark WODs, EMOM/AMRAP/Tabata timers, personal records, Apple Watch and Wear OS. iOS and Android."
+    />
+    <link rel="canonical" href="https://www.manulorenzo.me/wod-tracker/" />
+    <title>WOD Tracker — training log for CrossFit and weightlifting</title>
+
+    <meta property="og:title" content="WOD Tracker — training log for CrossFit and weightlifting" />
+    <meta
+      property="og:description"
+      content="81 benchmark WODs, EMOM/AMRAP/Tabata timers, automatic personal records. Works offline. iOS, Android, Apple Watch and Wear OS."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.manulorenzo.me/wod-tracker/" />
+    <meta property="og:image" content="https://www.manulorenzo.me/wod-tracker/img/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WOD Tracker — training log for CrossFit and weightlifting" />
+    <meta
+      name="twitter:description"
+      content="81 benchmark WODs, EMOM/AMRAP/Tabata timers, automatic personal records. Works offline."
+    />
+    <meta name="twitter:image" content="https://www.manulorenzo.me/wod-tracker/img/og.png" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-77L8ZHRRKG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-77L8ZHRRKG");
+    </script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
+      rel="stylesheet"
+      integrity="sha384-HphS8cQyN+eYiJ5PMbzShG6qZdRtvHPVLPkYb8JwMkmNgaIxrFVDhQe3jIbq3EZ2"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      :root {
+        /* Chassis inherited from the portfolio */
+        --bg: #ffffff;
+        --section: #f6f7f9;
+        --ink: #111111;
+        --muted: #4f5663;
+        --quiet: #7a8190;
+        --line: #d9dde5;
+        --line-strong: #aeb5c2;
+        --radius: 8px;
+        --max: 1280px;
+
+        /* WOD Tracker brand, taken from the app's own theme */
+        --flame: #ff6b35; /* primary; decoration, and text on dark only */
+        --ember: #cc4a1a; /* accent text on white — passes AA */
+        --gold: #ffd700; /* personal records, on dark only */
+        --board: #12100f;
+        --board-hi: #1c1917;
+        --board-line: #2e2724;
+        --chalk: #f5f3f1;
+        --chalk-quiet: #a39a94;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-width: 320px;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--ember);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+
+      .wrap {
+        width: min(var(--max), calc(100% - 3.5rem));
+        margin-inline: auto;
+      }
+
+      .band {
+        padding-block: clamp(4rem, 8vw, 7.5rem);
+      }
+
+      /* ---------- shared type roles ---------- */
+
+      .display {
+        font-family: "Archivo", "Geist", sans-serif;
+        font-stretch: 112%;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 1.02;
+      }
+
+      .mono {
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .eyebrow {
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.74rem;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ember);
+      }
+
+      .eyebrow.as-written {
+        text-transform: none;
+        letter-spacing: 0.1em;
+      }
+
+      .section-title {
+        font-family: "Archivo", "Geist", sans-serif;
+        font-stretch: 110%;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 1.05;
+        font-size: clamp(2rem, 4.2vw, 3.1rem);
+        margin-top: 1rem;
+      }
+
+      .section-copy {
+        color: var(--muted);
+        font-size: 1.06rem;
+        max-width: 58ch;
+        margin-top: 1.1rem;
+      }
+
+      /* ---------- header ---------- */
+
+      .page-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-row {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .nav-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+        color: var(--muted);
+      }
+
+      .nav-brand i {
+        font-size: 1.1rem;
+      }
+
+      .nav-brand:hover {
+        color: var(--ink);
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .nav-menu a {
+        font-size: 0.94rem;
+        font-weight: 500;
+        text-decoration: none;
+        color: var(--ink);
+      }
+
+      .nav-menu a:hover {
+        color: var(--ember);
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      /* ---------- buttons ---------- */
+
+      .store-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        margin-top: 2.2rem;
+      }
+
+      .store-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        min-width: 208px;
+        padding: 0.8rem 1.4rem;
+        border: 1px solid var(--ink);
+        border-radius: var(--radius);
+        text-decoration: none;
+        background: var(--bg);
+        color: var(--ink);
+        transition:
+          background 0.15s ease,
+          color 0.15s ease;
+      }
+
+      .store-btn i {
+        font-size: 1.6rem;
+        line-height: 1;
+      }
+
+      .store-btn .store-lead {
+        display: block;
+        font-size: 0.7rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--quiet);
+      }
+
+      .store-btn .store-name {
+        display: block;
+        font-size: 1.02rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .store-btn.filled {
+        background: var(--ink);
+        color: #fff;
+        border-color: var(--ink);
+      }
+
+      .store-btn.filled .store-lead {
+        color: #b7bcc6;
+      }
+
+      .store-btn:hover {
+        background: var(--ember);
+        border-color: var(--ember);
+        color: #fff;
+      }
+
+      .store-btn:hover .store-lead {
+        color: #ffd9c9;
+      }
+
+      /* ---------- hero ---------- */
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+        gap: clamp(2.5rem, 6vw, 6rem);
+        align-items: center;
+      }
+
+      .hero-title {
+        font-size: clamp(2.6rem, 5vw, 4.25rem);
+        margin-top: 1.4rem;
+      }
+
+      .hero-title .beat {
+        display: block;
+      }
+
+      .hero-copy {
+        color: var(--muted);
+        font-size: 1.12rem;
+        max-width: 52ch;
+        margin-top: 1.6rem;
+      }
+
+      .hero-note {
+        margin-top: 1.4rem;
+        font-size: 0.82rem;
+        color: var(--quiet);
+      }
+
+      /* ---------- the board (hero signature) ---------- */
+
+      .board {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(170deg, var(--board-hi), var(--board));
+        border: 1px solid var(--board-line);
+        border-radius: 14px;
+        padding: clamp(1.6rem, 3vw, 2.4rem);
+        color: var(--chalk);
+      }
+
+      .board::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--flame), var(--ember));
+      }
+
+      .board-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .board-head .left {
+        color: var(--flame);
+      }
+
+      .board-head .right {
+        color: var(--chalk-quiet);
+      }
+
+      .board-name {
+        font-family: "Archivo", sans-serif;
+        font-stretch: 115%;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        font-size: clamp(2.6rem, 5.6vw, 3.6rem);
+        margin-top: 1.1rem;
+      }
+
+      .board-scheme {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 1.02rem;
+        letter-spacing: 0.06em;
+        color: var(--chalk-quiet);
+        margin-top: 0.45rem;
+      }
+
+      .board-moves {
+        list-style: none;
+        margin-top: 1.5rem;
+        border-top: 1px solid var(--board-line);
+      }
+
+      .board-moves li {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.7rem 0;
+        border-bottom: 1px solid var(--board-line);
+        font-size: 1rem;
+      }
+
+      .board-moves .move {
+        font-weight: 500;
+      }
+
+      .board-moves .load {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.9rem;
+        color: var(--chalk-quiet);
+      }
+
+      .board-clock {
+        margin-top: 1.8rem;
+      }
+
+      .board-clock .label {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--chalk-quiet);
+      }
+
+      .clock {
+        display: block;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        font-size: clamp(3.4rem, 8vw, 4.8rem);
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+        margin-top: 0.15rem;
+      }
+
+      .board-result {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-top: 0.9rem;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.86rem;
+        letter-spacing: 0.04em;
+        color: var(--gold);
+        opacity: 0;
+        transform: translateY(6px);
+        transition:
+          opacity 0.45s ease,
+          transform 0.45s ease;
+      }
+
+      .board-result.is-in {
+        opacity: 1;
+        transform: none;
+      }
+
+      .board-result .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gold);
+        flex: none;
+      }
+
+      .board-caption {
+        margin-top: 0.9rem;
+        font-size: 0.8rem;
+        color: var(--quiet);
+      }
+
+      /* ---------- dark bands ---------- */
+
+      .dark-band {
+        background: var(--board);
+        color: var(--chalk);
+      }
+
+      .dark-band .eyebrow {
+        color: var(--flame);
+      }
+
+      .dark-band .section-copy {
+        color: #b9b1ac;
+      }
+
+      /* ---------- screens ---------- */
+
+      .screens-rail {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(200px, 1fr);
+        gap: 1.6rem;
+        margin-top: 3rem;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain;
+      }
+
+      .screen {
+        scroll-snap-align: start;
+        min-width: 0;
+      }
+
+      .screen-shot {
+        background: #1a1020;
+        border: 1px solid var(--board-line);
+        border-radius: 12px;
+        overflow: hidden;
+        padding-top: 1.1rem;
+        padding-inline: 1.1rem;
+      }
+
+      .screen-shot img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .screen-label {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--flame);
+        margin-top: 1.3rem;
+      }
+
+      .screen h3 {
+        font-family: "Archivo", sans-serif;
+        font-stretch: 110%;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        font-size: 1.18rem;
+        margin-top: 0.3rem;
+      }
+
+      .screen p {
+        color: #b9b1ac;
+        font-size: 0.94rem;
+        margin-top: 0.45rem;
+      }
+
+      /* ---------- benchmarks ---------- */
+
+      .bench-groups {
+        margin-top: 3rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .bench-group {
+        display: grid;
+        grid-template-columns: 190px minmax(0, 1fr);
+        gap: 2.5rem;
+        padding: 1.6rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .bench-key {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.76rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .bench-key .count {
+        display: block;
+        font-family: "Archivo", sans-serif;
+        font-stretch: 115%;
+        font-weight: 800;
+        font-size: 2rem;
+        letter-spacing: -0.04em;
+        color: var(--ember);
+        margin-top: 0.2rem;
+      }
+
+      .bench-names {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.35rem 0.9rem;
+      }
+
+      .bench-names li {
+        font-family: "Archivo", sans-serif;
+        font-stretch: 106%;
+        font-weight: 600;
+        font-size: 1.02rem;
+        letter-spacing: -0.015em;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+
+      .bench-names li::after {
+        content: "·";
+        margin-left: 0.9rem;
+        color: var(--flame);
+        font-weight: 700;
+      }
+
+      .bench-names li:last-child::after {
+        content: none;
+      }
+
+      /* ---------- wrist ---------- */
+
+      .wrist-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+        gap: clamp(2.5rem, 6vw, 5rem);
+        align-items: center;
+      }
+
+      .watches {
+        display: flex;
+        gap: 1.4rem;
+        justify-content: center;
+      }
+
+      .watch {
+        background: #000;
+        border: 1px solid #3a3330;
+        border-radius: 34px;
+        padding: 6px;
+        max-width: 190px;
+        flex: 1 1 0;
+      }
+
+      .watch img {
+        width: 100%;
+        border-radius: 28px;
+      }
+
+      .facts {
+        list-style: none;
+        margin-top: 2.4rem;
+        border-top: 1px solid var(--board-line);
+      }
+
+      .facts li {
+        display: grid;
+        grid-template-columns: 132px minmax(0, 1fr);
+        gap: 1.6rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--board-line);
+      }
+
+      .facts .key {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--flame);
+        padding-top: 0.18rem;
+      }
+
+      .facts .val {
+        color: #d5cfcb;
+        font-size: 0.98rem;
+      }
+
+      /* ---------- plans ---------- */
+
+      .plans-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0;
+        margin-top: 3rem;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .plan {
+        padding: 2rem 1.8rem 2.2rem;
+        border-right: 1px solid var(--line);
+      }
+
+      .plan:last-child {
+        border-right: 0;
+      }
+
+      .plan-name {
+        font-family: "Archivo", sans-serif;
+        font-stretch: 115%;
+        font-weight: 800;
+        font-size: 1.5rem;
+        letter-spacing: -0.03em;
+      }
+
+      .plan-lead {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-top: 0.4rem;
+        min-height: 2.8em;
+      }
+
+      .plan ul {
+        list-style: none;
+        margin-top: 1.2rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .plan li {
+        padding: 0.55rem 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 0.94rem;
+        color: var(--ink);
+      }
+
+      .plan li:last-child {
+        border-bottom: 0;
+      }
+
+      .plan.is-top {
+        background: var(--section);
+      }
+
+      .plan.is-top .plan-name {
+        color: var(--ember);
+      }
+
+      .plans-note {
+        margin-top: 1.4rem;
+        font-size: 0.85rem;
+        color: var(--quiet);
+      }
+
+      /* ---------- build ---------- */
+
+      .spec {
+        list-style: none;
+        margin-top: 3rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .spec li {
+        display: grid;
+        grid-template-columns: 190px minmax(0, 1fr);
+        gap: 2.5rem;
+        padding: 1.15rem 0;
+        border-bottom: 1px solid var(--line);
+        align-items: baseline;
+      }
+
+      .spec .key {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.76rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ember);
+      }
+
+      .spec .val {
+        font-size: 1rem;
+        color: var(--ink);
+      }
+
+      .spec .val span {
+        color: var(--quiet);
+        padding-inline: 0.5rem;
+      }
+
+      /* ---------- closing ---------- */
+
+      .closing {
+        background: var(--section);
+        border-top: 1px solid var(--line);
+      }
+
+      .closing-title {
+        font-family: "Archivo", sans-serif;
+        font-stretch: 112%;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1.02;
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+      }
+
+      /* ---------- footer ---------- */
+
+      .page-footer {
+        border-top: 1px solid var(--line);
+      }
+
+      .footer-inner {
+        min-height: 78px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        color: var(--muted);
+        font-size: 0.88rem;
+        padding-block: 1.2rem;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.8rem;
+      }
+
+      .footer-links a {
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        color: var(--ember);
+      }
+
+      /* ---------- responsive ---------- */
+
+      @media (max-width: 1000px) {
+        .hero-grid,
+        .wrist-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .plans-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .plan {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .plan:last-child {
+          border-bottom: 0;
+        }
+
+        .plan-lead {
+          min-height: 0;
+        }
+      }
+
+      @media (max-width: 820px) {
+        .nav-menu a:not(.nav-cta) {
+          display: none;
+        }
+
+        .nav-cta {
+          display: inline-block;
+          border: 1px solid var(--ink);
+          border-radius: var(--radius);
+          padding: 0.45rem 0.95rem;
+          font-weight: 600;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .wrap {
+          width: min(var(--max), calc(100% - 2rem));
+        }
+
+        .bench-group,
+        .spec li,
+        .facts li {
+          grid-template-columns: 1fr;
+          gap: 0.7rem;
+        }
+
+        .bench-key .count {
+          display: inline;
+          margin-left: 0.5rem;
+          font-size: 1.3rem;
+        }
+
+        .store-btn {
+          width: 100%;
+          min-width: 0;
+        }
+
+        .watches {
+          gap: 1rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .board-result {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="page-header">
+      <nav class="wrap nav-row" aria-label="Main">
+        <a class="nav-brand" href="../">
+          <i class="mdi mdi-arrow-left"></i>
+          Manuel Lorenzo Parejo
+        </a>
+        <div class="nav-menu">
+          <a href="#screens">Screens</a>
+          <a href="#benchmarks">Benchmarks</a>
+          <a href="#plans">Plans</a>
+          <a href="#built">Built with</a>
+          <a
+            class="nav-cta"
+            href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Get the app</a
+          >
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ============ hero ============ -->
+      <section class="wrap band hero-grid" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow as-written">iOS · Android · Apple Watch · Wear OS</p>
+          <h1 id="hero-title" class="display hero-title">
+            <span class="beat">Log the lift.</span>
+            <span class="beat">Run the clock.</span>
+            <span class="beat">Keep the record.</span>
+          </h1>
+          <p class="hero-copy">
+            WOD Tracker is a training log for CrossFit, weightlifting and hybrid
+            athletes. 81 benchmark WODs, timers for EMOM, AMRAP, Tabata and For
+            Time, and a personal record for every movement you train. It works
+            offline, and your data stays on your phone unless you back it up.
+          </p>
+
+          <div class="store-row">
+            <a
+              class="store-btn filled"
+              href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="mdi mdi-google-play" aria-hidden="true"></i>
+              <span>
+                <span class="store-lead">Get it on</span>
+                <span class="store-name">Google Play</span>
+              </span>
+            </a>
+            <a
+              class="store-btn"
+              href="https://apps.apple.com/app/id6760609857"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="mdi mdi-apple" aria-hidden="true"></i>
+              <span>
+                <span class="store-lead">Download on the</span>
+                <span class="store-name">App Store</span>
+              </span>
+            </a>
+          </div>
+
+          <p class="hero-note">
+            Free to use. Premium and PRO add analytics, backup and the AI coach.
+          </p>
+        </div>
+
+        <div>
+          <figure class="board">
+            <div class="board-head">
+              <span class="left">The board</span>
+              <span class="right">For time</span>
+            </div>
+            <p class="board-name">Fran</p>
+            <p class="board-scheme">21 – 15 – 9</p>
+            <ul class="board-moves">
+              <li>
+                <span class="move">Thruster</span>
+                <span class="load">95 lb / 43 kg</span>
+              </li>
+              <li>
+                <span class="move">Pull-up</span>
+                <span class="load">bodyweight</span>
+              </li>
+            </ul>
+            <div class="board-clock">
+              <span class="label">Elapsed</span>
+              <span
+                class="clock"
+                id="clock"
+                data-seconds="222"
+                role="img"
+                aria-label="Workout clock finishing at three minutes forty-two seconds"
+                >0:00</span
+              >
+            </div>
+            <p class="board-result" id="board-result">
+              <span class="dot" aria-hidden="true"></span>
+              Personal record — 14 seconds faster
+            </p>
+            <figcaption class="board-caption">
+              Fran, written the way a box writes it on the wall.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ screens ============ -->
+      <section id="screens" class="dark-band" aria-labelledby="screens-title">
+        <div class="wrap band">
+          <p class="eyebrow">Inside the app</p>
+          <h2 id="screens-title" class="section-title">Five screens, one job each</h2>
+          <p class="section-copy">
+            Nothing here is a mockup. These are the app's own screens, the ones
+            you land on between sets.
+          </p>
+
+          <div
+            class="screens-rail"
+            role="region"
+            tabindex="0"
+            aria-label="App screenshots, scroll sideways"
+          >
+            <article class="screen">
+              <div class="screen-shot">
+                <img
+                  src="img/screen-lifts.webp"
+                  width="520"
+                  height="1084"
+                  alt="The Lifts screen showing recent lifts with sets, weights and notes"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="screen-label">Log</p>
+              <h3>Lifts</h3>
+              <p>
+                Every set, with weight, reps and a note. The last time you trained
+                a movement is the first thing you see.
+              </p>
+            </article>
+
+            <article class="screen">
+              <div class="screen-shot">
+                <img
+                  src="img/screen-timer.webp"
+                  width="520"
+                  height="1084"
+                  alt="The Timer screen listing EMOM, AMRAP, For Time and Tabata workouts"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="screen-label">Clock</p>
+              <h3>Timer</h3>
+              <p>
+                EMOM, AMRAP, For Time and Tabata, with audio cues and a time cap.
+                Quick rest timers for the gaps between sets.
+              </p>
+            </article>
+
+            <article class="screen">
+              <div class="screen-shot">
+                <img
+                  src="img/screen-benchmarks.webp"
+                  width="520"
+                  height="1084"
+                  alt="The benchmark workout library showing Amanda, Angie and Annie"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="screen-label">Library</p>
+              <h3>Benchmarks</h3>
+              <p>
+                81 benchmark WODs come with the app. Pick one and start its timer
+                from the same card.
+              </p>
+            </article>
+
+            <article class="screen">
+              <div class="screen-shot">
+                <img
+                  src="img/screen-stats.webp"
+                  width="520"
+                  height="1084"
+                  alt="Lift statistics for the back squat with personal record, volume and a progress chart"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="screen-label">Record</p>
+              <h3>Lift stats</h3>
+              <p>
+                Personal record, total volume, average weight and set count for
+                any movement, with the whole history as a chart.
+              </p>
+            </article>
+
+            <article class="screen">
+              <div class="screen-shot">
+                <img
+                  src="img/screen-analytics.webp"
+                  width="520"
+                  height="1084"
+                  alt="Analytics showing training health, training load and plateau analysis"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="screen-label">Read</p>
+              <h3>Analytics</h3>
+              <p>
+                Training load, consistency and the lifts that have stopped moving.
+                It says when to deload instead of leaving you to guess.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ benchmarks ============ -->
+      <section id="benchmarks" class="wrap band" aria-labelledby="bench-title">
+        <p class="eyebrow">The library</p>
+        <h2 id="bench-title" class="section-title">
+          81 workouts you already know by name
+        </h2>
+        <p class="section-copy">
+          The whole benchmark library ships inside the app. No download, no
+          subscription, no signal needed at the box.
+        </p>
+
+        <div class="bench-groups">
+          <div class="bench-group">
+            <p class="bench-key">The Girls <span class="count">21</span></p>
+            <ul class="bench-names">
+              <li>Fran</li><li>Grace</li><li>Isabel</li><li>Helen</li><li>Diane</li>
+              <li>Elizabeth</li><li>Jackie</li><li>Karen</li><li>Annie</li><li>Nancy</li>
+              <li>Cindy</li><li>Mary</li><li>Chelsea</li><li>Angie</li><li>Barbara</li>
+              <li>Nicole</li><li>Lynne</li><li>Amanda</li><li>Eva</li><li>Kelly</li>
+              <li>Linda</li>
+            </ul>
+          </div>
+
+          <div class="bench-group">
+            <p class="bench-key">The Heroes <span class="count">40</span></p>
+            <ul class="bench-names">
+              <li>Murph</li><li>DT</li><li>Nate</li><li>Michael</li><li>Joshie</li>
+              <li>Luce</li><li>Badger</li><li>Nutts</li><li>Randy</li><li>JT</li>
+              <li>Daniel</li><li>Jason</li><li>Whitten</li><li>Loredo</li><li>McGhee</li>
+              <li>Griff</li><li>Josh</li><li>Ryan</li><li>Jerry</li><li>Roy</li>
+              <li>Severin</li><li>Tommy V</li><li>Bradley</li><li>Holleyman</li><li>Manion</li>
+              <li>Blake</li><li>Hamilton</li><li>Hotshots 19</li><li>Arnie</li><li>Glen</li>
+              <li>Paul</li><li>Taylor</li><li>White</li><li>Small</li><li>Santora</li>
+              <li>Rahoi</li><li>Rankel</li><li>Collin</li><li>Weston</li><li>Zeus</li>
+            </ul>
+          </div>
+
+          <div class="bench-group">
+            <p class="bench-key">Named <span class="count">7</span></p>
+            <ul class="bench-names">
+              <li>Fight Gone Bad</li><li>Filthy Fifty</li><li>The Chief</li>
+              <li>King Kong</li><li>Kalsu</li><li>Acid Bath</li>
+              <li>Tabata Something Else</li>
+            </ul>
+          </div>
+
+          <div class="bench-group">
+            <p class="bench-key">The Open <span class="count">13</span></p>
+            <ul class="bench-names">
+              <li>12.1</li><li>13.1</li><li>14.5</li><li>16.5</li><li>17.1</li>
+              <li>18.1</li><li>19.1</li><li>20.1</li><li>21.1</li><li>22.1</li>
+              <li>23.1</li><li>24.1</li><li>24.2</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ wrist ============ -->
+      <section class="dark-band" aria-labelledby="wrist-title">
+        <div class="wrap band wrist-grid">
+          <div>
+            <p class="eyebrow">On the wrist, and off the grid</p>
+            <h2 id="wrist-title" class="section-title">
+              It follows you to the rig
+            </h2>
+            <p class="section-copy">
+              Start a workout, log sets and run a rest timer from your watch.
+              Sets you log while the phone is out of range are queued and sent
+              across when it comes back.
+            </p>
+
+            <ul class="facts">
+              <li>
+                <span class="key">Offline</span>
+                <span class="val"
+                  >Everything works with no signal. Basements and garage gyms
+                  included.</span
+                >
+              </li>
+              <li>
+                <span class="key">Private</span>
+                <span class="val"
+                  >Training data lives on your device. Nothing is uploaded unless
+                  you turn on backup yourself.</span
+                >
+              </li>
+              <li>
+                <span class="key">Health</span>
+                <span class="val"
+                  >Workouts sync to Apple Health, so the rest of your health
+                  picture stays complete.</span
+                >
+              </li>
+              <li>
+                <span class="key">18 languages</span>
+                <span class="val"
+                  >The app is translated into 18 languages, with store listings
+                  in 22.</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="watches">
+            <figure class="watch">
+              <img
+                src="img/watch-home.webp"
+                width="416"
+                height="496"
+                alt="Apple Watch screen with a Start Workout button"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <figure class="watch">
+              <img
+                src="img/watch-timer.webp"
+                width="416"
+                height="496"
+                alt="Apple Watch rest timer with one, two and three minute presets"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ plans ============ -->
+      <section id="plans" class="wrap band" aria-labelledby="plans-title">
+        <p class="eyebrow">Plans</p>
+        <h2 id="plans-title" class="section-title">Logging is free, and stays free</h2>
+        <p class="section-copy">
+          Two paid tiers add the things that need a server or a subscription
+          behind them. Prices are shown in the store for your country.
+        </p>
+
+        <div class="plans-grid">
+          <article class="plan">
+            <h3 class="plan-name">Free</h3>
+            <p class="plan-lead">Everything you need to keep a training log.</p>
+            <ul>
+              <li>Unlimited lifts, sets and history</li>
+              <li>All 81 benchmark WODs</li>
+              <li>EMOM, AMRAP, Tabata and For Time timers</li>
+              <li>Automatic personal records and 1RM</li>
+              <li>Three workout templates</li>
+              <li>Apple Watch and Wear OS</li>
+            </ul>
+          </article>
+
+          <article class="plan">
+            <h3 class="plan-name">Premium</h3>
+            <p class="plan-lead">
+              For athletes who plan blocks rather than sessions.
+            </p>
+            <ul>
+              <li>Unlimited templates</li>
+              <li>Multi-week programs</li>
+              <li>Advanced analytics and plateau detection</li>
+              <li>Cloud backup and restore</li>
+              <li>Data export</li>
+              <li>Apple Health sync and body composition</li>
+              <li>Warm-up generator and recovery dashboard</li>
+            </ul>
+          </article>
+
+          <article class="plan is-top">
+            <h3 class="plan-name">PRO</h3>
+            <p class="plan-lead">
+              Everything in Premium, plus coaching between sessions.
+            </p>
+            <ul>
+              <li>AI coach for suggestions and post-workout insight</li>
+              <li>Video demonstrations for 100+ movements</li>
+              <li>Live Activity on the lock screen</li>
+              <li>Form check</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="plans-note">
+          Subscriptions are handled by the App Store and Google Play, and can be
+          cancelled there at any time.
+        </p>
+      </section>
+
+      <!-- ============ built with ============ -->
+      <section id="built" class="wrap band" aria-labelledby="built-title">
+        <p class="eyebrow">Engineering</p>
+        <h2 id="built-title" class="section-title">How it is built</h2>
+        <p class="section-copy">
+          One Kotlin Multiplatform codebase holds the data and domain layers.
+          Each platform keeps its own native UI, so nothing feels ported.
+        </p>
+
+        <ul class="spec">
+          <li>
+            <span class="key">Shared</span>
+            <span class="val"
+              >Kotlin Multiplatform<span>·</span>Room<span>·</span>Koin<span>·</span
+              >Coroutines and Flow<span>·</span>Clean Architecture with use
+              cases</span
+            >
+          </li>
+          <li>
+            <span class="key">Android</span>
+            <span class="val"
+              >Jetpack Compose<span>·</span>Material 3<span>·</span
+              >WorkManager<span>·</span>Wear OS companion</span
+            >
+          </li>
+          <li>
+            <span class="key">iOS</span>
+            <span class="val"
+              >SwiftUI<span>·</span>SKIE for Kotlin interop<span>·</span
+              >WidgetKit and ActivityKit<span>·</span>watchOS companion with
+              HealthKit</span
+            >
+          </li>
+          <li>
+            <span class="key">Services</span>
+            <span class="val"
+              >Firebase Auth and Firestore<span>·</span>RevenueCat<span>·</span
+              >Gemini 2.5 Flash for the coach</span
+            >
+          </li>
+          <li>
+            <span class="key">Delivery</span>
+            <span class="val"
+              >Fastlane<span>·</span>GitHub Actions<span>·</span>Detekt<span
+                >·</span
+              >Maestro flows<span>·</span>unit tests on both platforms</span
+            >
+          </li>
+        </ul>
+      </section>
+
+      <!-- ============ closing ============ -->
+      <section class="closing">
+        <div class="wrap band">
+          <h2 class="closing-title">Start with today's WOD.</h2>
+          <div class="store-row">
+            <a
+              class="store-btn filled"
+              href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="mdi mdi-google-play" aria-hidden="true"></i>
+              <span>
+                <span class="store-lead">Get it on</span>
+                <span class="store-name">Google Play</span>
+              </span>
+            </a>
+            <a
+              class="store-btn"
+              href="https://apps.apple.com/app/id6760609857"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="mdi mdi-apple" aria-hidden="true"></i>
+              <span>
+                <span class="store-lead">Download on the</span>
+                <span class="store-name">App Store</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <div class="wrap footer-inner">
+        <small>
+          WOD Tracker is built by
+          <a href="../">Manuel Lorenzo Parejo</a>. &copy; 2026.
+        </small>
+        <div class="footer-links">
+          <a
+            href="https://noloman.github.io/crossfit-tracker/privacy-policy.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Privacy policy</a
+          >
+          <a
+            href="https://noloman.github.io/crossfit-tracker/support.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Support</a
+          >
+          <a href="mailto:manulorenzop@gmail.com">Contact</a>
+          <a href="../">Portfolio</a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "WOD Tracker: Gym Log",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "iOS, Android, watchOS, Wear OS",
+        "url": "https://www.manulorenzo.me/wod-tracker/",
+        "description": "A training log for CrossFit, weightlifting and hybrid athletes. 81 benchmark WODs, EMOM, AMRAP, Tabata and For Time timers, automatic personal records, Apple Health sync and an AI coach.",
+        "author": {
+          "@type": "Person",
+          "name": "Manuel Lorenzo Parejo",
+          "url": "https://www.manulorenzo.me/"
+        }
+      }
+    </script>
+
+    <script>
+      (function () {
+        var clock = document.getElementById("clock");
+        var result = document.getElementById("board-result");
+        if (!clock) return;
+
+        var total = parseInt(clock.dataset.seconds, 10) || 0;
+
+        function format(seconds) {
+          var m = Math.floor(seconds / 60);
+          var s = Math.floor(seconds % 60);
+          return m + ":" + (s < 10 ? "0" : "") + s;
+        }
+
+        function finish() {
+          clock.textContent = format(total);
+          if (result) result.classList.add("is-in");
+        }
+
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+        if (reduced.matches) {
+          finish();
+          return;
+        }
+
+        var duration = 2600;
+        var started = null;
+
+        function step(now) {
+          if (started === null) started = now;
+          var t = Math.min((now - started) / duration, 1);
+          // Ease out, so the clock slows into its final time.
+          var eased = 1 - Math.pow(1 - t, 3);
+          clock.textContent = format(total * eased);
+          if (t < 1) {
+            requestAnimationFrame(step);
+          } else {
+            finish();
+          }
+        }
+
+        requestAnimationFrame(step);
+      })();
+    </script>
+  </body>
+</html>

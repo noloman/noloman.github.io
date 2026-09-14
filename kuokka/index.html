@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kuokka — a Hacker News reader for Android and iOS</title>
+    <meta
+      name="description"
+      content="Kuokka is a Hacker News reader with keyword watchlists, on-device story summaries, reader mode, offline reading and home screen widgets. Built for Android and iOS with Kotlin Multiplatform."
+    />
+    <link rel="canonical" href="https://www.manulorenzo.me/kuokka/" />
+    <meta
+      property="og:title"
+      content="Kuokka — a Hacker News reader for Android and iOS"
+    />
+    <meta
+      property="og:description"
+      content="Keyword watchlists, on-device summaries, reader mode, offline reading and home screen widgets. One Kotlin codebase, two native apps."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.manulorenzo.me/kuokka/" />
+    <meta
+      property="og:image"
+      content="https://www.manulorenzo.me/kuokka/assets/icon.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Kuokka — a Hacker News reader for Android and iOS"
+    />
+    <meta
+      name="twitter:description"
+      content="Keyword watchlists, on-device summaries, reader mode, offline reading and home screen widgets. One Kotlin codebase, two native apps."
+    />
+    <link rel="icon" type="image/png" href="assets/icon.png" />
+    <link rel="apple-touch-icon" href="assets/icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/kuokka.css" />
+    <style>
+      /* ---------- hero ---------- */
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        gap: 3.5rem;
+        align-items: center;
+        padding: 5rem 0 5.5rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.6rem, 5.6vw, 4rem);
+        font-weight: 800;
+        letter-spacing: -0.045em;
+        line-height: 1.02;
+        margin-top: 1.1rem;
+      }
+
+      .hero h1 .accent {
+        color: var(--orange-ink);
+      }
+
+      .lede {
+        color: var(--muted);
+        font-size: 1.14rem;
+        max-width: 34rem;
+        margin-top: 1.4rem;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 2rem;
+      }
+
+      .hero-meta {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 0.8rem;
+        color: var(--quiet);
+        margin-top: 1.6rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 0.9rem;
+        list-style: none;
+      }
+
+      .hero-meta li + li::before {
+        content: "·";
+        margin-right: 0.9rem;
+        color: var(--line-strong);
+      }
+
+      /* ---------- device stack ---------- */
+
+      .shots {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        min-height: 520px;
+      }
+
+      .device {
+        border-radius: 26px;
+        border: 1px solid var(--line-strong);
+        background: #fff;
+        overflow: hidden;
+        box-shadow: 0 22px 55px -30px rgba(20, 21, 26, 0.55);
+      }
+
+      .device img {
+        width: 100%;
+      }
+
+      .shots .device-front {
+        width: 258px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .shots .device-back {
+        width: 210px;
+        position: absolute;
+        right: 2%;
+        bottom: 8%;
+        z-index: 1;
+        opacity: 0.97;
+      }
+
+      /* ---------- feature feed ---------- */
+
+      .feed {
+        list-style: none;
+        margin-top: 2.75rem;
+        border-top: 1px solid var(--line-strong);
+      }
+
+      .feed-row {
+        display: grid;
+        grid-template-columns: 2.6rem minmax(0, 1fr);
+        gap: 1.4rem;
+        align-items: start;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .row-title {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+      }
+
+      .rank {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--quiet);
+        padding-top: 0.15rem;
+      }
+
+      .feed-row:nth-child(-n + 3) .rank {
+        color: var(--orange-ink);
+      }
+
+      .feed-row h3 {
+        font-size: 1.22rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .feed-row p {
+        color: var(--muted);
+        margin-top: 0.4rem;
+        max-width: 44rem;
+      }
+
+      .row-meta {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 0.78rem;
+        color: var(--quiet);
+        margin-top: 0.7rem;
+      }
+
+      .pill {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--orange-ink);
+        background: var(--orange-tint);
+        border: 1px solid #ffd9bd;
+        padding: 0.28rem 0.6rem;
+        border-radius: 999px;
+        white-space: nowrap;
+        transform: translateY(-1px);
+      }
+
+      .fact-strip {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem 3rem;
+        margin-top: 2.75rem;
+      }
+
+      .fact {
+        border-left: 2px solid var(--orange);
+        padding-left: 1.1rem;
+      }
+
+      .fact dt {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 0.74rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--quiet);
+      }
+
+      .fact dd {
+        margin-top: 0.35rem;
+        font-size: 1rem;
+        color: var(--ink);
+      }
+
+      /* ---------- split showcase ---------- */
+
+      .showcase {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3rem;
+        margin-top: 3rem;
+      }
+
+      .showcase-item {
+        display: grid;
+        grid-template-columns: 170px minmax(0, 1fr);
+        gap: 1.75rem;
+        align-items: center;
+      }
+
+      .showcase-item h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .showcase-item p {
+        color: var(--muted);
+        margin-top: 0.55rem;
+      }
+
+      .showcase-item .device {
+        border-radius: 20px;
+      }
+
+      .showcase-item .device img {
+        aspect-ratio: 170 / 300;
+        object-fit: cover;
+        object-position: top;
+      }
+
+      /* ---------- platforms ---------- */
+
+      .stack-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+        margin-top: 3rem;
+      }
+
+      .stack-card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 1.6rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .stack-card.is-shared {
+        border-color: #ffd0ac;
+        background: linear-gradient(180deg, var(--orange-tint) 0%, #fff 62%);
+      }
+
+      .stack-card .stack-head {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--quiet);
+      }
+
+      .stack-card.is-shared .stack-head {
+        color: var(--orange-ink);
+      }
+
+      .stack-card h3 {
+        font-size: 1.18rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-top: 0.75rem;
+      }
+
+      .stack-card p {
+        color: var(--muted);
+        font-size: 0.98rem;
+        margin-top: 0.55rem;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 1.35rem;
+        list-style: none;
+      }
+
+      .chips li {
+        font-family: "Geist Mono", ui-monospace, monospace;
+        font-size: 0.75rem;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 0.25rem 0.5rem;
+      }
+
+      .stack-note {
+        margin-top: 2rem;
+        font-size: 1rem;
+        color: var(--muted);
+        max-width: 46rem;
+      }
+
+      /* ---------- privacy ---------- */
+
+      .privacy-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
+      }
+
+      .privacy-item i {
+        font-size: 1.5rem;
+        color: var(--indigo);
+      }
+
+      .privacy-item h3 {
+        font-size: 1.08rem;
+        font-weight: 700;
+        margin-top: 0.7rem;
+      }
+
+      .privacy-item p {
+        color: var(--muted);
+        margin-top: 0.45rem;
+      }
+
+      .privacy-more {
+        margin-top: 2.5rem;
+        font-size: 0.98rem;
+        color: var(--muted);
+      }
+
+      .privacy-more a {
+        color: var(--indigo);
+        text-underline-offset: 2px;
+      }
+
+      /* ---------- closing cta ---------- */
+
+      .closing {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .closing .wrap {
+        padding: 5rem 0;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      .closing h2 {
+        font-size: clamp(1.9rem, 4vw, 2.5rem);
+        font-weight: 800;
+        letter-spacing: -0.035em;
+        line-height: 1.1;
+      }
+
+      .closing p {
+        color: #b6bbc9;
+        margin-top: 0.85rem;
+        max-width: 34rem;
+      }
+
+      .closing .store-button {
+        background: #fff;
+        color: var(--ink);
+        border-color: #fff;
+      }
+
+      .closing .store-button:hover {
+        background: #e9ebf0;
+      }
+
+      .closing .cta-row {
+        margin-top: 0;
+      }
+
+      /* ---------- responsive ---------- */
+
+      @media (max-width: 1020px) {
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+          padding: 3.5rem 0 4rem;
+        }
+
+        .shots {
+          min-height: 0;
+          justify-content: flex-start;
+          padding-bottom: 1rem;
+        }
+
+        .shots .device-front {
+          width: 240px;
+        }
+
+        .shots .device-back {
+          width: 195px;
+          right: auto;
+          left: 200px;
+        }
+
+        .stack-grid,
+        .privacy-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .privacy-grid {
+          gap: 2rem;
+        }
+
+        .showcase {
+          gap: 2.25rem;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .hero-meta {
+          flex-direction: column;
+          gap: 0.35rem;
+        }
+
+        .hero-meta li + li::before {
+          content: "";
+          margin: 0;
+        }
+
+        .shots .device-back {
+          display: none;
+        }
+
+        .shots .device-front {
+          width: min(260px, 70%);
+        }
+
+        .feed-row {
+          grid-template-columns: 1.8rem minmax(0, 1fr);
+          gap: 0.9rem;
+        }
+
+        .fact-strip,
+        .showcase {
+          grid-template-columns: 1fr;
+        }
+
+        .showcase-item {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 1.25rem;
+        }
+
+        .showcase-item .device {
+          width: 190px;
+        }
+
+        .closing .wrap {
+          grid-template-columns: 1fr;
+          padding: 3.75rem 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="top-rule"></div>
+
+    <header class="site-header">
+      <nav class="nav wrap" aria-label="Primary">
+        <a class="brand" href="#top">
+          <img src="assets/icon.png" alt="" width="30" height="30" />
+          Kuokka
+        </a>
+        <div class="nav-links">
+          <a class="nav-link" href="#features">Features</a>
+          <a class="nav-link" href="#platforms">How it is built</a>
+          <a class="nav-link" href="#privacy">Privacy</a>
+        </div>
+        <a class="nav-cta" href="#get">Get the app</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div id="top" class="wrap">
+        <section class="hero" aria-labelledby="hero-title">
+          <div>
+            <p class="eyebrow">
+              <span class="tri" aria-hidden="true">▲</span> Android · iOS ·
+              Kotlin Multiplatform
+            </p>
+            <h1 id="hero-title">
+              Hacker News, worth keeping on your
+              <span class="accent">home screen</span>.
+            </h1>
+            <p class="lede">
+              Kuokka watches the keywords you care about, pulls the key points
+              out of a long article without sending it anywhere, and keeps what
+              you saved readable with no signal.
+            </p>
+            <div class="cta-row">
+              <a
+                class="store-button"
+                href="https://apps.apple.com/us/app/kuokka-hacker-news/id6756539700"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="mdi mdi-apple" aria-hidden="true"></i>
+                <span class="store-label">
+                  <small>Download on the</small>
+                  App Store
+                </span>
+              </a>
+              <a
+                class="store-button ghost"
+                href="https://play.google.com/store/apps/details?id=me.manulorenzo.hackernewskmp"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i class="mdi mdi-google-play" aria-hidden="true"></i>
+                <span class="store-label">
+                  <small>Get it on</small>
+                  Google Play
+                </span>
+              </a>
+            </div>
+            <ul class="hero-meta">
+              <li>Version 2.0.10</li>
+              <li>11 languages</li>
+              <li>Free to download</li>
+            </ul>
+          </div>
+
+          <div class="shots">
+            <div class="device device-front">
+              <img
+                src="assets/shot-stories.png"
+                alt="Kuokka showing the top Hacker News stories, each with score, comment count and quick actions."
+                width="258"
+                height="573"
+                loading="eager"
+              />
+            </div>
+            <div class="device device-back" aria-hidden="true">
+              <img
+                src="assets/shot-dark.png"
+                alt=""
+                width="210"
+                height="467"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="band">
+        <section
+          id="features"
+          class="section wrap"
+          aria-labelledby="features-title"
+        >
+          <div class="section-head reveal">
+            <p class="eyebrow">
+              <span class="tri" aria-hidden="true">▲</span> Top features
+            </p>
+            <h2 id="features-title" class="section-title">
+              Everything a daily reader asks for, ranked.
+            </h2>
+            <p class="section-copy">
+              Kuokka covers the whole of Hacker News — Top, New, Best, Ask HN,
+              Show HN and Jobs — and adds the parts the site leaves to you.
+            </p>
+          </div>
+
+          <ol class="feed">
+            <li class="feed-row reveal">
+              <span class="rank" aria-hidden="true">1</span>
+              <div>
+                <div class="row-title"><h3>Radar watchlists</h3></div>
+                <p>
+                  Name the keywords, domains, authors and sections you want to
+                  follow. Matching stories collect in a Radar feed, and a digest
+                  rounds up the best of them so you can stop refreshing the
+                  front page.
+                </p>
+                <p class="row-meta">
+                  keywords · domains · authors · sections — evening digest free,
+                  three a day on Premium
+                </p>
+              </div>
+            </li>
+
+            <li class="feed-row reveal">
+              <span class="rank" aria-hidden="true">2</span>
+              <div>
+                <div class="row-title">
+                  <h3>Summaries that stay on your phone</h3>
+                </div>
+                <p>
+                  Tap a story for its key points. The summary is extracted on
+                  the device — no account, no API key, nothing sent to a server.
+                  Prefer a language model? Add your own Gemini, Claude or OpenAI
+                  key and Kuokka uses that instead.
+                </p>
+                <p class="row-meta">
+                  three per session free · uncapped on Premium
+                </p>
+              </div>
+            </li>
+
+            <li class="feed-row reveal">
+              <span class="rank" aria-hidden="true">3</span>
+              <div>
+                <div class="row-title"><h3>Reader mode</h3></div>
+                <p>
+                  Articles open stripped of the clutter, with adjustable text
+                  size and light, dark and sepia themes. Word count and reading
+                  time sit at the top, so you know what you are committing to.
+                </p>
+                <p class="row-meta">light · dark · sepia</p>
+              </div>
+            </li>
+
+            <li class="feed-row reveal">
+              <span class="rank" aria-hidden="true">4</span>
+              <div>
+                <div class="row-title">
+                  <h3>Offline reading</h3>
+                  <span class="pill">Premium</span>
+                </div>
+                <p>
+                  Save stories before you leave and read them on the train, on a
+                  flight, or anywhere the signal drops out.
+                </p>
+              </div>
+            </li>
+
+            <li class="feed-row reveal">
+              <span class="rank" aria-hidden="true">5</span>
+              <div>
+                <div class="row-title"><h3>Comment tools</h3></div>
+                <p>
+                  Pick a long thread up where you left off, spot the replies you
+                  have not read, search inside a discussion, and jump between
+                  top-level comments with one tap. Comment digests pull the
+                  substance out of a 300-reply thread.
+                </p>
+                <p class="row-meta">digests are a Premium feature</p>
+              </div>
+            </li>
+
+            <li class="feed-row reveal">
+              <span class="rank" aria-hidden="true">6</span>
+              <div>
+                <div class="row-title">
+                  <h3>For You</h3>
+                  <span class="pill">Premium</span>
+                </div>
+                <p>
+                  Recommendations built from what you actually open — your
+                  topics, your authors, your domains — rather than what is
+                  loudest today.
+                </p>
+              </div>
+            </li>
+
+            <li class="feed-row reveal">
+              <span class="rank" aria-hidden="true">7</span>
+              <div>
+                <div class="row-title"><h3>Home screen widgets</h3></div>
+                <p>
+                  Top stories on the home screen, in four responsive sizes on
+                  Android and three widget families on iOS. See what is breaking
+                  without opening the app.
+                </p>
+              </div>
+            </li>
+
+            <li class="feed-row reveal">
+              <span class="rank" aria-hidden="true">8</span>
+              <div>
+                <div class="row-title">
+                  <h3>Bookmarks, history and streaks</h3>
+                </div>
+                <p>
+                  Save stories for later, see at a glance which ones you have
+                  already opened, and build a reading streak with achievements
+                  along the way.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <dl class="fact-strip reveal">
+            <div class="fact">
+              <dt>Sections</dt>
+              <dd>
+                Top, New, Best, Ask HN, Show HN and Jobs, with infinite scroll
+                and search by date, type and points.
+              </dd>
+            </div>
+            <div class="fact">
+              <dt>Languages</dt>
+              <dd>
+                English, Spanish, French, Portuguese, Turkish, Indonesian,
+                German, Japanese, Chinese, Korean and Italian.
+              </dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+
+      <section id="craft" class="section wrap" aria-labelledby="craft-title">
+        <div class="section-head reveal">
+          <p class="eyebrow">
+            <span class="tri" aria-hidden="true">▲</span> Day and night
+          </p>
+          <h2 id="craft-title" class="section-title">
+            Made to be read, not scrolled past.
+          </h2>
+        </div>
+
+        <div class="showcase">
+          <article class="showcase-item reveal">
+            <div class="device">
+              <img
+                src="assets/shot-reader.png"
+                alt="Reader mode showing an article with its title, reading time and word count."
+                width="170"
+                height="378"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <h3>Reader mode</h3>
+              <p>
+                Clean typography, generous measure, and the reading time up
+                front. Text size and theme follow your preference, not the
+                publisher's.
+              </p>
+            </div>
+          </article>
+
+          <article class="showcase-item reveal">
+            <div class="device">
+              <img
+                src="assets/shot-dark.png"
+                alt="The story list in dark mode."
+                width="170"
+                height="378"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <h3>A dark mode that is actually dark</h3>
+              <p>
+                Material&nbsp;3 on Android and native SwiftUI on iOS, so the app
+                follows the system theme and the platform's own conventions
+                instead of imitating them.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <div class="band">
+        <section
+          id="platforms"
+          class="section wrap"
+          aria-labelledby="platforms-title"
+        >
+          <div class="section-head reveal">
+            <p class="eyebrow">
+              <span class="tri" aria-hidden="true">▲</span> How it is built
+            </p>
+            <h2 id="platforms-title" class="section-title">
+              One Kotlin codebase, two native apps.
+            </h2>
+            <p class="section-copy">
+              The logic lives once in a Kotlin Multiplatform module. Each
+              platform keeps its own UI, so neither app pays for the other's
+              compromises.
+            </p>
+          </div>
+
+          <div class="stack-grid">
+            <article class="stack-card is-shared reveal">
+              <p class="stack-head">
+                <i class="mdi mdi-language-kotlin" aria-hidden="true"></i>
+                Shared
+              </p>
+              <h3>Kotlin Multiplatform</h3>
+              <p>
+                Models, repositories, view models, the Hacker News API client
+                and the rules that decide what a free and a Premium reader see —
+                written once, compiled for both.
+              </p>
+              <ul class="chips">
+                <li>Kotlin</li>
+                <li>Coroutines</li>
+                <li>Flow / StateFlow</li>
+                <li>Ktor</li>
+                <li>Koin</li>
+              </ul>
+            </article>
+
+            <article class="stack-card reveal">
+              <p class="stack-head">
+                <i class="mdi mdi-android" aria-hidden="true"></i> Android
+              </p>
+              <h3>Compose and Material 3</h3>
+              <p>
+                A Compose Multiplatform UI, Glance widgets in four sizes, and
+                background work that keeps Radar digests arriving on schedule.
+              </p>
+              <ul class="chips">
+                <li>Jetpack Compose</li>
+                <li>Material 3</li>
+                <li>Glance</li>
+                <li>WorkManager</li>
+                <li>DataStore</li>
+              </ul>
+            </article>
+
+            <article class="stack-card reveal">
+              <p class="stack-head">
+                <i class="mdi mdi-apple" aria-hidden="true"></i> iOS
+              </p>
+              <h3>SwiftUI, all the way down</h3>
+              <p>
+                A hand-written SwiftUI app that consumes the shared module
+                through SKIE, so Kotlin flows arrive in Swift as async sequences
+                and sealed types as real enums.
+              </p>
+              <ul class="chips">
+                <li>SwiftUI</li>
+                <li>SKIE</li>
+                <li>WidgetKit</li>
+                <li>Swift Concurrency</li>
+              </ul>
+            </article>
+          </div>
+
+          <p class="stack-note reveal">
+            Both clients read the same entitlement rules, so a feature cannot
+            quietly behave one way on Android and another on iOS. Purchases go
+            through RevenueCat, and analytics and crash reporting through
+            Firebase.
+          </p>
+        </section>
+      </div>
+
+      <section
+        id="privacy"
+        class="section wrap"
+        aria-labelledby="privacy-title"
+      >
+        <div class="section-head reveal">
+          <p class="eyebrow">
+            <span class="tri" aria-hidden="true">▲</span> Privacy
+          </p>
+          <h2 id="privacy-title" class="section-title">
+            There is no account, and no server.
+          </h2>
+          <p class="section-copy">
+            Kuokka talks to the public Hacker News API. What you read is your
+            business.
+          </p>
+        </div>
+
+        <div class="privacy-grid">
+          <article class="privacy-item reveal">
+            <i class="mdi mdi-cellphone-lock" aria-hidden="true"></i>
+            <h3>Your history stays put</h3>
+            <p>
+              Reading history, bookmarks and watchlists are stored on the
+              device. There is nothing to sign in to.
+            </p>
+          </article>
+
+          <article class="privacy-item reveal">
+            <i class="mdi mdi-chip" aria-hidden="true"></i>
+            <h3>Summaries run locally</h3>
+            <p>
+              Article text is summarized on the phone unless you choose to add
+              your own provider key.
+            </p>
+          </article>
+
+          <article class="privacy-item reveal">
+            <i class="mdi mdi-chart-box-outline" aria-hidden="true"></i>
+            <h3>Analytics you switch off</h3>
+            <p>
+              Anonymous usage and crash diagnostics are asked for, not assumed,
+              and you can turn them off in Account at any time.
+            </p>
+          </article>
+        </div>
+
+        <p class="privacy-more reveal">
+          The free app shows ads through Google AdMob, and they are never
+          personalized. Premium removes them entirely. The
+          <a href="privacy/">privacy policy</a> sets out every service involved.
+        </p>
+      </section>
+
+      <div id="get" class="closing">
+        <div class="wrap">
+          <div>
+            <h2>Put Hacker News on your home screen.</h2>
+            <p>
+              Free to download on both stores. Premium is a one-time purchase,
+              not a subscription.
+            </p>
+          </div>
+          <div class="cta-row">
+            <a
+              class="store-button"
+              href="https://apps.apple.com/us/app/kuokka-hacker-news/id6756539700"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="mdi mdi-apple" aria-hidden="true"></i>
+              <span class="store-label">
+                <small>Download on the</small>
+                App Store
+              </span>
+            </a>
+            <a
+              class="store-button"
+              href="https://play.google.com/store/apps/details?id=me.manulorenzo.hackernewskmp"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="mdi mdi-google-play" aria-hidden="true"></i>
+              <span class="store-label">
+                <small>Get it on</small>
+                Google Play
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner wrap">
+        <small
+          >Built by Manuel Lorenzo Parejo. Not affiliated with
+          Y&nbsp;Combinator.</small
+        >
+        <div class="footer-links">
+          <a href="privacy/">Privacy</a>
+          <a href="terms/">Terms</a>
+          <a href="support/">Support</a>
+          <a href="/">Portfolio</a>
+          <a href="mailto:manulorenzop@gmail.com">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var items = document.querySelectorAll(".reveal");
+        var reduced = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        if (reduced || !("IntersectionObserver" in window)) {
+          items.forEach(function (el) {
+            el.classList.add("in");
+          });
+          return;
+        }
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry, index) {
+              if (!entry.isIntersecting) return;
+              var el = entry.target;
+              el.style.transitionDelay = Math.min(index, 5) * 45 + "ms";
+              el.classList.add("in");
+              observer.unobserve(el);
+            });
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.1 },
+        );
+
+        items.forEach(function (el) {
+          observer.observe(el);
+        });
+
+        window.setTimeout(function () {
+          items.forEach(function (el) {
+            el.classList.add("in");
+          });
+        }, 3000);
+      })();
+    </script>
+  </body>
+</html>

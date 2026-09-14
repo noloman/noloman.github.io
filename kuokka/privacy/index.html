@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kuokka — Privacy Policy</title>
+    <meta
+      name="description"
+      content="How Kuokka handles your data: no account, no servers of ours, reading history kept on the device, and every third-party service named."
+    />
+    <link rel="canonical" href="https://www.manulorenzo.me/kuokka/privacy/" />
+    <link rel="icon" type="image/png" href="../assets/icon.png" />
+    <link rel="apple-touch-icon" href="../assets/icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/kuokka.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="top-rule"></div>
+
+    <header class="site-header">
+      <nav class="nav wrap" aria-label="Primary">
+        <a class="brand" href="../">
+          <img src="../assets/icon.png" alt="" width="30" height="30" />
+          Kuokka
+        </a>
+        <div class="nav-links">
+          <a class="nav-link" href="../#features">Features</a>
+          <a class="nav-link" aria-current="page" href="./">Privacy</a>
+          <a class="nav-link" href="../terms/">Terms</a>
+          <a class="nav-link" href="../support/">Support</a>
+        </div>
+        <a class="nav-cta" href="../#get">Get the app</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="doc-header">
+        <div class="wrap">
+          <p class="eyebrow">
+            <span class="tri" aria-hidden="true">▲</span> Privacy
+          </p>
+          <h1 class="doc-title">Privacy policy</h1>
+          <p class="doc-summary">
+            Kuokka has no account system and no server of its own. What you
+            read, save and watch for is held on your device. This page names
+            every other party your phone talks to, and why.
+          </p>
+          <p class="doc-dates">
+            Effective 14 September 2026 · Applies to Kuokka on iOS and Android
+          </p>
+          <div class="doc-nav">
+            <a href="./" aria-current="page">Privacy</a>
+            <a href="../terms/">Terms</a>
+            <a href="../support/">Support</a>
+          </div>
+        </div>
+      </div>
+
+      <article class="doc wrap">
+        <h2>The short version</h2>
+        <p>
+          There is nothing to sign up for. Kuokka stores your bookmarks, reading
+          history, Radar watchlists, streaks and settings in the app's own
+          storage on your phone, and they never leave it. Article summaries are
+          produced on the device. The app does use a small number of third-party
+          services — Hacker News itself, crash and analytics reporting, ads on
+          the free tier, and the stores that process purchases — and each is
+          listed below.
+        </p>
+
+        <div class="callout">
+          <p>
+            Deleting the app deletes everything Kuokka kept on the device. There
+            is no copy on a server for us to hold, because there is no server.
+          </p>
+        </div>
+
+        <h2>What stays on your device</h2>
+        <ul>
+          <li>
+            Bookmarks and saved articles, including anything downloaded for
+            offline reading
+          </li>
+          <li>
+            Reading history, which is what dims the stories you have already
+            opened
+          </li>
+          <li>
+            Radar watchlists: the keywords, domains, authors and sections you
+            follow
+          </li>
+          <li>Reading streaks and achievements</li>
+          <li>
+            Your settings, including theme, text size and any provider API key
+            you add
+          </li>
+        </ul>
+        <p>
+          This data is written with the platform's own storage (DataStore on
+          Android,
+          <code>NSUserDefaults</code> on iOS) and is covered by the device's
+          encryption. It is not transmitted to us and is not synced between your
+          devices.
+        </p>
+
+        <h2>What leaves your device, and where it goes</h2>
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th scope="col">Service</th>
+              <th scope="col">What it receives, and why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hacker News API</td>
+              <td>
+                Requests for stories, comments and profiles. Like any web
+                request this reveals your IP address and approximate region to
+                the service. Kuokka does not attach any identifier of its own.
+              </td>
+            </tr>
+            <tr>
+              <td>The sites you open</td>
+              <td>
+                Opening an article in reader mode fetches it from the
+                publisher's own server, so that request reaches the publisher
+                exactly as a browser visit would.
+              </td>
+            </tr>
+            <tr>
+              <td>Google AdMob</td>
+              <td>
+                Ads on the free tier. Ads in Kuokka are not personalized. AdMob
+                may still use a device advertising identifier for frequency
+                capping and fraud prevention. Premium removes ads completely.
+              </td>
+            </tr>
+            <tr>
+              <td>Firebase Analytics and Crashlytics</td>
+              <td>
+                Anonymous usage events and crash diagnostics, and only if you
+                allow them. Kuokka asks on first run and the choice lives under
+                Account, where you can change it at any time.
+              </td>
+            </tr>
+            <tr>
+              <td>RevenueCat</td>
+              <td>
+                Purchase and entitlement state, so a Premium purchase is
+                recognised on the device. It receives a store transaction
+                identifier, never your payment details.
+              </td>
+            </tr>
+            <tr>
+              <td>Your AI provider, if you add a key</td>
+              <td>
+                Only when you supply your own Gemini, Claude or OpenAI key: the
+                article text is sent to that provider under your own account and
+                their terms. Leave the key empty and no article text ever leaves
+                the device.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Summaries and comment digests</h2>
+        <p>
+          By default Kuokka summarizes on the device. The summarizer is
+          extractive: it selects sentences that already appear in the article
+          rather than generating new text, and it needs no network call and no
+          API key. If you prefer a language model to write them, you can add
+          your own provider key in Settings — that is the only configuration in
+          which article or comment text is sent anywhere.
+        </p>
+
+        <h2>Notifications</h2>
+        <p>
+          Radar digests arrive as local notifications scheduled on the device.
+          They are not push messages, there is no push token, and nothing about
+          them reaches a server. Kuokka asks for notification permission before
+          scheduling any, and the system settings for the app revoke it at any
+          time.
+        </p>
+
+        <h2>App tracking on iOS</h2>
+        <p>
+          On iOS, Kuokka presents Apple's App Tracking Transparency prompt
+          before any tracking identifier could be used for advertising.
+          Declining is fully supported; the free tier continues to show
+          non-personalized ads, and nothing else in the app changes.
+        </p>
+
+        <h2>Your choices</h2>
+        <ul>
+          <li>
+            <strong>Analytics:</strong> turn anonymous analytics and crash
+            reporting on or off under Account.
+          </li>
+          <li>
+            <strong>Advertising:</strong> reset or limit your advertising
+            identifier in the device's own privacy settings, or buy Premium to
+            remove ads.
+          </li>
+          <li>
+            <strong>AI provider:</strong> remove your API key in Settings and
+            summaries return to running on the device.
+          </li>
+          <li>
+            <strong>Everything else:</strong> clear reading history from
+            Settings, or delete the app to remove all of it.
+          </li>
+        </ul>
+
+        <h2>Children</h2>
+        <p>
+          Kuokka is not directed to children under 13 and does not knowingly
+          collect information from them. It displays content from Hacker News,
+          which is written for a general adult audience and is not moderated by
+          us.
+        </p>
+
+        <h2>Changes to this policy</h2>
+        <p>
+          If the app starts handling data differently, this page changes with
+          it, and the effective date above moves. Material changes will also be
+          described in the release notes for the version that introduces them.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions about any of this, or a request about your data, go to
+          <a href="mailto:manulorenzop@gmail.com">manulorenzop@gmail.com</a>.
+          Kuokka is built and maintained by Manuel Lorenzo Parejo.
+        </p>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner wrap">
+        <small
+          >Built by Manuel Lorenzo Parejo. Not affiliated with
+          Y&nbsp;Combinator.</small
+        >
+        <div class="footer-links">
+          <a href="../">Kuokka</a>
+          <a href="../terms/">Terms</a>
+          <a href="../support/">Support</a>
+          <a href="/">Portfolio</a>
+          <a href="mailto:manulorenzop@gmail.com">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

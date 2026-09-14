@@ -1,0 +1,523 @@
+/* Kuokka mini-site — shared shell used by the landing page and the policy pages. */
+
+:root {
+  --paper: #ffffff;
+  --band: #f6f7f9;
+  --ink: #14151a;
+  --muted: #586074;
+  --quiet: #868da0;
+  --line: #e3e6ec;
+  --line-strong: #c7ccd8;
+  --orange: #ff6600;
+  --orange-ink: #c44d00;
+  --orange-tint: #fff3e9;
+  --indigo: #3d4f85;
+  --radius: 10px;
+  --max: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family:
+    "Geist",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.wrap {
+  width: min(var(--max), calc(100% - 56px));
+  margin: 0 auto;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.7rem 1.1rem;
+  z-index: 50;
+  border-radius: 0 0 var(--radius) 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--indigo);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- header ---------- */
+
+.top-rule {
+  height: 4px;
+  background: var(--orange);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-weight: 700;
+  font-size: 1.08rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.brand img {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.1rem;
+}
+
+.nav-link {
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--ink);
+}
+
+.nav-link[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.58rem 1.05rem;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.nav-cta:hover {
+  background: #2c2f3a;
+}
+
+/* ---------- shared type ---------- */
+
+.eyebrow {
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--quiet);
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.tri {
+  color: var(--orange);
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.section {
+  padding: 5.5rem 0;
+}
+
+.band {
+  background: var(--band);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.section-head {
+  max-width: 640px;
+}
+
+.section-title {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin-top: 0.9rem;
+}
+
+.section-copy {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin-top: 0.9rem;
+}
+
+/* ---------- store buttons ---------- */
+
+.store-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.78rem 1.35rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.store-button i {
+  font-size: 1.3rem;
+}
+
+.store-button .store-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.store-button .store-label small {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.store-button:hover {
+  transform: translateY(-1px);
+  background: #2c2f3a;
+}
+
+.store-button.ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.store-button.ghost:hover {
+  background: var(--band);
+}
+
+/* ---------- document pages ---------- */
+
+.doc-header {
+  padding: 4rem 0 2.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.doc-title {
+  font-size: clamp(2.1rem, 4.5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-top: 1rem;
+}
+
+.doc-summary {
+  color: var(--muted);
+  font-size: 1.12rem;
+  max-width: 44rem;
+  margin-top: 1.1rem;
+}
+
+.doc-dates {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--quiet);
+  margin-top: 1.4rem;
+}
+
+.doc {
+  padding: 3.25rem 0 5rem;
+  max-width: 46rem;
+}
+
+.doc h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 2.75rem;
+  padding-top: 0.2rem;
+}
+
+.doc h2:first-child {
+  margin-top: 0;
+}
+
+.doc h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 1.75rem;
+}
+
+.doc p,
+.doc li {
+  color: var(--muted);
+  margin-top: 0.85rem;
+}
+
+.doc ul,
+.doc ol {
+  margin-top: 0.5rem;
+  padding-left: 1.15rem;
+}
+
+.doc li {
+  margin-top: 0.5rem;
+}
+
+.doc li::marker {
+  color: var(--line-strong);
+}
+
+.doc strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.doc a {
+  color: var(--indigo);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.callout {
+  border-left: 2px solid var(--orange);
+  background: var(--orange-tint);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.1rem 1.3rem;
+  margin-top: 1.75rem;
+}
+
+.callout p {
+  color: #6b3c14;
+  margin-top: 0;
+}
+
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.25rem;
+  font-size: 0.96rem;
+}
+
+.doc-table th,
+.doc-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.7rem 1rem 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.doc-table th {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--quiet);
+}
+
+.doc-table td {
+  color: var(--muted);
+}
+
+.doc-table td:first-child {
+  color: var(--ink);
+  font-weight: 500;
+  width: 34%;
+}
+
+.doc-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.doc-nav a {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  background: var(--paper);
+}
+
+.doc-nav a:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.doc-nav a[aria-current="page"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--line);
+}
+
+.footer-inner {
+  min-height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--ink);
+}
+
+/* ---------- motion ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .store-button:hover {
+    transform: none;
+  }
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 760px) {
+  .wrap {
+    width: calc(100% - 36px);
+  }
+
+  .nav {
+    min-height: 64px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .section {
+    padding: 3.75rem 0;
+  }
+
+  .store-button {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .doc-header {
+    padding: 2.75rem 0 2rem;
+  }
+
+  .doc {
+    padding: 2.5rem 0 3.5rem;
+  }
+
+  .doc-table td:first-child {
+    width: 40%;
+  }
+
+  .footer-inner {
+    min-height: 0;
+    padding: 1.75rem 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

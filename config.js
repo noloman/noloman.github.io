@@ -83,16 +83,18 @@ window.PorfolioConfig = {
         "A web app for finding remote work opportunities. Browse remote job listings, filter by role and category, save interesting positions, and apply directly from the browser.",
     },
     {
-      name: "CrossFit Tracker",
-      link: "https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android",
+      name: "WOD Tracker",
+      type: "iOS & Android",
+      link: "/wod-tracker/",
       description:
-        "An Android app for tracking weightlifting workouts. Record lifts with weight, reps, and sets, track personal records, monitor total volume, and visualize your strength progress with interactive charts.",
+        "A training log for CrossFit, weightlifting, and hybrid athletes. 81 benchmark WODs, EMOM/AMRAP/Tabata timers, automatic personal records, Apple Watch and Wear OS companions, and an AI coach. Kotlin Multiplatform shared logic with native Compose and SwiftUI interfaces.",
     },
     {
-      name: "Hacker News Reader",
-      link: "https://play.google.com/store/apps/details?id=me.manulorenzo.hackernewskmp",
+      name: "Kuokka \u2014 Hacker News Reader",
+      type: "Android \u00b7 iOS",
+      link: "/kuokka/",
       description:
-        "A Hacker News reader built with Kotlin Multiplatform. Browse tech news and developer stories with offline reading support and dark mode.",
+        "A Hacker News client for Android and iOS built from one Kotlin Multiplatform codebase: keyword watchlists, on-device story summaries, reader mode, offline reading and home screen widgets.",
     },
     {
       name: "Stressi",
