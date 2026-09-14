@@ -837,7 +837,7 @@
                       {{ work.name }}
                     </a>
                   </td>
-                  <td>{{ getProjectType(work.link) }}</td>
+                  <td>{{ getProjectType(work) }}</td>
                   <td>{{ work.description }}</td>
                   <td>
                     <a
@@ -867,7 +867,7 @@
                   <h3>{{ work.name }}</h3>
                   <i class="mdi mdi-open-in-new"></i>
                 </div>
-                <p class="type">{{ getProjectType(work.link) }}</p>
+                <p class="type">{{ getProjectType(work) }}</p>
                 <p>{{ work.description }}</p>
               </a>
             </div>
@@ -966,9 +966,10 @@
             };
             return icons[name] || "mdi mdi-code-tags";
           },
-          getProjectType(link) {
-            if (link.includes("play.google.com")) return "Android";
-            if (link.includes("apps.apple.com")) return "iOS";
+          getProjectType(work) {
+            if (work.type) return work.type;
+            if (work.link.includes("play.google.com")) return "Android";
+            if (work.link.includes("apps.apple.com")) return "iOS";
             return "Web";
           },
           getContactIcon(name) {

@@ -70,6 +70,13 @@ window.PorfolioConfig = {
   ],
   works: [
     {
+      name: "Keysi",
+      type: "macOS",
+      link: "https://keysi.io",
+      description:
+        "A macOS menu-bar utility that shows the keyboard shortcuts of whatever app you're using. Hold ⌘ for a glance at every shortcut grouped by menu, click any row to run it, search when you need one fast, and add custom cheat sheets for apps like Vim and tmux.",
+    },
+    {
       name: "Anywhere Roles",
       link: "https://anywhereroles.com",
       description:
