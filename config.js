@@ -30,13 +30,6 @@ window.PorfolioConfig = {
   ],
   backendWorks: [
     {
-      name: "Spring Boot Learning Kit",
-      type: "Spring Boot · Java",
-      link: "https://github.com/noloman/springboot-learning-kit",
-      description:
-        "Java Spring Boot service focused on backend patterns including messaging with ActiveMQ and RabbitMQ, PostgreSQL persistence, Docker-based local development, and Prometheus/Grafana observability.",
-    },
-    {
       name: "GitHub Activity Stream",
       type: "Java",
       link: "https://github.com/noloman/github-activity-stream",
