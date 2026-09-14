@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0f14" />
     <meta
       name="description"
       content="Manuel Lorenzo Parejo - Backend-focused Software Engineer working with Spring Boot, Java, Kotlin, APIs, and product systems."
@@ -48,29 +49,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --bg: #ffffff;
-        --section: #f6f7f9;
-        --text: #111111;
-        --muted: #4f5663;
-        --quiet: #7a8190;
-        --line: #d9dde5;
-        --line-strong: #aeb5c2;
-        --accent: #0b57d0;
-        --accent-soft: #eaf1ff;
-        --radius: 8px;
-        --max: 1280px;
+        --ink: #0b0f14;
+        --raise: #111820;
+        --hover: #16202a;
+        --line: #1e2a36;
+        --line-2: #2c3b4b;
+        --text: #e8eef4;
+        --muted: #93a3b4;
+        --dim: #7a8b9e;
+        --amber: #e8913a;
+        --amber-hi: #f6ab5d;
+        --amber-wash: rgba(232, 145, 58, 0.1);
+        --steel: #5e7c99;
+        --max: 1180px;
+        --gutter: clamp(20px, 5vw, 64px);
+        --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
       }
 
-      * {
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
@@ -78,49 +81,122 @@
 
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: 88px;
+        -webkit-text-size-adjust: 100%;
       }
 
       body {
         min-width: 320px;
-        background: var(--bg);
+        background: var(--ink);
         color: var(--text);
         font-family:
-          "Geist",
+          "Archivo",
           -apple-system,
           BlinkMacSystemFont,
           "Segoe UI",
           sans-serif;
-        line-height: 1.5;
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
       }
 
       a {
         color: inherit;
       }
 
+      :focus-visible {
+        outline: 2px solid var(--amber);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+
+      .icon {
+        width: 1em;
+        height: 1em;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.75;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex: none;
+      }
+
+      .icon.solid {
+        fill: currentColor;
+        stroke: none;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: var(--max);
+        margin: 0 auto;
+        padding-inline: var(--gutter);
+      }
+
+      .eyebrow {
+        color: var(--amber);
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.17em;
+        text-transform: uppercase;
+      }
+
+      .skip {
+        position: absolute;
+        left: -9999px;
+      }
+
+      .skip:focus {
+        left: var(--gutter);
+        top: 12px;
+        z-index: 60;
+        background: var(--amber);
+        border-radius: 4px;
+        color: var(--ink);
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        padding: 10px 16px;
+      }
+
+      /* ---------- header ---------- */
+
       .site-header {
-        border-bottom: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.92);
         position: sticky;
         top: 0;
-        z-index: 10;
-        backdrop-filter: blur(18px);
+        z-index: 50;
+        border-bottom: 1px solid var(--line);
+        background: rgba(11, 15, 20, 0.82);
+        backdrop-filter: blur(14px);
       }
 
       .nav {
-        width: min(var(--max), calc(100% - 56px));
-        min-height: 82px;
-        margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 2rem;
+        gap: 1.5rem;
+        min-height: 68px;
       }
 
       .brand {
-        font-size: 1.12rem;
-        font-weight: 700;
-        letter-spacing: -0.03em;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        white-space: nowrap;
+        font-family: var(--mono);
+        font-size: 0.84rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
         text-decoration: none;
+      }
+
+      .brand .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--amber);
+        box-shadow: 0 0 0 3px var(--amber-wash);
+        flex: none;
       }
 
       .brand-short {
@@ -130,483 +206,634 @@
       .nav-links {
         display: flex;
         align-items: center;
-        gap: 2.6rem;
+        gap: clamp(1rem, 3vw, 2.25rem);
       }
 
       .nav-link {
-        color: var(--text);
-        font-size: 0.96rem;
-        font-weight: 500;
-        text-decoration: none;
-        transition: color 160ms ease;
-      }
-
-      .nav-link:hover,
-      .nav-link:focus-visible {
-        color: var(--accent);
-        outline: none;
-      }
-
-      .nav-link.active {
-        color: var(--accent);
         position: relative;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        text-transform: uppercase;
+        padding-block: 4px;
+        transition: color 180ms ease;
       }
 
-      .nav-link.active::after {
+      .nav-link::after {
         content: "";
         position: absolute;
         left: 0;
         right: 0;
-        bottom: -12px;
-        height: 2px;
-        background: var(--accent);
+        bottom: -2px;
+        height: 1px;
+        background: var(--amber);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 220ms ease;
       }
 
-      .hero,
-      .section,
-      .footer-inner {
-        width: min(var(--max), calc(100% - 56px));
-        margin: 0 auto;
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--text);
       }
+
+      .nav-link.active::after {
+        transform: scaleX(1);
+      }
+
+      /* ---------- hero ---------- */
 
       .hero {
-        min-height: min(calc(100vh - 82px), 760px);
         display: grid;
-        grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.72fr);
-        gap: clamp(4rem, 8vw, 8rem);
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+        gap: clamp(2.5rem, 6vw, 5.5rem);
         align-items: center;
-        padding: clamp(5rem, 8vw, 8rem) 0;
+        padding-block: clamp(3.5rem, 9vw, 7rem) clamp(3.5rem, 8vw, 6rem);
       }
 
       .hero-title {
-        max-width: 920px;
-        font-size: clamp(3.8rem, 6vw, 5.6rem);
+        max-width: 15ch;
+        margin-top: 1.35rem;
+        font-size: clamp(2.5rem, 5.4vw, 4.25rem);
+        font-stretch: 108%;
         font-weight: 700;
-        letter-spacing: -0.065em;
-        line-height: 0.94;
+        letter-spacing: -0.028em;
+        line-height: 1.03;
+        text-wrap: balance;
       }
 
-      .hero-role {
-        margin-top: 1.25rem;
-        color: var(--muted);
-        font-size: clamp(1.55rem, 2.2vw, 2.2rem);
-        font-weight: 400;
-        letter-spacing: -0.045em;
-        line-height: 1.05;
+      .hero-title em {
+        color: var(--amber);
+        font-style: normal;
       }
 
       .hero-copy {
-        max-width: 700px;
-        margin-top: 2.3rem;
+        max-width: 46ch;
+        margin-top: 1.6rem;
         color: var(--muted);
-        font-size: clamp(1.08rem, 1.35vw, 1.22rem);
-        line-height: 1.56;
+        font-size: 1.05rem;
+        line-height: 1.68;
+      }
+
+      .byline {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 2rem;
+        color: var(--dim);
+        font-family: var(--mono);
+        font-size: 0.78rem;
+      }
+
+      .byline::before {
+        content: "";
+        width: 26px;
+        height: 1px;
+        background: var(--line-2);
+        flex: none;
       }
 
       .hero-actions {
         display: flex;
         flex-wrap: wrap;
-        gap: 1.25rem;
-        margin-top: 3rem;
+        gap: 0.85rem;
+        margin-top: 2.25rem;
       }
 
-      .button {
-        min-width: 210px;
-        min-height: 58px;
-        border: 1px solid var(--accent);
-        border-radius: var(--radius);
+      .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 0.7rem;
-        padding: 0 1.5rem;
-        color: var(--accent);
-        font-size: 1rem;
-        font-weight: 600;
+        gap: 0.6rem;
+        min-height: 50px;
+        padding-inline: 1.4rem;
+        border: 1px solid var(--line-2);
+        border-radius: 6px;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        letter-spacing: 0.04em;
         text-decoration: none;
         transition:
-          background 160ms ease,
-          color 160ms ease,
-          transform 160ms ease;
+          background 180ms ease,
+          border-color 180ms ease,
+          color 180ms ease;
       }
 
-      .button.primary {
-        background: var(--accent);
-        color: #ffffff;
+      .btn:hover {
+        background: var(--hover);
+        border-color: var(--steel);
       }
 
-      .button:hover,
-      .button:focus-visible {
-        outline: none;
-        transform: translateY(-2px);
+      .btn.primary {
+        background: var(--amber);
+        border-color: var(--amber);
+        color: #180d02;
+        font-weight: 600;
       }
 
-      .focus-panel {
-        border-left: 1px solid var(--line-strong);
-        padding-left: clamp(2rem, 4vw, 4rem);
+      .btn.primary:hover {
+        background: var(--amber-hi);
+        border-color: var(--amber-hi);
       }
 
-      .focus-item {
-        padding: 2.1rem 0;
-        border-bottom: 1px solid var(--line);
+      /* ---------- topology diagram (signature) ---------- */
+
+      .topology {
+        justify-self: end;
+        width: 100%;
+        max-width: 420px;
       }
 
-      .focus-item:first-child {
-        padding-top: 0;
+      .topology svg {
+        display: block;
+        width: 100%;
+        height: auto;
       }
 
-      .focus-item:last-child {
-        border-bottom: 0;
-        padding-bottom: 0;
+      .topo-label {
+        fill: var(--dim);
+        font-family: var(--mono);
+        font-size: 8.5px;
+        letter-spacing: 0.15em;
       }
 
-      .label {
-        color: var(--muted);
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+      .topo-node {
+        fill: var(--raise);
+        stroke: var(--line-2);
       }
 
-      .focus-item p {
+      .topo-node-name {
+        fill: var(--text);
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+      }
+
+      .topo-node-sub {
+        fill: var(--dim);
+        font-family: var(--mono);
+        font-size: 8.5px;
+      }
+
+      .topo-service {
+        fill: rgba(232, 145, 58, 0.06);
+        stroke: var(--amber);
+      }
+
+      .topo-service-name {
+        fill: var(--amber);
+        font-family: var(--mono);
+        font-size: 13px;
+        font-weight: 500;
+      }
+
+      .topo-wire {
+        fill: none;
+        stroke: var(--line-2);
+        stroke-width: 1;
+      }
+
+      .topo-pulse path {
+        fill: none;
+        stroke: var(--amber);
+        stroke-width: 1.25;
+        stroke-linecap: round;
+        stroke-dasharray: 3 97;
+        animation: flow 3.6s linear infinite;
+      }
+
+      @keyframes flow {
+        from {
+          stroke-dashoffset: 100;
+        }
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      .topo-caption {
         margin-top: 1.1rem;
-        color: var(--muted);
-        font-size: 1.14rem;
-        line-height: 1.55;
+        padding-left: 1rem;
+        border-left: 1px solid var(--line);
+        color: var(--dim);
+        font-family: var(--mono);
+        font-size: 0.73rem;
+        line-height: 1.7;
       }
 
-      .section-band {
+      /* ---------- section frame ---------- */
+
+      .band {
         border-top: 1px solid var(--line);
-        background: var(--section);
+      }
+
+      .band.alt {
+        background: #090d11;
       }
 
       .section {
-        padding: clamp(4rem, 7vw, 6.5rem) 0;
+        padding-block: clamp(3.5rem, 7vw, 5.5rem);
+      }
+
+      .section-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.75rem 2rem;
+        padding-bottom: 1.75rem;
       }
 
       .section-title {
-        font-size: clamp(2.2rem, 4vw, 4rem);
-        font-weight: 650;
-        letter-spacing: -0.055em;
-        line-height: 1;
-      }
-
-      .section-copy {
-        margin-top: 0.85rem;
-        color: var(--muted);
-        font-size: 1.08rem;
-      }
-
-      .subsection-title {
-        margin-top: 3rem;
-        color: var(--muted);
-        font-size: 0.78rem;
+        margin-top: 0.7rem;
+        font-size: clamp(1.85rem, 3.4vw, 2.7rem);
+        font-stretch: 106%;
         font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+        letter-spacing: -0.025em;
+        line-height: 1.1;
       }
 
-      .backend-grid {
+      .section-note {
+        max-width: 38ch;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .count {
+        color: var(--dim);
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+      }
+
+      /* ---------- services list ---------- */
+
+      .services {
+        border-top: 1px solid var(--line);
+      }
+
+      .service {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr) 32px;
+        gap: clamp(1.25rem, 3vw, 3rem);
+        align-items: start;
+        border-bottom: 1px solid var(--line);
+        padding: 1.6rem 0.9rem;
+        margin-inline: -0.9rem;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background 180ms ease;
+      }
+
+      a.service:hover {
+        background: var(--raise);
+      }
+
+      .service-id {
+        display: flex;
+        align-items: baseline;
+        gap: 0.7rem;
+      }
+
+      .status {
+        margin-top: 0.55rem;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        flex: none;
+      }
+
+      .status.live {
+        background: var(--amber);
+        box-shadow: 0 0 0 3px var(--amber-wash);
+      }
+
+      .status.closed {
+        border: 1px solid var(--steel);
+      }
+
+      .service h3 {
+        font-size: 1.18rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+        line-height: 1.25;
+      }
+
+      .service-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        margin-top: 0.7rem;
+      }
+
+      .tag {
+        border: 1px solid var(--line-2);
+        border-radius: 3px;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.09em;
+        padding: 0.2rem 0.5rem;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .tag.private {
+        border-color: rgba(94, 124, 153, 0.45);
+        color: var(--steel);
+      }
+
+      .service p {
+        color: var(--muted);
+        font-size: 0.96rem;
+        line-height: 1.68;
+      }
+
+      .service-go {
+        justify-self: end;
+        margin-top: 0.2rem;
+        color: var(--dim);
+        font-size: 1.05rem;
+        transition:
+          color 180ms ease,
+          transform 180ms ease;
+      }
+
+      a.service:hover .service-go {
+        color: var(--amber);
+        transform: translate(2px, -2px);
+      }
+
+      /* ---------- products ---------- */
+
+      .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1px;
-        margin-top: 1rem;
         border: 1px solid var(--line);
         background: var(--line);
       }
 
-      .backend-card {
-        min-height: 230px;
-        background: var(--section);
-        color: var(--text);
+      .product {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        gap: 1.4rem;
-        padding: 1.5rem;
+        gap: 0.85rem;
+        background: var(--ink);
+        padding: 1.6rem 1.5rem 1.75rem;
         text-decoration: none;
+        transition: background 180ms ease;
       }
 
-      .backend-card.is-link:hover,
-      .backend-card.is-link:focus-visible {
-        background: #ffffff;
-        outline: 2px solid var(--accent);
-        outline-offset: -2px;
+      .product:hover {
+        background: var(--raise);
       }
 
-      .backend-card-header {
+      .product-top {
         display: flex;
-        align-items: start;
+        align-items: center;
         justify-content: space-between;
         gap: 1rem;
-      }
-
-      .backend-card h3 {
-        color: var(--text);
-        font-size: 1.28rem;
-        font-weight: 700;
-        letter-spacing: -0.035em;
-        line-height: 1.16;
-      }
-
-      .backend-card .type {
-        color: var(--accent);
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        margin-top: 0.55rem;
+        color: var(--steel);
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
       }
 
-      .backend-card p {
-        color: var(--muted);
-        font-size: 0.98rem;
-        line-height: 1.6;
+      .product-top .service-go {
+        justify-self: auto;
+        margin-top: 0;
       }
 
-      .backend-card i {
-        color: var(--accent);
-        font-size: 1.25rem;
+      .product:hover .service-go {
+        color: var(--amber);
+        transform: translate(2px, -2px);
       }
 
-      .work-table {
-        width: 100%;
-        margin-top: 1rem;
-        border-collapse: collapse;
-        table-layout: fixed;
-      }
-
-      .work-table th {
-        border-bottom: 2px solid var(--line-strong);
-        color: var(--muted);
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        padding: 0 0.7rem 1.15rem;
-        text-align: left;
-        text-transform: uppercase;
-      }
-
-      .work-table td {
-        border-bottom: 1px solid var(--line);
-        color: var(--muted);
-        font-size: 1.02rem;
-        padding: 1.45rem 0.7rem;
-        vertical-align: top;
-      }
-
-      .work-table th:first-child,
-      .work-table td:first-child {
-        padding-left: 0;
-      }
-
-      .work-table th:last-child,
-      .work-table td:last-child {
-        padding-right: 0;
-        text-align: right;
-      }
-
-      .work-name {
-        color: var(--accent);
-        font-weight: 700;
-        text-decoration: none;
-      }
-
-      .work-name:hover,
-      .work-name:focus-visible {
-        outline: none;
-        text-decoration: underline;
-        text-underline-offset: 4px;
-      }
-
-      .work-link {
-        width: 34px;
-        height: 34px;
-        border: 1px solid transparent;
-        border-radius: var(--radius);
-        color: var(--accent);
-        display: inline-grid;
-        place-items: center;
-        text-decoration: none;
-      }
-
-      .work-link:hover,
-      .work-link:focus-visible {
-        border-color: var(--accent);
-        background: var(--accent-soft);
-        outline: none;
-      }
-
-      .mobile-work-list {
-        display: none;
-      }
-
-      .expertise-list {
-        margin-top: 2.8rem;
-        border-top: 1px solid var(--line);
-      }
-
-      .expertise-row {
-        display: grid;
-        grid-template-columns: 104px minmax(220px, 0.42fr) minmax(0, 1fr);
-        gap: 2.6rem;
-        align-items: center;
-        min-height: 118px;
-        border-bottom: 1px solid var(--line);
-        padding: 1.2rem 0;
-      }
-
-      .skill-icon {
-        width: 72px;
-        height: 52px;
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        color: var(--accent);
-        display: grid;
-        place-items: center;
-        font-size: 1.75rem;
-      }
-
-      .expertise-row h3 {
+      .product h3 {
         font-size: 1.22rem;
-        font-weight: 700;
-        letter-spacing: -0.03em;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        transition: color 180ms ease;
       }
 
-      .expertise-row p {
+      .product:hover h3 {
+        color: var(--amber);
+      }
+
+      .product p {
         color: var(--muted);
-        font-size: 1rem;
-        line-height: 1.62;
+        font-size: 0.93rem;
+        line-height: 1.66;
       }
 
-      .contact-band {
+      /* ---------- stack ---------- */
+
+      .stack-group + .stack-group {
+        margin-top: 3rem;
+      }
+
+      .group-head {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding-bottom: 0.4rem;
+      }
+
+      .group-head .rule {
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+
+      .group-name {
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 0.74rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .stack-group.lead .group-name {
+        color: var(--amber);
+      }
+
+      .group-note {
+        color: var(--dim);
+        font-family: var(--mono);
+        font-size: 0.72rem;
+      }
+
+      .stack-list {
         border-top: 1px solid var(--line);
-        background: linear-gradient(180deg, #ffffff, #f8f9fb);
       }
 
-      .contact-grid {
+      .stack-row {
         display: grid;
-        grid-template-columns: minmax(0, 0.72fr) minmax(420px, 1fr);
-        gap: clamp(3rem, 7vw, 7rem);
-        align-items: end;
+        grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+        gap: clamp(1rem, 3vw, 2.75rem);
+        align-items: baseline;
+        border-bottom: 1px solid var(--line);
+        padding-block: 1.7rem;
+      }
+
+      .stack-row h3 {
+        font-size: 1.15rem;
+        font-weight: 600;
+        letter-spacing: -0.015em;
+      }
+
+      .stack-group.lead .stack-row h3 {
+        font-size: 1.3rem;
+      }
+
+      .stack-row p {
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      .owned {
+        border: 1px solid rgba(232, 145, 58, 0.45);
+        border-radius: 3px;
+        color: var(--amber);
+        font-family: var(--mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.12em;
+        padding: 0.18rem 0.45rem;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      /* ---------- contact ---------- */
+
+      .contact {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+        gap: clamp(2rem, 6vw, 5rem);
+        align-items: start;
+        padding-block: clamp(4rem, 8vw, 6.5rem);
       }
 
       .contact-title {
-        font-size: clamp(2rem, 4vw, 3.8rem);
-        font-weight: 650;
-        letter-spacing: -0.055em;
-        line-height: 1.05;
+        margin-top: 0.8rem;
+        font-size: clamp(2.4rem, 5.5vw, 4rem);
+        font-stretch: 108%;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+
+      .contact p {
+        max-width: 40ch;
+        margin-top: 1.25rem;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.68;
       }
 
       .contact-links {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) auto auto;
-        gap: 1.5rem;
-        align-items: center;
+        border-top: 1px solid var(--line);
       }
 
       .contact-link {
-        color: var(--accent);
-        display: inline-flex;
+        display: flex;
         align-items: center;
-        gap: 0.75rem;
-        font-size: 1.06rem;
-        font-weight: 600;
-        min-width: 0;
+        gap: 1rem;
+        border-bottom: 1px solid var(--line);
+        padding: 1.15rem 0.75rem;
+        margin-inline: -0.75rem;
+        border-radius: 4px;
+        font-family: var(--mono);
+        font-size: 0.88rem;
         text-decoration: none;
+        transition:
+          background 180ms ease,
+          color 180ms ease;
       }
 
-      .contact-link.email {
+      .contact-link:hover {
+        background: var(--raise);
+        color: var(--amber);
+      }
+
+      .contact-link .icon {
+        color: var(--steel);
+        font-size: 1.15rem;
+        transition: color 180ms ease;
+      }
+
+      .contact-link:hover .icon {
+        color: var(--amber);
+      }
+
+      .contact-link .val {
+        min-width: 0;
         overflow-wrap: anywhere;
       }
 
-      .contact-link:hover,
-      .contact-link:focus-visible {
-        outline: none;
-        text-decoration: underline;
-        text-underline-offset: 4px;
+      .contact-link .service-go {
+        margin-left: auto;
+        margin-top: 0;
+        justify-self: auto;
       }
 
-      .contact-link i {
-        color: var(--accent);
-        font-size: 1.45rem;
-      }
+      /* ---------- footer ---------- */
 
       .site-footer {
         border-top: 1px solid var(--line);
       }
 
       .footer-inner {
-        min-height: 78px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1.5rem;
-        color: var(--muted);
-        font-size: 0.9rem;
+        flex-wrap: wrap;
+        gap: 1rem 2rem;
+        min-height: 72px;
+        padding-block: 1.25rem;
+        color: var(--dim);
+        font-family: var(--mono);
+        font-size: 0.74rem;
       }
 
       .footer-links {
         display: flex;
-        gap: 2rem;
+        gap: 1.5rem;
       }
 
       .footer-links a {
         text-decoration: none;
+        transition: color 180ms ease;
       }
 
-      .footer-links a:hover,
-      .footer-links a:focus-visible {
-        color: var(--accent);
-        outline: none;
+      .footer-links a:hover {
+        color: var(--amber);
       }
 
-      @media (max-width: 920px) {
+      /* ---------- responsive ---------- */
+
+      @media (max-width: 960px) {
         .hero {
-          min-height: auto;
           grid-template-columns: 1fr;
-          gap: 4rem;
+          gap: 3rem;
         }
 
-        .focus-panel {
-          border-left: 0;
-          border-top: 1px solid var(--line-strong);
-          padding-left: 0;
-          padding-top: 2rem;
+        .topology {
+          justify-self: start;
+          max-width: 400px;
         }
 
-        .contact-grid,
-        .contact-links {
+        .contact {
           grid-template-columns: 1fr;
-        }
-
-        .expertise-row {
-          grid-template-columns: 72px 1fr;
-          gap: 1.4rem;
-          align-items: start;
-        }
-
-        .expertise-row p {
-          grid-column: 2;
         }
       }
 
-      @media (max-width: 700px) {
-        .nav,
-        .hero,
-        .section,
-        .footer-inner {
-          width: min(100% - 32px, var(--max));
-        }
-
-        .nav {
-          min-height: 72px;
-        }
-
-        .brand {
-          font-size: 1rem;
-        }
-
+      @media (max-width: 720px) {
         .brand-full {
           display: none;
         }
@@ -615,332 +842,486 @@
           display: inline;
         }
 
-        .nav-links {
-          gap: 1.1rem;
-        }
-
-        .nav-link {
-          font-size: 0.9rem;
-        }
-
-        .nav-link.active::after {
-          bottom: -8px;
-        }
-
-        .hero {
-          padding: 4.25rem 0;
-        }
-
-        .hero-title {
-          font-size: clamp(3.2rem, 14vw, 4.8rem);
-        }
-
-        .hero-role {
-          font-size: 1.75rem;
-        }
-
-        .hero-copy,
-        .focus-item p {
-          font-size: 1.04rem;
-        }
-
-        .button {
-          min-width: 0;
-          width: 100%;
-        }
-
-        .section {
-          padding: 3.5rem 0;
-        }
-
-        .work-table {
-          display: none;
-        }
-
-        .backend-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .backend-card {
-          min-height: auto;
-        }
-
-        .mobile-work-list {
-          display: grid;
-          margin-top: 1rem;
-          border-top: 1px solid var(--line);
-        }
-
-        .work-card {
-          border-bottom: 1px solid var(--line);
-          padding: 1.25rem 0;
-          text-decoration: none;
-        }
-
-        .work-card-head {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+        .nav {
           gap: 1rem;
         }
 
-        .work-card h3 {
-          color: var(--accent);
-          font-size: 1.08rem;
+        .nav-links {
+          gap: 0.9rem;
         }
 
-        .work-card .type {
-          color: var(--muted);
-          font-size: 0.82rem;
-          font-weight: 700;
-          margin-top: 0.4rem;
-          text-transform: uppercase;
+        .nav-link {
+          font-size: 0.72rem;
         }
 
-        .work-card p {
-          color: var(--muted);
-          margin-top: 0.75rem;
+        .hero-title {
+          max-width: none;
         }
 
-        .expertise-row {
+        .btn {
+          flex: 1 1 auto;
+        }
+
+        .service {
+          grid-template-columns: minmax(0, 1fr) 32px;
+          gap: 0.9rem 1rem;
+        }
+
+        .service > div {
+          grid-row: 1;
+          grid-column: 1;
+        }
+
+        .service p {
+          grid-row: 2;
+          grid-column: 1 / -1;
+        }
+
+        .service .service-go {
+          grid-row: 1;
+          grid-column: 2;
+        }
+
+        .stack-row {
           grid-template-columns: 1fr;
+          gap: 0.6rem;
         }
 
-        .expertise-row p {
-          grid-column: auto;
-        }
-
-        .footer-inner {
-          min-height: 120px;
-          align-items: flex-start;
+        .section-head {
           flex-direction: column;
-          justify-content: center;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
         }
 
-        .footer-links {
-          gap: 1.3rem;
+        .topo-pulse path {
+          animation: none;
+          stroke-dasharray: none;
+          opacity: 0.4;
+        }
+
+        *,
+        *::before,
+        *::after {
+          transition-duration: 1ms !important;
         }
       }
     </style>
   </head>
 
   <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-arrow-ur" viewBox="0 0 24 24">
+        <path d="M7 17 17 7M8 7h9v9" />
+      </symbol>
+      <symbol id="i-arrow-r" viewBox="0 0 24 24">
+        <path d="M4 12h15M13 6l6 6-6 6" />
+      </symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="m3.5 7 8.5 6 8.5-6" />
+      </symbol>
+      <symbol id="i-github" viewBox="0 0 24 24">
+        <path
+          d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"
+        />
+      </symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24">
+        <path
+          d="M6.94 5.5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0ZM3.4 21h3.1V9.3H3.4V21Zm6.1 0h3.1v-6.3c0-1.66.73-2.5 1.94-2.5 1.12 0 1.76.78 1.76 2.5V21h3.1v-6.9c0-3.1-1.62-4.6-3.86-4.6-1.72 0-2.6.92-3 1.62V9.3H9.5c.04.9 0 11.7 0 11.7Z"
+        />
+      </symbol>
+    </svg>
+
+    <a class="skip" href="#work">Skip to work</a>
+
     <div id="app">
       <header class="site-header">
-        <nav class="nav" aria-label="Primary navigation">
+        <nav class="wrap nav" aria-label="Primary">
           <a class="brand" href="#top">
+            <span class="dot" aria-hidden="true"></span>
             <span class="brand-full">{{ name }}</span>
             <span class="brand-short">MLP</span>
           </a>
           <div class="nav-links">
-            <a class="nav-link active" href="#work">Work</a>
-            <a class="nav-link" href="#expertise">Expertise</a>
-            <a class="nav-link" href="#contact">Contact</a>
+            <a
+              v-for="item in navItems"
+              :key="item.id"
+              class="nav-link"
+              :class="{ active: activeSection === item.id }"
+              :href="'#' + item.id"
+              >{{ item.label }}</a
+            >
           </div>
         </nav>
       </header>
 
       <main id="top">
-        <section class="hero" aria-labelledby="hero-title">
+        <section class="wrap hero" aria-labelledby="hero-title">
           <div>
-            <h1 id="hero-title" class="hero-title">{{ name }}</h1>
-            <p class="hero-role">Backend-focused Software Engineer</p>
+            <p class="eyebrow">Backend engineer</p>
+            <h1 id="hero-title" class="hero-title">
+              I build the services that sit <em>behind</em> the apps.
+            </h1>
             <p class="hero-copy">
-              I build backend systems and product APIs with Spring Boot, Java,
-              Kotlin, and Go, with mobile experience that helps me design
-              practical client-facing contracts.
+              Spring Boot, Java, Kotlin and Go on the server — APIs,
+              persistence, messaging and observability. Enough mobile work to
+              know what a client actually needs from a contract.
             </p>
+            <p class="byline">{{ name }}</p>
             <div class="hero-actions">
-              <a class="button primary" href="#work">
-                View my work
-                <i class="mdi mdi-arrow-right"></i>
+              <a class="btn primary" href="#work">
+                See the work
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-arrow-r" />
+                </svg>
               </a>
-              <a class="button" :href="'mailto:' + contacts.email">
-                Contact me
-              </a>
+              <a class="btn" :href="'mailto:' + contacts.email">Get in touch</a>
             </div>
           </div>
 
-          <aside class="focus-panel" aria-label="Portfolio summary">
-            <div class="focus-item">
-              <p class="label">Current focus</p>
-              <p>
-                Backend engineering with Spring Boot and Java, with emphasis
-                on APIs, persistence, messaging, observability, and service
-                reliability.
-              </p>
-            </div>
-            <div class="focus-item">
-              <p class="label">Tech stack</p>
-              <p>Spring Boot, Java, Kotlin, PostgreSQL, Docker, Go</p>
-            </div>
-            <div class="focus-item">
-              <p class="label">Backend domains</p>
-              <p>Remote jobs, subscriptions, activity streams, messaging, and APIs.</p>
-            </div>
-          </aside>
+          <figure class="topology">
+            <svg viewBox="0 0 400 356" role="img" aria-labelledby="topo-title">
+              <title id="topo-title">
+                Architecture of the private remote-jobs platform: listings from
+                several remote job boards are ingested and deduplicated by a
+                private Spring service, which serves the Anywhere Roles web app
+                and the Android and iOS mobile app.
+              </title>
+
+              <text class="topo-label" x="200" y="12" text-anchor="middle">
+                REMOTE JOB SOURCES
+              </text>
+              <g class="topo-node">
+                <rect x="52" y="24" width="52" height="14" rx="2" />
+                <rect x="113" y="24" width="52" height="14" rx="2" />
+                <rect x="174" y="24" width="52" height="14" rx="2" />
+                <rect x="235" y="24" width="52" height="14" rx="2" />
+                <rect x="296" y="24" width="52" height="14" rx="2" />
+              </g>
+
+              <g class="topo-wire">
+                <path
+                  d="M78 38 V64 M139 38 V64 M200 38 V64 M261 38 V64 M322 38 V64"
+                />
+                <path d="M78 64 H322" />
+                <path d="M200 64 V128" />
+                <path d="M200 232 V258" />
+                <path d="M92 258 H308" />
+                <path d="M92 258 V284 M200 258 V284 M308 258 V284" />
+              </g>
+              <g class="topo-pulse">
+                <path pathLength="100" d="M78 38 V64 H200 V128" />
+                <path
+                  pathLength="100"
+                  style="animation-delay: 1.2s"
+                  d="M200 232 V258 H92 V284"
+                />
+                <path
+                  pathLength="100"
+                  style="animation-delay: 1.2s"
+                  d="M200 232 V284"
+                />
+                <path
+                  pathLength="100"
+                  style="animation-delay: 1.2s"
+                  d="M200 232 V258 H308 V284"
+                />
+              </g>
+
+              <text class="topo-label" x="212" y="100">INGEST · DEDUPE</text>
+
+              <rect
+                class="topo-service"
+                x="28"
+                y="128"
+                width="344"
+                height="104"
+                rx="8"
+              />
+              <text class="topo-service-name" x="50" y="162">
+                remote-jobs platform
+              </text>
+              <text class="topo-node-sub" x="50" y="186">
+                Spring · app-facing APIs
+              </text>
+              <text class="topo-node-sub" x="50" y="204">
+                ingest · search · saved jobs
+              </text>
+              <text class="topo-label" x="350" y="152" text-anchor="end">
+                PRIVATE
+              </text>
+
+              <g>
+                <rect
+                  class="topo-node"
+                  x="40"
+                  y="284"
+                  width="104"
+                  height="52"
+                  rx="6"
+                />
+                <text
+                  class="topo-node-name"
+                  x="92"
+                  y="308"
+                  text-anchor="middle"
+                >
+                  WEB
+                </text>
+                <text class="topo-node-sub" x="92" y="324" text-anchor="middle">
+                  Anywhere Roles
+                </text>
+
+                <rect
+                  class="topo-node"
+                  x="148"
+                  y="284"
+                  width="104"
+                  height="52"
+                  rx="6"
+                />
+                <text
+                  class="topo-node-name"
+                  x="200"
+                  y="308"
+                  text-anchor="middle"
+                >
+                  iOS
+                </text>
+                <text
+                  class="topo-node-sub"
+                  x="200"
+                  y="324"
+                  text-anchor="middle"
+                >
+                  Mobile app
+                </text>
+
+                <rect
+                  class="topo-node"
+                  x="256"
+                  y="284"
+                  width="104"
+                  height="52"
+                  rx="6"
+                />
+                <text
+                  class="topo-node-name"
+                  x="308"
+                  y="308"
+                  text-anchor="middle"
+                >
+                  ANDROID
+                </text>
+                <text
+                  class="topo-node-sub"
+                  x="308"
+                  y="324"
+                  text-anchor="middle"
+                >
+                  Mobile app
+                </text>
+              </g>
+            </svg>
+            <figcaption class="topo-caption">
+              One of mine. The private backend behind the Anywhere Roles product
+              family.
+            </figcaption>
+          </figure>
         </section>
 
-        <div class="section-band">
-          <section id="work" class="section" aria-labelledby="work-title">
-            <h2 id="work-title" class="section-title">Work</h2>
-            <p class="section-copy">
-              Backend and product projects, with Spring Boot and Java work
-              intentionally shown first.
-            </p>
+        <div class="band alt">
+          <section id="work" class="wrap section" aria-labelledby="work-title">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Services</p>
+                <h2 id="work-title" class="section-title">
+                  Backend I've built
+                </h2>
+              </div>
+              <p class="section-note">
+                Filled marker means the source is public. Hollow means it runs
+                in private.
+              </p>
+            </div>
 
-            <h3 class="subsection-title">Backend and Spring Boot</h3>
-            <div class="backend-grid">
+            <div class="services">
               <component
                 v-for="work in backendWorks"
                 :key="work.name"
-                :is="work.link ? 'a' : 'article'"
-                class="backend-card"
-                :class="{ 'is-link': work.link }"
+                :is="work.link ? 'a' : 'div'"
+                class="service"
                 :href="work.link || null"
-                target="_blank"
-                rel="noopener noreferrer"
+                :target="work.link ? '_blank' : null"
+                :rel="work.link ? 'noopener noreferrer' : null"
               >
-                <div class="backend-card-header">
-                  <div>
+                <div>
+                  <div class="service-id">
+                    <span
+                      class="status"
+                      :class="work.link ? 'live' : 'closed'"
+                      aria-hidden="true"
+                    ></span>
                     <h3>{{ work.name }}</h3>
-                    <p class="type">{{ work.type }}</p>
                   </div>
-                  <i
-                    :class="work.link ? 'mdi mdi-open-in-new' : 'mdi mdi-lock-outline'"
-                  ></i>
+                  <div class="service-tags">
+                    <span class="tag">{{ work.type }}</span>
+                    <span v-if="!work.link" class="tag private">Private</span>
+                  </div>
                 </div>
                 <p>{{ work.description }}</p>
+                <svg
+                  v-if="work.link"
+                  class="icon service-go"
+                  aria-hidden="true"
+                >
+                  <use href="#i-arrow-ur" />
+                </svg>
+                <span v-else></span>
               </component>
             </div>
+          </section>
+        </div>
 
-            <h3 class="subsection-title">Product and app work</h3>
+        <div class="band">
+          <section class="wrap section" aria-labelledby="products-title">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Products</p>
+                <h2 id="products-title" class="section-title">
+                  Things people install
+                </h2>
+              </div>
+              <p class="section-note">
+                Apps and sites I shipped end to end — two of them served by the
+                private backend above.
+              </p>
+            </div>
 
-            <table class="work-table">
-              <thead>
-                <tr>
-                  <th style="width: 27%">Project</th>
-                  <th style="width: 17%">Type</th>
-                  <th>Description</th>
-                  <th style="width: 70px">Link</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="work in works" :key="work.name">
-                  <td>
-                    <a
-                      class="work-name"
-                      :href="work.link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {{ work.name }}
-                    </a>
-                  </td>
-                  <td>{{ getProjectType(work) }}</td>
-                  <td>{{ work.description }}</td>
-                  <td>
-                    <a
-                      class="work-link"
-                      :href="work.link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      :aria-label="'Open ' + work.name"
-                    >
-                      <i class="mdi mdi-open-in-new"></i>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div class="mobile-work-list">
+            <div class="products">
               <a
                 v-for="work in works"
                 :key="work.name"
-                class="work-card"
+                class="product"
                 :href="work.link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <div class="work-card-head">
-                  <h3>{{ work.name }}</h3>
-                  <i class="mdi mdi-open-in-new"></i>
+                <div class="product-top">
+                  <span>{{ getProjectType(work) }}</span>
+                  <span v-if="work.ownBackend" class="owned">
+                    Runs on my backend
+                  </span>
+                  <svg class="icon service-go" aria-hidden="true">
+                    <use href="#i-arrow-ur" />
+                  </svg>
                 </div>
-                <p class="type">{{ getProjectType(work) }}</p>
+                <h3>{{ work.name }}</h3>
                 <p>{{ work.description }}</p>
               </a>
             </div>
           </section>
         </div>
 
-        <section
-          id="expertise"
-          class="section"
-          aria-labelledby="expertise-title"
-        >
-          <h2 id="expertise-title" class="section-title">Expertise</h2>
-          <p class="section-copy">Core technologies I work with.</p>
-
-          <div class="expertise-list">
-            <article
-              v-for="skill in skills"
-              :key="skill.name"
-              class="expertise-row"
-            >
-              <div class="skill-icon">
-                <i :class="getSkillIcon(skill.name)"></i>
+        <div class="band alt">
+          <section
+            id="stack"
+            class="wrap section"
+            aria-labelledby="stack-title"
+          >
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Stack</p>
+                <h2 id="stack-title" class="section-title">What I reach for</h2>
               </div>
-              <h3>{{ skill.name }}</h3>
-              <p>{{ skill.description }}</p>
-            </article>
-          </div>
-        </section>
+              <p class="section-note">
+                Backend is where I work now. Mobile is where I came from, and
+                it's why I design APIs a client can actually live with.
+              </p>
+            </div>
 
-        <div class="contact-band">
+            <div
+              v-for="group in skillGroups"
+              :key="group.id"
+              class="stack-group"
+              :class="{ lead: group.id === 'backend' }"
+            >
+              <div class="group-head">
+                <span class="group-name">{{ group.label }}</span>
+                <span class="group-note">{{ group.note }}</span>
+                <span class="rule" aria-hidden="true"></span>
+              </div>
+              <div class="stack-list">
+                <article
+                  v-for="skill in group.skills"
+                  :key="skill.name"
+                  class="stack-row"
+                >
+                  <h3>{{ skill.name }}</h3>
+                  <p>{{ skill.description }}</p>
+                </article>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="band">
           <section
             id="contact"
-            class="section"
+            class="wrap contact"
             aria-labelledby="contact-title"
           >
-            <div class="contact-grid">
-              <div>
-                <h2 id="contact-title" class="contact-title">Contact</h2>
-                <p class="section-copy">Let's build something great together.</p>
-              </div>
+            <div>
+              <p class="eyebrow">Contact</p>
+              <h2 id="contact-title" class="contact-title">Let's talk.</h2>
+              <p>
+                Backend roles, API work, or a question about something above —
+                my inbox is open.
+              </p>
+            </div>
 
-              <div class="contact-links">
-                <a
-                  class="contact-link email"
-                  :href="'mailto:' + contacts.email"
-                >
-                  <i class="mdi mdi-email-outline"></i>
-                  {{ contacts.email }}
-                </a>
-                <a
-                  v-for="link in contactLinks"
-                  :key="link.name"
-                  class="contact-link"
-                  :href="link.link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i :class="getContactIcon(link.name)"></i>
-                  {{ link.name }}
-                </a>
-              </div>
+            <div class="contact-links">
+              <a class="contact-link" :href="'mailto:' + contacts.email">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-mail" />
+                </svg>
+                <span class="val">{{ contacts.email }}</span>
+                <svg class="icon service-go" aria-hidden="true">
+                  <use href="#i-arrow-ur" />
+                </svg>
+              </a>
+              <a
+                v-for="link in contactLinks"
+                :key="link.name"
+                class="contact-link"
+                :href="link.link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg class="icon solid" aria-hidden="true">
+                  <use :href="getContactIcon(link.name)" />
+                </svg>
+                <span class="val">{{ link.name }}</span>
+                <svg class="icon service-go" aria-hidden="true">
+                  <use href="#i-arrow-ur" />
+                </svg>
+              </a>
             </div>
           </section>
         </div>
       </main>
 
       <footer class="site-footer">
-        <div class="footer-inner">
-          <small>&copy; 2026 Manuel Lorenzo Parejo. All rights reserved.</small>
+        <div class="wrap footer-inner">
+          <small>© 2026 {{ name }}</small>
           <div class="footer-links">
-            <a href="#work">Work</a>
-            <a href="#expertise">Expertise</a>
-            <a href="#contact">Contact</a>
+            <a v-for="item in navItems" :key="item.id" :href="'#' + item.id"
+              >{{ item.label }}</a
+            >
           </div>
         </div>
       </footer>
@@ -952,46 +1333,87 @@
       var vm = new Vue({
         el: "#app",
         data() {
-          return {
-            ...window.PorfolioConfig,
-          };
-        },
-        methods: {
-          getSkillIcon(name) {
-            const icons = {
-              "Android & Kotlin": "mdi mdi-android",
-              "iOS & Swift": "mdi mdi-apple",
-              "Spring Boot & Java": "mdi mdi-leaf",
-              Golang: "mdi mdi-language-go",
-            };
-            return icons[name] || "mdi mdi-code-tags";
-          },
-          getProjectType(work) {
-            if (work.type) return work.type;
-            if (work.link.includes("play.google.com")) return "Android";
-            if (work.link.includes("apps.apple.com")) return "iOS";
-            return "Web";
-          },
-          getContactIcon(name) {
-            const icons = {
-              GitHub: "mdi mdi-github",
-              LinkedIn: "mdi mdi-linkedin",
-              Twitter: "mdi mdi-twitter",
-            };
-            return icons[name] || "mdi mdi-link";
-          },
+          return Object.assign(
+            {
+              activeSection: "",
+              navItems: [
+                { id: "work", label: "Work" },
+                { id: "stack", label: "Stack" },
+                { id: "contact", label: "Contact" },
+              ],
+            },
+            window.PorfolioConfig,
+          );
         },
         computed: {
           contactLinks() {
-            if (
-              this.contacts &&
-              this.contacts.links &&
-              this.contacts.links.length
-            ) {
-              return this.contacts.links;
-            }
-            return [];
+            return (this.contacts && this.contacts.links) || [];
           },
+          skillGroups() {
+            var all = this.skills || [];
+            var by = function (area) {
+              return all.filter(function (s) {
+                return s.area === area;
+              });
+            };
+            return [
+              {
+                id: "backend",
+                label: "Backend",
+                note: "where I work now",
+                skills: by("backend"),
+              },
+              {
+                id: "mobile",
+                label: "Mobile",
+                note: "where I came from",
+                skills: by("mobile"),
+              },
+            ].filter(function (g) {
+              return g.skills.length;
+            });
+          },
+        },
+        methods: {
+          getProjectType(work) {
+            if (work.type) return work.type;
+            if (work.link.indexOf("play.google.com") !== -1) return "Android";
+            if (work.link.indexOf("apps.apple.com") !== -1) return "iOS";
+            return "Web";
+          },
+          getContactIcon(name) {
+            var icons = {
+              GitHub: "#i-github",
+              LinkedIn: "#i-linkedin",
+            };
+            return icons[name] || "#i-arrow-ur";
+          },
+        },
+        mounted() {
+          var self = this;
+          var ids = this.navItems.map(function (i) {
+            return i.id;
+          });
+          var targets = ids
+            .map(function (id) {
+              return document.getElementById(id);
+            })
+            .filter(Boolean);
+
+          if (!("IntersectionObserver" in window) || !targets.length) return;
+
+          var observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) self.activeSection = entry.target.id;
+              });
+            },
+            { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
+          );
+
+          targets.forEach(function (el) {
+            observer.observe(el);
+          });
         },
       });
     </script>
