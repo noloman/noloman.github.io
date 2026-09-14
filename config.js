@@ -108,16 +108,11 @@ window.PorfolioConfig = {
         "A subscription management app to track all your recurring payments in one place. Get payment reminders, spending insights, and cancellation guides with cross-platform sync.",
     },
     {
-      name: "Remoti (Android)",
-      link: "https://play.google.com/store/apps/details?id=me.manulorenzo.remoti",
+      name: "AnywhereRoles \u2014 Mobile App",
+      type: "Android & iOS",
+      link: "/anywhereroles/",
       description:
-        "An Android app that aggregates remote job listings from multiple job boards. Search and filter opportunities by category, save listings, and apply directly—no registration required.",
-    },
-    {
-      name: "Remoti (iOS)",
-      link: "https://apps.apple.com/es/app/remoti-remote-work/id1567902235",
-      description:
-        "An iOS app for finding remote work opportunities. Browse job listings, use advanced filters to find the perfect match, and apply directly from your iPhone—no registration required.",
+        "The native mobile side of AnywhereRoles: Jetpack Compose on Android, SwiftUI on iOS, and a shared Kotlin Multiplatform core for data, domain and presentation. Aggregates remote roles from multiple sources, scores how well each one fits, flags stale or duplicate postings, and turns saved jobs into a tracked application pipeline with alerts and a weekly briefing.",
     },
   ],
   contacts: {

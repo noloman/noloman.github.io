@@ -1,0 +1,1412 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AnywhereRoles is a native Android and iOS app that brings remote jobs from multiple trusted sources into one place — filter the noise, save strong matches, track every application, and get alerts for new roles."
+    />
+    <link rel="canonical" href="https://www.manulorenzo.me/anywhereroles/" />
+    <meta name="theme-color" content="#102732" />
+    <meta
+      property="og:title"
+      content="AnywhereRoles | Remote jobs, organized"
+    />
+    <meta
+      property="og:description"
+      content="Remote jobs from multiple trusted sources, with filters, saved jobs, alerts, salary insights and application tracking — on Android and iOS."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://www.manulorenzo.me/anywhereroles/"
+    />
+    <meta
+      property="og:image"
+      content="https://www.manulorenzo.me/anywhereroles/assets/app-icon.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="AnywhereRoles | Remote jobs, organized"
+    />
+    <meta
+      name="twitter:description"
+      content="Remote jobs from multiple trusted sources, with filters, saved jobs, alerts and application tracking — on Android and iOS."
+    />
+    <meta name="apple-itunes-app" content="app-id=1567902235" />
+    <title>
+      AnywhereRoles | Remote jobs, organized from search to follow-up
+    </title>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-77L8ZHRRKG"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-77L8ZHRRKG");
+    </script>
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon-32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #ffffff;
+        --section: #f6f7f9;
+        --text: #111111;
+        --muted: #4f5663;
+        --quiet: #7a8190;
+        --line: #d9dde5;
+        --line-strong: #aeb5c2;
+        --accent: #0b57d0;
+        --accent-soft: #eaf1ff;
+        --ink: #102732;
+        --ink-line: #2b4351;
+        --ink-muted: #9fb3bd;
+        --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        --radius: 8px;
+        --max: 1280px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      html,
+      body {
+        overflow-x: clip;
+      }
+
+      body {
+        min-width: 320px;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          "Geist",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      ::selection {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .wrap {
+        width: min(var(--max), calc(100% - 56px));
+        margin: 0 auto;
+      }
+
+      .skip {
+        position: absolute;
+        left: -9999px;
+      }
+
+      .skip:focus {
+        left: 1rem;
+        top: 1rem;
+        z-index: 50;
+        background: var(--accent);
+        color: #fff;
+        padding: 0.7rem 1rem;
+        border-radius: var(--radius);
+      }
+
+      /* ---------- header ---------- */
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(255, 255, 255, 0.9);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav {
+        min-height: 82px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-size: 1.08rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        text-decoration: none;
+      }
+
+      .brand img {
+        width: 32px;
+        height: 32px;
+        border-radius: 7px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2.2rem;
+      }
+
+      .nav-link {
+        color: var(--text);
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 160ms ease;
+      }
+
+      .nav-link:hover,
+      .nav-link:focus-visible {
+        color: var(--accent);
+        outline: none;
+      }
+
+      .nav-cta {
+        min-height: 42px;
+        border: 1px solid var(--accent);
+        border-radius: var(--radius);
+        background: var(--accent);
+        display: inline-flex;
+        align-items: center;
+        padding: 0 1.1rem;
+        color: #ffffff;
+        font-size: 0.92rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: opacity 160ms ease;
+      }
+
+      .nav-cta:hover,
+      .nav-cta:focus-visible {
+        opacity: 0.88;
+        outline: none;
+      }
+
+      .nav-link.back {
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      /* ---------- buttons ---------- */
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .button {
+        min-height: 58px;
+        border: 1px solid var(--accent);
+        border-radius: var(--radius);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0 1.4rem;
+        color: var(--accent);
+        text-decoration: none;
+        transition:
+          transform 160ms ease,
+          background 160ms ease,
+          color 160ms ease;
+      }
+
+      .button i {
+        font-size: 1.5rem;
+        line-height: 1;
+      }
+
+      .button .stack {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.15;
+        text-align: left;
+      }
+
+      .button .stack small {
+        font-family: var(--mono);
+        font-size: 0.66rem;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        opacity: 0.85;
+        text-transform: uppercase;
+      }
+
+      .button .stack strong {
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .button.primary {
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      .button:hover,
+      .button:focus-visible {
+        outline: none;
+        transform: translateY(-2px);
+      }
+
+      .button.on-ink {
+        border-color: var(--ink-line);
+        color: #ffffff;
+      }
+
+      .button.on-ink.primary {
+        background: #ffffff;
+        border-color: #ffffff;
+        color: var(--ink);
+      }
+
+      /* ---------- hero ---------- */
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.12fr) minmax(260px, 0.55fr);
+        gap: clamp(3rem, 6vw, 6rem);
+        align-items: center;
+        padding: clamp(4rem, 7vw, 7rem) 0 clamp(3.5rem, 6vw, 6rem);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: var(--accent);
+        font-family: var(--mono);
+        font-size: 0.74rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: var(--accent);
+      }
+
+      .hero-title {
+        margin-top: 1.4rem;
+        max-width: 15ch;
+        font-size: clamp(2.9rem, 5.2vw, 5rem);
+        font-weight: 700;
+        letter-spacing: -0.06em;
+        line-height: 0.96;
+      }
+
+      .hero-title em {
+        font-style: normal;
+        color: var(--accent);
+      }
+
+      .hero-copy {
+        max-width: 56ch;
+        margin-top: 1.9rem;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+        line-height: 1.58;
+      }
+
+      .hero .actions {
+        margin-top: 2.6rem;
+      }
+
+      .hero-note {
+        margin-top: 1.5rem;
+        color: var(--quiet);
+        font-size: 0.9rem;
+      }
+
+      .hero-device {
+        position: relative;
+        justify-self: center;
+        max-width: 272px;
+      }
+
+      .hero-device::before {
+        content: "";
+        position: absolute;
+        inset: -14% -22% -8%;
+        background: radial-gradient(
+          60% 55% at 50% 45%,
+          rgba(11, 87, 208, 0.16),
+          rgba(16, 39, 50, 0) 70%
+        );
+        z-index: -1;
+      }
+
+      .hero-device img {
+        width: 100%;
+        filter: drop-shadow(0 26px 46px rgba(16, 39, 50, 0.22));
+      }
+
+      /* ---------- fact strip ---------- */
+
+      .facts {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: var(--section);
+      }
+
+      .facts-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--line);
+        border-left: 1px solid var(--line);
+        border-right: 1px solid var(--line);
+      }
+
+      .fact {
+        background: var(--section);
+        padding: 1.9rem 1.6rem;
+      }
+
+      .fact strong {
+        display: block;
+        font-size: 1.08rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+
+      .fact span {
+        display: block;
+        margin-top: 0.35rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      /* ---------- sections ---------- */
+
+      .section {
+        padding: clamp(4rem, 7vw, 6.5rem) 0;
+      }
+
+      .section-band {
+        border-top: 1px solid var(--line);
+        background: var(--section);
+      }
+
+      .label {
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.74rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .section-title {
+        margin-top: 0.9rem;
+        max-width: 20ch;
+        font-size: clamp(2.1rem, 3.8vw, 3.6rem);
+        font-weight: 650;
+        letter-spacing: -0.055em;
+        line-height: 1.02;
+      }
+
+      .section-copy {
+        max-width: 62ch;
+        margin-top: 1.1rem;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.6;
+      }
+
+      /* ---------- workflow ---------- */
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: 3rem;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .step {
+        background: var(--bg);
+        padding: 1.7rem 1.5rem 1.9rem;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .step .num {
+        color: var(--accent);
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+      }
+
+      .step h3 {
+        margin-top: 1.3rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        letter-spacing: -0.035em;
+      }
+
+      .step p {
+        margin-top: 0.8rem;
+        color: var(--muted);
+        font-size: 0.98rem;
+        line-height: 1.6;
+      }
+
+      /* ---------- dark showcase ---------- */
+
+      .showcase {
+        background: var(--ink);
+        color: #ffffff;
+        padding: clamp(4rem, 7vw, 6.5rem) 0 clamp(3rem, 5vw, 4.5rem);
+        overflow: hidden;
+      }
+
+      .showcase .label {
+        color: var(--ink-muted);
+      }
+
+      .showcase .section-title {
+        color: #ffffff;
+      }
+
+      .showcase .section-copy {
+        color: var(--ink-muted);
+      }
+
+      .screens {
+        display: flex;
+        gap: clamp(1.4rem, 2.6vw, 2.6rem);
+        margin-top: 3.2rem;
+        padding-bottom: 1.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+        scrollbar-color: var(--ink-line) transparent;
+      }
+
+      .screen {
+        flex: 0 0 auto;
+        width: clamp(208px, 24vw, 258px);
+        scroll-snap-align: start;
+      }
+
+      .screen img {
+        width: 100%;
+        border-radius: 18px;
+        filter: drop-shadow(0 20px 38px rgba(0, 0, 0, 0.45));
+      }
+
+      .screen h3 {
+        margin-top: 1.5rem;
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+
+      .screen p {
+        margin-top: 0.45rem;
+        color: var(--ink-muted);
+        font-size: 0.92rem;
+        line-height: 1.55;
+      }
+
+      .scroll-hint {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--ink-muted);
+        font-size: 0.85rem;
+      }
+
+      /* ---------- feature grid ---------- */
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: 3rem;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .feature {
+        background: var(--section);
+        padding: 1.8rem 1.6rem 2rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .feature i {
+        color: var(--accent);
+        font-size: 1.5rem;
+      }
+
+      .feature h3 {
+        margin-top: 1.1rem;
+        font-size: 1.18rem;
+        font-weight: 700;
+        letter-spacing: -0.035em;
+      }
+
+      .feature ul {
+        margin-top: 0.9rem;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .feature li {
+        position: relative;
+        padding-left: 1.15rem;
+        color: var(--muted);
+        font-size: 0.96rem;
+        line-height: 1.5;
+      }
+
+      .feature li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.6em;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--line-strong);
+      }
+
+      /* ---------- platforms ---------- */
+
+      .platforms {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: 3rem;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .platform {
+        background: var(--bg);
+        padding: 1.8rem 1.6rem 2rem;
+      }
+
+      .platform-head {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+      }
+
+      .platform-head i {
+        color: var(--accent);
+        font-size: 1.35rem;
+      }
+
+      .platform-head h3 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: -0.035em;
+      }
+
+      .platform ul {
+        margin-top: 1.2rem;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
+
+      .platform li {
+        position: relative;
+        padding-left: 1.15rem;
+        color: var(--muted);
+        font-size: 0.96rem;
+        line-height: 1.5;
+      }
+
+      .platform li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.6em;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--line-strong);
+      }
+
+      .stack-note {
+        margin-top: 2rem;
+        border-left: 2px solid var(--accent);
+        padding: 0.2rem 0 0.2rem 1.3rem;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.6;
+        max-width: 78ch;
+      }
+
+      /* ---------- pro ---------- */
+
+      .pro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 0.52fr);
+        gap: clamp(2.5rem, 5vw, 5rem);
+        align-items: center;
+      }
+
+      .pro-list {
+        margin-top: 2rem;
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem 2rem;
+      }
+
+      .pro-list li {
+        display: flex;
+        align-items: start;
+        gap: 0.65rem;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      .pro-list i {
+        color: var(--accent);
+        font-size: 1.15rem;
+        line-height: 1.4;
+      }
+
+      .pro-device {
+        justify-self: center;
+        max-width: 270px;
+      }
+
+      .pro-device img {
+        width: 100%;
+        filter: drop-shadow(0 22px 40px rgba(16, 39, 50, 0.2));
+      }
+
+      /* ---------- cta ---------- */
+
+      .cta {
+        background: var(--ink);
+        color: #ffffff;
+        padding: clamp(4rem, 7vw, 6rem) 0;
+      }
+
+      .cta h2 {
+        max-width: 18ch;
+        font-size: clamp(2.1rem, 3.8vw, 3.4rem);
+        font-weight: 650;
+        letter-spacing: -0.055em;
+        line-height: 1.03;
+      }
+
+      .cta p {
+        max-width: 56ch;
+        margin-top: 1.1rem;
+        color: var(--ink-muted);
+        font-size: 1.08rem;
+        line-height: 1.6;
+      }
+
+      .cta .actions {
+        margin-top: 2.4rem;
+      }
+
+      /* ---------- footer ---------- */
+
+      .site-footer {
+        border-top: 1px solid var(--line);
+        padding: 2.8rem 0;
+      }
+
+      .footer-inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+      }
+
+      .footer-inner p {
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.6rem;
+      }
+
+      .footer-links a {
+        color: var(--muted);
+        font-size: 0.94rem;
+        text-decoration: none;
+      }
+
+      .footer-links a:hover,
+      .footer-links a:focus-visible {
+        color: var(--accent);
+        outline: none;
+      }
+
+      /* ---------- responsive ---------- */
+
+      @media (max-width: 1080px) {
+        .steps,
+        .features,
+        .platforms {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .facts-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 900px) {
+        .wrap {
+          width: min(var(--max), calc(100% - 40px));
+        }
+
+        .nav-links {
+          gap: 1.4rem;
+        }
+
+        .nav-links .nav-link:not(.back) {
+          display: none;
+        }
+
+        .nav-cta {
+          display: none;
+        }
+
+        .hero {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 3.5rem;
+        }
+
+        .hero-device {
+          max-width: 260px;
+        }
+
+        .pro {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .pro-device {
+          max-width: 230px;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .wrap {
+          width: min(var(--max), calc(100% - 32px));
+        }
+
+        .steps,
+        .features,
+        .platforms,
+        .facts-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .step {
+          min-height: 0;
+        }
+
+        .pro-list {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .button {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .screens {
+          margin-left: -16px;
+          margin-right: -16px;
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="nav wrap" aria-label="Primary">
+        <a class="brand" href="#top">
+          <img src="assets/app-icon.png" alt="" width="32" height="32" />
+          AnywhereRoles
+        </a>
+        <div class="nav-links">
+          <a class="nav-link" href="#workflow">How it works</a>
+          <a class="nav-link" href="#screens">Screens</a>
+          <a class="nav-link" href="#features">Features</a>
+          <a class="nav-link" href="#platforms">Platforms</a>
+          <a class="nav-link back" href="/"
+            ><i class="mdi mdi-arrow-left" aria-hidden="true"></i>Portfolio</a
+          >
+        </div>
+        <a class="nav-cta" href="#get">Get the app</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- ---------------- hero ---------------- -->
+      <section class="hero wrap" id="top">
+        <div>
+          <p class="eyebrow">Android &amp; iOS · Remote job search</p>
+          <h1 class="hero-title">
+            Remote jobs, organized from search to <em>follow&#8209;up</em>.
+          </h1>
+          <p class="hero-copy">
+            AnywhereRoles brings remote roles from multiple trusted sources into
+            one native app. Filter out the noise, understand why a role fits,
+            save strong matches, and keep every application moving — without
+            living in a dozen browser tabs.
+          </p>
+          <div class="actions">
+            <a
+              class="button primary"
+              href="https://apps.apple.com/us/app/anywhereroles-remote-jobs/id1567902235"
+              rel="noopener"
+            >
+              <i class="mdi mdi-apple" aria-hidden="true"></i>
+              <span class="stack">
+                <small>Download on the</small>
+                <strong>App Store</strong>
+              </span>
+            </a>
+            <a
+              class="button"
+              href="https://play.google.com/store/apps/details?id=me.manulorenzo.remoti"
+              rel="noopener"
+            >
+              <i class="mdi mdi-google-play" aria-hidden="true"></i>
+              <span class="stack">
+                <small>Get it on</small>
+                <strong>Google Play</strong>
+              </span>
+            </a>
+          </div>
+          <p class="hero-note">
+            Free to download. No sign-up needed to start browsing.
+          </p>
+        </div>
+
+        <div class="hero-device">
+          <img
+            src="assets/shot-jobs.webp"
+            alt="AnywhereRoles job list showing a Senior iOS Engineer role with salary range, worldwide location and source badge"
+            width="640"
+            height="1406"
+            fetchpriority="high"
+          />
+        </div>
+      </section>
+
+      <!-- ---------------- facts ---------------- -->
+      <section class="facts" aria-label="At a glance">
+        <div class="wrap">
+          <div class="facts-grid">
+            <div class="fact">
+              <strong>Multiple sources</strong>
+              <span
+                >Aggregated remote listings, each linked back to the original
+                posting</span
+              >
+            </div>
+            <div class="fact">
+              <strong>Native on both</strong>
+              <span>Jetpack Compose on Android, SwiftUI on iOS</span>
+            </div>
+            <div class="fact">
+              <strong>Works offline</strong>
+              <span>Cached browsing and saved jobs stored on device</span>
+            </div>
+            <div class="fact">
+              <strong>Remote-only</strong>
+              <span>No hybrid filler, no location-bait listings</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------------- workflow ---------------- -->
+      <section class="section wrap" id="workflow">
+        <p class="label">How it works</p>
+        <h2 class="section-title">Four steps, one app</h2>
+        <p class="section-copy">
+          Most job apps stop at search. AnywhereRoles covers the whole loop —
+          from the first listing you open to the follow-up you nearly forgot.
+        </p>
+
+        <div class="steps">
+          <article class="step">
+            <span class="num">01</span>
+            <h3>Discover</h3>
+            <p>
+              Browse remote roles pulled from multiple sources, with source
+              badges and a direct link to the original posting when you're ready
+              to apply.
+            </p>
+          </article>
+          <article class="step">
+            <span class="num">02</span>
+            <h3>Shortlist</h3>
+            <p>
+              Cut the list down by salary, category, company, tags, region, date
+              and source — or describe what you want in plain language and let
+              the app build the filters.
+            </p>
+          </article>
+          <article class="step">
+            <span class="num">03</span>
+            <h3>Track</h3>
+            <p>
+              Save roles with notes, tags and folders, then move them through
+              applied, interviewing, offer or rejected with reminders for the
+              next step.
+            </p>
+          </article>
+          <article class="step">
+            <span class="num">04</span>
+            <h3>Learn</h3>
+            <p>
+              Salary insights, market statistics and company pages with hiring
+              velocity and remote-policy signals help you compare offers before
+              you commit.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ---------------- screens ---------------- -->
+      <section class="showcase" id="screens">
+        <div class="wrap">
+          <p class="label">Inside the app</p>
+          <h2 class="section-title">Built for the whole search</h2>
+          <p class="section-copy">
+            Every screen is native — no web views, no wrapped job board.
+          </p>
+        </div>
+
+        <div class="wrap">
+          <div
+            class="screens"
+            tabindex="0"
+            role="region"
+            aria-label="App screenshots"
+          >
+            <figure class="screen">
+              <img
+                src="assets/shot-jobs.webp"
+                alt="Job list with search, sorting and a job card showing salary, location and source"
+                width="640"
+                height="1406"
+                loading="lazy"
+              />
+              <figcaption>
+                <h3>Every remote job. One app.</h3>
+                <p>
+                  Search, sort and scan listings from every connected source in
+                  one feed.
+                </p>
+              </figcaption>
+            </figure>
+            <figure class="screen">
+              <img
+                src="assets/shot-fit.webp"
+                alt="Job detail showing remote-fit score and trust and quality signals"
+                width="640"
+                height="1406"
+                loading="lazy"
+              />
+              <figcaption>
+                <h3>See why a role fits</h3>
+                <p>
+                  Remote-fit scoring plus trust signals for salary visibility,
+                  location clarity, freshness and duplicates.
+                </p>
+              </figcaption>
+            </figure>
+            <figure class="screen">
+              <img
+                src="assets/shot-saved.webp"
+                alt="Saved jobs organised into folders with notes and tags"
+                width="640"
+                height="1406"
+                loading="lazy"
+              />
+              <figcaption>
+                <h3>Save the roles that matter</h3>
+                <p>
+                  Notes, tags and folders turn a bookmark list into a real
+                  shortlist.
+                </p>
+              </figcaption>
+            </figure>
+            <figure class="screen">
+              <img
+                src="assets/shot-tracker.webp"
+                alt="Application tracker with statuses from saved through to offer"
+                width="640"
+                height="1406"
+                loading="lazy"
+              />
+              <figcaption>
+                <h3>Track every application</h3>
+                <p>
+                  Saved, applied, interviewing, offer or rejected — with
+                  reminders so nothing goes cold.
+                </p>
+              </figcaption>
+            </figure>
+            <figure class="screen">
+              <img
+                src="assets/shot-briefing.webp"
+                alt="Weekly briefing summarising fresh jobs, alerts and pipeline health"
+                width="640"
+                height="1406"
+                loading="lazy"
+              />
+              <figcaption>
+                <h3>Your week, briefed</h3>
+                <p>
+                  Fresh roles, alert activity, pipeline health and the next best
+                  action, once a week.
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+          <p class="scroll-hint">
+            <i class="mdi mdi-gesture-swipe-horizontal" aria-hidden="true"></i>
+            Scroll for more screens
+          </p>
+        </div>
+      </section>
+
+      <!-- ---------------- features ---------------- -->
+      <section class="section-band" id="features">
+        <div class="section wrap">
+          <p class="label">Features</p>
+          <h2 class="section-title">More than a list of jobs</h2>
+          <p class="section-copy">
+            The parts of a job search that usually end up in a spreadsheet are
+            built into the app.
+          </p>
+
+          <div class="features">
+            <article class="feature">
+              <i class="mdi mdi-magnify" aria-hidden="true"></i>
+              <h3>Search &amp; filters</h3>
+              <ul>
+                <li>Title, company, skill or keyword search</li>
+                <li>
+                  Salary, category, source, tag, company, region and date
+                  filters
+                </li>
+                <li>Reusable filter presets and saved searches</li>
+                <li>Plain-language filters turned into editable criteria</li>
+              </ul>
+            </article>
+            <article class="feature">
+              <i class="mdi mdi-shield-check-outline" aria-hidden="true"></i>
+              <h3>Fit &amp; trust signals</h3>
+              <ul>
+                <li>Remote-fit scoring from your saved preferences</li>
+                <li>
+                  Timezone and region compatibility for "worldwide" claims
+                </li>
+                <li>
+                  Flags for stale posts, likely duplicates and apply-domain
+                  mismatches
+                </li>
+                <li>Quality thresholds to hide low-signal listings</li>
+              </ul>
+            </article>
+            <article class="feature">
+              <i
+                class="mdi mdi-bookmark-multiple-outline"
+                aria-hidden="true"
+              ></i>
+              <h3>Saved jobs</h3>
+              <ul>
+                <li>Notes, tags and folders on every saved role</li>
+                <li>Offline access to anything you've saved</li>
+                <li>CSV and JSON export</li>
+                <li>Optional cloud sync when you sign in</li>
+              </ul>
+            </article>
+            <article class="feature">
+              <i class="mdi mdi-bell-ring-outline" aria-hidden="true"></i>
+              <h3>Alerts</h3>
+              <ul>
+                <li>Alerts for the categories and searches you care about</li>
+                <li>"Why this matched" explanations on every hit</li>
+                <li>Natural-language alert builder</li>
+                <li>
+                  Push notifications and background alert checks on Android
+                </li>
+              </ul>
+            </article>
+            <article class="feature">
+              <i class="mdi mdi-progress-check" aria-hidden="true"></i>
+              <h3>Application pipeline</h3>
+              <ul>
+                <li>Statuses from saved through to offer or rejection</li>
+                <li>Local follow-up reminders</li>
+                <li>Applied dates and application URLs kept with the role</li>
+                <li>Weekly briefing on pipeline health and next actions</li>
+              </ul>
+            </article>
+            <article class="feature">
+              <i class="mdi mdi-chart-box-outline" aria-hidden="true"></i>
+              <h3>Market insight</h3>
+              <ul>
+                <li>Salary insights and job market statistics</li>
+                <li>Company pages with recent hiring velocity</li>
+                <li>Remote-policy classification and salary transparency</li>
+                <li>Popular technologies and source trends</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------------- platforms ---------------- -->
+      <section class="section wrap" id="platforms">
+        <p class="label">Platforms</p>
+        <h2 class="section-title">One codebase, two native apps</h2>
+        <p class="section-copy">
+          Domain logic, networking, persistence and presentation live in a
+          shared Kotlin Multiplatform module. Each platform keeps its own native
+          UI and its own platform conventions.
+        </p>
+
+        <div class="platforms">
+          <article class="platform">
+            <div class="platform-head">
+              <i class="mdi mdi-android" aria-hidden="true"></i>
+              <h3>Android</h3>
+            </div>
+            <ul>
+              <li>Jetpack Compose and Material 3</li>
+              <li>Dynamic colour and theme settings</li>
+              <li>Multiple list density modes</li>
+              <li>Push notifications and a home screen widget</li>
+              <li>Optional Google sign-in</li>
+            </ul>
+          </article>
+          <article class="platform">
+            <div class="platform-head">
+              <i class="mdi mdi-apple" aria-hidden="true"></i>
+              <h3>iOS</h3>
+            </div>
+            <ul>
+              <li>Native SwiftUI throughout</li>
+              <li>Saved jobs, filters, onboarding and preferences</li>
+              <li>Application-status surfaces</li>
+              <li>Share extension and widgets</li>
+              <li>Sign in with Google or Apple</li>
+            </ul>
+          </article>
+          <article class="platform">
+            <div class="platform-head">
+              <i class="mdi mdi-layers-outline" aria-hidden="true"></i>
+              <h3>Shared</h3>
+            </div>
+            <ul>
+              <li>Kotlin Multiplatform data, domain and presentation layers</li>
+              <li>Ktor networking with Kotlinx Serialization</li>
+              <li>Room persistence and local-first saved jobs</li>
+              <li>Koin dependency injection</li>
+              <li>Firebase App Check on every API request</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="stack-note">
+          Clean architecture across data, domain and presentation, with Kotlin
+          Flow driving state on both platforms — so a feature shipped once
+          behaves the same in Compose and in SwiftUI.
+        </p>
+      </section>
+
+      <!-- ---------------- pro ---------------- -->
+      <section class="section-band">
+        <div class="section wrap">
+          <div class="pro">
+            <div>
+              <p class="label">AnywhereRoles Pro</p>
+              <h2 class="section-title">
+                Upgrade when the search gets serious
+              </h2>
+              <p class="section-copy">
+                Everything you need to browse, save and track is free. Pro
+                removes the limits and the ads when you're running a real
+                search.
+              </p>
+              <ul class="pro-list">
+                <li>
+                  <i class="mdi mdi-check" aria-hidden="true"></i>Advanced
+                  filters for faster shortlisting
+                </li>
+                <li>
+                  <i class="mdi mdi-check" aria-hidden="true"></i>More job
+                  alerts and saved-search power
+                </li>
+                <li>
+                  <i class="mdi mdi-check" aria-hidden="true"></i>Salary
+                  insights with less friction
+                </li>
+                <li>
+                  <i class="mdi mdi-check" aria-hidden="true"></i>Ad-free
+                  browsing
+                </li>
+              </ul>
+            </div>
+            <div class="pro-device">
+              <img
+                src="assets/shot-pro.webp"
+                alt="AnywhereRoles Pro upgrade screen listing the included benefits"
+                width="640"
+                height="1406"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------------- cta ---------------- -->
+      <section class="cta" id="get">
+        <div class="wrap">
+          <h2>Start your next remote search in one place.</h2>
+          <p>
+            Download AnywhereRoles on Android or iOS and run your job search
+            with more focus, better organisation and less friction.
+          </p>
+          <div class="actions">
+            <a
+              class="button on-ink primary"
+              href="https://apps.apple.com/us/app/anywhereroles-remote-jobs/id1567902235"
+              rel="noopener"
+            >
+              <i class="mdi mdi-apple" aria-hidden="true"></i>
+              <span class="stack">
+                <small>Download on the</small>
+                <strong>App Store</strong>
+              </span>
+            </a>
+            <a
+              class="button on-ink"
+              href="https://play.google.com/store/apps/details?id=me.manulorenzo.remoti"
+              rel="noopener"
+            >
+              <i class="mdi mdi-google-play" aria-hidden="true"></i>
+              <span class="stack">
+                <small>Get it on</small>
+                <strong>Google Play</strong>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner wrap">
+        <p>Designed and built by Manuel Lorenzo Parejo.</p>
+        <div class="footer-links">
+          <a href="/">Portfolio</a>
+          <a href="https://anywhereroles.com" rel="noopener"
+            >anywhereroles.com</a
+          >
+          <a href="https://github.com/noloman" rel="noopener">GitHub</a>
+          <a href="mailto:manulorenzop@gmail.com">Contact</a>
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
