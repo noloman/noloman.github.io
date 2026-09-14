@@ -47,11 +47,11 @@ window.PorfolioConfig = {
         "Spring Boot and React application with a Java backend, API surface, and frontend client, showing end-to-end product implementation around a backend service.",
     },
     {
-      name: "AnywhereRoles platform backend",
-      type: "Private Spring Boot / Kotlin",
+      name: "Private remote-jobs platform backend",
+      type: "Private Spring/backend work",
       link: null,
       description:
-        "Private Spring Boot and Kotlin service behind AnywhereRoles and the Remoti apps: ingestion and deduplication of listings from five remote job boards, search and filtering, saved jobs, and company and salary aggregation, all exposed through app-facing APIs. Runs on PostgreSQL and Docker Compose behind a Caddy reverse proxy.",
+        "Private backend work around remote-job ingestion, search, saved jobs, and app-facing APIs supporting the Anywhere Roles and Remoti product family.",
     },
     {
       name: "LogLens",
@@ -77,10 +77,10 @@ window.PorfolioConfig = {
         "A macOS menu-bar utility that shows the keyboard shortcuts of whatever app you're using. Hold ⌘ for a glance at every shortcut grouped by menu, click any row to run it, search when you need one fast, and add custom cheat sheets for apps like Vim and tmux.",
     },
     {
-      name: "AnywhereRoles",
+      name: "Anywhere Roles",
       link: "https://anywhereroles.com",
       description:
-        "A remote jobs board built with Next.js and React that aggregates listings from five job boards into one searchable interface. Server-rendered for SEO, with filtering by role, category, region and salary, saved jobs, company profiles, salary insights, an RSS feed, and an MCP server so AI assistants can search the listings directly.",
+        "A web app for finding remote work opportunities. Browse remote job listings, filter by role and category, save interesting positions, and apply directly from the browser.",
     },
     {
       name: "CrossFit Tracker",
