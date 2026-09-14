@@ -95,6 +95,13 @@ window.PorfolioConfig = {
         "A Hacker News reader built with Kotlin Multiplatform. Browse tech news and developer stories with offline reading support and dark mode.",
     },
     {
+      name: "Stressi",
+      type: "Android & iOS",
+      link: "/stressi/",
+      description:
+        "A stress and recovery app for iPhone and Android built on one Kotlin Multiplatform core. Reads HRV, sleep, resting heart rate and activity from Apple Health or Health Connect, turns them into a single daily Body State score, explains which signal moved it, and suggests a plan for the day. Everything is processed on device, with no account and no cloud sync.",
+    },
+    {
       name: "Subscribi",
       link: "https://play.google.com/store/apps/details?id=me.manulorenzo.subscribi.android",
       description:

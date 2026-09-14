@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stressi — Stress &amp; HRV tracker with one daily Body State score</title>
+    <meta
+      name="description"
+      content="Stressi turns the HRV, sleep, resting heart rate and training load your watch already records into one daily Body State score, tells you what moved it, and gives you a plan for the day. Everything stays on your phone."
+    />
+    <link rel="canonical" href="https://noloman.github.io/stressi/" />
+    <link rel="icon" href="assets/icon.png" />
+    <link rel="apple-touch-icon" href="assets/icon-512.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://noloman.github.io/stressi/" />
+    <meta property="og:title" content="Stressi — Stress &amp; HRV tracker" />
+    <meta
+      property="og:description"
+      content="One daily Body State score from your HRV, sleep and heart rate. See what moved it and what to do next. Nothing leaves your phone."
+    />
+    <meta property="og:image" content="https://noloman.github.io/stressi/assets/og-stressi.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Stressi — Stress &amp; HRV tracker" />
+    <meta
+      name="twitter:description"
+      content="One daily Body State score from your HRV, sleep and heart rate. Private by design."
+    />
+    <meta name="twitter:image" content="https://noloman.github.io/stressi/assets/og-stressi.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/stressi.css" />
+    <noscript>
+      <style>
+        .reveal { opacity: 1; transform: none; }
+        .rail .mark { left: var(--at); opacity: 1; }
+      </style>
+    </noscript>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "MobileApplication",
+            "name": "Stressi",
+            "alternateName": "Stress Monitor & HRV: Stressi",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "iOS 16.0 or later, Android 14 or later",
+            "description": "Stressi reads heart rate variability, resting heart rate, sleep and activity from Apple Health or Health Connect and turns them into one daily Body State score, with an explanation of what changed and a short plan for the day. All processing happens on device.",
+            "url": "https://noloman.github.io/stressi/",
+            "image": "https://noloman.github.io/stressi/assets/icon.png",
+            "author": { "@type": "Person", "name": "Manuel Lorenzo", "url": "https://www.manulorenzo.me/" },
+            "inLanguage": ["en", "es", "de", "fr", "it", "pt", "ja", "ko", "zh"],
+            "offers": [
+              { "@type": "Offer", "name": "Stressi (free)", "price": "0", "priceCurrency": "USD" },
+              { "@type": "Offer", "name": "Stressi Pro Monthly", "price": "3.99", "priceCurrency": "USD" },
+              { "@type": "Offer", "name": "Stressi Pro Annual", "price": "24.99", "priceCurrency": "USD" }
+            ],
+            "installUrl": [
+              "https://apps.apple.com/app/id6761765523",
+              "https://play.google.com/store/apps/details?id=me.manulorenzo.stressi"
+            ],
+            "privacyPolicy": "https://noloman.github.io/stressi/privacy/"
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Does Stressi need an account?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. There is no sign-up and no cloud sync. Stressi reads from Apple Health or Health Connect and keeps every reading on your device."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need a smartwatch to use Stressi?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A wearable that records heart rate variability and sleep gives the sharpest read — an Apple Watch on iOS, or any Health Connect compatible wearable on Android. Stressi also works with phone-only data and a camera-based heart rate check, with a less precise score."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is a Body State score?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Body State is a single daily number built from your recovery, stress load, sleep quality, heart rate variability, resting heart rate and recent activity. It is compared against your own recent baseline rather than a population average."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much does Stressi cost?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The daily Body State score, why-it-changed explanations and Today Plan are free. Stressi Pro unlocks long-range trends, deeper patterns, programmes, reports and exports for USD 3.99 per month or USD 24.99 per year, with a 7-day free trial on the annual plan."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Stressi a medical device?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Stressi is a wellness app. It does not diagnose, treat or prevent any condition, and it is not a substitute for advice from a qualified clinician."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <header class="top">
+      <div class="wrap top-inner">
+        <a class="wordmark" href="/stressi/">
+          <img src="assets/icon.png" alt="" width="30" height="30" />
+          Stressi
+        </a>
+        <nav class="top-nav">
+          <a class="only-wide" href="#sequence">How it works</a>
+          <a class="only-wide" href="#privacy">Privacy</a>
+          <a class="only-wide" href="#pricing">Pricing</a>
+          <a class="top-cta" href="#get">Get the app</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- hero -->
+      <section class="wrap hero">
+        <div>
+          <span class="mono eyebrow">iPhone &amp; Android · Apple Health &amp; Health Connect</span>
+          <h1>Wake up knowing <em>what your body can take</em> today.</h1>
+          <p class="lede">
+            Stressi reads the heart rate variability, sleep, resting heart rate and training load
+            your watch already records, and turns them into one Body State score — with the reason
+            it moved and a plan for the day.
+          </p>
+          <div class="stores">
+            <a class="store" href="https://apps.apple.com/app/id6761765523">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.05 12.04c-.02-2.1 1.72-3.11 1.8-3.16-.98-1.44-2.5-1.64-3.05-1.66-1.3-.13-2.54.77-3.2.77-.66 0-1.68-.75-2.76-.73-1.42.02-2.73.83-3.46 2.1-1.47 2.56-.38 6.35 1.06 8.43.7 1.02 1.54 2.16 2.64 2.12 1.06-.04 1.46-.68 2.74-.68 1.28 0 1.64.68 2.76.66 1.14-.02 1.86-1.04 2.56-2.06.8-1.18 1.13-2.32 1.15-2.38-.03-.01-2.2-.84-2.24-3.33zM14.9 5.6c.58-.71.97-1.7.86-2.68-.84.03-1.85.56-2.45 1.26-.54.62-1.01 1.62-.88 2.58.93.07 1.89-.47 2.47-1.16z" />
+              </svg>
+              <span>
+                <span class="over">Download on the</span>
+                <span class="name">App Store</span>
+              </span>
+            </a>
+            <a class="store ghost" href="https://play.google.com/store/apps/details?id=me.manulorenzo.stressi">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1 9.3-9.3v-.2L3.7 2.2l-.1.1zM16.3 15.6l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1.1.6 1.1 1.6 0 2.2l-3.8 2zM15.9 16l-3.2-3.2-9.1 9.1c.4.4 1 .4 1.7.1L15.9 16zM15.9 8L5.3 2c-.7-.4-1.3-.3-1.7.1l9.1 9.1L15.9 8z" />
+              </svg>
+              <span>
+                <span class="over">Get it on</span>
+                <span class="name">Google Play</span>
+              </span>
+            </a>
+          </div>
+          <p class="hero-note">Free to start · No account · Nothing leaves your phone</p>
+        </div>
+
+        <!-- signature: today's reading against your own range -->
+        <div class="instrument" id="instrument">
+          <div class="inst-top">
+            <span class="mono">Body State</span>
+            <span class="mono dim">Tue · 07:12</span>
+          </div>
+          <div class="inst-score">
+            <b data-count="64">64</b>
+            <span class="state">Mixed</span>
+            <span class="of">2 below your usual</span>
+          </div>
+          <div class="rail" style="--from: 66%; --to: 84%; --at: 62%; --tone: #d8901a">
+            <span class="band-typical"></span>
+            <span class="mark"></span>
+          </div>
+          <div class="rail-key">
+            <span class="mono">Your typical 66–84</span>
+            <span class="mono">Today 64</span>
+          </div>
+
+          <ul class="inst-signals">
+            <li>
+              <span class="mono sig">HRV</span>
+              <span class="rail" style="--from: 52%; --to: 76%; --at: 40%; --tone: #e8563f">
+                <span class="band-typical"></span><span class="mark"></span>
+              </span>
+              <span class="read">41 ms<i>Below</i></span>
+            </li>
+            <li>
+              <span class="mono sig">Sleep</span>
+              <span class="rail" style="--from: 58%; --to: 82%; --at: 45%; --tone: #d8901a">
+                <span class="band-typical"></span><span class="mark"></span>
+              </span>
+              <span class="read">6h 12m<i>Below</i></span>
+            </li>
+            <li>
+              <span class="mono sig">Resting</span>
+              <span class="rail" style="--from: 36%; --to: 62%; --at: 50%; --tone: #0fae9f">
+                <span class="band-typical"></span><span class="mark"></span>
+              </span>
+              <span class="read">54 bpm<i>In range</i></span>
+            </li>
+            <li>
+              <span class="mono sig">Load</span>
+              <span class="rail" style="--from: 26%; --to: 54%; --at: 76%; --tone: #98a0ff">
+                <span class="band-typical"></span><span class="mark"></span>
+              </span>
+              <span class="read">Hard<i>Above</i></span>
+            </li>
+          </ul>
+
+          <p class="inst-why">
+            <span class="mono">Why</span>
+            Sleep quality is pulling recovery down, and yesterday's training load is still showing
+            up today.
+          </p>
+          <p class="inst-foot">
+            Sample reading. On your phone these are your own figures, from Apple Health or Health
+            Connect.
+          </p>
+        </div>
+      </section>
+
+      <!-- the morning sequence -->
+      <section class="band" id="sequence">
+        <div class="wrap block">
+          <span class="mono eyebrow">The morning read</span>
+          <h2>Three questions, answered before coffee.</h2>
+          <p class="lede">
+            Most health apps hand you six graphs and leave you to work it out. Stressi answers the
+            questions you actually wake up with, in the order you ask them.
+          </p>
+
+          <div class="sequence">
+            <article class="step reveal">
+              <div class="step-head">
+                <span class="mono">State</span>
+                <h3>How is my body today?</h3>
+                <p>
+                  One Body State score, measured against your own recent baseline rather than a
+                  population average.
+                </p>
+              </div>
+              <div class="shot">
+                <img
+                  src="assets/01-body-state-hero.png"
+                  alt="Stressi showing a Body State score of 64, marked as mixed, with stress, recovery and sleep percentages"
+                  width="414"
+                  height="900"
+                  loading="lazy"
+                />
+              </div>
+            </article>
+
+            <article class="step reveal">
+              <div class="step-head">
+                <span class="mono">Cause</span>
+                <h3>Why did it change?</h3>
+                <p>
+                  Stressi names the signals that moved — sleep debt, a drop in HRV, a hard session
+                  yesterday — and shows how fresh the data behind them is.
+                </p>
+              </div>
+              <div class="shot">
+                <img
+                  src="assets/02-why-it-changed.png"
+                  alt="Stressi explaining that sleep quality is pulling recovery down and yesterday's training load is still showing"
+                  width="414"
+                  height="900"
+                  loading="lazy"
+                />
+              </div>
+            </article>
+
+            <article class="step reveal">
+              <div class="step-head">
+                <span class="mono">Action</span>
+                <h3>What should I do next?</h3>
+                <p>
+                  A short Today Plan with specific steps for the day you are actually having, not
+                  generic advice to get more rest.
+                </p>
+              </div>
+              <div class="shot">
+                <img
+                  src="assets/03-today-plan.png"
+                  alt="Stressi's Today Plan suggesting a calmer work block, a light walk and gentle recovery"
+                  width="414"
+                  height="900"
+                  loading="lazy"
+                />
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- what it reads -->
+      <section class="band" id="signals">
+        <div class="wrap block">
+          <span class="mono eyebrow">What it reads</span>
+          <h2>Your own data, finally saying something.</h2>
+          <p class="lede">
+            Stressi works from what your phone and watch already collect — Apple Health on iPhone,
+            Health Connect on Android, including Pixel Watch, Galaxy Watch and other Wear OS
+            devices. No extra hardware, no new straps.
+          </p>
+
+          <div class="reads">
+            <ul class="signal-list">
+              <li>
+                <h3>Heart rate variability</h3>
+                <span class="pill free">Free</span>
+                <p>
+                  The clearest read on how much load your nervous system is carrying, tracked
+                  against your own range instead of a textbook number.
+                </p>
+              </li>
+              <li>
+                <h3>Sleep and recovery</h3>
+                <span class="pill free">Free</span>
+                <p>Sleep duration and quality, overnight heart rate, and how much you actually recovered.</p>
+              </li>
+              <li>
+                <h3>Resting heart rate</h3>
+                <span class="pill free">Free</span>
+                <p>Slow shifts that show up days before you feel them, including the days worth backing off.</p>
+              </li>
+              <li>
+                <h3>Activity load</h3>
+                <span class="pill free">Free</span>
+                <p>Recent training and movement, weighed against what your body has left to give.</p>
+              </li>
+              <li>
+                <h3>Breathing rate, blood oxygen, body temperature, VO₂ max</h3>
+                <span class="pill">Pro</span>
+                <p>
+                  Overnight signals compared only with your own typical range. Each one is optional
+                  and each works on its own — decline any of them and the rest keep going.
+                </p>
+              </li>
+              <li>
+                <h3>Trends and triggers</h3>
+                <span class="pill">Pro</span>
+                <p>
+                  Seven-day trends are free. Thirty, ninety and 365-day trends, patterns, triggers
+                  and journal correlations come with Pro.
+                </p>
+              </li>
+            </ul>
+
+            <div class="aside">
+              <div class="note accent">
+                <h3>Measured against you</h3>
+                <p>
+                  Every signal is scored against your own rolling baseline. A 41 ms HRV is not good
+                  or bad in the abstract — it matters because it is below where you usually sit.
+                </p>
+              </div>
+              <div class="note">
+                <h3>No wearable to hand?</h3>
+                <p>
+                  Take a heart rate and HRV reading with the phone camera, and Stressi writes it
+                  back to Apple Health or Health Connect.
+                </p>
+              </div>
+              <div class="note">
+                <h3>Honest about gaps</h3>
+                <p>
+                  Health data coverage varies by watch and phone. Stressi shows when it last synced,
+                  which signals are contributing today, and when a score is running on partial data
+                  — instead of pretending to be more precise than it is.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- privacy -->
+      <section class="band night on-night" id="privacy">
+        <div class="wrap block">
+          <div class="privacy-grid">
+            <div>
+              <span class="mono eyebrow">Privacy</span>
+              <h2>Your health data never leaves the phone.</h2>
+              <p class="lede">
+                Stressi is built for people who want a real physiological read without handing their
+                health history to anyone — including me.
+              </p>
+              <p style="margin-top: 1.6rem">
+                <a href="privacy/">Read the full privacy policy →</a>
+              </p>
+            </div>
+            <div>
+              <ul class="facts">
+                <li><span>Every reading is processed and stored <b>on your device</b>.</span></li>
+                <li><span><b>No account</b>, no email, no sign-up, no cloud sync.</span></li>
+                <li><span>No advertising SDKs and <b>no tracking</b> across other apps or websites.</span></li>
+                <li><span>Export your own data to CSV whenever you want.</span></li>
+                <li><span>Delete the app and the data goes with it.</span></li>
+              </ul>
+              <div class="exception">
+                <h3>The two exceptions, stated plainly</h3>
+                <p>
+                  When the app crashes, a diagnostic report goes to Firebase Crashlytics so the bug
+                  can be fixed — code location, device model, OS and app version, never health data.
+                  And if you subscribe, RevenueCat sees an anonymous subscription status. That is
+                  the entire list.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- pricing -->
+      <section class="band" id="pricing">
+        <div class="wrap block">
+          <span class="mono eyebrow">Pricing</span>
+          <h2>The daily read is free. Pro is for the long view.</h2>
+
+          <div class="plans">
+            <div class="plan">
+              <div class="plan-head"><h3>Free</h3></div>
+              <div class="price">$0<small>No account, no time limit</small></div>
+              <ul>
+                <li>Daily Body State score</li>
+                <li>Why it changed, every day</li>
+                <li>Today Plan</li>
+                <li>7-day trends</li>
+                <li>Journal and streaks</li>
+              </ul>
+            </div>
+            <div class="plan pro">
+              <div class="plan-head">
+                <h3>Stressi Pro</h3>
+                <span class="pill">7-day free trial</span>
+              </div>
+              <div class="price">
+                $24.99<small>per year, or $3.99 per month</small>
+              </div>
+              <ul>
+                <li>30, 90 and 365-day trends</li>
+                <li>Patterns, triggers and signal breakdowns</li>
+                <li>Recovery forecasts and premium daily plans</li>
+                <li>Guided programmes, breathing and advanced widgets</li>
+                <li>Reports, CSV export and journal correlations</li>
+                <li>Breathing rate, blood oxygen, body temperature, VO₂ max</li>
+              </ul>
+            </div>
+          </div>
+          <p class="fineprint">
+            Prices shown in USD and vary by country. The free trial is on the annual plan.
+            Subscriptions renew automatically until cancelled, and you can cancel any time from your
+            App Store or Google Play subscription settings.
+          </p>
+        </div>
+      </section>
+
+      <!-- faq -->
+      <section class="band" id="faq">
+        <div class="wrap block">
+          <span class="mono eyebrow">Questions</span>
+          <h2>Before you download.</h2>
+          <div class="faq">
+            <details>
+              <summary>Do I need a smartwatch?</summary>
+              <p>
+                A wearable that records HRV and sleep gives the sharpest read — an Apple Watch on
+                iOS, or any Health Connect compatible wearable on Android. Stressi also works with
+                phone-only data and a camera-based heart rate check, with a less precise score.
+              </p>
+            </details>
+            <details>
+              <summary>What exactly is a Body State score?</summary>
+              <p>
+                A single daily number built from your recovery, stress load, sleep quality, heart
+                rate variability, resting heart rate and recent activity — compared against your own
+                recent baseline, not a population average. The more consistently you wear your
+                watch, the sharper it gets.
+              </p>
+            </details>
+            <details>
+              <summary>Does Stressi need an account?</summary>
+              <p>
+                No. There is no sign-up and no cloud sync. Stressi reads from Apple Health or Health
+                Connect and keeps every reading on your device.
+              </p>
+            </details>
+            <details>
+              <summary>Which devices does it run on?</summary>
+              <p>iPhone on iOS 16 or later, and Android 14 or later with Health Connect.</p>
+            </details>
+            <details>
+              <summary>Is Stressi a medical device?</summary>
+              <p>
+                No. Stressi is a wellness app. It does not diagnose, treat or prevent any condition,
+                and it is not a substitute for advice from a qualified clinician.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- closing -->
+      <section class="band" id="get">
+        <div class="wrap block closing">
+          <h2>See today's Body State.</h2>
+          <p class="lede">Free to start, and it works with the watch you already own.</p>
+          <div class="stores">
+            <a class="store" href="https://apps.apple.com/app/id6761765523">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.05 12.04c-.02-2.1 1.72-3.11 1.8-3.16-.98-1.44-2.5-1.64-3.05-1.66-1.3-.13-2.54.77-3.2.77-.66 0-1.68-.75-2.76-.73-1.42.02-2.73.83-3.46 2.1-1.47 2.56-.38 6.35 1.06 8.43.7 1.02 1.54 2.16 2.64 2.12 1.06-.04 1.46-.68 2.74-.68 1.28 0 1.64.68 2.76.66 1.14-.02 1.86-1.04 2.56-2.06.8-1.18 1.13-2.32 1.15-2.38-.03-.01-2.2-.84-2.24-3.33zM14.9 5.6c.58-.71.97-1.7.86-2.68-.84.03-1.85.56-2.45 1.26-.54.62-1.01 1.62-.88 2.58.93.07 1.89-.47 2.47-1.16z" />
+              </svg>
+              <span>
+                <span class="over">Download on the</span>
+                <span class="name">App Store</span>
+              </span>
+            </a>
+            <a class="store ghost" href="https://play.google.com/store/apps/details?id=me.manulorenzo.stressi">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3.6 2.3c-.3.3-.5.8-.5 1.4v16.6c0 .6.2 1.1.5 1.4l.1.1 9.3-9.3v-.2L3.7 2.2l-.1.1zM16.3 15.6l-3.1-3.1v-.2l3.1-3.1.1.1 3.7 2.1c1.1.6 1.1 1.6 0 2.2l-3.8 2zM15.9 16l-3.2-3.2-9.1 9.1c.4.4 1 .4 1.7.1L15.9 16zM15.9 8L5.3 2c-.7-.4-1.3-.3-1.7.1l9.1 9.1L15.9 8z" />
+              </svg>
+              <span>
+                <span class="over">Get it on</span>
+                <span class="name">Google Play</span>
+              </span>
+            </a>
+          </div>
+          <p class="langs">
+            English, Spanish, German, French, Italian, Portuguese, Japanese, Korean and Chinese.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap">
+        <nav class="foot-nav">
+          <a href="privacy/">Privacy</a>
+          <a href="terms/">Terms</a>
+          <a href="support/">Support</a>
+          <a href="https://apps.apple.com/app/id6761765523">App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=me.manulorenzo.stressi">Google Play</a>
+        </nav>
+        <p>
+          Stressi is a wellness app, not a medical device. It does not diagnose, treat or prevent
+          any condition.
+        </p>
+        <p>
+          Built by <a href="/">Manuel Lorenzo</a>. Apple Health and Apple Watch are trademarks of
+          Apple Inc. Google Play, Health Connect and Wear OS are trademarks of Google LLC.
+        </p>
+        <p>© 2026 Manuel Lorenzo</p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var inst = document.getElementById("instrument");
+
+        function settle() {
+          if (!inst) return;
+          inst.classList.add("is-ready");
+          var n = inst.querySelector("[data-count]");
+          if (!n) return;
+          var target = parseInt(n.getAttribute("data-count"), 10);
+          if (calm) {
+            n.textContent = target;
+            return;
+          }
+          var start = performance.now();
+          (function tick(now) {
+            var p = Math.min((now - start) / 900, 1);
+            n.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(tick);
+          })(start);
+        }
+
+        if (calm) settle();
+        else setTimeout(settle, 260);
+
+        var reveals = document.querySelectorAll(".reveal");
+        if (calm || !("IntersectionObserver" in window)) {
+          reveals.forEach(function (el) {
+            el.classList.add("is-in");
+          });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry, i) {
+              if (!entry.isIntersecting) return;
+              setTimeout(function () {
+                entry.target.classList.add("is-in");
+              }, i * 90);
+              io.unobserve(entry.target);
+            });
+          },
+          { rootMargin: "0px 0px -12% 0px" }
+        );
+        reveals.forEach(function (el) {
+          io.observe(el);
+        });
+      })();
+    </script>
+  </body>
+</html>

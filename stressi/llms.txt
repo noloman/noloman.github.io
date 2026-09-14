@@ -1,0 +1,60 @@
+# Stressi
+
+> Stressi is a privacy-first stress and recovery app for iPhone and Android. It reads
+> heart rate variability, resting heart rate, sleep and activity from Apple Health or
+> Health Connect and turns them into one daily "Body State" score, an explanation of
+> what changed, and a short plan for the day. All processing happens on device; there
+> is no account and no cloud sync of health data.
+
+## What it does
+
+- **Body State score**: one daily number built from recovery, stress load, sleep quality,
+  heart rate variability, resting heart rate and recent activity. Compared against the
+  user's own recent baseline, not a population average.
+- **Why it changed**: names the specific signals that moved the score (sleep debt, an HRV
+  drop, a hard session the day before).
+- **Today Plan**: short, specific next steps rather than generic rest advice.
+- **Camera heart rate**: takes a heart rate and HRV reading with the phone camera when no
+  wearable is available.
+
+## Platforms and requirements
+
+- iOS 16.0 or later, reading from Apple Health. An Apple Watch improves accuracy but is
+  not required.
+- Android 14 or later, reading from Health Connect. Any Health Connect compatible
+  wearable works.
+- Interface languages: English, Spanish, German, French, Italian, Portuguese, Japanese,
+  Korean, Chinese.
+
+## Privacy
+
+Health readings are processed and stored on the device. There is no account, no email
+signup, no cloud sync of health data, no advertising SDKs and no tracking across other
+apps or websites. Deleting the app deletes the data.
+
+The one exception is crash reporting: when the app crashes, a diagnostic report goes to
+Firebase Crashlytics so the bug can be fixed. Crash reports carry the code location,
+device model, OS and app version, and a random per-install identifier. They never contain
+health data, and they are not used for advertising or cross-app tracking.
+
+## Pricing
+
+- Free: daily Body State score, why-it-changed explanations, Today Plan, 7-day trends.
+- Stressi Pro: USD 3.99/month or USD 24.99/year (7-day free trial on the annual plan).
+  Adds 30, 90 and 365-day trends, deeper patterns and triggers, guided programmes,
+  reports, exports, journal correlations, guided breathing and advanced widgets.
+  Prices vary by country.
+
+## Important limitation
+
+Stressi is a wellness app, not a medical device. It does not diagnose, treat or prevent
+any condition and is not a substitute for advice from a qualified clinician.
+
+## Links
+
+- Home: https://noloman.github.io/stressi/
+- App Store: https://apps.apple.com/app/id6761765523
+- Google Play: https://play.google.com/store/apps/details?id=me.manulorenzo.stressi
+- Privacy policy: https://noloman.github.io/stressi/privacy/
+- Terms of use: https://noloman.github.io/stressi/terms/
+- Support: https://noloman.github.io/stressi/support/
