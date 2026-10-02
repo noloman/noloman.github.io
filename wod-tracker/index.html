@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#0c0a09" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#fbfbfa" />
     <meta
       name="description"
       content="WOD Tracker is a training log for CrossFit, weightlifting and hybrid athletes. 81 benchmark WODs, EMOM, AMRAP, Tabata and For Time timers, automatic personal records, Apple Watch and Wear OS. iOS and Android."
@@ -45,7 +45,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="img/icon-180.png" />
 
     <link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="fonts/figtree.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/geist.woff2" as="font" type="font/woff2" crossorigin />
 
     <script type="application/ld+json">
       {
@@ -80,50 +80,40 @@
         font-display: swap;
       }
       @font-face {
-        font-family: "Figtree";
-        src: url("fonts/figtree.woff2") format("woff2");
-        font-weight: 400 700;
+        font-family: "Geist";
+        src: url("fonts/geist.woff2") format("woff2");
+        font-weight: 100 900;
         font-display: swap;
       }
       @font-face {
         font-family: "Geist Mono";
         src: url("fonts/geistmono.woff2") format("woff2");
-        font-weight: 400 600;
+        font-weight: 100 900;
         font-display: swap;
       }
 
       :root {
-        color-scheme: dark;
+        --bg: #fbfbfa;
+        --surface: #f4f3ef;
+        --text: #111111;
+        --body: #2f3437;
+        --muted: #6b6a66;
+        --line: #eaeaea;
+        --blue-bg: #e1f3fe;
+        --blue-fg: #1f6c9f;
+        --yellow-bg: #fbf3db;
+        --yellow-fg: #956400;
 
-        /* warm near-black, tinted toward the ember accent */
-        --bg: #0c0a09;
-        --bg-2: #120f0d;
-        --surface: #181310;
-        --surface-2: #211b17;
-        --hair: rgba(255, 236, 224, 0.08);
-        --hair-2: rgba(255, 236, 224, 0.16);
-        --ink: #f7f2ed;
-        --muted: #b8ada4;
-        --quiet: #8f847b;
+        /* one accent: flame orange for markers, ember for text on light (AA) */
+        --flame: #ff6b35;
+        --ember: #b8431a;
 
-        /* one accent, from the app's own theme */
-        --ember: #ff6b35;
-        --ember-hi: #ff8a5c;
-        --ember-ink: #1d0b04;
-        --ember-glow: rgba(255, 107, 53, 0.16);
-
-        --display: "Bricolage Grotesque", "Figtree", ui-sans-serif, system-ui, sans-serif;
-        --body: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-        --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-
-        --ease: cubic-bezier(0.32, 0.72, 0, 1);
-        --max: 1240px;
-        --gutter: clamp(1.1rem, 4vw, 2.5rem);
-
-        /* the only z layers on the page */
-        --z-grain: 2;
-        --z-nav: 40;
-        --z-menu: 50;
+        --max: 1120px;
+        --gutter: clamp(20px, 5vw, 40px);
+        --display: "Bricolage Grotesque", "Geist", -apple-system, sans-serif;
+        --sans: "Geist", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+        --mono: "Geist Mono", "SF Mono", ui-monospace, Menlo, monospace;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       *,
@@ -136,35 +126,24 @@
 
       html {
         scroll-behavior: smooth;
-        scroll-padding-top: 6rem;
+        scroll-padding-top: 72px;
         -webkit-text-size-adjust: 100%;
       }
 
       body {
         min-width: 320px;
         background: var(--bg);
-        color: var(--ink);
-        font-family: var(--body);
-        font-size: 1.0625rem;
+        color: var(--body);
+        font-family: var(--sans);
+        font-size: 16px;
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
         overflow-x: clip;
-      }
-
-      /* paper-grain over everything: fixed, inert, GPU-cheap */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: var(--z-grain);
-        pointer-events: none;
-        opacity: 0.06;
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
       }
 
       a {
         color: inherit;
+        text-decoration: none;
       }
       img {
         display: block;
@@ -189,35 +168,39 @@
       }
 
       :focus-visible {
-        outline: 2px solid var(--ember);
+        outline: 2px solid var(--text);
         outline-offset: 3px;
-        border-radius: 6px;
+        border-radius: 3px;
       }
 
       .skip {
         position: fixed;
-        left: 1rem;
-        top: -4rem;
-        z-index: var(--z-menu);
-        background: var(--ember);
-        color: var(--ember-ink);
-        padding: 0.6rem 1rem;
-        border-radius: 999px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: top 0.3s var(--ease);
+        left: 12px;
+        top: -48px;
+        z-index: 30;
+        padding: 8px 14px;
+        border-radius: 6px;
+        background: var(--text);
+        color: #fff;
+        font-size: 14px;
       }
       .skip:focus {
-        top: 1rem;
+        top: 12px;
       }
 
       .wrap {
-        width: min(var(--max), calc(100% - 2 * var(--gutter)));
+        width: 100%;
+        max-width: calc(var(--max) + var(--gutter) * 2);
         margin-inline: auto;
+        padding-inline: var(--gutter);
       }
 
       .band {
-        padding-block: clamp(5rem, 11vw, 10rem);
+        padding-block: clamp(56px, 9vw, 96px);
+      }
+      .alt {
+        background: var(--surface);
+        border-block: 1px solid var(--line);
       }
 
       /* ---------- type roles ---------- */
@@ -225,459 +208,292 @@
       .display {
         font-family: var(--display);
         font-weight: 700;
-        font-variation-settings: "wdth" 92;
-        letter-spacing: -0.028em;
-        line-height: 0.96;
+        letter-spacing: -0.035em;
+        line-height: 1.05;
+        color: var(--text);
         text-wrap: balance;
       }
-
       .h2 {
-        font-size: clamp(2.35rem, 5.4vw, 4.6rem);
+        font-size: clamp(2rem, 4.6vw, 3.25rem);
       }
-
       .lede {
-        color: var(--muted);
-        font-size: clamp(1.05rem, 1.5vw, 1.2rem);
         max-width: 52ch;
+        color: var(--muted);
+        font-size: 1.125rem;
         text-wrap: pretty;
       }
-
       .eyebrow {
         display: inline-flex;
         align-items: center;
-        gap: 0.55rem;
-        padding: 0.4rem 0.85rem 0.4rem 0.7rem;
-        border-radius: 999px;
-        border: 1px solid var(--hair-2);
-        background: rgba(255, 236, 224, 0.03);
+        gap: 8px;
         font-family: var(--mono);
-        font-size: 0.78rem;
-        letter-spacing: 0.01em;
+        font-size: 13px;
         color: var(--muted);
       }
       .eyebrow::before {
         content: "";
-        width: 0.42rem;
-        height: 0.42rem;
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
-        background: var(--ember);
-        box-shadow: 0 0 0 4px var(--ember-glow);
+        background: var(--flame);
       }
-
       .head {
         display: grid;
-        gap: 1.4rem;
+        gap: 16px;
         justify-items: start;
-        margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+        margin-bottom: clamp(32px, 5vw, 56px);
       }
-
       em.hot {
         font-style: normal;
         color: var(--ember);
       }
 
-      /* ---------- motion: heavy fade-up on enter ---------- */
+      /* tags: mono, 5px radius, surface */
+      .tag {
+        display: inline-block;
+        padding: 5px 8px;
+        border-radius: 5px;
+        background: var(--surface);
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1;
+      }
+      .tag.blue {
+        background: var(--blue-bg);
+        color: var(--blue-fg);
+      }
+      .tag.yellow {
+        background: var(--yellow-bg);
+        color: var(--yellow-fg);
+      }
+
+      /* ---------- reveal ---------- */
 
       .js .rv {
         opacity: 0;
-        transform: translateY(2.4rem);
-        filter: blur(8px);
+        transform: translateY(12px);
         transition:
-          opacity 0.9s var(--ease) var(--d, 0s),
-          transform 0.9s var(--ease) var(--d, 0s),
-          filter 0.9s var(--ease) var(--d, 0s);
-      }
-      .js .rv.soft {
-        filter: none;
+          opacity 0.6s var(--ease) calc(var(--i, 0) * 60ms),
+          transform 0.6s var(--ease) calc(var(--i, 0) * 60ms);
       }
       .js .rv.in {
         opacity: 1;
         transform: none;
-        filter: none;
       }
 
-      /* ---------- navigation: a floating glass pill ---------- */
+      /* ---------- header ---------- */
 
-      .nav {
-        position: fixed;
-        inset: 1rem 0 auto;
-        z-index: var(--z-nav);
-        display: flex;
-        justify-content: center;
-        padding-inline: var(--gutter);
-        pointer-events: none;
+      .top {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(251, 251, 250, 0.82);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
       }
-      .menu-open .nav {
-        z-index: calc(var(--z-menu) + 1);
-      }
-      .nav-pill {
-        pointer-events: auto;
+      .top-inner {
         display: flex;
         align-items: center;
-        gap: 0.4rem;
-        padding: 0.4rem;
-        border-radius: 999px;
-        background: rgba(18, 15, 13, 0.62);
-        border: 1px solid var(--hair-2);
-        box-shadow:
-          inset 0 1px 0 rgba(255, 255, 255, 0.06),
-          0 18px 40px -18px rgba(0, 0, 0, 0.8);
-        -webkit-backdrop-filter: blur(22px) saturate(1.4);
-        backdrop-filter: blur(22px) saturate(1.4);
+        justify-content: space-between;
+        gap: 16px;
+        height: 64px;
       }
-      .nav-back {
+      .wordmark {
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.5rem 0.9rem 0.5rem 0.7rem;
-        border-radius: 999px;
-        color: var(--muted);
-        font-size: 0.9rem;
-        font-weight: 500;
-        text-decoration: none;
-        transition:
-          color 0.4s var(--ease),
-          background 0.4s var(--ease);
-      }
-      .nav-back:hover {
-        color: var(--ink);
-        background: rgba(255, 236, 224, 0.06);
-      }
-      .nav-links {
-        display: flex;
-        gap: 0.15rem;
-        padding-inline: 0.4rem;
-        border-left: 1px solid var(--hair);
-        margin-left: 0.2rem;
-      }
-      .nav-links a {
-        padding: 0.5rem 0.85rem;
-        border-radius: 999px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: var(--muted);
-        text-decoration: none;
-        transition:
-          color 0.4s var(--ease),
-          background 0.4s var(--ease);
-      }
-      .nav-links a:hover {
-        color: var(--ink);
-        background: rgba(255, 236, 224, 0.06);
-      }
-      .nav-toggle {
-        display: none;
-        width: 2.6rem;
-        height: 2.6rem;
-        border-radius: 50%;
-        position: relative;
-        background: rgba(255, 236, 224, 0.06);
-      }
-      .nav-toggle span {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: 1.05rem;
-        height: 1.5px;
-        margin-left: -0.525rem;
-        background: var(--ink);
-        border-radius: 2px;
-        transition: transform 0.6s var(--ease);
-      }
-      .nav-toggle span:nth-child(1) {
-        transform: translateY(-4px);
-      }
-      .nav-toggle span:nth-child(2) {
-        transform: translateY(4px);
-      }
-      .nav-toggle[aria-expanded="true"] span:nth-child(1) {
-        transform: rotate(45deg);
-      }
-      .nav-toggle[aria-expanded="true"] span:nth-child(2) {
-        transform: rotate(-45deg);
-      }
-
-      .menu {
-        position: fixed;
-        inset: 0;
-        z-index: calc(var(--z-menu) - 1);
-        display: grid;
-        align-content: center;
-        gap: 0.4rem;
-        padding: 6rem var(--gutter) 3rem;
-        background: rgba(12, 10, 9, 0.88);
-        -webkit-backdrop-filter: blur(28px);
-        backdrop-filter: blur(28px);
-        opacity: 0;
-        visibility: hidden;
-        transition:
-          opacity 0.6s var(--ease),
-          visibility 0s linear 0.6s;
-      }
-      .menu.open {
-        opacity: 1;
-        visibility: visible;
-        transition-delay: 0s;
-      }
-      .menu a {
-        justify-self: start;
+        gap: 10px;
         font-family: var(--display);
-        font-variation-settings: "wdth" 92;
+        font-size: 1.1rem;
         font-weight: 700;
-        font-size: clamp(2.4rem, 11vw, 4rem);
         letter-spacing: -0.03em;
-        line-height: 1.12;
-        text-decoration: none;
-        opacity: 0;
-        transform: translateY(2.5rem);
-        transition:
-          opacity 0.7s var(--ease),
-          transform 0.7s var(--ease),
-          color 0.3s var(--ease);
+        color: var(--text);
       }
-      .menu.open a {
-        opacity: 1;
-        transform: none;
-        transition-delay: calc(0.07s * var(--i));
+      .wordmark img {
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
       }
-      .menu a:hover {
-        color: var(--ember);
-      }
-
-      /* ---------- buttons: pill with a nested icon orb ---------- */
-
-      .btn {
-        --orb: 2.5rem;
-        display: inline-flex;
+      .top-nav {
+        display: flex;
         align-items: center;
-        gap: 0.9rem;
-        padding: 0.4rem 0.4rem 0.4rem 1.45rem;
-        border-radius: 999px;
-        border: 1px solid var(--hair-2);
-        background: rgba(255, 236, 224, 0.05);
-        color: var(--ink);
-        font-weight: 600;
-        font-size: 0.98rem;
-        line-height: 1.15;
-        text-decoration: none;
-        transition:
-          transform 0.5s var(--ease),
-          background 0.5s var(--ease),
-          border-color 0.5s var(--ease);
+        gap: 4px;
       }
-      .btn small {
-        display: block;
-        font-size: 0.7rem;
+      .top-nav a {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        color: var(--muted);
+        transition:
+          color 0.2s,
+          background-color 0.2s,
+          transform 0.15s;
+      }
+      .top-nav a:hover {
+        color: var(--text);
+        background: var(--surface);
+      }
+      .top-nav .top-cta {
+        margin-left: 8px;
+        padding: 8px 14px;
+        background: var(--text);
+        color: #fff;
         font-weight: 500;
-        color: var(--quiet);
-        letter-spacing: 0.01em;
       }
-      .btn .orb {
-        width: var(--orb);
-        height: var(--orb);
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        background: rgba(255, 236, 224, 0.1);
-        transition:
-          transform 0.5s var(--ease),
-          background 0.5s var(--ease);
+      .top-nav .top-cta:hover {
+        background: #333;
+        color: #fff;
       }
-      .btn .orb svg {
-        width: 1.3rem;
-        height: 1.3rem;
-        transition: transform 0.5s var(--ease);
+      .top-cta:active,
+      .store:active {
+        transform: scale(0.98);
       }
-      .btn:hover {
-        background: rgba(255, 236, 224, 0.09);
-        border-color: rgba(255, 236, 224, 0.28);
-      }
-      .btn:hover .orb {
-        transform: scale(1.06);
-      }
-      .btn:hover .orb svg.go {
-        transform: translate(2px, -2px);
-      }
-      .btn:active {
-        transform: scale(0.97);
-      }
-      .btn.primary {
-        background: var(--ember);
-        border-color: var(--ember);
-        color: var(--ember-ink);
-        box-shadow: 0 14px 34px -14px rgba(255, 107, 53, 0.75);
-      }
-      .btn.primary small {
-        color: rgba(29, 11, 4, 0.7);
-      }
-      .btn.primary .orb {
-        background: rgba(29, 11, 4, 0.14);
-      }
-      .btn.primary:hover {
-        background: var(--ember-hi);
-        border-color: var(--ember-hi);
-      }
-      .btn.mini {
-        --orb: 2.1rem;
-        padding: 0.3rem 0.3rem 0.3rem 1.05rem;
-        font-size: 0.9rem;
-        gap: 0.6rem;
-      }
-      .btn.mini .orb svg {
-        width: 1.05rem;
-        height: 1.05rem;
-      }
+
+      /* ---------- store badges ---------- */
 
       .stores {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.8rem;
+        gap: 12px;
+      }
+      .store {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 52px;
+        padding: 0 20px;
+        border-radius: 8px;
+        background: var(--text);
+        color: #fff;
+        transition:
+          background-color 0.2s,
+          transform 0.15s;
+      }
+      .store:hover {
+        background: #333;
+      }
+      .store svg {
+        width: 22px;
+        height: 22px;
+      }
+      .store span {
+        display: block;
+        line-height: 1.15;
+      }
+      .store .over {
+        font-size: 11px;
+        opacity: 0.75;
+      }
+      .store .name {
+        font-size: 1.0625rem;
+        font-weight: 500;
       }
 
-      /* ---------- device frames ---------- */
+      /* ---------- device frames: screenshots in hairline phones, dark watch captures ---------- */
 
       .phone {
-        --pw: 280px;
-        position: relative;
+        --pw: 260px;
         width: var(--pw);
-        padding: calc(var(--pw) * 0.024);
-        border-radius: calc(var(--pw) * 0.17);
-        background: linear-gradient(155deg, #52483f 0%, #1a1512 38%, #0e0b0a 62%, #3a322b 100%);
-        box-shadow:
-          inset 0 0 0 1px rgba(255, 255, 255, 0.16),
-          inset 0 1px 1px rgba(255, 255, 255, 0.3),
-          0 0 0 1px rgba(0, 0, 0, 0.7),
-          0 50px 90px -28px rgba(0, 0, 0, 0.85),
-          0 22px 40px -22px rgba(255, 107, 53, 0.22);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: var(--surface);
+        box-shadow: 0 12px 32px rgba(60, 50, 30, 0.1);
       }
       .phone img {
         width: 100%;
-        border-radius: calc(var(--pw) * 0.146);
-        background: #000;
       }
-      /* dynamic island: the simulator doesn't render one */
-      .phone::after {
-        content: "";
-        position: absolute;
-        top: calc(var(--pw) * 0.056);
-        left: 50%;
-        width: calc(var(--pw) * 0.285);
-        height: calc(var(--pw) * 0.082);
-        margin-left: calc(var(--pw) * -0.1425);
-        border-radius: 999px;
-        background: #000;
-      }
-
       .watch {
-        --ww: 200px;
-        position: relative;
+        --ww: 180px;
         width: var(--ww);
-        padding: calc(var(--ww) * 0.052);
-        border-radius: calc(var(--ww) * 0.3);
-        background: linear-gradient(155deg, #4b4239 0%, #19140f 40%, #0d0a09 65%, #352d26 100%);
-        box-shadow:
-          inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-          inset 0 1px 1px rgba(255, 255, 255, 0.28),
-          0 0 0 1px rgba(0, 0, 0, 0.7),
-          0 40px 70px -26px rgba(0, 0, 0, 0.85);
-      }
-      .watch::before {
-        /* digital crown */
-        content: "";
-        position: absolute;
-        right: calc(var(--ww) * -0.035);
-        top: 24%;
-        width: calc(var(--ww) * 0.05);
-        height: calc(var(--ww) * 0.17);
-        border-radius: 3px;
-        background: linear-gradient(90deg, #2a231d, #4b4239);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: calc(var(--ww) * 0.22);
+        background: #000;
       }
       .watch img {
         width: 100%;
-        border-radius: calc(var(--ww) * 0.245);
-        background: #000;
       }
 
       /* ---------- hero ---------- */
 
       .hero {
         position: relative;
-        min-height: 100dvh;
-        display: grid;
-        align-items: center;
-        padding-block: 8rem 5rem;
         isolation: isolate;
         overflow: clip;
+        padding-block: clamp(56px, 9vw, 96px);
       }
       .hero::before {
         content: "";
         position: absolute;
         inset: 0;
         z-index: -1;
-        background:
-          radial-gradient(circle min(62vw, 760px) at 76% 34%, rgba(255, 107, 53, 0.2), transparent 100%),
-          radial-gradient(circle min(40vw, 480px) at 96% 82%, rgba(255, 150, 90, 0.09), transparent 100%);
+        background-image: radial-gradient(rgba(17, 17, 17, 0.13) 1px, transparent 1.2px);
+        background-size: 22px 22px;
+        -webkit-mask-image: radial-gradient(ellipse 70% 80% at 25% 30%, #000 0%, transparent 75%);
+        mask-image: radial-gradient(ellipse 70% 80% at 25% 30%, #000 0%, transparent 75%);
         pointer-events: none;
       }
       .hero-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
         align-items: center;
-        gap: clamp(2rem, 4vw, 4rem);
+        gap: clamp(32px, 5vw, 64px);
       }
       .hero h1 {
-        font-size: clamp(3.1rem, 7.2vw, 6.6rem);
-        margin-top: 1.6rem;
+        margin-top: 24px;
+        font-size: clamp(2.5rem, 6.4vw, 4.5rem);
+        line-height: 1;
+        letter-spacing: -0.045em;
       }
       .hero h1 span {
         display: block;
       }
       .hero .lede {
-        margin-top: 1.8rem;
+        margin-top: 28px;
       }
       .hero .stores {
-        margin-top: 2.4rem;
+        margin-top: 36px;
       }
       .hero-note {
-        margin-top: 1.4rem;
-        font-size: 0.86rem;
-        color: var(--quiet);
+        margin-top: 20px;
+        font-size: 14px;
+        color: var(--muted);
       }
 
       .stack {
+        --mw: clamp(190px, 19vw, 250px);
+        --sw: calc(var(--mw) * 0.78);
         position: relative;
-        height: clamp(520px, 52vw, 700px);
+        height: calc(var(--mw) * 2.2);
       }
       .stack .phone {
         position: absolute;
       }
       .stack .p-main {
-        --pw: clamp(220px, 21vw, 292px);
-        left: 50%;
-        top: 50%;
-        margin: calc(var(--pw) * -0.99) 0 0 calc(var(--pw) * -0.5);
+        --pw: var(--mw);
+        left: calc(50% - var(--mw) / 2);
+        top: 0;
         z-index: 3;
       }
       .stack .p-left {
-        --pw: clamp(180px, 17vw, 240px);
+        --pw: var(--sw);
         left: 0;
-        top: 13%;
-        rotate: -5deg;
+        top: 14%;
         z-index: 1;
       }
       .stack .p-right {
-        --pw: clamp(180px, 17vw, 240px);
+        --pw: var(--sw);
         right: 0;
-        top: 20%;
-        rotate: 5deg;
+        top: 24%;
         z-index: 2;
       }
       .js .stack .phone {
         opacity: 0;
-        translate: 0 4rem;
+        translate: 0 12px;
         transition:
-          opacity 1.1s var(--ease) var(--d, 0s),
-          translate 1.3s var(--ease) var(--d, 0s);
+          opacity 0.6s var(--ease) calc(var(--i, 0) * 60ms),
+          translate 0.6s var(--ease) calc(var(--i, 0) * 60ms);
       }
       .js .stack.in .phone {
         opacity: 1;
@@ -687,11 +503,10 @@
       /* ---------- ticker ---------- */
 
       .ticker {
-        position: relative;
         overflow: hidden;
-        border-block: 1px solid var(--hair);
-        background: var(--bg-2);
-        padding-block: 1.5rem;
+        border-block: 1px solid var(--line);
+        background: var(--surface);
+        padding-block: 20px;
         -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
         mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
       }
@@ -708,21 +523,19 @@
         display: flex;
         align-items: center;
         font-family: var(--display);
-        font-variation-settings: "wdth" 92;
-        font-weight: 600;
-        font-size: clamp(1.6rem, 3vw, 2.4rem);
-        letter-spacing: -0.02em;
-        color: var(--muted);
+        font-weight: 700;
+        font-size: clamp(1.4rem, 2.6vw, 2rem);
+        letter-spacing: -0.03em;
+        color: var(--text);
         white-space: nowrap;
       }
       .ticker li::after {
         content: "";
-        width: 0.5rem;
-        height: 0.5rem;
-        margin-inline: clamp(1.2rem, 2.4vw, 2.2rem);
+        width: 6px;
+        height: 6px;
+        margin-inline: clamp(20px, 2.4vw, 32px);
         border-radius: 50%;
-        background: var(--ember);
-        opacity: 0.8;
+        background: var(--flame);
       }
       @keyframes tick {
         to {
@@ -735,55 +548,61 @@
       .numbers {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: clamp(1.2rem, 3vw, 3rem);
-        padding-block: clamp(3.5rem, 7vw, 6rem) 0;
+        gap: clamp(20px, 3vw, 40px);
+        padding-top: clamp(56px, 9vw, 96px);
       }
       .numbers div {
         display: flex;
         flex-direction: column;
-        padding-top: 1.1rem;
-        border-top: 1px solid var(--hair-2);
+        padding-top: 16px;
+        border-top: 1px solid var(--text);
       }
       .numbers dt {
         order: 2;
-        margin-top: 0.5rem;
+        margin-top: 8px;
         color: var(--muted);
-        font-size: 0.98rem;
-        line-height: 1.4;
+        font-size: 15px;
+        line-height: 1.45;
       }
       .numbers dd {
         order: 1;
         font-family: var(--display);
-        font-variation-settings: "wdth" 92;
         font-weight: 700;
-        font-size: clamp(3rem, 7vw, 5.6rem);
-        letter-spacing: -0.035em;
-        line-height: 0.95;
+        font-size: clamp(2.75rem, 6vw, 4.5rem);
+        letter-spacing: -0.045em;
+        line-height: 1;
+        color: var(--text);
       }
 
-      /* ---------- double bezel ---------- */
+      /* ---------- card surface ---------- */
 
       .bezel {
-        padding: 0.4rem;
-        border-radius: 2rem;
-        background: rgba(255, 236, 224, 0.035);
-        border: 1px solid var(--hair);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+        transition:
+          border-color 0.25s,
+          box-shadow 0.25s,
+          opacity 0.6s var(--ease) calc(var(--i, 0) * 60ms),
+          transform 0.6s var(--ease) calc(var(--i, 0) * 60ms);
       }
-      .bezel > .core {
-        position: relative;
+      .js .bezel.rv {
+        transition:
+          border-color 0.25s,
+          box-shadow 0.25s,
+          opacity 0.6s var(--ease) calc(var(--i, 0) * 60ms),
+          transform 0.6s var(--ease) calc(var(--i, 0) * 60ms);
+      }
+      .bezel > * {
         height: 100%;
-        border-radius: calc(2rem - 0.4rem);
-        background: linear-gradient(180deg, var(--surface-2), var(--surface));
-        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.07);
-        overflow: hidden;
       }
-      .bezel.top {
-        background: rgba(255, 107, 53, 0.06);
-        border-color: rgba(255, 107, 53, 0.35);
-        box-shadow: 0 30px 80px -40px rgba(255, 107, 53, 0.5);
+      .bezel:hover {
+        border-color: #d9d8d3;
+        box-shadow: 0 8px 28px rgba(60, 50, 30, 0.07);
       }
-      .bezel.top > .core {
-        background: linear-gradient(180deg, #2a1c14, #1a120d);
+      .bezel.top,
+      .bezel.top:hover {
+        border-color: var(--text);
       }
 
       /* ---------- tour ---------- */
@@ -791,106 +610,96 @@
       .tour {
         display: grid;
         grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-        gap: clamp(2rem, 5vw, 5rem);
+        gap: clamp(24px, 5vw, 64px);
         align-items: center;
       }
       .tabs {
         display: grid;
-        gap: 0.35rem;
+        gap: 4px;
       }
       .tab {
         display: grid;
         grid-template-columns: auto 1fr;
-        column-gap: 1.1rem;
+        column-gap: 16px;
         align-items: baseline;
-        padding: 1.15rem 1.4rem 1.15rem 1.3rem;
-        border-radius: 1.5rem;
+        padding: 16px 20px;
         border: 1px solid transparent;
+        border-radius: 12px;
         text-align: left;
         transition:
-          background 0.6s var(--ease),
-          border-color 0.6s var(--ease);
+          background-color 0.25s,
+          border-color 0.25s;
       }
       .tab .n {
         font-family: var(--mono);
-        font-size: 0.78rem;
-        color: var(--quiet);
-        transition: color 0.5s var(--ease);
+        font-size: 12px;
+        color: var(--muted);
       }
       .tab .t {
         font-family: var(--display);
-        font-variation-settings: "wdth" 92;
-        font-weight: 650;
-        font-size: clamp(1.5rem, 2.6vw, 2.15rem);
-        letter-spacing: -0.025em;
-        line-height: 1.1;
-        color: var(--quiet);
-        transition: color 0.5s var(--ease);
+        font-weight: 700;
+        font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        color: var(--muted);
+        transition: color 0.2s;
       }
       .tab .d {
         grid-column: 2;
         display: grid;
         grid-template-rows: 0fr;
-        transition: grid-template-rows 0.7s var(--ease);
+        transition: grid-template-rows 0.5s var(--ease);
       }
       .tab .d > p {
         overflow: hidden;
         color: var(--muted);
-        font-size: 1rem;
+        font-size: 15px;
         opacity: 0;
-        transition: opacity 0.6s var(--ease);
+        transition: opacity 0.4s var(--ease);
       }
       .tab .d > p > span {
         display: block;
-        padding-top: 0.7rem;
+        padding-top: 8px;
       }
       .tab:hover .t {
-        color: var(--ink);
+        color: var(--text);
       }
       .tab[aria-selected="true"] {
-        background: rgba(255, 236, 224, 0.045);
-        border-color: var(--hair-2);
+        background: var(--surface);
+        border-color: var(--line);
       }
       .tab[aria-selected="true"] .n {
         color: var(--ember);
       }
       .tab[aria-selected="true"] .t {
-        color: var(--ink);
+        color: var(--text);
       }
       .tab[aria-selected="true"] .d {
         grid-template-rows: 1fr;
       }
       .tab[aria-selected="true"] .d > p {
         opacity: 1;
-        transition-delay: 0.15s;
+        transition-delay: 0.1s;
       }
 
       .stage {
-        position: relative;
         display: grid;
         place-items: center;
-        min-height: clamp(560px, 62vw, 780px);
-        isolation: isolate;
-      }
-      .stage::before {
-        content: "";
-        position: absolute;
-        width: min(560px, 90%);
-        aspect-ratio: 1;
-        border-radius: 50%;
-        background: radial-gradient(closest-side, var(--ember-glow), transparent);
-        z-index: -1;
+        padding: clamp(24px, 4vw, 40px);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
       }
       .stage .phone {
-        --pw: clamp(250px, 26vw, 330px);
+        --pw: clamp(220px, 22vw, 280px);
         grid-area: 1 / 1;
         transition:
-          opacity 0.7s var(--ease),
-          transform 0.9s var(--ease);
+          opacity 0.4s var(--ease),
+          transform 0.5s var(--ease);
       }
       .js .stage .phone {
         opacity: 0;
-        transform: translateY(2rem) scale(0.96);
+        transform: translateY(12px);
         pointer-events: none;
       }
       .js .stage .phone.on {
@@ -902,87 +711,73 @@
         display: none;
       }
       .tour-tag {
-        display: inline-block;
-        margin-left: 0.5rem;
-        padding: 0.12rem 0.55rem;
-        border-radius: 999px;
-        border: 1px solid var(--hair-2);
-        font-family: var(--mono);
-        font-size: 0.68rem;
-        letter-spacing: 0.02em;
-        color: var(--ember-hi);
-        vertical-align: 0.18em;
+        margin-left: 8px;
+        vertical-align: 0.2em;
+        letter-spacing: 0;
       }
       /* the active tab's text, shown under the phone on narrow screens */
       .tour-desc {
         display: none;
-        text-align: center;
-        color: var(--muted);
-        font-size: 1rem;
         min-height: 6.5em;
         max-width: 40ch;
-        margin: 1rem auto 0;
+        margin: 16px auto 0;
+        text-align: center;
+        color: var(--muted);
+        font-size: 15px;
       }
 
       /* ---------- library ---------- */
 
-      .alt {
-        background: var(--bg-2);
-        border-block: 1px solid var(--hair);
-      }
       .lib-row {
         display: grid;
         grid-template-columns: minmax(180px, 0.28fr) minmax(0, 1fr);
-        gap: 1.5rem 3rem;
-        padding-block: clamp(1.6rem, 3vw, 2.4rem);
-        border-top: 1px solid var(--hair-2);
+        gap: 16px 48px;
         align-items: start;
+        padding-block: 28px;
+        border-top: 1px solid var(--line);
       }
       .lib-row:last-child {
-        border-bottom: 1px solid var(--hair-2);
+        border-bottom: 1px solid var(--line);
       }
       .lib-key {
         display: flex;
         align-items: baseline;
-        gap: 0.9rem;
+        gap: 12px;
       }
       .lib-key h3 {
         font-family: var(--display);
-        font-variation-settings: "wdth" 92;
         font-weight: 700;
-        font-size: clamp(1.7rem, 2.8vw, 2.4rem);
-        letter-spacing: -0.028em;
-        line-height: 1;
+        font-size: clamp(1.4rem, 2.4vw, 1.75rem);
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        color: var(--text);
       }
       .lib-key span {
         font-family: var(--mono);
-        font-size: 0.85rem;
-        color: var(--ember-hi);
+        font-size: 13px;
+        color: var(--ember);
       }
       .chips {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
+        gap: 6px;
       }
       .chips li {
-        padding: 0.42rem 0.95rem;
-        border-radius: 999px;
-        border: 1px solid var(--hair-2);
-        background: rgba(255, 236, 224, 0.03);
-        font-size: 0.95rem;
-        font-weight: 500;
-        color: var(--ink);
+        padding: 5px 8px;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        background: #fff;
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1;
+        color: var(--body);
         transition:
-          background 0.4s var(--ease),
-          border-color 0.4s var(--ease),
-          color 0.4s var(--ease),
-          transform 0.5s var(--ease);
+          border-color 0.2s,
+          color 0.2s;
       }
       .chips li:hover {
-        background: var(--ember);
-        border-color: var(--ember);
-        color: var(--ember-ink);
-        transform: translateY(-2px);
+        border-color: var(--text);
+        color: var(--text);
       }
 
       /* ---------- on the wrist ---------- */
@@ -990,61 +785,55 @@
       .wrist {
         display: grid;
         grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-        gap: clamp(2.5rem, 6vw, 6rem);
+        gap: clamp(32px, 6vw, 80px);
         align-items: center;
       }
       .wrist-visual {
-        position: relative;
         display: grid;
         grid-template-columns: repeat(2, auto);
         justify-content: center;
         align-items: center;
-        gap: clamp(0.8rem, 2vw, 1.6rem);
-        padding-block: 3rem;
-        isolation: isolate;
-      }
-      .wrist-visual::before {
-        content: "";
-        position: absolute;
-        inset: 8% 4%;
-        z-index: -1;
-        border-radius: 50%;
-        background: radial-gradient(closest-side, var(--ember-glow), transparent);
+        gap: clamp(12px, 2vw, 24px);
+        padding: clamp(40px, 6vw, 64px) 24px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--surface);
       }
       .wrist-visual .watch {
-        --ww: clamp(130px, 14vw, 190px);
+        --ww: clamp(120px, 14vw, 180px);
       }
       .wrist-visual .watch:nth-child(1) {
-        translate: 0 2.2rem;
+        translate: 0 20px;
       }
       .wrist-visual .watch:nth-child(2) {
-        translate: 0 -2.2rem;
+        translate: 0 -20px;
       }
       .facts {
-        margin-top: 2.2rem;
+        margin-top: 32px;
       }
       .facts li {
         display: grid;
-        grid-template-columns: 1.6rem 1fr;
-        gap: 0.2rem 1rem;
-        padding-block: 1rem;
-        border-top: 1px solid var(--hair);
+        grid-template-columns: 24px 1fr;
+        gap: 4px 16px;
+        padding-block: 16px;
+        border-top: 1px solid var(--line);
       }
       .facts li:last-child {
-        border-bottom: 1px solid var(--hair);
+        border-bottom: 1px solid var(--line);
       }
       .facts svg {
-        margin-top: 0.15rem;
-        color: var(--ember);
-        width: 1.4rem;
-        height: 1.4rem;
+        width: 22px;
+        height: 22px;
+        margin-top: 2px;
+        color: var(--text);
       }
       .facts b {
-        font-weight: 600;
+        font-weight: 500;
+        color: var(--text);
       }
       .facts p {
         color: var(--muted);
-        font-size: 0.98rem;
+        font-size: 15px;
       }
 
       /* ---------- bento ---------- */
@@ -1052,7 +841,7 @@
       .bento {
         display: grid;
         grid-template-columns: repeat(12, minmax(0, 1fr));
-        gap: 1rem;
+        gap: 16px;
       }
       .bento > :nth-child(1) {
         grid-column: span 7;
@@ -1066,47 +855,38 @@
       .tile {
         display: flex;
         flex-direction: column;
-        gap: 0.9rem;
-        min-height: 17rem;
-        padding: clamp(1.5rem, 2.6vw, 2.2rem);
+        gap: 12px;
+        min-height: 272px;
+        padding: clamp(24px, 3vw, 32px);
       }
       .tile .ico {
         display: grid;
         place-items: center;
-        width: 2.8rem;
-        height: 2.8rem;
-        border-radius: 1rem;
-        background: var(--ember-glow);
-        color: var(--ember-hi);
-        box-shadow: inset 0 0 0 1px rgba(255, 107, 53, 0.25);
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--surface);
+        color: var(--text);
       }
       .tile .ico svg {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 22px;
+        height: 22px;
       }
       .tile h3 {
-        font-family: var(--display);
-        font-variation-settings: "wdth" 92;
-        font-weight: 650;
-        font-size: clamp(1.45rem, 2.2vw, 1.9rem);
-        letter-spacing: -0.025em;
-        line-height: 1.1;
         margin-top: auto;
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: clamp(1.25rem, 2vw, 1.5rem);
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        color: var(--text);
         text-wrap: balance;
       }
       .tile p {
         color: var(--muted);
-        font-size: 0.99rem;
+        font-size: 15px;
         text-wrap: pretty;
-      }
-      .tile .tag {
-        align-self: flex-start;
-        padding: 0.12rem 0.6rem;
-        border-radius: 999px;
-        border: 1px solid var(--hair-2);
-        font-family: var(--mono);
-        font-size: 0.7rem;
-        color: var(--ember-hi);
       }
       .tile-head {
         display: flex;
@@ -1116,17 +896,16 @@
       .langs {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.2rem 0.85rem;
+        gap: 2px 14px;
         font-family: var(--display);
-        font-variation-settings: "wdth" 92;
-        font-weight: 600;
-        font-size: 1.25rem;
+        font-weight: 700;
+        font-size: 1.125rem;
         letter-spacing: -0.02em;
-        line-height: 1.3;
-        color: var(--quiet);
+        line-height: 1.4;
+        color: #b4b2ab;
       }
       .langs span:nth-child(3n + 1) {
-        color: var(--ink);
+        color: var(--text);
       }
 
       /* ---------- plans ---------- */
@@ -1134,54 +913,51 @@
       .plans {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1rem;
-        align-items: stretch;
+        gap: 16px;
       }
       .plan {
-        padding: clamp(1.6rem, 2.8vw, 2.4rem);
+        padding: clamp(24px, 3vw, 32px);
       }
       .plan h3 {
         font-family: var(--display);
-        font-variation-settings: "wdth" 92;
         font-weight: 700;
-        font-size: clamp(2rem, 3.4vw, 2.8rem);
-        letter-spacing: -0.03em;
-        line-height: 1;
+        font-size: clamp(1.75rem, 3vw, 2.25rem);
+        letter-spacing: -0.035em;
+        line-height: 1.05;
+        color: var(--text);
       }
       .plan .lead {
-        color: var(--muted);
-        font-size: 0.98rem;
         min-height: 3.2em;
-        margin: 0.5rem 0 1.2rem;
+        margin: 8px 0 16px;
+        color: var(--muted);
+        font-size: 15px;
       }
       .plan li {
         display: grid;
-        grid-template-columns: 1.2rem 1fr;
-        gap: 0.7rem;
-        padding-block: 0.62rem;
-        border-top: 1px solid var(--hair);
-        font-size: 0.97rem;
+        grid-template-columns: 18px 1fr;
+        gap: 10px;
+        padding-block: 10px;
+        border-top: 1px solid var(--line);
+        font-size: 15px;
       }
       .plan li svg {
-        margin-top: 0.22rem;
-        width: 1.1rem;
-        height: 1.1rem;
-        color: var(--quiet);
+        width: 18px;
+        height: 18px;
+        margin-top: 3px;
+        color: var(--muted);
       }
       .plan li.inc {
-        font-weight: 600;
+        font-weight: 500;
+        color: var(--text);
       }
       .plan li.inc svg {
-        color: var(--ember);
-      }
-      .bezel.top li svg {
-        color: var(--ember);
+        color: var(--text);
       }
       .plans-note {
-        margin-top: 1.6rem;
-        color: var(--quiet);
-        font-size: 0.9rem;
         max-width: 70ch;
+        margin-top: 24px;
+        color: var(--muted);
+        font-size: 14px;
       }
 
       /* ---------- built ---------- */
@@ -1189,132 +965,114 @@
       .built {
         display: grid;
         grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-        gap: clamp(2rem, 6vw, 6rem);
+        gap: clamp(32px, 6vw, 80px);
         align-items: start;
       }
       .spec li {
         display: grid;
-        grid-template-columns: 7.5rem 1fr;
-        gap: 1rem;
-        padding-block: 1.15rem;
-        border-top: 1px solid var(--hair-2);
+        grid-template-columns: 120px 1fr;
+        gap: 16px;
+        padding-block: 18px;
+        border-top: 1px solid var(--line);
       }
       .spec li:last-child {
-        border-bottom: 1px solid var(--hair-2);
+        border-bottom: 1px solid var(--line);
       }
       .spec .k {
+        padding-top: 5px;
         font-family: var(--mono);
-        font-size: 0.82rem;
-        color: var(--ember-hi);
-        padding-top: 0.3rem;
+        font-size: 12px;
+        color: var(--muted);
       }
       .spec .v {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.4rem;
+        gap: 6px;
       }
       .spec .v span {
-        padding: 0.28rem 0.75rem;
-        border-radius: 999px;
-        background: rgba(255, 236, 224, 0.05);
-        font-size: 0.92rem;
-        color: var(--ink);
+        padding: 5px 8px;
+        border-radius: 5px;
+        background: var(--surface);
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1;
+        color: var(--body);
       }
 
       /* ---------- closing ---------- */
 
       .closing {
-        position: relative;
-        isolation: isolate;
         text-align: center;
-        overflow: hidden;
-        border-top: 1px solid var(--hair);
-        background: var(--bg-2);
-      }
-      .closing::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: -45%;
-        width: min(1100px, 130%);
-        aspect-ratio: 1;
-        translate: -50% 0;
-        z-index: -1;
-        border-radius: 50%;
-        background: radial-gradient(closest-side, rgba(255, 107, 53, 0.28), transparent);
+        background: var(--surface);
+        border-top: 1px solid var(--line);
       }
       .closing h2 {
-        font-size: clamp(3rem, 9vw, 8rem);
+        max-width: 14ch;
         margin-inline: auto;
-        max-width: 11ch;
+        font-size: clamp(2.5rem, 7vw, 4.5rem);
+        line-height: 1;
+        letter-spacing: -0.045em;
+      }
+      .closing .lede {
+        margin: 20px auto 0;
       }
       .closing .stores {
         justify-content: center;
-        margin-top: 2.6rem;
-      }
-      .closing .lede {
-        margin: 1.6rem auto 0;
+        margin-top: 32px;
       }
 
       /* ---------- footer ---------- */
 
       .foot {
-        padding-block: 2.2rem 2.6rem;
-        border-top: 1px solid var(--hair);
-        color: var(--quiet);
-        font-size: 0.9rem;
+        padding-block: 28px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
       }
-      .foot-in {
+      .foot-top {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 1.2rem 2rem;
+        gap: 12px 24px;
       }
       .foot-brand {
         display: inline-flex;
         align-items: center;
-        gap: 0.8rem;
+        gap: 10px;
+        color: var(--text);
       }
       .foot-brand img {
-        width: 2.2rem;
-        height: 2.2rem;
-        border-radius: 0.6rem;
-      }
-      .foot a {
-        text-decoration: none;
-        transition: color 0.3s var(--ease);
-      }
-      .foot a:hover {
-        color: var(--ember-hi);
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
       }
       .foot nav {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.4rem 1.8rem;
+        gap: 8px 20px;
+      }
+      .foot a:hover {
+        color: var(--text);
+      }
+      .foot-meta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 24px;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+      }
+      .foot-meta a {
+        border-bottom: 1px solid var(--line);
       }
 
       /* ---------- responsive ---------- */
 
-      @media (max-width: 1060px) {
-        .nav-links {
-          display: none;
-        }
-        .nav-toggle {
-          display: block;
-        }
-        .nav-back span {
-          display: none;
-        }
-        .nav-back {
-          padding-inline: 0.7rem;
-        }
-      }
-
       @media (max-width: 900px) {
-        .hero {
-          min-height: 0;
-          padding-block: 7rem 3rem;
+        .top-nav .only-wide {
+          display: none;
         }
         .hero-grid,
         .tour,
@@ -1323,27 +1081,20 @@
           grid-template-columns: 1fr;
         }
         .stack {
-          height: clamp(480px, 118vw, 620px);
-          margin-top: 1rem;
-        }
-        .stack .p-main {
-          --pw: clamp(200px, 52vw, 260px);
-        }
-        .stack .p-left,
-        .stack .p-right {
-          --pw: clamp(150px, 38vw, 200px);
+          --mw: clamp(180px, 46vw, 250px);
+          --sw: calc(var(--mw) * 0.7);
+          margin-top: 8px;
         }
         .numbers {
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          row-gap: 2.4rem;
+          row-gap: 32px;
         }
         .tabs {
           display: flex;
           overflow-x: auto;
-          gap: 0.5rem;
+          gap: 8px;
           margin-inline: calc(-1 * var(--gutter));
-          padding-inline: var(--gutter);
-          padding-bottom: 0.4rem;
+          padding: 0 var(--gutter) 4px;
           scroll-snap-type: x proximity;
           scrollbar-width: none;
         }
@@ -1354,22 +1105,21 @@
           flex: none;
           scroll-snap-align: start;
           grid-template-columns: auto;
-          padding: 0.8rem 1.2rem;
-          border-color: var(--hair);
+          padding: 10px 16px;
+          border-color: var(--line);
         }
         .tab .d,
         .tab .n {
           display: none;
         }
         .tab .t {
-          font-size: 1.15rem;
+          font-size: 1.0625rem;
         }
         .tour-desc {
           display: block;
         }
-        .stage {
-          min-height: 0;
-          padding-block: 1rem;
+        .stage .phone {
+          --pw: clamp(200px, 56vw, 260px);
         }
         .bento > :nth-child(n) {
           grid-column: span 12;
@@ -1385,37 +1135,29 @@
         }
         .lib-row {
           grid-template-columns: 1fr;
-          gap: 1rem;
         }
         .wrist-visual {
           order: -1;
         }
         .spec li {
           grid-template-columns: 1fr;
-          gap: 0.5rem;
+          gap: 8px;
         }
       }
 
       @media (max-width: 520px) {
-        .btn {
+        .store {
           width: 100%;
-          justify-content: space-between;
         }
         .stores {
           width: 100%;
         }
-        .btn.mini {
-          width: auto;
-        }
         .wrist-visual .watch {
-          --ww: clamp(120px, 38vw, 170px);
+          --ww: clamp(110px, 36vw, 160px);
         }
         .wrist-visual .watch:nth-child(1),
         .wrist-visual .watch:nth-child(2) {
           translate: 0 0;
-        }
-        .ticker li {
-          font-size: 1.5rem;
         }
       }
 
@@ -1431,7 +1173,6 @@
           opacity: 1;
           transform: none;
           translate: none;
-          filter: none;
         }
         * {
           transition-duration: 0.01ms !important;
@@ -1466,37 +1207,22 @@
 </svg>
     <a class="skip" href="#main">Skip to content</a>
 
-    <header class="nav">
-      <div class="nav-pill">
-        <a class="nav-back" href="../" aria-label="Back to Manuel Lorenzo's portfolio">
-          <svg class="i" aria-hidden="true"><use href="#i-arrow-left" /></svg>
-          <span>Manuel Lorenzo</span>
+    <header class="top">
+      <div class="wrap top-inner">
+        <a class="wordmark" href="./" aria-label="WOD Tracker home">
+          <img src="img/icon-96.png" width="28" height="28" alt="" />
+          WOD Tracker
         </a>
-        <nav class="nav-links" aria-label="Sections">
-          <a href="#tour">The app</a>
-          <a href="#library">Library</a>
-          <a href="#wrist">Watch</a>
-          <a href="#plans">Plans</a>
-          <a href="#built">Built with</a>
+        <nav class="top-nav" aria-label="Sections">
+          <a class="only-wide" href="#tour">The app</a>
+          <a class="only-wide" href="#library">Library</a>
+          <a class="only-wide" href="#wrist">Watch</a>
+          <a class="only-wide" href="#plans">Plans</a>
+          <a class="only-wide" href="#built">Built with</a>
+          <a class="top-cta" href="#get">Get the app</a>
         </nav>
-        <a class="btn mini primary" href="#get">
-          Get the app
-          <span class="orb"><svg class="i go" aria-hidden="true"><use href="#i-arrow-up-right" /></svg></span>
-        </a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
-          <span></span><span></span>
-        </button>
       </div>
     </header>
-
-    <div class="menu" id="menu" aria-label="Menu">
-      <a href="#tour" style="--i: 1">The app</a>
-      <a href="#library" style="--i: 2">Library</a>
-      <a href="#wrist" style="--i: 3">Watch</a>
-      <a href="#plans" style="--i: 4">Plans</a>
-      <a href="#built" style="--i: 5">Built with</a>
-      <a href="../" style="--i: 6">Portfolio</a>
-    </div>
 
     <main id="main">
       <!-- ================= hero ================= -->
@@ -1505,42 +1231,42 @@
           <div>
             <p class="eyebrow rv">iOS · Android · Apple Watch · Wear OS</p>
             <h1 id="hero-title" class="display">
-              <span class="rv" style="--d: 0.05s">Log the lift.</span>
-              <span class="rv" style="--d: 0.15s">Run the clock.</span>
-              <span class="rv" style="--d: 0.25s"><em class="hot">Keep the record.</em></span>
+              <span class="rv" style="--i: 1">Log the lift.</span>
+              <span class="rv" style="--i: 2">Run the clock.</span>
+              <span class="rv" style="--i: 4"><em class="hot">Keep the record.</em></span>
             </h1>
-            <p class="lede rv" style="--d: 0.35s">
+            <p class="lede rv" style="--i: 6">
               A training log for CrossFit, weightlifting and hybrid athletes. 81 benchmark WODs, timers for
               EMOM, AMRAP, Tabata and For Time, and a personal record for every movement. It works offline,
               and your data stays on your phone unless you back it up.
             </p>
-            <div class="stores rv" style="--d: 0.45s">
+            <div class="stores rv" style="--i: 8">
               <a
-                class="btn primary"
+                class="store"
                 href="https://apps.apple.com/app/id6760609857"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span><small>Download on the</small>App Store</span>
-                <span class="orb"><svg class="i" aria-hidden="true"><use href="#i-apple" /></svg></span>
-              </a>
+<svg class="i" aria-hidden="true"><use href="#i-apple" /></svg>
+<span><span class="over">Download on the</span><span class="name">App Store</span></span>
+</a>
               <a
-                class="btn"
+                class="store"
                 href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span><small>Get it on</small>Google Play</span>
-                <span class="orb"><svg class="i" aria-hidden="true"><use href="#i-gplay" /></svg></span>
-              </a>
+<svg class="i" aria-hidden="true"><use href="#i-gplay" /></svg>
+<span><span class="over">Get it on</span><span class="name">Google Play</span></span>
+</a>
             </div>
-            <p class="hero-note rv" style="--d: 0.55s">
+            <p class="hero-note rv" style="--i: 9">
               Free to use. Premium and PRO add analytics, backup and the AI coach.
             </p>
           </div>
 
           <div class="stack">
-            <div class="phone p-left" style="--d: 0.35s">
+            <div class="phone p-left" style="--i: 6">
               <img
                 src="img/ios-benchmarks.webp"
                 width="660"
@@ -1549,7 +1275,7 @@
                 decoding="async"
               />
             </div>
-            <div class="phone p-right" style="--d: 0.5s">
+            <div class="phone p-right" style="--i: 8">
               <img
                 src="img/ios-stats.webp"
                 width="660"
@@ -1558,7 +1284,7 @@
                 decoding="async"
               />
             </div>
-            <div class="phone p-main" style="--d: 0.15s">
+            <div class="phone p-main" style="--i: 2">
               <img
                 src="img/ios-timer.webp"
                 width="660"
@@ -1592,9 +1318,9 @@
       <div class="wrap">
         <dl class="numbers">
           <div class="rv"><dd>81</dd><dt>benchmark WODs, built in and offline</dt></div>
-          <div class="rv" style="--d: 0.08s"><dd>4</dd><dt>timer formats: EMOM, AMRAP, For Time, Tabata</dt></div>
-          <div class="rv" style="--d: 0.16s"><dd>18</dd><dt>languages in the app, 22 in the stores</dt></div>
-          <div class="rv" style="--d: 0.24s"><dd>4</dd><dt>platforms: iPhone, Android, Apple Watch, Wear OS</dt></div>
+          <div class="rv" style="--i: 1"><dd>4</dd><dt>timer formats: EMOM, AMRAP, For Time, Tabata</dt></div>
+          <div class="rv" style="--i: 3"><dd>18</dd><dt>languages in the app, 22 in the stores</dt></div>
+          <div class="rv" style="--i: 4"><dd>4</dd><dt>platforms: iPhone, Android, Apple Watch, Wear OS</dt></div>
         </dl>
       </div>
 
@@ -1603,13 +1329,13 @@
         <div class="wrap">
           <header class="head">
             <p class="eyebrow rv">Inside the app</p>
-            <h2 id="tour-title" class="display h2 rv" style="--d: 0.08s">Five screens,<br />one job each.</h2>
-            <p class="lede rv" style="--d: 0.16s">
+            <h2 id="tour-title" class="display h2 rv" style="--i: 1">Five screens,<br />one job each.</h2>
+            <p class="lede rv" style="--i: 3">
               Nothing here is a mockup. These are the app's own screens, captured from the current version.
             </p>
           </header>
 
-          <div class="tour rv soft">
+          <div class="tour rv">
             <div class="tabs" role="tablist" aria-label="App screens" aria-orientation="vertical">
               <button class="tab" role="tab" id="tab-timer" aria-controls="shot-timer" aria-selected="true">
                 <span class="n">01</span><span class="t">Timer</span>
@@ -1628,7 +1354,7 @@
                 <span class="d"><p><span>Estimated one-rep max from any rep scheme, total volume, average weight and set count for any movement, with the whole history as a chart.</span></p></span>
               </button>
               <button class="tab" role="tab" id="tab-analytics" aria-controls="shot-analytics" aria-selected="false" tabindex="-1">
-                <span class="n">05</span><span class="t">Analytics<span class="tour-tag">Premium</span></span>
+                <span class="n">05</span><span class="t">Analytics<span class="tag yellow tour-tag">Premium</span></span>
                 <span class="d"><p><span>Training load, consistency and the lifts that have stopped moving. It tells you when to deload instead of leaving you to guess.</span></p></span>
               </button>
             </div>
@@ -1662,33 +1388,33 @@
         <div class="wrap">
           <header class="head">
             <p class="eyebrow rv">The library</p>
-            <h2 id="lib-title" class="display h2 rv" style="--d: 0.08s">81 workouts you already<br />know by name.</h2>
-            <p class="lede rv" style="--d: 0.16s">
+            <h2 id="lib-title" class="display h2 rv" style="--i: 1">81 workouts you already<br />know by name.</h2>
+            <p class="lede rv" style="--i: 3">
               The whole benchmark library ships inside the app. No download, no subscription, no signal needed
               at the box.
             </p>
           </header>
 
           <div>
-            <div class="lib-row rv soft">
+            <div class="lib-row rv">
               <div class="lib-key"><h3>The Girls</h3><span>21</span></div>
               <ul class="chips">
                 <li>Fran</li><li>Grace</li><li>Isabel</li><li>Helen</li><li>Diane</li><li>Elizabeth</li><li>Jackie</li><li>Karen</li><li>Annie</li><li>Nancy</li><li>Cindy</li><li>Mary</li><li>Chelsea</li><li>Angie</li><li>Barbara</li><li>Nicole</li><li>Lynne</li><li>Amanda</li><li>Eva</li><li>Kelly</li><li>Linda</li>
               </ul>
             </div>
-            <div class="lib-row rv soft">
+            <div class="lib-row rv">
               <div class="lib-key"><h3>The Heroes</h3><span>40</span></div>
               <ul class="chips">
                 <li>Murph</li><li>DT</li><li>Nate</li><li>Michael</li><li>Joshie</li><li>Luce</li><li>Badger</li><li>Nutts</li><li>Randy</li><li>JT</li><li>Daniel</li><li>Jason</li><li>Whitten</li><li>Loredo</li><li>McGhee</li><li>Griff</li><li>Josh</li><li>Ryan</li><li>Jerry</li><li>Roy</li><li>Severin</li><li>Tommy V</li><li>Bradley</li><li>Holleyman</li><li>Manion</li><li>Blake</li><li>Hamilton</li><li>Hotshots 19</li><li>Arnie</li><li>Glen</li><li>Paul</li><li>Taylor</li><li>White</li><li>Small</li><li>Santora</li><li>Rahoi</li><li>Rankel</li><li>Collin</li><li>Weston</li><li>Zeus</li>
               </ul>
             </div>
-            <div class="lib-row rv soft">
+            <div class="lib-row rv">
               <div class="lib-key"><h3>Named</h3><span>7</span></div>
               <ul class="chips">
                 <li>Fight Gone Bad</li><li>Filthy Fifty</li><li>The Chief</li><li>King Kong</li><li>Kalsu</li><li>Acid Bath</li><li>Tabata Something Else</li>
               </ul>
             </div>
-            <div class="lib-row rv soft">
+            <div class="lib-row rv">
               <div class="lib-key"><h3>The Open</h3><span>13</span></div>
               <ul class="chips">
                 <li>12.1</li><li>13.1</li><li>14.5</li><li>16.5</li><li>17.1</li><li>18.1</li><li>19.1</li><li>20.1</li><li>21.1</li><li>22.1</li><li>23.1</li><li>24.1</li><li>24.2</li>
@@ -1703,12 +1429,12 @@
         <div class="wrap wrist">
           <div>
             <p class="eyebrow rv">Apple Watch and Wear OS</p>
-            <h2 id="wrist-title" class="display h2 rv" style="--d: 0.08s; margin-top: 1.4rem">It follows you<br />to the rig.</h2>
-            <p class="lede rv" style="--d: 0.16s; margin-top: 1.4rem">
+            <h2 id="wrist-title" class="display h2 rv" style="--i: 1; margin-top: 1.4rem">It follows you<br />to the rig.</h2>
+            <p class="lede rv" style="--i: 3; margin-top: 1.4rem">
               Start a workout, log sets and run a rest timer from your wrist, with a buzz for every interval.
               Sets you log while the phone is out of range are queued and sent across when it comes back.
             </p>
-            <ul class="facts rv soft" style="--d: 0.24s">
+            <ul class="facts rv" style="--i: 4">
               <li>
                 <svg class="i" aria-hidden="true"><use href="#i-timer" /></svg>
                 <div><b>Timers on the wrist.</b><p>EMOM, AMRAP, For Time and Tabata, plus a rest timer for the gaps between sets.</p></div>
@@ -1723,7 +1449,7 @@
               </li>
             </ul>
           </div>
-          <div class="wrist-visual rv soft" style="--d: 0.1s">
+          <div class="wrist-visual rv" style="--i: 2">
             <div class="watch"><img src="img/watch-home.webp" width="422" height="514" loading="lazy" decoding="async" alt="Apple Watch home screen with a Start Workout button" /></div>
             <div class="watch"><img src="img/watch-timer.webp" width="422" height="514" loading="lazy" decoding="async" alt="Apple Watch rest timer with 1:00, 1:30, 2:00 and 3:00 presets" /></div>
           </div>
@@ -1735,46 +1461,46 @@
         <div class="wrap">
           <header class="head">
             <p class="eyebrow rv">Around the workout</p>
-            <h2 id="more-title" class="display h2 rv" style="--d: 0.08s">Private by default.<br />Smart when you ask.</h2>
+            <h2 id="more-title" class="display h2 rv" style="--i: 1">Private by default.<br />Smart when you ask.</h2>
           </header>
 
           <div class="bento">
-            <div class="bezel rv soft">
-              <div class="core tile">
+            <div class="bezel rv">
+              <div class="tile">
                 <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-wifi-slash" /></svg></span>
                 <h3>Works with no signal. Your data stays on your phone.</h3>
                 <p>Basements and garage gyms included. Nothing is uploaded unless you turn on backup yourself, and with Premium you can export your whole training history whenever you want.</p>
               </div>
             </div>
-            <div class="bezel top rv soft" style="--d: 0.08s">
-              <div class="core tile">
+            <div class="bezel top rv" style="--i: 1">
+              <div class="tile">
                 <div class="tile-head">
                   <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-sparkle" /></svg></span>
-                  <span class="tag">PRO</span>
+                  <span class="tag blue">PRO</span>
                 </div>
                 <h3>An AI coach that has read your log.</h3>
                 <p>Workout suggestions from your logged history, post-workout insight and recovery recommendations. It asks before it sends anything, and it's general guidance, not medical advice.</p>
               </div>
             </div>
-            <div class="bezel rv soft">
-              <div class="core tile">
+            <div class="bezel rv">
+              <div class="tile">
                 <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-heartbeat" /></svg></span>
                 <h3>Apple Health, kept complete.</h3>
                 <p>Workouts sync to Apple Health, so the rest of your health picture stays in one place.</p>
               </div>
             </div>
-            <div class="bezel rv soft" style="--d: 0.08s">
-              <div class="core tile">
+            <div class="bezel rv" style="--i: 1">
+              <div class="tile">
                 <div class="tile-head">
                   <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-cloud-arrow-up" /></svg></span>
-                  <span class="tag">Premium</span>
+                  <span class="tag yellow">Premium</span>
                 </div>
                 <h3>Back up, restore, change phones.</h3>
                 <p>Manual cloud backup and restore under your own Apple or Google sign-in, so a new phone is one restore away.</p>
               </div>
             </div>
-            <div class="bezel rv soft" style="--d: 0.16s">
-              <div class="core tile">
+            <div class="bezel rv" style="--i: 3">
+              <div class="tile">
                 <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-translate" /></svg></span>
                 <div class="langs" aria-hidden="true">
                   <span>English</span><span>Español</span><span>Deutsch</span><span>Français</span><span>日本語</span><span>한국어</span><span>Português</span><span>Italiano</span><span>العربية</span><span>Русский</span>
@@ -1791,16 +1517,16 @@
         <div class="wrap">
           <header class="head">
             <p class="eyebrow rv">Plans</p>
-            <h2 id="plans-title" class="display h2 rv" style="--d: 0.08s">Logging is free,<br />and stays free.</h2>
-            <p class="lede rv" style="--d: 0.16s">
+            <h2 id="plans-title" class="display h2 rv" style="--i: 1">Logging is free,<br />and stays free.</h2>
+            <p class="lede rv" style="--i: 3">
               Two paid tiers add the things that need a server or a subscription behind them. Prices are shown in
               the store for your country.
             </p>
           </header>
 
           <div class="plans">
-            <div class="bezel rv soft">
-              <article class="core plan">
+            <div class="bezel rv">
+              <article class="plan">
                 <h3>Free</h3>
                 <p class="lead">Everything you need to keep a training log.</p>
                 <ul>
@@ -1813,8 +1539,8 @@
                 </ul>
               </article>
             </div>
-            <div class="bezel rv soft" style="--d: 0.08s">
-              <article class="core plan">
+            <div class="bezel rv" style="--i: 1">
+              <article class="plan">
                 <h3>Premium</h3>
                 <p class="lead">For athletes who plan blocks rather than sessions.</p>
                 <ul>
@@ -1829,8 +1555,8 @@
                 </ul>
               </article>
             </div>
-            <div class="bezel top rv soft" style="--d: 0.16s">
-              <article class="core plan">
+            <div class="bezel top rv" style="--i: 3">
+              <article class="plan">
                 <h3>PRO</h3>
                 <p class="lead">Everything in Premium, plus coaching between sessions.</p>
                 <ul>
@@ -1855,13 +1581,13 @@
         <div class="wrap built">
           <div>
             <p class="eyebrow rv">Engineering</p>
-            <h2 id="built-title" class="display h2 rv" style="--d: 0.08s; margin-top: 1.4rem">Native on both,<br />shared underneath.</h2>
-            <p class="lede rv" style="--d: 0.16s; margin-top: 1.4rem">
+            <h2 id="built-title" class="display h2 rv" style="--i: 1; margin-top: 1.4rem">Native on both,<br />shared underneath.</h2>
+            <p class="lede rv" style="--i: 3; margin-top: 1.4rem">
               One Kotlin Multiplatform codebase holds the data and domain layers. Each platform keeps its own
               native UI, so nothing feels ported.
             </p>
           </div>
-          <ul class="spec rv soft" style="--d: 0.12s">
+          <ul class="spec rv" style="--i: 2">
             <li>
               <span class="k">Shared</span>
               <span class="v"><span>Kotlin Multiplatform</span><span>Room</span><span>Koin</span><span>Coroutines and Flow</span><span>Clean Architecture</span></span>
@@ -1890,33 +1616,38 @@
       <section id="get" class="band closing" aria-labelledby="get-title">
         <div class="wrap">
           <h2 id="get-title" class="display rv">Start with today's WOD.</h2>
-          <p class="lede rv" style="--d: 0.08s">Free on iPhone and Android. Apple Watch and Wear OS come with it.</p>
-          <div class="stores rv" style="--d: 0.16s">
-            <a class="btn primary" href="https://apps.apple.com/app/id6760609857" target="_blank" rel="noopener noreferrer">
-              <span><small>Download on the</small>App Store</span>
-              <span class="orb"><svg class="i" aria-hidden="true"><use href="#i-apple" /></svg></span>
-            </a>
-            <a class="btn" href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android" target="_blank" rel="noopener noreferrer">
-              <span><small>Get it on</small>Google Play</span>
-              <span class="orb"><svg class="i" aria-hidden="true"><use href="#i-gplay" /></svg></span>
-            </a>
+          <p class="lede rv" style="--i: 1">Free on iPhone and Android. Apple Watch and Wear OS come with it.</p>
+          <div class="stores rv" style="--i: 3">
+            <a class="store" href="https://apps.apple.com/app/id6760609857" target="_blank" rel="noopener noreferrer">
+<svg class="i" aria-hidden="true"><use href="#i-apple" /></svg>
+<span><span class="over">Download on the</span><span class="name">App Store</span></span>
+</a>
+            <a class="store" href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android" target="_blank" rel="noopener noreferrer">
+<svg class="i" aria-hidden="true"><use href="#i-gplay" /></svg>
+<span><span class="over">Get it on</span><span class="name">Google Play</span></span>
+</a>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="foot">
-      <div class="wrap foot-in">
-        <span class="foot-brand">
-          <img src="img/icon-96.png" width="96" height="96" alt="" loading="lazy" />
-          <span>WOD Tracker, built by <a href="../">Manuel Lorenzo Parejo</a>. &copy; 2026</span>
-        </span>
-        <nav aria-label="Footer">
-          <a href="https://noloman.github.io/crossfit-tracker/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a>
-          <a href="https://noloman.github.io/crossfit-tracker/support.html" target="_blank" rel="noopener noreferrer">Support</a>
-          <a href="mailto:manulorenzop+wodtracker@gmail.com?subject=WOD%20Tracker">Contact</a>
-          <a href="../">Portfolio</a>
-        </nav>
+      <div class="wrap">
+        <div class="foot-top">
+          <span class="foot-brand">
+            <img src="img/icon-96.png" width="96" height="96" alt="" loading="lazy" />
+            <span>WOD Tracker</span>
+          </span>
+          <nav aria-label="Footer">
+            <a href="https://noloman.github.io/crossfit-tracker/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a>
+            <a href="https://noloman.github.io/crossfit-tracker/support.html" target="_blank" rel="noopener noreferrer">Support</a>
+            <a href="mailto:manulorenzop+wodtracker@gmail.com?subject=WOD%20Tracker">Contact</a>
+          </nav>
+        </div>
+        <div class="foot-meta">
+          <p>Made by <a href="https://www.manulorenzo.me/">Manuel Lorenzo Parejo</a> &middot; &copy; 2026</p>
+          <a href="/">&larr; All work</a>
+        </div>
       </div>
     </footer>
 
@@ -1942,27 +1673,6 @@
           );
           targets.forEach(function (el) { io.observe(el); });
         }
-
-        /* menu */
-        var toggle = document.querySelector(".nav-toggle");
-        var menu = document.getElementById("menu");
-        function setMenu(open) {
-          menu.classList.toggle("open", open);
-          toggle.setAttribute("aria-expanded", String(open));
-          toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-          document.documentElement.classList.toggle("menu-open", open);
-          document.body.style.overflow = open ? "hidden" : "";
-          menu.inert = !open;
-        }
-        menu.inert = true;
-        toggle.addEventListener("click", function () { setMenu(!menu.classList.contains("open")); });
-        menu.querySelectorAll("a").forEach(function (a) {
-          a.addEventListener("click", function () { setMenu(false); });
-        });
-        document.addEventListener("keydown", function (e) {
-          if (e.key === "Escape" && menu.classList.contains("open")) { setMenu(false); toggle.focus(); }
-        });
-        window.matchMedia("(min-width: 1061px)").addEventListener("change", function () { setMenu(false); });
 
         /* tour tabs */
         var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
