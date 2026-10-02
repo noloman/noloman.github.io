@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0b0f14" />
+    <meta name="theme-color" content="#fbfbfa" />
     <meta
       name="description"
       content="Manuel Lorenzo Parejo - Backend-focused Software Engineer working with Spring Boot, Java, Kotlin, APIs, and product systems."
@@ -46,29 +46,31 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
     <link rel="manifest" href="site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --ink: #0b0f14;
-        --raise: #111820;
-        --hover: #16202a;
-        --line: #1e2a36;
-        --line-2: #2c3b4b;
-        --text: #e8eef4;
-        --muted: #93a3b4;
-        --dim: #7a8b9e;
-        --amber: #e8913a;
-        --amber-hi: #f6ab5d;
-        --amber-wash: rgba(232, 145, 58, 0.1);
-        --steel: #5e7c99;
-        --max: 1180px;
-        --gutter: clamp(20px, 5vw, 64px);
-        --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        --bg: #fbfbfa;
+        --surface: #f4f3ef;
+        --text: #111111;
+        --body: #2f3437;
+        --muted: #6b6a66;
+        --line: #eaeaea;
+        --blue-bg: #e1f3fe;
+        --blue-fg: #1f6c9f;
+        --yellow-bg: #fbf3db;
+        --yellow-fg: #956400;
+        --max: 960px;
+        --gutter: clamp(20px, 5vw, 40px);
+        --display: "Bricolage Grotesque", "Geist", -apple-system, sans-serif;
+        --sans: "Geist", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+          sans-serif;
+        --mono: "Geist Mono", "SF Mono", ui-monospace, Menlo, monospace;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       *,
@@ -81,20 +83,15 @@
 
       html {
         scroll-behavior: smooth;
-        scroll-padding-top: 88px;
+        scroll-padding-top: 72px;
         -webkit-text-size-adjust: 100%;
       }
 
       body {
         min-width: 320px;
-        background: var(--ink);
-        color: var(--text);
-        font-family:
-          "Archivo",
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          sans-serif;
+        background: var(--bg);
+        color: var(--body);
+        font-family: var(--sans);
         font-size: 16px;
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
@@ -102,25 +99,25 @@
 
       a {
         color: inherit;
+        text-decoration: none;
       }
 
       :focus-visible {
-        outline: 2px solid var(--amber);
+        outline: 2px solid var(--text);
         outline-offset: 3px;
-        border-radius: 2px;
+        border-radius: 3px;
       }
 
       .icon {
         width: 1em;
         height: 1em;
+        flex: none;
         fill: none;
         stroke: currentColor;
-        stroke-width: 1.75;
+        stroke-width: 1.5;
         stroke-linecap: round;
         stroke-linejoin: round;
-        flex: none;
       }
-
       .icon.solid {
         fill: currentColor;
         stroke: none;
@@ -128,785 +125,498 @@
 
       .wrap {
         width: 100%;
-        max-width: var(--max);
+        max-width: calc(var(--max) + var(--gutter) * 2);
         margin: 0 auto;
-        padding-inline: var(--gutter);
-      }
-
-      .eyebrow {
-        color: var(--amber);
-        font-family: var(--mono);
-        font-size: 0.72rem;
-        font-weight: 500;
-        letter-spacing: 0.17em;
-        text-transform: uppercase;
+        padding: 0 var(--gutter);
       }
 
       .skip {
         position: absolute;
-        left: -9999px;
+        left: 12px;
+        top: -48px;
+        padding: 8px 14px;
+        background: var(--text);
+        color: #fff;
+        border-radius: 6px;
+        font-size: 14px;
+        z-index: 20;
       }
-
       .skip:focus {
-        left: var(--gutter);
         top: 12px;
-        z-index: 60;
-        background: var(--amber);
-        border-radius: 4px;
-        color: var(--ink);
-        font-family: var(--mono);
-        font-size: 0.8rem;
-        padding: 10px 16px;
       }
 
-      /* ---------- header ---------- */
-
+      /* Header */
       .site-header {
         position: sticky;
         top: 0;
-        z-index: 50;
-        border-bottom: 1px solid var(--line);
-        background: rgba(11, 15, 20, 0.82);
-        backdrop-filter: blur(14px);
+        z-index: 10;
+        background: rgba(251, 251, 250, 0.82);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid transparent;
       }
-
       .nav {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1.5rem;
-        min-height: 68px;
+        height: 64px;
       }
-
       .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.65rem;
-        white-space: nowrap;
-        font-family: var(--mono);
-        font-size: 0.84rem;
         font-weight: 500;
-        letter-spacing: 0.02em;
-        text-decoration: none;
+        color: var(--text);
+        letter-spacing: -0.01em;
       }
-
-      .brand .dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--amber);
-        box-shadow: 0 0 0 3px var(--amber-wash);
-        flex: none;
-      }
-
-      .brand-short {
-        display: none;
-      }
-
       .nav-links {
         display: flex;
-        align-items: center;
-        gap: clamp(1rem, 3vw, 2.25rem);
+        gap: 4px;
       }
-
       .nav-link {
-        position: relative;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 14px;
         color: var(--muted);
-        font-family: var(--mono);
-        font-size: 0.78rem;
-        letter-spacing: 0.08em;
-        text-decoration: none;
-        text-transform: uppercase;
-        padding-block: 4px;
-        transition: color 180ms ease;
+        transition:
+          color 0.2s,
+          background-color 0.2s;
       }
-
-      .nav-link::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -2px;
-        height: 1px;
-        background: var(--amber);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 220ms ease;
-      }
-
       .nav-link:hover,
       .nav-link.active {
         color: var(--text);
       }
-
-      .nav-link.active::after {
-        transform: scaleX(1);
+      .nav-link:hover {
+        background: var(--surface);
       }
 
-      /* ---------- hero ---------- */
-
+      /* Hero */
       .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
-        gap: clamp(2.5rem, 6vw, 5.5rem);
-        align-items: center;
-        padding-block: clamp(3.5rem, 9vw, 7rem) clamp(3.5rem, 8vw, 6rem);
+        position: relative;
+        padding-top: clamp(72px, 14vw, 152px);
+        padding-bottom: clamp(72px, 12vw, 128px);
       }
-
-      .hero-title {
-        max-width: 15ch;
-        margin-top: 1.35rem;
-        font-size: clamp(2.5rem, 5.4vw, 4.25rem);
-        font-stretch: 108%;
-        font-weight: 700;
-        letter-spacing: -0.028em;
-        line-height: 1.03;
-        text-wrap: balance;
-      }
-
-      .hero-title em {
-        color: var(--amber);
-        font-style: normal;
-      }
-
-      .hero-copy {
-        max-width: 46ch;
-        margin-top: 1.6rem;
-        color: var(--muted);
-        font-size: 1.05rem;
-        line-height: 1.68;
-      }
-
-      .byline {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-top: 2rem;
-        color: var(--dim);
-        font-family: var(--mono);
-        font-size: 0.78rem;
-      }
-
-      .byline::before {
+      .hero::before {
         content: "";
-        width: 26px;
-        height: 1px;
-        background: var(--line-2);
-        flex: none;
+        position: absolute;
+        z-index: -1;
+        top: -64px;
+        bottom: 0;
+        left: 50%;
+        width: 100vw;
+        transform: translateX(-50%);
+        background-image: radial-gradient(
+          rgba(17, 17, 17, 0.13) 1px,
+          transparent 1.2px
+        );
+        background-size: 22px 22px;
+        -webkit-mask-image: radial-gradient(
+          ellipse 70% 80% at 25% 30%,
+          #000 0%,
+          transparent 75%
+        );
+        mask-image: radial-gradient(
+          ellipse 70% 80% at 25% 30%,
+          #000 0%,
+          transparent 75%
+        );
+        pointer-events: none;
       }
-
+      .role {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: 28px;
+      }
+      .hero-title {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: clamp(2.5rem, 7.6vw, 4.75rem);
+        line-height: 0.98;
+        letter-spacing: -0.045em;
+        color: var(--text);
+              }
+      .hero-title .dim {
+        display: block;
+        color: #b4b2ab;
+      }
+      .hero-copy {
+        max-width: 34em;
+        margin-top: 32px;
+        font-size: 1.125rem;
+        color: var(--muted);
+        text-wrap: pretty;
+      }
       .hero-actions {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.85rem;
-        margin-top: 2.25rem;
+        align-items: center;
+        gap: 12px 24px;
+        margin-top: 40px;
       }
 
       .btn {
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        gap: 0.6rem;
-        min-height: 50px;
-        padding-inline: 1.4rem;
-        border: 1px solid var(--line-2);
+        gap: 8px;
+        padding: 11px 18px;
         border-radius: 6px;
-        color: var(--text);
-        font-family: var(--mono);
-        font-size: 0.82rem;
-        letter-spacing: 0.04em;
-        text-decoration: none;
-        transition:
-          background 180ms ease,
-          border-color 180ms ease,
-          color 180ms ease;
-      }
-
-      .btn:hover {
-        background: var(--hover);
-        border-color: var(--steel);
-      }
-
-      .btn.primary {
-        background: var(--amber);
-        border-color: var(--amber);
-        color: #180d02;
-        font-weight: 600;
-      }
-
-      .btn.primary:hover {
-        background: var(--amber-hi);
-        border-color: var(--amber-hi);
-      }
-
-      /* ---------- topology diagram (signature) ---------- */
-
-      .topology {
-        justify-self: end;
-        width: 100%;
-        max-width: 420px;
-      }
-
-      .topology svg {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-
-      .topo-label {
-        fill: var(--dim);
-        font-family: var(--mono);
-        font-size: 8.5px;
-        letter-spacing: 0.15em;
-      }
-
-      .topo-node {
-        fill: var(--raise);
-        stroke: var(--line-2);
-      }
-
-      .topo-node-name {
-        fill: var(--text);
-        font-family: var(--mono);
-        font-size: 10px;
-        letter-spacing: 0.1em;
-      }
-
-      .topo-node-sub {
-        fill: var(--dim);
-        font-family: var(--mono);
-        font-size: 8.5px;
-      }
-
-      .topo-service {
-        fill: rgba(232, 145, 58, 0.06);
-        stroke: var(--amber);
-      }
-
-      .topo-service-name {
-        fill: var(--amber);
-        font-family: var(--mono);
-        font-size: 13px;
+        background: var(--text);
+        color: #fff;
+        font-size: 15px;
         font-weight: 500;
+        transition:
+          background-color 0.2s,
+          transform 0.15s;
+      }
+      .btn:hover {
+        background: #333;
+      }
+      .btn:active {
+        transform: scale(0.98);
+      }
+      .link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 15px;
+        color: var(--text);
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 1px;
+        transition: border-color 0.2s;
+      }
+      .link:hover {
+        border-color: var(--text);
       }
 
-      .topo-wire {
-        fill: none;
-        stroke: var(--line-2);
-        stroke-width: 1;
-      }
-
-      .topo-pulse path {
-        fill: none;
-        stroke: var(--amber);
-        stroke-width: 1.25;
-        stroke-linecap: round;
-        stroke-dasharray: 3 97;
-        animation: flow 3.6s linear infinite;
-      }
-
-      @keyframes flow {
-        from {
-          stroke-dashoffset: 100;
-        }
-        to {
-          stroke-dashoffset: 0;
-        }
-      }
-
-      .topo-caption {
-        margin-top: 1.1rem;
-        padding-left: 1rem;
-        border-left: 1px solid var(--line);
-        color: var(--dim);
-        font-family: var(--mono);
-        font-size: 0.73rem;
-        line-height: 1.7;
-      }
-
-      /* ---------- section frame ---------- */
-
-      .band {
-        border-top: 1px solid var(--line);
-      }
-
-      .band.alt {
-        background: #090d11;
-      }
-
+      /* Sections */
       .section {
-        padding-block: clamp(3.5rem, 7vw, 5.5rem);
+        padding-top: clamp(56px, 9vw, 96px);
       }
-
+      .section:last-of-type {
+        padding-bottom: clamp(56px, 9vw, 96px);
+      }
       .section-head {
         display: flex;
         flex-wrap: wrap;
         align-items: baseline;
         justify-content: space-between;
-        gap: 0.75rem 2rem;
-        padding-bottom: 1.75rem;
+        gap: 6px 32px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--text);
       }
-
       .section-title {
-        margin-top: 0.7rem;
-        font-size: clamp(1.85rem, 3.4vw, 2.7rem);
-        font-stretch: 106%;
+        font-family: var(--display);
         font-weight: 700;
-        letter-spacing: -0.025em;
+        font-size: clamp(1.9rem, 4vw, 2.5rem);
         line-height: 1.1;
+        letter-spacing: -0.035em;
+        color: var(--text);
       }
-
       .section-note {
-        max-width: 38ch;
+        font-size: 14px;
         color: var(--muted);
-        font-size: 0.95rem;
       }
-
-      .count {
-        color: var(--dim);
+      .group-label {
+        padding: 28px 0 10px;
         font-family: var(--mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.12em;
+        font-size: 12px;
+        color: var(--muted);
       }
 
-      /* ---------- services list ---------- */
-
-      .services {
-        border-top: 1px solid var(--line);
-      }
-
-      .service {
+      /* Rows */
+      .row {
+        position: relative;
         display: grid;
-        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr) 32px;
-        gap: clamp(1.25rem, 3vw, 3rem);
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr) 20px;
+        gap: 8px 32px;
         align-items: start;
+        padding: 24px 0;
         border-bottom: 1px solid var(--line);
-        padding: 1.6rem 0.9rem;
-        margin-inline: -0.9rem;
-        border-radius: 4px;
-        text-decoration: none;
-        transition: background 180ms ease;
       }
-
-      a.service:hover {
-        background: var(--raise);
+      .row.plain {
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
       }
-
-      .service-id {
-        display: flex;
-        align-items: baseline;
-        gap: 0.7rem;
+      a.row::before {
+        content: "";
+        position: absolute;
+        inset: 0 -16px;
+        background: var(--surface);
+        border-radius: 10px;
+        opacity: 0;
+        transition: opacity 0.2s;
+        z-index: -1;
       }
-
-      .status {
-        margin-top: 0.55rem;
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        flex: none;
+      a.row:hover::before {
+        opacity: 1;
       }
-
-      .status.live {
-        background: var(--amber);
-        box-shadow: 0 0 0 3px var(--amber-wash);
+      .row h3 {
+        font-size: 1.0625rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        color: var(--text);
+        line-height: 1.35;
       }
-
-      .status.closed {
-        border: 1px solid var(--steel);
+      .row p {
+        color: var(--muted);
+        font-size: 0.9375rem;
+        text-wrap: pretty;
       }
-
-      .service h3 {
-        font-size: 1.18rem;
-        font-weight: 600;
-        letter-spacing: -0.015em;
-        line-height: 1.25;
-      }
-
-      .service-tags {
+      .tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.45rem;
-        margin-top: 0.7rem;
+        gap: 6px;
+        margin-top: 8px;
       }
-
       .tag {
-        border: 1px solid var(--line-2);
-        border-radius: 3px;
-        color: var(--muted);
         font-family: var(--mono);
-        font-size: 0.68rem;
-        letter-spacing: 0.09em;
-        padding: 0.2rem 0.5rem;
-        text-transform: uppercase;
-        white-space: nowrap;
-      }
-
-      .tag.private {
-        border-color: rgba(94, 124, 153, 0.45);
-        color: var(--steel);
-      }
-
-      .service p {
+        font-size: 12px;
+        line-height: 1;
+        padding: 5px 8px;
+        border-radius: 5px;
+        background: var(--surface);
         color: var(--muted);
-        font-size: 0.96rem;
-        line-height: 1.68;
       }
-
-      .service-go {
-        justify-self: end;
-        margin-top: 0.2rem;
-        color: var(--dim);
-        font-size: 1.05rem;
+      .tag.private {
+        background: var(--yellow-bg);
+        color: var(--yellow-fg);
+      }
+      .tag.own {
+        background: var(--blue-bg);
+        color: var(--blue-fg);
+      }
+      .go {
+        margin-top: 4px;
+        color: var(--muted);
         transition:
-          color 180ms ease,
-          transform 180ms ease;
+          transform 0.25s var(--ease),
+          color 0.2s;
       }
-
-      a.service:hover .service-go {
-        color: var(--amber);
+      a.row:hover .go {
+        color: var(--text);
         transform: translate(2px, -2px);
       }
 
-      /* ---------- products ---------- */
-
-      .products {
+      /* Product bento */
+      .bento {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1px;
-        border: 1px solid var(--line);
-        background: var(--line);
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 8px;
       }
-
-      .product {
+      .card {
+        position: relative;
         display: flex;
         flex-direction: column;
-        gap: 0.85rem;
-        background: var(--ink);
-        padding: 1.6rem 1.5rem 1.75rem;
-        text-decoration: none;
-        transition: background 180ms ease;
+        gap: 24px;
+        min-height: 440px;
+        padding: 32px 32px 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
+        transition:
+          border-color 0.25s,
+          box-shadow 0.25s;
       }
-
-      .product:hover {
-        background: var(--raise);
+      .card:nth-child(1),
+      .card:nth-child(4) {
+        grid-column: span 4;
+        flex-direction: row;
+        gap: 32px;
       }
-
-      .product-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        color: var(--steel);
-        font-family: var(--mono);
-        font-size: 0.68rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
+      .card:nth-child(2),
+      .card:nth-child(3) {
+        grid-column: span 2;
       }
-
-      .product-top .service-go {
-        justify-self: auto;
-        margin-top: 0;
+      .card:hover {
+        border-color: #d9d8d3;
+        box-shadow: 0 8px 28px rgba(60, 50, 30, 0.07);
       }
-
-      .product:hover .service-go {
-        color: var(--amber);
+      .card-text {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+      .card .go {
+        position: absolute;
+        top: 36px;
+        right: 32px;
+      }
+      .card:hover .go {
+        color: var(--text);
         transform: translate(2px, -2px);
       }
-
-      .product h3 {
-        font-size: 1.22rem;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        transition: color 180ms ease;
+      .card h3 {
+        padding-right: 28px;
       }
-
-      .product:hover h3 {
-        color: var(--amber);
-      }
-
-      .product p {
-        color: var(--muted);
-        font-size: 0.93rem;
-        line-height: 1.66;
-      }
-
-      /* ---------- stack ---------- */
-
-      .stack-group + .stack-group {
-        margin-top: 3rem;
-      }
-
-      .group-head {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding-bottom: 0.4rem;
-      }
-
-      .group-head .rule {
-        flex: 1;
-        height: 1px;
-        background: var(--line);
-      }
-
-      .group-name {
-        color: var(--text);
-        font-family: var(--mono);
-        font-size: 0.74rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-      }
-
-      .stack-group.lead .group-name {
-        color: var(--amber);
-      }
-
-      .group-note {
-        color: var(--dim);
-        font-family: var(--mono);
-        font-size: 0.72rem;
-      }
-
-      .stack-list {
-        border-top: 1px solid var(--line);
-      }
-
-      .stack-row {
-        display: grid;
-        grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
-        gap: clamp(1rem, 3vw, 2.75rem);
-        align-items: baseline;
-        border-bottom: 1px solid var(--line);
-        padding-block: 1.7rem;
-      }
-
-      .stack-row h3 {
-        font-size: 1.15rem;
-        font-weight: 600;
-        letter-spacing: -0.015em;
-      }
-
-      .stack-group.lead .stack-row h3 {
-        font-size: 1.3rem;
-      }
-
-      .stack-row p {
-        color: var(--muted);
-        font-size: 0.95rem;
-        line-height: 1.7;
-      }
-
-      .owned {
-        border: 1px solid rgba(232, 145, 58, 0.45);
-        border-radius: 3px;
-        color: var(--amber);
-        font-family: var(--mono);
-        font-size: 0.62rem;
-        letter-spacing: 0.12em;
-        padding: 0.18rem 0.45rem;
-        text-transform: uppercase;
-        white-space: nowrap;
-      }
-
-      /* ---------- contact ---------- */
-
-      .contact {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-        gap: clamp(2rem, 6vw, 5rem);
-        align-items: start;
-        padding-block: clamp(4rem, 8vw, 6.5rem);
-      }
-
-      .contact-title {
-        margin-top: 0.8rem;
-        font-size: clamp(2.4rem, 5.5vw, 4rem);
-        font-stretch: 108%;
+      .card h3 {
+        font-family: var(--display);
+        font-size: 1.5rem;
         font-weight: 700;
+        line-height: 1.15;
         letter-spacing: -0.03em;
-        line-height: 1;
+        color: var(--text);
       }
-
-      .contact p {
-        max-width: 40ch;
-        margin-top: 1.25rem;
+      .card p {
+        margin-top: 10px;
+        font-size: 0.9375rem;
         color: var(--muted);
-        font-size: 1.02rem;
-        line-height: 1.68;
+      }
+      .card .tags {
+        margin-top: 14px;
+      }
+      .shot {
+        flex: none;
+        align-self: center;
+        width: min(100%, 230px);
+        margin-top: auto;
+        margin-bottom: -48px;
+        aspect-ratio: 9 / 18;
+        object-fit: cover;
+        object-position: top;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: var(--surface);
+        box-shadow: 0 12px 32px rgba(60, 50, 30, 0.1);
+        transition: transform 0.5s var(--ease);
+      }
+      .card:nth-child(1) .shot,
+      .card:nth-child(4) .shot {
+        align-self: flex-end;
+        margin-top: 24px;
+        width: 220px;
+      }
+      .card:hover .shot {
+        transform: translateY(-10px);
+      }
+      .more {
+        margin-top: 8px;
       }
 
-      .contact-links {
-        display: grid;
-        border-top: 1px solid var(--line);
+      /* Contact */
+      .contact-title {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: clamp(2.5rem, 7.6vw, 4.75rem);
+        line-height: 0.98;
+        letter-spacing: -0.045em;
+        color: var(--text);
       }
-
-      .contact-link {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
+      .contact-mail {
+        display: inline-block;
+        margin-top: 24px;
+        font-family: var(--display);
+        font-weight: 600;
+        font-size: clamp(1.4rem, 4.4vw, 2.25rem);
+        letter-spacing: -0.03em;
+        color: var(--text);
         border-bottom: 1px solid var(--line);
-        padding: 1.15rem 0.75rem;
-        margin-inline: -0.75rem;
-        border-radius: 4px;
-        font-family: var(--mono);
-        font-size: 0.88rem;
-        text-decoration: none;
-        transition:
-          background 180ms ease,
-          color 180ms ease;
-      }
-
-      .contact-link:hover {
-        background: var(--raise);
-        color: var(--amber);
-      }
-
-      .contact-link .icon {
-        color: var(--steel);
-        font-size: 1.15rem;
-        transition: color 180ms ease;
-      }
-
-      .contact-link:hover .icon {
-        color: var(--amber);
-      }
-
-      .contact-link .val {
-        min-width: 0;
         overflow-wrap: anywhere;
+        transition: border-color 0.2s;
       }
-
-      .contact-link .service-go {
-        margin-left: auto;
-        margin-top: 0;
-        justify-self: auto;
+      .contact-mail:hover {
+        border-color: var(--text);
       }
-
-      /* ---------- footer ---------- */
+      .socials {
+        display: flex;
+        gap: 24px;
+        margin-top: 32px;
+      }
 
       .site-footer {
         border-top: 1px solid var(--line);
       }
-
       .footer-inner {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
         flex-wrap: wrap;
-        gap: 1rem 2rem;
-        min-height: 72px;
-        padding-block: 1.25rem;
-        color: var(--dim);
-        font-family: var(--mono);
-        font-size: 0.74rem;
+        justify-content: space-between;
+        gap: 8px 24px;
+        padding-top: 28px;
+        padding-bottom: 28px;
+        font-size: 13px;
+        color: var(--muted);
       }
-
       .footer-links {
         display: flex;
-        gap: 1.5rem;
+        gap: 20px;
       }
-
-      .footer-links a {
-        text-decoration: none;
-        transition: color 180ms ease;
-      }
-
       .footer-links a:hover {
-        color: var(--amber);
+        color: var(--text);
       }
 
-      /* ---------- responsive ---------- */
-
-      @media (max-width: 960px) {
-        .hero {
-          grid-template-columns: 1fr;
-          gap: 3rem;
-        }
-
-        .topology {
-          justify-self: start;
-          max-width: 400px;
-        }
-
-        .contact {
-          grid-template-columns: 1fr;
-        }
+      /* Scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 0.6s var(--ease),
+          transform 0.6s var(--ease);
+        transition-delay: calc(var(--i, 0) * 60ms);
       }
-
-      @media (max-width: 720px) {
-        .brand-full {
-          display: none;
-        }
-
-        .brand-short {
-          display: inline;
-        }
-
-        .nav {
-          gap: 1rem;
-        }
-
-        .nav-links {
-          gap: 0.9rem;
-        }
-
-        .nav-link {
-          font-size: 0.72rem;
-        }
-
-        .hero-title {
-          max-width: none;
-        }
-
-        .btn {
-          flex: 1 1 auto;
-        }
-
-        .service {
-          grid-template-columns: minmax(0, 1fr) 32px;
-          gap: 0.9rem 1rem;
-        }
-
-        .service > div {
-          grid-row: 1;
-          grid-column: 1;
-        }
-
-        .service p {
-          grid-row: 2;
-          grid-column: 1 / -1;
-        }
-
-        .service .service-go {
-          grid-row: 1;
-          grid-column: 2;
-        }
-
-        .stack-row {
-          grid-template-columns: 1fr;
-          gap: 0.6rem;
-        }
-
-        .section-head {
-          flex-direction: column;
-        }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
       }
-
       @media (prefers-reduced-motion: reduce) {
         html {
           scroll-behavior: auto;
         }
-
-        .topo-pulse path {
-          animation: none;
-          stroke-dasharray: none;
-          opacity: 0.4;
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
         }
+        * {
+          transition-duration: 0s !important;
+        }
+      }
 
-        *,
-        *::before,
-        *::after {
-          transition-duration: 1ms !important;
+      @media (max-width: 720px) {
+        .row,
+        .row.plain {
+          grid-template-columns: minmax(0, 1fr) 20px;
+          gap: 10px 16px;
+        }
+        .row.plain {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .row > div:first-child {
+          grid-column: 1;
+        }
+        .row > p {
+          grid-column: 1 / -1;
+          grid-row: 2;
+        }
+        .row .go {
+          grid-column: 2;
+          grid-row: 1;
+        }
+        a.row::before {
+          inset: 0 -10px;
+        }
+      }
+      @media (max-width: 860px) {
+        .bento {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .card,
+        .card:nth-child(n) {
+          grid-column: auto;
+          flex-direction: column;
+          gap: 24px;
+          min-height: 0;
+        }
+        .card:nth-child(n) .shot {
+          align-self: center;
+          width: min(100%, 230px);
+          margin-top: auto;
+        }
+      }
+      @media (max-width: 420px) {
+        .brand {
+          font-size: 14px;
+          white-space: nowrap;
+        }
+        .nav-link {
+          padding: 6px;
+          font-size: 13px;
         }
       }
     </style>
@@ -919,10 +629,6 @@
       </symbol>
       <symbol id="i-arrow-r" viewBox="0 0 24 24">
         <path d="M4 12h15M13 6l6 6-6 6" />
-      </symbol>
-      <symbol id="i-mail" viewBox="0 0 24 24">
-        <rect x="3" y="5" width="18" height="14" rx="2" />
-        <path d="m3.5 7 8.5 6 8.5-6" />
       </symbol>
       <symbol id="i-github" viewBox="0 0 24 24">
         <path
@@ -941,11 +647,7 @@
     <div id="app">
       <header class="site-header">
         <nav class="wrap nav" aria-label="Primary">
-          <a class="brand" href="#top">
-            <span class="dot" aria-hidden="true"></span>
-            <span class="brand-full">{{ name }}</span>
-            <span class="brand-short">MLP</span>
-          </a>
+          <a class="brand" href="#top">{{ name }}</a>
           <div class="nav-links">
             <a
               v-for="item in navItems"
@@ -961,344 +663,157 @@
 
       <main id="top">
         <section class="wrap hero" aria-labelledby="hero-title">
-          <div>
-            <p class="eyebrow">Software engineer</p>
-            <h1 id="hero-title" class="hero-title">
-              I build the apps, and the services <em>behind</em> them.
-            </h1>
-            <p class="hero-copy">
-              Kotlin, Java and Swift across the stack — Spring Boot services and
-              the Android, iOS and web clients that talk to them. More and more
-              of my time goes to the server side.
-            </p>
-            <p class="byline">{{ name }}</p>
-            <div class="hero-actions">
-              <a class="btn primary" href="#work">
-                See the work
-                <svg class="icon" aria-hidden="true">
-                  <use href="#i-arrow-r" />
-                </svg>
-              </a>
-              <a class="btn" :href="'mailto:' + contacts.email">Get in touch</a>
-            </div>
+          <p class="role reveal">{{ jobTitle }}</p>
+          <h1 id="hero-title" class="hero-title reveal" style="--i: 1">
+            <span class="dim">I build the apps, and</span> the services behind them.
+          </h1>
+          <p class="hero-copy reveal" style="--i: 2">
+            Kotlin, Java and Swift across the stack: Spring Boot services and
+            the Android, iOS and web clients that talk to them. More and more of
+            my time goes to the server side.
+          </p>
+          <div class="hero-actions reveal" style="--i: 3">
+            <a class="btn" href="#work">
+              See the work
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-r" /></svg>
+            </a>
+            <a class="link" :href="'mailto:' + contacts.email">Get in touch</a>
           </div>
-
-          <figure class="topology">
-            <svg viewBox="0 0 400 356" role="img" aria-labelledby="topo-title">
-              <title id="topo-title">
-                Architecture of the private remote-jobs platform: listings from
-                several remote job boards are ingested and deduplicated by a
-                private Spring service, which serves the Anywhere Roles web app
-                and the Android and iOS mobile app.
-              </title>
-
-              <text class="topo-label" x="200" y="12" text-anchor="middle">
-                REMOTE JOB SOURCES
-              </text>
-              <g class="topo-node">
-                <rect x="52" y="24" width="52" height="14" rx="2" />
-                <rect x="113" y="24" width="52" height="14" rx="2" />
-                <rect x="174" y="24" width="52" height="14" rx="2" />
-                <rect x="235" y="24" width="52" height="14" rx="2" />
-                <rect x="296" y="24" width="52" height="14" rx="2" />
-              </g>
-
-              <g class="topo-wire">
-                <path
-                  d="M78 38 V64 M139 38 V64 M200 38 V64 M261 38 V64 M322 38 V64"
-                />
-                <path d="M78 64 H322" />
-                <path d="M200 64 V128" />
-                <path d="M200 232 V258" />
-                <path d="M92 258 H308" />
-                <path d="M92 258 V284 M200 258 V284 M308 258 V284" />
-              </g>
-              <g class="topo-pulse">
-                <path pathLength="100" d="M78 38 V64 H200 V128" />
-                <path
-                  pathLength="100"
-                  style="animation-delay: 1.2s"
-                  d="M200 232 V258 H92 V284"
-                />
-                <path
-                  pathLength="100"
-                  style="animation-delay: 1.2s"
-                  d="M200 232 V284"
-                />
-                <path
-                  pathLength="100"
-                  style="animation-delay: 1.2s"
-                  d="M200 232 V258 H308 V284"
-                />
-              </g>
-
-              <text class="topo-label" x="212" y="100">INGEST · DEDUPE</text>
-
-              <rect
-                class="topo-service"
-                x="28"
-                y="128"
-                width="344"
-                height="104"
-                rx="8"
-              />
-              <text class="topo-service-name" x="50" y="162">
-                remote-jobs platform
-              </text>
-              <text class="topo-node-sub" x="50" y="186">
-                Spring · app-facing APIs
-              </text>
-              <text class="topo-node-sub" x="50" y="204">
-                ingest · search · saved jobs
-              </text>
-              <text class="topo-label" x="350" y="152" text-anchor="end">
-                PRIVATE
-              </text>
-
-              <g>
-                <rect
-                  class="topo-node"
-                  x="40"
-                  y="284"
-                  width="104"
-                  height="52"
-                  rx="6"
-                />
-                <text
-                  class="topo-node-name"
-                  x="92"
-                  y="308"
-                  text-anchor="middle"
-                >
-                  WEB
-                </text>
-                <text class="topo-node-sub" x="92" y="324" text-anchor="middle">
-                  Anywhere Roles
-                </text>
-
-                <rect
-                  class="topo-node"
-                  x="148"
-                  y="284"
-                  width="104"
-                  height="52"
-                  rx="6"
-                />
-                <text
-                  class="topo-node-name"
-                  x="200"
-                  y="308"
-                  text-anchor="middle"
-                >
-                  iOS
-                </text>
-                <text
-                  class="topo-node-sub"
-                  x="200"
-                  y="324"
-                  text-anchor="middle"
-                >
-                  Mobile app
-                </text>
-
-                <rect
-                  class="topo-node"
-                  x="256"
-                  y="284"
-                  width="104"
-                  height="52"
-                  rx="6"
-                />
-                <text
-                  class="topo-node-name"
-                  x="308"
-                  y="308"
-                  text-anchor="middle"
-                >
-                  ANDROID
-                </text>
-                <text
-                  class="topo-node-sub"
-                  x="308"
-                  y="324"
-                  text-anchor="middle"
-                >
-                  Mobile app
-                </text>
-              </g>
-            </svg>
-            <figcaption class="topo-caption">
-              One of mine. The private backend behind the Anywhere Roles product
-              family.
-            </figcaption>
-          </figure>
         </section>
 
-        <div class="band alt">
-          <section id="work" class="wrap section" aria-labelledby="work-title">
-            <div class="section-head">
-              <div>
-                <p class="eyebrow">Services</p>
-                <h2 id="work-title" class="section-title">
-                  Backend I've built
-                </h2>
-              </div>
-              <p class="section-note">
-                Filled marker means the source is public. Hollow means it runs
-                in private.
-              </p>
-            </div>
+        <section id="work" class="wrap section" aria-labelledby="work-title">
+          <div class="section-head reveal">
+            <h2 id="work-title" class="section-title">Selected work</h2>
+            <p class="section-note">Backend first, then the apps built on it.</p>
+          </div>
 
-            <div class="services">
-              <component
-                v-for="work in backendWorks"
-                :key="work.name"
-                :is="work.link ? 'a' : 'div'"
-                class="service"
-                :href="work.link || null"
-                :target="work.link ? '_blank' : null"
-                :rel="work.link ? 'noopener noreferrer' : null"
-              >
-                <div>
-                  <div class="service-id">
-                    <span
-                      class="status"
-                      :class="work.link ? 'live' : 'closed'"
-                      aria-hidden="true"
-                    ></span>
-                    <h3>{{ work.name }}</h3>
-                  </div>
-                  <div class="service-tags">
-                    <span class="tag">{{ work.type }}</span>
-                    <span v-if="!work.link" class="tag private">Private</span>
-                  </div>
-                </div>
-                <p>{{ work.description }}</p>
-                <svg
-                  v-if="work.link"
-                  class="icon service-go"
-                  aria-hidden="true"
-                >
-                  <use href="#i-arrow-ur" />
-                </svg>
-                <span v-else></span>
-              </component>
-            </div>
-          </section>
-        </div>
-
-        <div class="band">
-          <section class="wrap section" aria-labelledby="products-title">
-            <div class="section-head">
-              <div>
-                <p class="eyebrow">Products</p>
-                <h2 id="products-title" class="section-title">
-                  Things people install
-                </h2>
-              </div>
-              <p class="section-note">
-                Apps and sites I shipped end to end — two of them served by the
-                private backend above.
-              </p>
-            </div>
-
-            <div class="products">
-              <a
-                v-for="work in works"
-                :key="work.name"
-                class="product"
-                :href="work.link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div class="product-top">
-                  <span>{{ getProjectType(work) }}</span>
-                  <span v-if="work.ownBackend" class="owned">
-                    Runs on my backend
-                  </span>
-                  <svg class="icon service-go" aria-hidden="true">
-                    <use href="#i-arrow-ur" />
-                  </svg>
-                </div>
-                <h3>{{ work.name }}</h3>
-                <p>{{ work.description }}</p>
-              </a>
-            </div>
-          </section>
-        </div>
-
-        <div class="band alt">
-          <section
-            id="stack"
-            class="wrap section"
-            aria-labelledby="stack-title"
-          >
-            <div class="section-head">
-              <div>
-                <p class="eyebrow">Stack</p>
-                <h2 id="stack-title" class="section-title">What I reach for</h2>
-              </div>
-              <p class="section-note">
-                Most of what I've shipped is mobile; more and more of my time
-                goes to the server. Having built both is why I design APIs a
-                client can actually live with.
-              </p>
-            </div>
-
-            <div
-              v-for="group in skillGroups"
-              :key="group.id"
-              class="stack-group"
-              :class="{ lead: group.id === 'backend' }"
-            >
-              <div class="group-head">
-                <span class="group-name">{{ group.label }}</span>
-                <span class="group-note">{{ group.note }}</span>
-                <span class="rule" aria-hidden="true"></span>
-              </div>
-              <div class="stack-list">
-                <article
-                  v-for="skill in group.skills"
-                  :key="skill.name"
-                  class="stack-row"
-                >
-                  <h3>{{ skill.name }}</h3>
-                  <p>{{ skill.description }}</p>
-                </article>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <div class="band">
-          <section
-            id="contact"
-            class="wrap contact"
-            aria-labelledby="contact-title"
+          <h3 class="group-label reveal">Backend</h3>
+          <component
+            v-for="(work, i) in backendWorks"
+            :key="work.name"
+            :is="work.link ? 'a' : 'div'"
+            class="row reveal"
+            :style="{ '--i': i }"
+            :href="work.link || null"
+            :target="work.link ? '_blank' : null"
+            :rel="work.link ? 'noopener noreferrer' : null"
           >
             <div>
-              <p class="eyebrow">Contact</p>
-              <h2 id="contact-title" class="contact-title">Let's talk.</h2>
-              <p>
-                Backend work, product engineering, or a question about something
-                above — my inbox is open.
-              </p>
+              <h3>{{ work.name }}</h3>
+              <div class="tags">
+                <span class="tag">{{ work.type }}</span>
+                <span v-if="!work.link" class="tag private">Private</span>
+              </div>
             </div>
+            <p>{{ work.description }}</p>
+            <svg v-if="work.link" class="icon go" aria-hidden="true">
+              <use href="#i-arrow-ur" />
+            </svg>
+            <span v-else></span>
+          </component>
 
-            <div class="contact-links">
-              <a class="contact-link" :href="'mailto:' + contacts.email">
-                <svg class="icon" aria-hidden="true">
-                  <use href="#i-mail" />
-                </svg>
-                <span class="val">{{ contacts.email }}</span>
-                <svg class="icon service-go" aria-hidden="true">
-                  <use href="#i-arrow-ur" />
-                </svg>
-              </a>
+          <h3 class="group-label reveal" style="margin-top: 24px">Products</h3>
+          <div class="bento">
+            <a
+              v-for="(work, i) in featuredWorks"
+              :key="work.name"
+              class="card reveal"
+              :style="{ '--i': i }"
+              :href="work.link"
+              :target="isExternal(work.link) ? '_blank' : null"
+              :rel="isExternal(work.link) ? 'noopener noreferrer' : null"
+            >
+              <div class="card-text">
+                <h3>{{ work.name }}</h3>
+                <p>{{ work.summary || work.description }}</p>
+                <div class="tags">
+                  <span class="tag">{{ getProjectType(work) }}</span>
+                  <span v-if="work.ownBackend" class="tag own"
+                    >Runs on my backend</span
+                  >
+                </div>
+              </div>
+              <svg class="icon go" aria-hidden="true">
+                <use href="#i-arrow-ur" />
+              </svg>
+              <img
+                class="shot"
+                :src="work.image"
+                :alt="work.imageAlt"
+                width="230"
+                height="460"
+                loading="lazy"
+              />
+            </a>
+          </div>
+
+          <div class="more">
+            <a
+              v-for="(work, i) in plainWorks"
+              :key="work.name"
+              class="row reveal"
+              :style="{ '--i': i }"
+              :href="work.link"
+              :target="isExternal(work.link) ? '_blank' : null"
+              :rel="isExternal(work.link) ? 'noopener noreferrer' : null"
+            >
+              <div>
+                <h3>{{ work.name }}</h3>
+                <div class="tags">
+                  <span class="tag">{{ getProjectType(work) }}</span>
+                  <span v-if="work.ownBackend" class="tag own"
+                    >Runs on my backend</span
+                  >
+                </div>
+              </div>
+              <p>{{ work.description }}</p>
+              <svg class="icon go" aria-hidden="true">
+                <use href="#i-arrow-ur" />
+              </svg>
+            </a>
+          </div>
+        </section>
+
+        <section id="stack" class="wrap section" aria-labelledby="stack-title">
+          <div class="section-head reveal">
+            <h2 id="stack-title" class="section-title">Stack</h2>
+            <p class="section-note">
+              Having built both sides is why I design APIs a client can live
+              with.
+            </p>
+          </div>
+
+          <template v-for="group in skillGroups">
+            <h3 :key="group.id + '-label'" class="group-label reveal">
+              {{ group.label }}
+            </h3>
+            <article
+              v-for="(skill, i) in group.skills"
+              :key="skill.name"
+              class="row plain reveal"
+              :style="{ '--i': i }"
+            >
+              <h3>{{ skill.name }}</h3>
+              <p>{{ skill.description }}</p>
+            </article>
+          </template>
+        </section>
+
+        <section
+          id="contact"
+          class="wrap section"
+          aria-labelledby="contact-title"
+        >
+          <div class="reveal">
+            <h2 id="contact-title" class="contact-title">Let's talk.</h2>
+            <a class="contact-mail" :href="'mailto:' + contacts.email">{{
+              contacts.email
+            }}</a>
+            <div class="socials">
               <a
                 v-for="link in contactLinks"
                 :key="link.name"
-                class="contact-link"
+                class="link"
                 :href="link.link"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1306,14 +821,11 @@
                 <svg class="icon solid" aria-hidden="true">
                   <use :href="getContactIcon(link.name)" />
                 </svg>
-                <span class="val">{{ link.name }}</span>
-                <svg class="icon service-go" aria-hidden="true">
-                  <use href="#i-arrow-ur" />
-                </svg>
+                {{ link.name }}
               </a>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </main>
 
       <footer class="site-footer">
@@ -1350,6 +862,16 @@
           contactLinks() {
             return (this.contacts && this.contacts.links) || [];
           },
+          featuredWorks() {
+            return (this.works || []).filter(function (w) {
+              return w.image;
+            });
+          },
+          plainWorks() {
+            return (this.works || []).filter(function (w) {
+              return !w.image;
+            });
+          },
           skillGroups() {
             var all = this.skills || [];
             var by = function (area) {
@@ -1358,24 +880,17 @@
               });
             };
             return [
-              {
-                id: "backend",
-                label: "Backend",
-                note: "where my focus is going",
-                skills: by("backend"),
-              },
-              {
-                id: "mobile",
-                label: "Mobile",
-                note: "years of shipped apps",
-                skills: by("mobile"),
-              },
+              { id: "backend", label: "Backend", skills: by("backend") },
+              { id: "mobile", label: "Mobile", skills: by("mobile") },
             ].filter(function (g) {
               return g.skills.length;
             });
           },
         },
         methods: {
+          isExternal(link) {
+            return /^https?:/.test(link);
+          },
           getProjectType(work) {
             if (work.type) return work.type;
             if (work.link.indexOf("play.google.com") !== -1) return "Android";
@@ -1392,18 +907,35 @@
         },
         mounted() {
           var self = this;
-          var ids = this.navItems.map(function (i) {
-            return i.id;
-          });
-          var targets = ids
-            .map(function (id) {
-              return document.getElementById(id);
+          var reveals = document.querySelectorAll(".reveal");
+          var targets = this.navItems
+            .map(function (i) {
+              return document.getElementById(i.id);
             })
             .filter(Boolean);
 
-          if (!("IntersectionObserver" in window) || !targets.length) return;
+          if (!("IntersectionObserver" in window)) {
+            reveals.forEach(function (el) {
+              el.classList.add("in");
+            });
+            return;
+          }
 
-          var observer = new IntersectionObserver(
+          var revealer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("in");
+                revealer.unobserve(entry.target);
+              });
+            },
+            { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+          );
+          reveals.forEach(function (el) {
+            revealer.observe(el);
+          });
+
+          var spy = new IntersectionObserver(
             function (entries) {
               entries.forEach(function (entry) {
                 if (entry.isIntersecting) self.activeSection = entry.target.id;
@@ -1411,9 +943,8 @@
             },
             { rootMargin: "-40% 0px -55% 0px", threshold: 0 },
           );
-
           targets.forEach(function (el) {
-            observer.observe(el);
+            spy.observe(el);
           });
         },
       });
