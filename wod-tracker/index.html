@@ -1,11 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0c0a09" />
     <meta
       name="description"
-      content="WOD Tracker is a training log for CrossFit, weightlifting and hybrid athletes. 81 benchmark WODs, EMOM/AMRAP/Tabata timers, personal records, Apple Watch and Wear OS. iOS and Android."
+      content="WOD Tracker is a training log for CrossFit, weightlifting and hybrid athletes. 81 benchmark WODs, EMOM, AMRAP, Tabata and For Time timers, automatic personal records, Apple Watch and Wear OS. iOS and Android."
     />
     <link rel="canonical" href="https://www.manulorenzo.me/wod-tracker/" />
     <title>WOD Tracker — training log for CrossFit and weightlifting</title>
@@ -18,6 +20,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.manulorenzo.me/wod-tracker/" />
     <meta property="og:image" content="https://www.manulorenzo.me/wod-tracker/img/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="WOD Tracker — training log for CrossFit and weightlifting" />
     <meta
@@ -37,48 +41,94 @@
       gtag("config", "G-77L8ZHRRKG");
     </script>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icon-180.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
-      rel="stylesheet"
-      integrity="sha384-HphS8cQyN+eYiJ5PMbzShG6qZdRtvHPVLPkYb8JwMkmNgaIxrFVDhQe3jIbq3EZ2"
-      crossorigin="anonymous"
-    />
+    <link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/figtree.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "WOD Tracker",
+        "alternateName": "CrossFit Tracker",
+        "description": "A training log for CrossFit, weightlifting and hybrid athletes: 81 benchmark WODs, EMOM, AMRAP, Tabata and For Time timers, automatic personal records, Apple Watch and Wear OS companions.",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "iOS, Android, watchOS, Wear OS",
+        "url": "https://www.manulorenzo.me/wod-tracker/",
+        "image": "https://www.manulorenzo.me/wod-tracker/img/og.png",
+        "installUrl": [
+          "https://apps.apple.com/app/id6760609857",
+          "https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
+        ],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Person", "name": "Manuel Lorenzo Parejo", "url": "https://www.manulorenzo.me/" }
+      }
+    </script>
+
+    <script>
+      document.documentElement.classList.replace("no-js", "js");
+    </script>
 
     <style>
-      :root {
-        /* Chassis inherited from the portfolio */
-        --bg: #ffffff;
-        --section: #f6f7f9;
-        --ink: #111111;
-        --muted: #4f5663;
-        --quiet: #7a8190;
-        --line: #d9dde5;
-        --line-strong: #aeb5c2;
-        --radius: 8px;
-        --max: 1280px;
-
-        /* WOD Tracker brand, taken from the app's own theme */
-        --flame: #ff6b35; /* primary; decoration, and text on dark only */
-        --ember: #cc4a1a; /* accent text on white — passes AA */
-        --gold: #ffd700; /* personal records, on dark only */
-        --board: #12100f;
-        --board-hi: #1c1917;
-        --board-line: #2e2724;
-        --chalk: #f5f3f1;
-        --chalk-quiet: #a39a94;
+      @font-face {
+        font-family: "Bricolage Grotesque";
+        src: url("fonts/bricolage.woff2") format("woff2");
+        font-weight: 200 800;
+        font-stretch: 75% 100%;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Figtree";
+        src: url("fonts/figtree.woff2") format("woff2");
+        font-weight: 400 700;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Geist Mono";
+        src: url("fonts/geistmono.woff2") format("woff2");
+        font-weight: 400 600;
+        font-display: swap;
       }
 
-      * {
+      :root {
+        color-scheme: dark;
+
+        /* warm near-black, tinted toward the ember accent */
+        --bg: #0c0a09;
+        --bg-2: #120f0d;
+        --surface: #181310;
+        --surface-2: #211b17;
+        --hair: rgba(255, 236, 224, 0.08);
+        --hair-2: rgba(255, 236, 224, 0.16);
+        --ink: #f7f2ed;
+        --muted: #b8ada4;
+        --quiet: #8f847b;
+
+        /* one accent, from the app's own theme */
+        --ember: #ff6b35;
+        --ember-hi: #ff8a5c;
+        --ember-ink: #1d0b04;
+        --ember-glow: rgba(255, 107, 53, 0.16);
+
+        --display: "Bricolage Grotesque", "Figtree", ui-sans-serif, system-ui, sans-serif;
+        --body: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+        --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+        --ease: cubic-bezier(0.32, 0.72, 0, 1);
+        --max: 1240px;
+        --gutter: clamp(1.1rem, 4vw, 2.5rem);
+
+        /* the only z layers on the page */
+        --z-grain: 2;
+        --z-nav: 40;
+        --z-menu: 50;
+      }
+
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
@@ -86,788 +136,1286 @@
 
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: 6rem;
+        -webkit-text-size-adjust: 100%;
       }
 
       body {
         min-width: 320px;
         background: var(--bg);
         color: var(--ink);
-        font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        line-height: 1.55;
+        font-family: var(--body);
+        font-size: 1.0625rem;
+        line-height: 1.6;
         -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        overflow-x: clip;
+      }
+
+      /* paper-grain over everything: fixed, inert, GPU-cheap */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: var(--z-grain);
+        pointer-events: none;
+        opacity: 0.06;
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
       }
 
       a {
         color: inherit;
       }
-
       img {
-        max-width: 100%;
         display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      ul {
+        list-style: none;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        background: none;
+        border: 0;
+        cursor: pointer;
+      }
+      svg.i {
+        width: 1.25em;
+        height: 1.25em;
+        flex: none;
+        fill: currentColor;
       }
 
       :focus-visible {
         outline: 2px solid var(--ember);
         outline-offset: 3px;
-        border-radius: 2px;
+        border-radius: 6px;
+      }
+
+      .skip {
+        position: fixed;
+        left: 1rem;
+        top: -4rem;
+        z-index: var(--z-menu);
+        background: var(--ember);
+        color: var(--ember-ink);
+        padding: 0.6rem 1rem;
+        border-radius: 999px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: top 0.3s var(--ease);
+      }
+      .skip:focus {
+        top: 1rem;
       }
 
       .wrap {
-        width: min(var(--max), calc(100% - 3.5rem));
+        width: min(var(--max), calc(100% - 2 * var(--gutter)));
         margin-inline: auto;
       }
 
       .band {
-        padding-block: clamp(4rem, 8vw, 7.5rem);
+        padding-block: clamp(5rem, 11vw, 10rem);
       }
 
-      /* ---------- shared type roles ---------- */
+      /* ---------- type roles ---------- */
 
       .display {
-        font-family: "Archivo", "Geist", sans-serif;
-        font-stretch: 112%;
-        font-weight: 800;
-        letter-spacing: -0.035em;
-        line-height: 1.02;
+        font-family: var(--display);
+        font-weight: 700;
+        font-variation-settings: "wdth" 92;
+        letter-spacing: -0.028em;
+        line-height: 0.96;
+        text-wrap: balance;
       }
 
-      .mono {
-        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-variant-numeric: tabular-nums;
+      .h2 {
+        font-size: clamp(2.35rem, 5.4vw, 4.6rem);
+      }
+
+      .lede {
+        color: var(--muted);
+        font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+        max-width: 52ch;
+        text-wrap: pretty;
       }
 
       .eyebrow {
-        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.74rem;
-        font-weight: 500;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.4rem 0.85rem 0.4rem 0.7rem;
+        border-radius: 999px;
+        border: 1px solid var(--hair-2);
+        background: rgba(255, 236, 224, 0.03);
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.01em;
+        color: var(--muted);
+      }
+      .eyebrow::before {
+        content: "";
+        width: 0.42rem;
+        height: 0.42rem;
+        border-radius: 50%;
+        background: var(--ember);
+        box-shadow: 0 0 0 4px var(--ember-glow);
+      }
+
+      .head {
+        display: grid;
+        gap: 1.4rem;
+        justify-items: start;
+        margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+      }
+
+      em.hot {
+        font-style: normal;
         color: var(--ember);
       }
 
-      .eyebrow.as-written {
-        text-transform: none;
-        letter-spacing: 0.1em;
-      }
+      /* ---------- motion: heavy fade-up on enter ---------- */
 
-      .section-title {
-        font-family: "Archivo", "Geist", sans-serif;
-        font-stretch: 110%;
-        font-weight: 800;
-        letter-spacing: -0.035em;
-        line-height: 1.05;
-        font-size: clamp(2rem, 4.2vw, 3.1rem);
-        margin-top: 1rem;
-      }
-
-      .section-copy {
-        color: var(--muted);
-        font-size: 1.06rem;
-        max-width: 58ch;
-        margin-top: 1.1rem;
-      }
-
-      /* ---------- header ---------- */
-
-      .page-header {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        background: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(18px);
-        border-bottom: 1px solid var(--line);
-      }
-
-      .nav-row {
-        min-height: 76px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 2rem;
-      }
-
-      .nav-brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        font-size: 0.95rem;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        text-decoration: none;
-        color: var(--muted);
-      }
-
-      .nav-brand i {
-        font-size: 1.1rem;
-      }
-
-      .nav-brand:hover {
-        color: var(--ink);
-      }
-
-      .nav-menu {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-      }
-
-      .nav-menu a {
-        font-size: 0.94rem;
-        font-weight: 500;
-        text-decoration: none;
-        color: var(--ink);
-      }
-
-      .nav-menu a:hover {
-        color: var(--ember);
-      }
-
-      .nav-cta {
-        display: none;
-      }
-
-      /* ---------- buttons ---------- */
-
-      .store-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.9rem;
-        margin-top: 2.2rem;
-      }
-
-      .store-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.8rem;
-        min-width: 208px;
-        padding: 0.8rem 1.4rem;
-        border: 1px solid var(--ink);
-        border-radius: var(--radius);
-        text-decoration: none;
-        background: var(--bg);
-        color: var(--ink);
+      .js .rv {
+        opacity: 0;
+        transform: translateY(2.4rem);
+        filter: blur(8px);
         transition:
-          background 0.15s ease,
-          color 0.15s ease;
+          opacity 0.9s var(--ease) var(--d, 0s),
+          transform 0.9s var(--ease) var(--d, 0s),
+          filter 0.9s var(--ease) var(--d, 0s);
+      }
+      .js .rv.soft {
+        filter: none;
+      }
+      .js .rv.in {
+        opacity: 1;
+        transform: none;
+        filter: none;
       }
 
-      .store-btn i {
-        font-size: 1.6rem;
-        line-height: 1;
+      /* ---------- navigation: a floating glass pill ---------- */
+
+      .nav {
+        position: fixed;
+        inset: 1rem 0 auto;
+        z-index: var(--z-nav);
+        display: flex;
+        justify-content: center;
+        padding-inline: var(--gutter);
+        pointer-events: none;
+      }
+      .menu-open .nav {
+        z-index: calc(var(--z-menu) + 1);
+      }
+      .nav-pill {
+        pointer-events: auto;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem;
+        border-radius: 999px;
+        background: rgba(18, 15, 13, 0.62);
+        border: 1px solid var(--hair-2);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.06),
+          0 18px 40px -18px rgba(0, 0, 0, 0.8);
+        -webkit-backdrop-filter: blur(22px) saturate(1.4);
+        backdrop-filter: blur(22px) saturate(1.4);
+      }
+      .nav-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.9rem 0.5rem 0.7rem;
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition:
+          color 0.4s var(--ease),
+          background 0.4s var(--ease);
+      }
+      .nav-back:hover {
+        color: var(--ink);
+        background: rgba(255, 236, 224, 0.06);
+      }
+      .nav-links {
+        display: flex;
+        gap: 0.15rem;
+        padding-inline: 0.4rem;
+        border-left: 1px solid var(--hair);
+        margin-left: 0.2rem;
+      }
+      .nav-links a {
+        padding: 0.5rem 0.85rem;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        transition:
+          color 0.4s var(--ease),
+          background 0.4s var(--ease);
+      }
+      .nav-links a:hover {
+        color: var(--ink);
+        background: rgba(255, 236, 224, 0.06);
+      }
+      .nav-toggle {
+        display: none;
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 50%;
+        position: relative;
+        background: rgba(255, 236, 224, 0.06);
+      }
+      .nav-toggle span {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 1.05rem;
+        height: 1.5px;
+        margin-left: -0.525rem;
+        background: var(--ink);
+        border-radius: 2px;
+        transition: transform 0.6s var(--ease);
+      }
+      .nav-toggle span:nth-child(1) {
+        transform: translateY(-4px);
+      }
+      .nav-toggle span:nth-child(2) {
+        transform: translateY(4px);
+      }
+      .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+        transform: rotate(45deg);
+      }
+      .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+        transform: rotate(-45deg);
       }
 
-      .store-btn .store-lead {
+      .menu {
+        position: fixed;
+        inset: 0;
+        z-index: calc(var(--z-menu) - 1);
+        display: grid;
+        align-content: center;
+        gap: 0.4rem;
+        padding: 6rem var(--gutter) 3rem;
+        background: rgba(12, 10, 9, 0.88);
+        -webkit-backdrop-filter: blur(28px);
+        backdrop-filter: blur(28px);
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.6s var(--ease),
+          visibility 0s linear 0.6s;
+      }
+      .menu.open {
+        opacity: 1;
+        visibility: visible;
+        transition-delay: 0s;
+      }
+      .menu a {
+        justify-self: start;
+        font-family: var(--display);
+        font-variation-settings: "wdth" 92;
+        font-weight: 700;
+        font-size: clamp(2.4rem, 11vw, 4rem);
+        letter-spacing: -0.03em;
+        line-height: 1.12;
+        text-decoration: none;
+        opacity: 0;
+        transform: translateY(2.5rem);
+        transition:
+          opacity 0.7s var(--ease),
+          transform 0.7s var(--ease),
+          color 0.3s var(--ease);
+      }
+      .menu.open a {
+        opacity: 1;
+        transform: none;
+        transition-delay: calc(0.07s * var(--i));
+      }
+      .menu a:hover {
+        color: var(--ember);
+      }
+
+      /* ---------- buttons: pill with a nested icon orb ---------- */
+
+      .btn {
+        --orb: 2.5rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.9rem;
+        padding: 0.4rem 0.4rem 0.4rem 1.45rem;
+        border-radius: 999px;
+        border: 1px solid var(--hair-2);
+        background: rgba(255, 236, 224, 0.05);
+        color: var(--ink);
+        font-weight: 600;
+        font-size: 0.98rem;
+        line-height: 1.15;
+        text-decoration: none;
+        transition:
+          transform 0.5s var(--ease),
+          background 0.5s var(--ease),
+          border-color 0.5s var(--ease);
+      }
+      .btn small {
         display: block;
         font-size: 0.7rem;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
+        font-weight: 500;
         color: var(--quiet);
+        letter-spacing: 0.01em;
       }
-
-      .store-btn .store-name {
-        display: block;
-        font-size: 1.02rem;
-        font-weight: 600;
-        letter-spacing: -0.02em;
+      .btn .orb {
+        width: var(--orb);
+        height: var(--orb);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 236, 224, 0.1);
+        transition:
+          transform 0.5s var(--ease),
+          background 0.5s var(--ease);
       }
-
-      .store-btn.filled {
-        background: var(--ink);
-        color: #fff;
-        border-color: var(--ink);
+      .btn .orb svg {
+        width: 1.3rem;
+        height: 1.3rem;
+        transition: transform 0.5s var(--ease);
       }
-
-      .store-btn.filled .store-lead {
-        color: #b7bcc6;
+      .btn:hover {
+        background: rgba(255, 236, 224, 0.09);
+        border-color: rgba(255, 236, 224, 0.28);
       }
-
-      .store-btn:hover {
+      .btn:hover .orb {
+        transform: scale(1.06);
+      }
+      .btn:hover .orb svg.go {
+        transform: translate(2px, -2px);
+      }
+      .btn:active {
+        transform: scale(0.97);
+      }
+      .btn.primary {
         background: var(--ember);
         border-color: var(--ember);
-        color: #fff;
+        color: var(--ember-ink);
+        box-shadow: 0 14px 34px -14px rgba(255, 107, 53, 0.75);
+      }
+      .btn.primary small {
+        color: rgba(29, 11, 4, 0.7);
+      }
+      .btn.primary .orb {
+        background: rgba(29, 11, 4, 0.14);
+      }
+      .btn.primary:hover {
+        background: var(--ember-hi);
+        border-color: var(--ember-hi);
+      }
+      .btn.mini {
+        --orb: 2.1rem;
+        padding: 0.3rem 0.3rem 0.3rem 1.05rem;
+        font-size: 0.9rem;
+        gap: 0.6rem;
+      }
+      .btn.mini .orb svg {
+        width: 1.05rem;
+        height: 1.05rem;
       }
 
-      .store-btn:hover .store-lead {
-        color: #ffd9c9;
+      .stores {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+
+      /* ---------- device frames ---------- */
+
+      .phone {
+        --pw: 280px;
+        position: relative;
+        width: var(--pw);
+        padding: calc(var(--pw) * 0.024);
+        border-radius: calc(var(--pw) * 0.17);
+        background: linear-gradient(155deg, #52483f 0%, #1a1512 38%, #0e0b0a 62%, #3a322b 100%);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+          inset 0 1px 1px rgba(255, 255, 255, 0.3),
+          0 0 0 1px rgba(0, 0, 0, 0.7),
+          0 50px 90px -28px rgba(0, 0, 0, 0.85),
+          0 22px 40px -22px rgba(255, 107, 53, 0.22);
+      }
+      .phone img {
+        width: 100%;
+        border-radius: calc(var(--pw) * 0.146);
+        background: #000;
+      }
+      /* dynamic island: the simulator doesn't render one */
+      .phone::after {
+        content: "";
+        position: absolute;
+        top: calc(var(--pw) * 0.056);
+        left: 50%;
+        width: calc(var(--pw) * 0.285);
+        height: calc(var(--pw) * 0.082);
+        margin-left: calc(var(--pw) * -0.1425);
+        border-radius: 999px;
+        background: #000;
+      }
+
+      .watch {
+        --ww: 200px;
+        position: relative;
+        width: var(--ww);
+        padding: calc(var(--ww) * 0.052);
+        border-radius: calc(var(--ww) * 0.3);
+        background: linear-gradient(155deg, #4b4239 0%, #19140f 40%, #0d0a09 65%, #352d26 100%);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+          inset 0 1px 1px rgba(255, 255, 255, 0.28),
+          0 0 0 1px rgba(0, 0, 0, 0.7),
+          0 40px 70px -26px rgba(0, 0, 0, 0.85);
+      }
+      .watch::before {
+        /* digital crown */
+        content: "";
+        position: absolute;
+        right: calc(var(--ww) * -0.035);
+        top: 24%;
+        width: calc(var(--ww) * 0.05);
+        height: calc(var(--ww) * 0.17);
+        border-radius: 3px;
+        background: linear-gradient(90deg, #2a231d, #4b4239);
+      }
+      .watch img {
+        width: 100%;
+        border-radius: calc(var(--ww) * 0.245);
+        background: #000;
       }
 
       /* ---------- hero ---------- */
 
+      .hero {
+        position: relative;
+        min-height: 100dvh;
+        display: grid;
+        align-items: center;
+        padding-block: 8rem 5rem;
+        isolation: isolate;
+        overflow: clip;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background:
+          radial-gradient(circle min(62vw, 760px) at 76% 34%, rgba(255, 107, 53, 0.2), transparent 100%),
+          radial-gradient(circle min(40vw, 480px) at 96% 82%, rgba(255, 150, 90, 0.09), transparent 100%);
+        pointer-events: none;
+      }
       .hero-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+        grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+        align-items: center;
+        gap: clamp(2rem, 4vw, 4rem);
+      }
+      .hero h1 {
+        font-size: clamp(3.1rem, 7.2vw, 6.6rem);
+        margin-top: 1.6rem;
+      }
+      .hero h1 span {
+        display: block;
+      }
+      .hero .lede {
+        margin-top: 1.8rem;
+      }
+      .hero .stores {
+        margin-top: 2.4rem;
+      }
+      .hero-note {
+        margin-top: 1.4rem;
+        font-size: 0.86rem;
+        color: var(--quiet);
+      }
+
+      .stack {
+        position: relative;
+        height: clamp(520px, 52vw, 700px);
+      }
+      .stack .phone {
+        position: absolute;
+      }
+      .stack .p-main {
+        --pw: clamp(220px, 21vw, 292px);
+        left: 50%;
+        top: 50%;
+        margin: calc(var(--pw) * -0.99) 0 0 calc(var(--pw) * -0.5);
+        z-index: 3;
+      }
+      .stack .p-left {
+        --pw: clamp(180px, 17vw, 240px);
+        left: 0;
+        top: 13%;
+        rotate: -5deg;
+        z-index: 1;
+      }
+      .stack .p-right {
+        --pw: clamp(180px, 17vw, 240px);
+        right: 0;
+        top: 20%;
+        rotate: 5deg;
+        z-index: 2;
+      }
+      .js .stack .phone {
+        opacity: 0;
+        translate: 0 4rem;
+        transition:
+          opacity 1.1s var(--ease) var(--d, 0s),
+          translate 1.3s var(--ease) var(--d, 0s);
+      }
+      .js .stack.in .phone {
+        opacity: 1;
+        translate: 0 0;
+      }
+
+      /* ---------- ticker ---------- */
+
+      .ticker {
+        position: relative;
+        overflow: hidden;
+        border-block: 1px solid var(--hair);
+        background: var(--bg-2);
+        padding-block: 1.5rem;
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      }
+      .ticker-track {
+        display: flex;
+        width: max-content;
+        animation: tick 70s linear infinite;
+      }
+      .ticker ul {
+        display: flex;
+        flex: none;
+      }
+      .ticker li {
+        display: flex;
+        align-items: center;
+        font-family: var(--display);
+        font-variation-settings: "wdth" 92;
+        font-weight: 600;
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        letter-spacing: -0.02em;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .ticker li::after {
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-inline: clamp(1.2rem, 2.4vw, 2.2rem);
+        border-radius: 50%;
+        background: var(--ember);
+        opacity: 0.8;
+      }
+      @keyframes tick {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ---------- numbers ---------- */
+
+      .numbers {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: clamp(1.2rem, 3vw, 3rem);
+        padding-block: clamp(3.5rem, 7vw, 6rem) 0;
+      }
+      .numbers div {
+        display: flex;
+        flex-direction: column;
+        padding-top: 1.1rem;
+        border-top: 1px solid var(--hair-2);
+      }
+      .numbers dt {
+        order: 2;
+        margin-top: 0.5rem;
+        color: var(--muted);
+        font-size: 0.98rem;
+        line-height: 1.4;
+      }
+      .numbers dd {
+        order: 1;
+        font-family: var(--display);
+        font-variation-settings: "wdth" 92;
+        font-weight: 700;
+        font-size: clamp(3rem, 7vw, 5.6rem);
+        letter-spacing: -0.035em;
+        line-height: 0.95;
+      }
+
+      /* ---------- double bezel ---------- */
+
+      .bezel {
+        padding: 0.4rem;
+        border-radius: 2rem;
+        background: rgba(255, 236, 224, 0.035);
+        border: 1px solid var(--hair);
+      }
+      .bezel > .core {
+        position: relative;
+        height: 100%;
+        border-radius: calc(2rem - 0.4rem);
+        background: linear-gradient(180deg, var(--surface-2), var(--surface));
+        box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.07);
+        overflow: hidden;
+      }
+      .bezel.top {
+        background: rgba(255, 107, 53, 0.06);
+        border-color: rgba(255, 107, 53, 0.35);
+        box-shadow: 0 30px 80px -40px rgba(255, 107, 53, 0.5);
+      }
+      .bezel.top > .core {
+        background: linear-gradient(180deg, #2a1c14, #1a120d);
+      }
+
+      /* ---------- tour ---------- */
+
+      .tour {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: clamp(2rem, 5vw, 5rem);
+        align-items: center;
+      }
+      .tabs {
+        display: grid;
+        gap: 0.35rem;
+      }
+      .tab {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 1.1rem;
+        align-items: baseline;
+        padding: 1.15rem 1.4rem 1.15rem 1.3rem;
+        border-radius: 1.5rem;
+        border: 1px solid transparent;
+        text-align: left;
+        transition:
+          background 0.6s var(--ease),
+          border-color 0.6s var(--ease);
+      }
+      .tab .n {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        color: var(--quiet);
+        transition: color 0.5s var(--ease);
+      }
+      .tab .t {
+        font-family: var(--display);
+        font-variation-settings: "wdth" 92;
+        font-weight: 650;
+        font-size: clamp(1.5rem, 2.6vw, 2.15rem);
+        letter-spacing: -0.025em;
+        line-height: 1.1;
+        color: var(--quiet);
+        transition: color 0.5s var(--ease);
+      }
+      .tab .d {
+        grid-column: 2;
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.7s var(--ease);
+      }
+      .tab .d > p {
+        overflow: hidden;
+        color: var(--muted);
+        font-size: 1rem;
+        opacity: 0;
+        transition: opacity 0.6s var(--ease);
+      }
+      .tab .d > p > span {
+        display: block;
+        padding-top: 0.7rem;
+      }
+      .tab:hover .t {
+        color: var(--ink);
+      }
+      .tab[aria-selected="true"] {
+        background: rgba(255, 236, 224, 0.045);
+        border-color: var(--hair-2);
+      }
+      .tab[aria-selected="true"] .n {
+        color: var(--ember);
+      }
+      .tab[aria-selected="true"] .t {
+        color: var(--ink);
+      }
+      .tab[aria-selected="true"] .d {
+        grid-template-rows: 1fr;
+      }
+      .tab[aria-selected="true"] .d > p {
+        opacity: 1;
+        transition-delay: 0.15s;
+      }
+
+      .stage {
+        position: relative;
+        display: grid;
+        place-items: center;
+        min-height: clamp(560px, 62vw, 780px);
+        isolation: isolate;
+      }
+      .stage::before {
+        content: "";
+        position: absolute;
+        width: min(560px, 90%);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: radial-gradient(closest-side, var(--ember-glow), transparent);
+        z-index: -1;
+      }
+      .stage .phone {
+        --pw: clamp(250px, 26vw, 330px);
+        grid-area: 1 / 1;
+        transition:
+          opacity 0.7s var(--ease),
+          transform 0.9s var(--ease);
+      }
+      .js .stage .phone {
+        opacity: 0;
+        transform: translateY(2rem) scale(0.96);
+        pointer-events: none;
+      }
+      .js .stage .phone.on {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+      .no-js .stage .phone:not(:first-child) {
+        display: none;
+      }
+      .tour-tag {
+        display: inline-block;
+        margin-left: 0.5rem;
+        padding: 0.12rem 0.55rem;
+        border-radius: 999px;
+        border: 1px solid var(--hair-2);
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.02em;
+        color: var(--ember-hi);
+        vertical-align: 0.18em;
+      }
+      /* the active tab's text, shown under the phone on narrow screens */
+      .tour-desc {
+        display: none;
+        text-align: center;
+        color: var(--muted);
+        font-size: 1rem;
+        min-height: 6.5em;
+        max-width: 40ch;
+        margin: 1rem auto 0;
+      }
+
+      /* ---------- library ---------- */
+
+      .alt {
+        background: var(--bg-2);
+        border-block: 1px solid var(--hair);
+      }
+      .lib-row {
+        display: grid;
+        grid-template-columns: minmax(180px, 0.28fr) minmax(0, 1fr);
+        gap: 1.5rem 3rem;
+        padding-block: clamp(1.6rem, 3vw, 2.4rem);
+        border-top: 1px solid var(--hair-2);
+        align-items: start;
+      }
+      .lib-row:last-child {
+        border-bottom: 1px solid var(--hair-2);
+      }
+      .lib-key {
+        display: flex;
+        align-items: baseline;
+        gap: 0.9rem;
+      }
+      .lib-key h3 {
+        font-family: var(--display);
+        font-variation-settings: "wdth" 92;
+        font-weight: 700;
+        font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+        letter-spacing: -0.028em;
+        line-height: 1;
+      }
+      .lib-key span {
+        font-family: var(--mono);
+        font-size: 0.85rem;
+        color: var(--ember-hi);
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .chips li {
+        padding: 0.42rem 0.95rem;
+        border-radius: 999px;
+        border: 1px solid var(--hair-2);
+        background: rgba(255, 236, 224, 0.03);
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--ink);
+        transition:
+          background 0.4s var(--ease),
+          border-color 0.4s var(--ease),
+          color 0.4s var(--ease),
+          transform 0.5s var(--ease);
+      }
+      .chips li:hover {
+        background: var(--ember);
+        border-color: var(--ember);
+        color: var(--ember-ink);
+        transform: translateY(-2px);
+      }
+
+      /* ---------- on the wrist ---------- */
+
+      .wrist {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
         gap: clamp(2.5rem, 6vw, 6rem);
         align-items: center;
       }
-
-      .hero-title {
-        font-size: clamp(2.6rem, 5vw, 4.25rem);
-        margin-top: 1.4rem;
-      }
-
-      .hero-title .beat {
-        display: block;
-      }
-
-      .hero-copy {
-        color: var(--muted);
-        font-size: 1.12rem;
-        max-width: 52ch;
-        margin-top: 1.6rem;
-      }
-
-      .hero-note {
-        margin-top: 1.4rem;
-        font-size: 0.82rem;
-        color: var(--quiet);
-      }
-
-      /* ---------- the board (hero signature) ---------- */
-
-      .board {
+      .wrist-visual {
         position: relative;
-        overflow: hidden;
-        background: linear-gradient(170deg, var(--board-hi), var(--board));
-        border: 1px solid var(--board-line);
-        border-radius: 14px;
-        padding: clamp(1.6rem, 3vw, 2.4rem);
-        color: var(--chalk);
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        justify-content: center;
+        align-items: center;
+        gap: clamp(0.8rem, 2vw, 1.6rem);
+        padding-block: 3rem;
+        isolation: isolate;
       }
-
-      .board::before {
+      .wrist-visual::before {
         content: "";
         position: absolute;
-        inset: 0 0 auto 0;
-        height: 3px;
-        background: linear-gradient(90deg, var(--flame), var(--ember));
-      }
-
-      .board-head {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-      }
-
-      .board-head .left {
-        color: var(--flame);
-      }
-
-      .board-head .right {
-        color: var(--chalk-quiet);
-      }
-
-      .board-name {
-        font-family: "Archivo", sans-serif;
-        font-stretch: 115%;
-        font-weight: 800;
-        letter-spacing: -0.04em;
-        line-height: 1;
-        font-size: clamp(2.6rem, 5.6vw, 3.6rem);
-        margin-top: 1.1rem;
-      }
-
-      .board-scheme {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 1.02rem;
-        letter-spacing: 0.06em;
-        color: var(--chalk-quiet);
-        margin-top: 0.45rem;
-      }
-
-      .board-moves {
-        list-style: none;
-        margin-top: 1.5rem;
-        border-top: 1px solid var(--board-line);
-      }
-
-      .board-moves li {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 0.7rem 0;
-        border-bottom: 1px solid var(--board-line);
-        font-size: 1rem;
-      }
-
-      .board-moves .move {
-        font-weight: 500;
-      }
-
-      .board-moves .load {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.9rem;
-        color: var(--chalk-quiet);
-      }
-
-      .board-clock {
-        margin-top: 1.8rem;
-      }
-
-      .board-clock .label {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.68rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--chalk-quiet);
-      }
-
-      .clock {
-        display: block;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-variant-numeric: tabular-nums;
-        font-weight: 700;
-        font-size: clamp(3.4rem, 8vw, 4.8rem);
-        letter-spacing: -0.03em;
-        line-height: 1.05;
-        margin-top: 0.15rem;
-      }
-
-      .board-result {
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        margin-top: 0.9rem;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.86rem;
-        letter-spacing: 0.04em;
-        color: var(--gold);
-        opacity: 0;
-        transform: translateY(6px);
-        transition:
-          opacity 0.45s ease,
-          transform 0.45s ease;
-      }
-
-      .board-result.is-in {
-        opacity: 1;
-        transform: none;
-      }
-
-      .board-result .dot {
-        width: 7px;
-        height: 7px;
+        inset: 8% 4%;
+        z-index: -1;
         border-radius: 50%;
-        background: var(--gold);
-        flex: none;
+        background: radial-gradient(closest-side, var(--ember-glow), transparent);
       }
-
-      .board-caption {
-        margin-top: 0.9rem;
-        font-size: 0.8rem;
-        color: var(--quiet);
+      .wrist-visual .watch {
+        --ww: clamp(130px, 14vw, 190px);
       }
-
-      /* ---------- dark bands ---------- */
-
-      .dark-band {
-        background: var(--board);
-        color: var(--chalk);
+      .wrist-visual .watch:nth-child(1) {
+        translate: 0 2.2rem;
       }
-
-      .dark-band .eyebrow {
-        color: var(--flame);
+      .wrist-visual .watch:nth-child(2) {
+        translate: 0 -2.2rem;
       }
-
-      .dark-band .section-copy {
-        color: #b9b1ac;
-      }
-
-      /* ---------- screens ---------- */
-
-      .screens-rail {
-        display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: minmax(200px, 1fr);
-        gap: 1.6rem;
-        margin-top: 3rem;
-        overflow-x: auto;
-        padding-bottom: 1rem;
-        scroll-snap-type: x mandatory;
-        overscroll-behavior-x: contain;
-      }
-
-      .screen {
-        scroll-snap-align: start;
-        min-width: 0;
-      }
-
-      .screen-shot {
-        background: #1a1020;
-        border: 1px solid var(--board-line);
-        border-radius: 12px;
-        overflow: hidden;
-        padding-top: 1.1rem;
-        padding-inline: 1.1rem;
-      }
-
-      .screen-shot img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px 10px 0 0;
-      }
-
-      .screen-label {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--flame);
-        margin-top: 1.3rem;
-      }
-
-      .screen h3 {
-        font-family: "Archivo", sans-serif;
-        font-stretch: 110%;
-        font-weight: 700;
-        letter-spacing: -0.025em;
-        font-size: 1.18rem;
-        margin-top: 0.3rem;
-      }
-
-      .screen p {
-        color: #b9b1ac;
-        font-size: 0.94rem;
-        margin-top: 0.45rem;
-      }
-
-      /* ---------- benchmarks ---------- */
-
-      .bench-groups {
-        margin-top: 3rem;
-        border-top: 1px solid var(--line);
-      }
-
-      .bench-group {
-        display: grid;
-        grid-template-columns: 190px minmax(0, 1fr);
-        gap: 2.5rem;
-        padding: 1.6rem 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .bench-key {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.76rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-      }
-
-      .bench-key .count {
-        display: block;
-        font-family: "Archivo", sans-serif;
-        font-stretch: 115%;
-        font-weight: 800;
-        font-size: 2rem;
-        letter-spacing: -0.04em;
-        color: var(--ember);
-        margin-top: 0.2rem;
-      }
-
-      .bench-names {
-        list-style: none;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        gap: 0.35rem 0.9rem;
-      }
-
-      .bench-names li {
-        font-family: "Archivo", sans-serif;
-        font-stretch: 106%;
-        font-weight: 600;
-        font-size: 1.02rem;
-        letter-spacing: -0.015em;
-        color: var(--ink);
-        white-space: nowrap;
-      }
-
-      .bench-names li::after {
-        content: "·";
-        margin-left: 0.9rem;
-        color: var(--flame);
-        font-weight: 700;
-      }
-
-      .bench-names li:last-child::after {
-        content: none;
-      }
-
-      /* ---------- wrist ---------- */
-
-      .wrist-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-        gap: clamp(2.5rem, 6vw, 5rem);
-        align-items: center;
-      }
-
-      .watches {
-        display: flex;
-        gap: 1.4rem;
-        justify-content: center;
-      }
-
-      .watch {
-        background: #000;
-        border: 1px solid #3a3330;
-        border-radius: 34px;
-        padding: 6px;
-        max-width: 190px;
-        flex: 1 1 0;
-      }
-
-      .watch img {
-        width: 100%;
-        border-radius: 28px;
-      }
-
       .facts {
-        list-style: none;
-        margin-top: 2.4rem;
-        border-top: 1px solid var(--board-line);
+        margin-top: 2.2rem;
       }
-
       .facts li {
         display: grid;
-        grid-template-columns: 132px minmax(0, 1fr);
-        gap: 1.6rem;
-        padding: 1rem 0;
-        border-bottom: 1px solid var(--board-line);
+        grid-template-columns: 1.6rem 1fr;
+        gap: 0.2rem 1rem;
+        padding-block: 1rem;
+        border-top: 1px solid var(--hair);
       }
-
-      .facts .key {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.72rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--flame);
-        padding-top: 0.18rem;
+      .facts li:last-child {
+        border-bottom: 1px solid var(--hair);
       }
-
-      .facts .val {
-        color: #d5cfcb;
+      .facts svg {
+        margin-top: 0.15rem;
+        color: var(--ember);
+        width: 1.4rem;
+        height: 1.4rem;
+      }
+      .facts b {
+        font-weight: 600;
+      }
+      .facts p {
+        color: var(--muted);
         font-size: 0.98rem;
+      }
+
+      /* ---------- bento ---------- */
+
+      .bento {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 1rem;
+      }
+      .bento > :nth-child(1) {
+        grid-column: span 7;
+      }
+      .bento > :nth-child(2) {
+        grid-column: span 5;
+      }
+      .bento > :nth-child(n + 3) {
+        grid-column: span 4;
+      }
+      .tile {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+        min-height: 17rem;
+        padding: clamp(1.5rem, 2.6vw, 2.2rem);
+      }
+      .tile .ico {
+        display: grid;
+        place-items: center;
+        width: 2.8rem;
+        height: 2.8rem;
+        border-radius: 1rem;
+        background: var(--ember-glow);
+        color: var(--ember-hi);
+        box-shadow: inset 0 0 0 1px rgba(255, 107, 53, 0.25);
+      }
+      .tile .ico svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+      .tile h3 {
+        font-family: var(--display);
+        font-variation-settings: "wdth" 92;
+        font-weight: 650;
+        font-size: clamp(1.45rem, 2.2vw, 1.9rem);
+        letter-spacing: -0.025em;
+        line-height: 1.1;
+        margin-top: auto;
+        text-wrap: balance;
+      }
+      .tile p {
+        color: var(--muted);
+        font-size: 0.99rem;
+        text-wrap: pretty;
+      }
+      .tile .tag {
+        align-self: flex-start;
+        padding: 0.12rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid var(--hair-2);
+        font-family: var(--mono);
+        font-size: 0.7rem;
+        color: var(--ember-hi);
+      }
+      .tile-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .langs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.2rem 0.85rem;
+        font-family: var(--display);
+        font-variation-settings: "wdth" 92;
+        font-weight: 600;
+        font-size: 1.25rem;
+        letter-spacing: -0.02em;
+        line-height: 1.3;
+        color: var(--quiet);
+      }
+      .langs span:nth-child(3n + 1) {
+        color: var(--ink);
       }
 
       /* ---------- plans ---------- */
 
-      .plans-grid {
+      .plans {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0;
-        margin-top: 3rem;
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
+        gap: 1rem;
+        align-items: stretch;
       }
-
       .plan {
-        padding: 2rem 1.8rem 2.2rem;
-        border-right: 1px solid var(--line);
+        padding: clamp(1.6rem, 2.8vw, 2.4rem);
       }
-
-      .plan:last-child {
-        border-right: 0;
-      }
-
-      .plan-name {
-        font-family: "Archivo", sans-serif;
-        font-stretch: 115%;
-        font-weight: 800;
-        font-size: 1.5rem;
+      .plan h3 {
+        font-family: var(--display);
+        font-variation-settings: "wdth" 92;
+        font-weight: 700;
+        font-size: clamp(2rem, 3.4vw, 2.8rem);
         letter-spacing: -0.03em;
+        line-height: 1;
       }
-
-      .plan-lead {
+      .plan .lead {
         color: var(--muted);
-        font-size: 0.92rem;
-        margin-top: 0.4rem;
-        min-height: 2.8em;
+        font-size: 0.98rem;
+        min-height: 3.2em;
+        margin: 0.5rem 0 1.2rem;
       }
-
-      .plan ul {
-        list-style: none;
-        margin-top: 1.2rem;
-        border-top: 1px solid var(--line);
-      }
-
       .plan li {
-        padding: 0.55rem 0;
-        border-bottom: 1px solid var(--line);
-        font-size: 0.94rem;
-        color: var(--ink);
+        display: grid;
+        grid-template-columns: 1.2rem 1fr;
+        gap: 0.7rem;
+        padding-block: 0.62rem;
+        border-top: 1px solid var(--hair);
+        font-size: 0.97rem;
       }
-
-      .plan li:last-child {
-        border-bottom: 0;
-      }
-
-      .plan.is-top {
-        background: var(--section);
-      }
-
-      .plan.is-top .plan-name {
-        color: var(--ember);
-      }
-
-      .plans-note {
-        margin-top: 1.4rem;
-        font-size: 0.85rem;
+      .plan li svg {
+        margin-top: 0.22rem;
+        width: 1.1rem;
+        height: 1.1rem;
         color: var(--quiet);
       }
-
-      /* ---------- build ---------- */
-
-      .spec {
-        list-style: none;
-        margin-top: 3rem;
-        border-top: 1px solid var(--line);
+      .plan li.inc {
+        font-weight: 600;
+      }
+      .plan li.inc svg {
+        color: var(--ember);
+      }
+      .bezel.top li svg {
+        color: var(--ember);
+      }
+      .plans-note {
+        margin-top: 1.6rem;
+        color: var(--quiet);
+        font-size: 0.9rem;
+        max-width: 70ch;
       }
 
+      /* ---------- built ---------- */
+
+      .built {
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: clamp(2rem, 6vw, 6rem);
+        align-items: start;
+      }
       .spec li {
         display: grid;
-        grid-template-columns: 190px minmax(0, 1fr);
-        gap: 2.5rem;
-        padding: 1.15rem 0;
-        border-bottom: 1px solid var(--line);
-        align-items: baseline;
+        grid-template-columns: 7.5rem 1fr;
+        gap: 1rem;
+        padding-block: 1.15rem;
+        border-top: 1px solid var(--hair-2);
       }
-
-      .spec .key {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.76rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--ember);
+      .spec li:last-child {
+        border-bottom: 1px solid var(--hair-2);
       }
-
-      .spec .val {
-        font-size: 1rem;
+      .spec .k {
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        color: var(--ember-hi);
+        padding-top: 0.3rem;
+      }
+      .spec .v {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+      .spec .v span {
+        padding: 0.28rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(255, 236, 224, 0.05);
+        font-size: 0.92rem;
         color: var(--ink);
-      }
-
-      .spec .val span {
-        color: var(--quiet);
-        padding-inline: 0.5rem;
       }
 
       /* ---------- closing ---------- */
 
       .closing {
-        background: var(--section);
-        border-top: 1px solid var(--line);
+        position: relative;
+        isolation: isolate;
+        text-align: center;
+        overflow: hidden;
+        border-top: 1px solid var(--hair);
+        background: var(--bg-2);
       }
-
-      .closing-title {
-        font-family: "Archivo", sans-serif;
-        font-stretch: 112%;
-        font-weight: 800;
-        letter-spacing: -0.04em;
-        line-height: 1.02;
-        font-size: clamp(2.2rem, 5vw, 3.6rem);
+      .closing::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -45%;
+        width: min(1100px, 130%);
+        aspect-ratio: 1;
+        translate: -50% 0;
+        z-index: -1;
+        border-radius: 50%;
+        background: radial-gradient(closest-side, rgba(255, 107, 53, 0.28), transparent);
+      }
+      .closing h2 {
+        font-size: clamp(3rem, 9vw, 8rem);
+        margin-inline: auto;
+        max-width: 11ch;
+      }
+      .closing .stores {
+        justify-content: center;
+        margin-top: 2.6rem;
+      }
+      .closing .lede {
+        margin: 1.6rem auto 0;
       }
 
       /* ---------- footer ---------- */
 
-      .page-footer {
-        border-top: 1px solid var(--line);
+      .foot {
+        padding-block: 2.2rem 2.6rem;
+        border-top: 1px solid var(--hair);
+        color: var(--quiet);
+        font-size: 0.9rem;
       }
-
-      .footer-inner {
-        min-height: 78px;
+      .foot-in {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-        color: var(--muted);
-        font-size: 0.88rem;
-        padding-block: 1.2rem;
+        gap: 1.2rem 2rem;
       }
-
-      .footer-links {
+      .foot-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .foot-brand img {
+        width: 2.2rem;
+        height: 2.2rem;
+        border-radius: 0.6rem;
+      }
+      .foot a {
+        text-decoration: none;
+        transition: color 0.3s var(--ease);
+      }
+      .foot a:hover {
+        color: var(--ember-hi);
+      }
+      .foot nav {
         display: flex;
         flex-wrap: wrap;
-        gap: 1.8rem;
-      }
-
-      .footer-links a {
-        text-decoration: none;
-      }
-
-      .footer-links a:hover {
-        color: var(--ember);
+        gap: 0.4rem 1.8rem;
       }
 
       /* ---------- responsive ---------- */
 
-      @media (max-width: 1000px) {
-        .hero-grid,
-        .wrist-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .plans-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .plan {
-          border-right: 0;
-          border-bottom: 1px solid var(--line);
-        }
-
-        .plan:last-child {
-          border-bottom: 0;
-        }
-
-        .plan-lead {
-          min-height: 0;
-        }
-      }
-
-      @media (max-width: 820px) {
-        .nav-menu a:not(.nav-cta) {
+      @media (max-width: 1060px) {
+        .nav-links {
           display: none;
         }
-
-        .nav-cta {
-          display: inline-block;
-          border: 1px solid var(--ink);
-          border-radius: var(--radius);
-          padding: 0.45rem 0.95rem;
-          font-weight: 600;
+        .nav-toggle {
+          display: block;
+        }
+        .nav-back span {
+          display: none;
+        }
+        .nav-back {
+          padding-inline: 0.7rem;
         }
       }
 
-      @media (max-width: 700px) {
-        .wrap {
-          width: min(var(--max), calc(100% - 2rem));
+      @media (max-width: 900px) {
+        .hero {
+          min-height: 0;
+          padding-block: 7rem 3rem;
         }
-
-        .bench-group,
-        .spec li,
-        .facts li {
+        .hero-grid,
+        .tour,
+        .wrist,
+        .built {
           grid-template-columns: 1fr;
-          gap: 0.7rem;
         }
-
-        .bench-key .count {
-          display: inline;
-          margin-left: 0.5rem;
-          font-size: 1.3rem;
+        .stack {
+          height: clamp(480px, 118vw, 620px);
+          margin-top: 1rem;
         }
-
-        .store-btn {
-          width: 100%;
-          min-width: 0;
+        .stack .p-main {
+          --pw: clamp(200px, 52vw, 260px);
         }
-
-        .watches {
+        .stack .p-left,
+        .stack .p-right {
+          --pw: clamp(150px, 38vw, 200px);
+        }
+        .numbers {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          row-gap: 2.4rem;
+        }
+        .tabs {
+          display: flex;
+          overflow-x: auto;
+          gap: 0.5rem;
+          margin-inline: calc(-1 * var(--gutter));
+          padding-inline: var(--gutter);
+          padding-bottom: 0.4rem;
+          scroll-snap-type: x proximity;
+          scrollbar-width: none;
+        }
+        .tabs::-webkit-scrollbar {
+          display: none;
+        }
+        .tab {
+          flex: none;
+          scroll-snap-align: start;
+          grid-template-columns: auto;
+          padding: 0.8rem 1.2rem;
+          border-color: var(--hair);
+        }
+        .tab .d,
+        .tab .n {
+          display: none;
+        }
+        .tab .t {
+          font-size: 1.15rem;
+        }
+        .tour-desc {
+          display: block;
+        }
+        .stage {
+          min-height: 0;
+          padding-block: 1rem;
+        }
+        .bento > :nth-child(n) {
+          grid-column: span 12;
+        }
+        .tile {
+          min-height: 0;
+        }
+        .plans {
+          grid-template-columns: 1fr;
+        }
+        .plan .lead {
+          min-height: 0;
+        }
+        .lib-row {
+          grid-template-columns: 1fr;
           gap: 1rem;
+        }
+        .wrist-visual {
+          order: -1;
+        }
+        .spec li {
+          grid-template-columns: 1fr;
+          gap: 0.5rem;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .btn {
+          width: 100%;
+          justify-content: space-between;
+        }
+        .stores {
+          width: 100%;
+        }
+        .btn.mini {
+          width: auto;
+        }
+        .wrist-visual .watch {
+          --ww: clamp(120px, 38vw, 170px);
+        }
+        .wrist-visual .watch:nth-child(1),
+        .wrist-visual .watch:nth-child(2) {
+          translate: 0 0;
+        }
+        .ticker li {
+          font-size: 1.5rem;
         }
       }
 
@@ -875,596 +1423,572 @@
         html {
           scroll-behavior: auto;
         }
-
-        .board-result {
-          transition: none;
+        .ticker-track {
+          animation: none;
+        }
+        .js .rv,
+        .js .stack .phone {
+          opacity: 1;
+          transform: none;
+          translate: none;
+          filter: none;
+        }
+        * {
+          transition-duration: 0.01ms !important;
         }
       }
     </style>
   </head>
-
   <body>
-    <header class="page-header">
-      <nav class="wrap nav-row" aria-label="Main">
-        <a class="nav-brand" href="../">
-          <i class="mdi mdi-arrow-left"></i>
-          Manuel Lorenzo Parejo
+    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<symbol id="i-apple" viewBox="0 0 24 24"><path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z"/></symbol>
+<symbol id="i-arrow-left" viewBox="0 0 256 256"><path d="M222,128a6,6,0,0,1-6,6H54.49l61.75,61.76a6,6,0,1,1-8.48,8.48l-72-72a6,6,0,0,1,0-8.48l72-72a6,6,0,0,1,8.48,8.48L54.49,122H216A6,6,0,0,1,222,128Z"/></symbol>
+<symbol id="i-arrow-up-right" viewBox="0 0 256 256"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"/></symbol>
+<symbol id="i-barbell" viewBox="0 0 256 256"><path d="M248,122H238V88a14,14,0,0,0-14-14H206V64a14,14,0,0,0-14-14H168a14,14,0,0,0-14,14v58H102V64A14,14,0,0,0,88,50H64A14,14,0,0,0,50,64V74H32A14,14,0,0,0,18,88v34H8a6,6,0,0,0,0,12H18v34a14,14,0,0,0,14,14H50v10a14,14,0,0,0,14,14H88a14,14,0,0,0,14-14V134h52v58a14,14,0,0,0,14,14h24a14,14,0,0,0,14-14V182h18a14,14,0,0,0,14-14V134h10a6,6,0,0,0,0-12ZM32,170a2,2,0,0,1-2-2V88a2,2,0,0,1,2-2H50v84Zm58,22a2,2,0,0,1-2,2H64a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H88a2,2,0,0,1,2,2Zm104,0a2,2,0,0,1-2,2H168a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2h24a2,2,0,0,1,2,2Zm32-24a2,2,0,0,1-2,2H206V86h18a2,2,0,0,1,2,2Z"/></symbol>
+<symbol id="i-chart-line-up" viewBox="0 0 256 256"><path d="M230,208a6,6,0,0,1-6,6H32a6,6,0,0,1-6-6V48a6,6,0,0,1,12,0V161.52l53.76-53.76a6,6,0,0,1,8.48,0L128,135.51,185.52,78H160a6,6,0,0,1,0-12h40a6,6,0,0,1,6,6v40a6,6,0,0,1-12,0V86.48l-61.76,61.76a6,6,0,0,1-8.48,0L96,120.49l-58,58V202H224A6,6,0,0,1,230,208Z"/></symbol>
+<symbol id="i-check" viewBox="0 0 256 256"><path d="M228.24,76.24l-128,128a6,6,0,0,1-8.48,0l-56-56a6,6,0,0,1,8.48-8.48L96,191.51,219.76,67.76a6,6,0,0,1,8.48,8.48Z"/></symbol>
+<symbol id="i-cloud-arrow-up" viewBox="0 0 256 256"><path d="M188.24,164.24a6,6,0,0,1-8.48,0L158,142.49V208a6,6,0,0,1-12,0V142.49l-21.76,21.75a6,6,0,0,1-8.48-8.48l32-32a6,6,0,0,1,8.48,0l32,32A6,6,0,0,1,188.24,164.24ZM160,42A86.1,86.1,0,0,0,82.43,90.88,62,62,0,1,0,72,214h40a6,6,0,0,0,0-12H72a50,50,0,0,1,0-100,50.68,50.68,0,0,1,5.91.36A85.54,85.54,0,0,0,74,128a6,6,0,0,0,12,0,74,74,0,1,1,103.6,67.85,6,6,0,0,0,4.8,11A86,86,0,0,0,160,42Z"/></symbol>
+<symbol id="i-device-mobile" viewBox="0 0 256 256"><path d="M176,18H80A22,22,0,0,0,58,40V216a22,22,0,0,0,22,22h96a22,22,0,0,0,22-22V40A22,22,0,0,0,176,18ZM70,62H186V194H70ZM80,30h96a10,10,0,0,1,10,10V50H70V40A10,10,0,0,1,80,30Zm96,196H80a10,10,0,0,1-10-10V206H186v10A10,10,0,0,1,176,226Z"/></symbol>
+<symbol id="i-export" viewBox="0 0 256 256"><path d="M214,112v96a14,14,0,0,1-14,14H56a14,14,0,0,1-14-14V112A14,14,0,0,1,56,98H80a6,6,0,0,1,0,12H56a2,2,0,0,0-2,2v96a2,2,0,0,0,2,2H200a2,2,0,0,0,2-2V112a2,2,0,0,0-2-2H176a6,6,0,0,1,0-12h24A14,14,0,0,1,214,112ZM92.24,68.24,122,38.49V136a6,6,0,0,0,12,0V38.49l29.76,29.75a6,6,0,1,0,8.48-8.48l-40-40a6,6,0,0,0-8.48,0l-40,40a6,6,0,1,0,8.48,8.48Z"/></symbol>
+<symbol id="i-gplay" viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></symbol>
+<symbol id="i-heartbeat" viewBox="0 0 256 256"><path d="M72,142H32a6,6,0,0,1,0-12H68.79L83,108.67a6,6,0,0,1,10,0l27,40.51,11-16.51a6,6,0,0,1,5-2.67h24a6,6,0,0,1,0,12H139.21L125,163.33a6,6,0,0,1-10,0L88,122.82,77,139.33A6,6,0,0,1,72,142ZM178,42c-21,0-39.26,9.47-50,25.34C117.26,51.47,99,42,78,42a60.07,60.07,0,0,0-60,60q0,1.09,0,2.19a6,6,0,0,0,12-.38c0-.6,0-1.21,0-1.81A48.05,48.05,0,0,1,78,54c20.28,0,37.31,10.83,44.45,28.27a6,6,0,0,0,11.1,0C140.69,64.83,157.72,54,178,54a48.05,48.05,0,0,1,48,48c0,55.73-81.61,105.65-98,115.11-9.84-5.66-43.09-25.82-68.16-53.16a6,6,0,1,0-8.84,8.1c30.94,33.77,72.41,56.29,74.16,57.23a6,6,0,0,0,5.68,0,334.68,334.68,0,0,0,53.06-37C219.8,161.59,238,131.2,238,102A60.07,60.07,0,0,0,178,42Z"/></symbol>
+<symbol id="i-lightning" viewBox="0 0 256 256"><path d="M213.84,118.63a6,6,0,0,0-3.73-4.25L150.88,92.17l15-75a6,6,0,0,0-10.27-5.27l-112,120a6,6,0,0,0,2.28,9.71l59.23,22.21-15,75a6,6,0,0,0,3.14,6.52A6.07,6.07,0,0,0,96,246a6,6,0,0,0,4.39-1.91l112-120A6,6,0,0,0,213.84,118.63ZM106,220.46l11.85-59.28a6,6,0,0,0-3.77-6.8l-55.6-20.85,91.46-98L138.12,94.82a6,6,0,0,0,3.77,6.8l55.6,20.85Z"/></symbol>
+<symbol id="i-list" viewBox="0 0 256 256"><path d="M222,128a6,6,0,0,1-6,6H40a6,6,0,0,1,0-12H216A6,6,0,0,1,222,128ZM40,70H216a6,6,0,0,0,0-12H40a6,6,0,0,0,0,12ZM216,186H40a6,6,0,0,0,0,12H216a6,6,0,0,0,0-12Z"/></symbol>
+<symbol id="i-lock-simple" viewBox="0 0 256 256"><path d="M208,82H174V56a46,46,0,0,0-92,0V82H48A14,14,0,0,0,34,96V208a14,14,0,0,0,14,14H208a14,14,0,0,0,14-14V96A14,14,0,0,0,208,82ZM94,56a34,34,0,0,1,68,0V82H94ZM210,208a2,2,0,0,1-2,2H48a2,2,0,0,1-2-2V96a2,2,0,0,1,2-2H208a2,2,0,0,1,2,2Z"/></symbol>
+<symbol id="i-ranking" viewBox="0 0 256 256"><path d="M114.31,101.9a6,6,0,0,1,3.79-7.59l12-4A6,6,0,0,1,138,96v40a6,6,0,0,1-12,0V104.32l-4.1,1.37A6,6,0,0,1,114.31,101.9ZM246,208a6,6,0,0,1-6,6H16a6,6,0,0,1,0-12H26V104A14,14,0,0,1,40,90H82V56A14,14,0,0,1,96,42h64a14,14,0,0,1,14,14v74h42a14,14,0,0,1,14,14v58h10A6,6,0,0,1,246,208Zm-72-66v60h44V144a2,2,0,0,0-2-2ZM94,202h68V56a2,2,0,0,0-2-2H96a2,2,0,0,0-2,2Zm-56,0H82V102H40a2,2,0,0,0-2,2Z"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 256 256"><path d="M196.89,130.94,144.4,111.6,125.06,59.11a13.92,13.92,0,0,0-26.12,0L79.6,111.6,27.11,130.94a13.92,13.92,0,0,0,0,26.12L79.6,176.4l19.34,52.49a13.92,13.92,0,0,0,26.12,0L144.4,176.4l52.49-19.34a13.92,13.92,0,0,0,0-26.12Zm-4.15,14.86-55.08,20.3a6,6,0,0,0-3.56,3.56l-20.3,55.08a1.92,1.92,0,0,1-3.6,0L89.9,169.66a6,6,0,0,0-3.56-3.56L31.26,145.8a1.92,1.92,0,0,1,0-3.6l55.08-20.3a6,6,0,0,0,3.56-3.56l20.3-55.08a1.92,1.92,0,0,1,3.6,0l20.3,55.08a6,6,0,0,0,3.56,3.56l55.08,20.3a1.92,1.92,0,0,1,0,3.6ZM146,40a6,6,0,0,1,6-6h18V16a6,6,0,0,1,12,0V34h18a6,6,0,0,1,0,12H182V64a6,6,0,0,1-12,0V46H152A6,6,0,0,1,146,40ZM246,88a6,6,0,0,1-6,6H230v10a6,6,0,0,1-12,0V94H208a6,6,0,0,1,0-12h10V72a6,6,0,0,1,12,0V82h10A6,6,0,0,1,246,88Z"/></symbol>
+<symbol id="i-stack" viewBox="0 0 256 256"><path d="M229.18,173a6,6,0,0,1-2.16,8.2l-96,56a6,6,0,0,1-6,0l-96-56a6,6,0,0,1,6-10.36l93,54.23,93-54.23A6,6,0,0,1,229.18,173ZM221,122.82l-93,54.23L35,122.82a6,6,0,0,0-6,10.36l96,56a6,6,0,0,0,6,0l96-56a6,6,0,0,0-6-10.36ZM26,80a6,6,0,0,1,3-5.18l96-56a6,6,0,0,1,6,0l96,56a6,6,0,0,1,0,10.36l-96,56a6,6,0,0,1-6,0l-96-56A6,6,0,0,1,26,80Zm17.91,0L128,129.05,212.09,80,128,31Z"/></symbol>
+<symbol id="i-timer" viewBox="0 0 256 256"><path d="M128,42a94,94,0,1,0,94,94A94.11,94.11,0,0,0,128,42Zm0,176a82,82,0,1,1,82-82A82.1,82.1,0,0,1,128,218ZM172.24,91.76a6,6,0,0,1,0,8.48l-40,40a6,6,0,1,1-8.48-8.48l40-40A6,6,0,0,1,172.24,91.76ZM98,16a6,6,0,0,1,6-6h48a6,6,0,0,1,0,12H104A6,6,0,0,1,98,16Z"/></symbol>
+<symbol id="i-translate" viewBox="0 0 256 256"><path d="M245.37,213.32l-56-112a6,6,0,0,0-10.74,0l-22.3,44.6A90,90,0,0,1,105,127.19,101.73,101.73,0,0,0,133.82,62H160a6,6,0,0,0,0-12H102V32a6,6,0,0,0-12,0V50H32a6,6,0,0,0,0,12h89.79A89.71,89.71,0,0,1,96,119.23,89.81,89.81,0,0,1,75.11,86,6,6,0,1,0,63.8,90,101.66,101.66,0,0,0,87,127.2,89.56,89.56,0,0,1,32,146a6,6,0,0,0,0,12,101.55,101.55,0,0,0,64-22.63,102.11,102.11,0,0,0,54.53,22.17l-27.89,55.78a6,6,0,0,0,10.74,5.36L147.71,190h72.58l14.34,28.68A6,6,0,0,0,240,222a5.87,5.87,0,0,0,2.68-.64A6,6,0,0,0,245.37,213.32ZM153.71,178,184,117.42,214.29,178Z"/></symbol>
+<symbol id="i-watch" viewBox="0 0 256 256"><path d="M206,128a77.92,77.92,0,0,0-32.53-63.31L167.1,29.5A14,14,0,0,0,153.32,18H102.68A14,14,0,0,0,88.9,29.5L82.53,64.69a77.87,77.87,0,0,0,0,126.62L88.9,226.5A14,14,0,0,0,102.68,238h50.64a14,14,0,0,0,13.78-11.5l6.37-35.19A77.92,77.92,0,0,0,206,128ZM100.71,31.64a2,2,0,0,1,2-1.64h50.64a2,2,0,0,1,2,1.64l4.56,25.19a77.68,77.68,0,0,0-63.7,0Zm54.58,192.72a2,2,0,0,1-2,1.64H102.68a2,2,0,0,1-2-1.64l-4.56-25.19a77.68,77.68,0,0,0,63.7,0ZM128,194a66,66,0,1,1,66-66A66.08,66.08,0,0,1,128,194Zm46-66a6,6,0,0,1-6,6H128a6,6,0,0,1-6-6V88a6,6,0,0,1,12,0v34h34A6,6,0,0,1,174,128Z"/></symbol>
+<symbol id="i-wifi-slash" viewBox="0 0 256 256"><path d="M138,204a10,10,0,1,1-10-10A10,10,0,0,1,138,204ZM52.44,36A6,6,0,0,0,43.56,44L61.33,63.58a169.41,169.41,0,0,0-41.14,25,6,6,0,1,0,7.62,9.27A157.58,157.58,0,0,1,69.91,73l26.48,29.13a122.21,122.21,0,0,0-44.12,22.19,6,6,0,0,0,7.46,9.41,110,110,0,0,1,45.87-21.47l31.13,34.25A74.4,74.4,0,0,0,128,146a73.44,73.44,0,0,0-43.53,14.15A6,6,0,0,0,88,171a5.93,5.93,0,0,0,3.53-1.15,62,62,0,0,1,59.76-7.31L203.56,220a6,6,0,0,0,8.88-8.08ZM235.81,88.55A170.32,170.32,0,0,0,128,50a173.45,173.45,0,0,0-21.76,1.38,6,6,0,1,0,1.52,11.9A160.58,160.58,0,0,1,128,62,158.26,158.26,0,0,1,228.19,97.82a6,6,0,1,0,7.62-9.27Zm-39.54,45.2A6,6,0,0,0,200,135a6,6,0,0,0,3.73-10.7,122.26,122.26,0,0,0-50.9-23.81,6,6,0,1,0-2.43,11.75A110,110,0,0,1,196.27,133.75Z"/></symbol>
+<symbol id="i-x" viewBox="0 0 256 256"><path d="M204.24,195.76a6,6,0,1,1-8.48,8.48L128,136.49,60.24,204.24a6,6,0,0,1-8.48-8.48L119.51,128,51.76,60.24a6,6,0,0,1,8.48-8.48L128,119.51l67.76-67.75a6,6,0,0,1,8.48,8.48L136.49,128Z"/></symbol>
+</svg>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="nav">
+      <div class="nav-pill">
+        <a class="nav-back" href="../" aria-label="Back to Manuel Lorenzo's portfolio">
+          <svg class="i" aria-hidden="true"><use href="#i-arrow-left" /></svg>
+          <span>Manuel Lorenzo</span>
         </a>
-        <div class="nav-menu">
-          <a href="#screens">Screens</a>
-          <a href="#benchmarks">Benchmarks</a>
+        <nav class="nav-links" aria-label="Sections">
+          <a href="#tour">The app</a>
+          <a href="#library">Library</a>
+          <a href="#wrist">Watch</a>
           <a href="#plans">Plans</a>
           <a href="#built">Built with</a>
-          <a
-            class="nav-cta"
-            href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Get the app</a
-          >
-        </div>
-      </nav>
+        </nav>
+        <a class="btn mini primary" href="#get">
+          Get the app
+          <span class="orb"><svg class="i go" aria-hidden="true"><use href="#i-arrow-up-right" /></svg></span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+          <span></span><span></span>
+        </button>
+      </div>
     </header>
 
-    <main>
-      <!-- ============ hero ============ -->
-      <section class="wrap band hero-grid" aria-labelledby="hero-title">
-        <div>
-          <p class="eyebrow as-written">iOS · Android · Apple Watch · Wear OS</p>
-          <h1 id="hero-title" class="display hero-title">
-            <span class="beat">Log the lift.</span>
-            <span class="beat">Run the clock.</span>
-            <span class="beat">Keep the record.</span>
-          </h1>
-          <p class="hero-copy">
-            WOD Tracker is a training log for CrossFit, weightlifting and hybrid
-            athletes. 81 benchmark WODs, timers for EMOM, AMRAP, Tabata and For
-            Time, and a personal record for every movement you train. It works
-            offline, and your data stays on your phone unless you back it up.
-          </p>
+    <div class="menu" id="menu" aria-label="Menu">
+      <a href="#tour" style="--i: 1">The app</a>
+      <a href="#library" style="--i: 2">Library</a>
+      <a href="#wrist" style="--i: 3">Watch</a>
+      <a href="#plans" style="--i: 4">Plans</a>
+      <a href="#built" style="--i: 5">Built with</a>
+      <a href="../" style="--i: 6">Portfolio</a>
+    </div>
 
-          <div class="store-row">
-            <a
-              class="store-btn filled"
-              href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="mdi mdi-google-play" aria-hidden="true"></i>
-              <span>
-                <span class="store-lead">Get it on</span>
-                <span class="store-name">Google Play</span>
-              </span>
-            </a>
-            <a
-              class="store-btn"
-              href="https://apps.apple.com/app/id6760609857"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="mdi mdi-apple" aria-hidden="true"></i>
-              <span>
-                <span class="store-lead">Download on the</span>
-                <span class="store-name">App Store</span>
-              </span>
-            </a>
-          </div>
-
-          <p class="hero-note">
-            Free to use. Premium and PRO add analytics, backup and the AI coach.
-          </p>
-        </div>
-
-        <div>
-          <figure class="board">
-            <div class="board-head">
-              <span class="left">The board</span>
-              <span class="right">For time</span>
-            </div>
-            <p class="board-name">Fran</p>
-            <p class="board-scheme">21 – 15 – 9</p>
-            <ul class="board-moves">
-              <li>
-                <span class="move">Thruster</span>
-                <span class="load">95 lb / 43 kg</span>
-              </li>
-              <li>
-                <span class="move">Pull-up</span>
-                <span class="load">bodyweight</span>
-              </li>
-            </ul>
-            <div class="board-clock">
-              <span class="label">Elapsed</span>
-              <span
-                class="clock"
-                id="clock"
-                data-seconds="222"
-                role="img"
-                aria-label="Workout clock finishing at three minutes forty-two seconds"
-                >0:00</span
-              >
-            </div>
-            <p class="board-result" id="board-result">
-              <span class="dot" aria-hidden="true"></span>
-              Personal record — 14 seconds faster
-            </p>
-            <figcaption class="board-caption">
-              Fran, written the way a box writes it on the wall.
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <!-- ============ screens ============ -->
-      <section id="screens" class="dark-band" aria-labelledby="screens-title">
-        <div class="wrap band">
-          <p class="eyebrow">Inside the app</p>
-          <h2 id="screens-title" class="section-title">Five screens, one job each</h2>
-          <p class="section-copy">
-            Nothing here is a mockup. These are the app's own screens, the ones
-            you land on between sets.
-          </p>
-
-          <div
-            class="screens-rail"
-            role="region"
-            tabindex="0"
-            aria-label="App screenshots, scroll sideways"
-          >
-            <article class="screen">
-              <div class="screen-shot">
-                <img
-                  src="img/screen-lifts.webp"
-                  width="520"
-                  height="1084"
-                  alt="The Lifts screen showing recent lifts with sets, weights and notes"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <p class="screen-label">Log</p>
-              <h3>Lifts</h3>
-              <p>
-                Every set, with weight, reps and a note. The last time you trained
-                a movement is the first thing you see.
-              </p>
-            </article>
-
-            <article class="screen">
-              <div class="screen-shot">
-                <img
-                  src="img/screen-timer.webp"
-                  width="520"
-                  height="1084"
-                  alt="The Timer screen listing EMOM, AMRAP, For Time and Tabata workouts"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <p class="screen-label">Clock</p>
-              <h3>Timer</h3>
-              <p>
-                EMOM, AMRAP, For Time and Tabata, with audio cues and a time cap.
-                Quick rest timers for the gaps between sets.
-              </p>
-            </article>
-
-            <article class="screen">
-              <div class="screen-shot">
-                <img
-                  src="img/screen-benchmarks.webp"
-                  width="520"
-                  height="1084"
-                  alt="The benchmark workout library showing Amanda, Angie and Annie"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <p class="screen-label">Library</p>
-              <h3>Benchmarks</h3>
-              <p>
-                81 benchmark WODs come with the app. Pick one and start its timer
-                from the same card.
-              </p>
-            </article>
-
-            <article class="screen">
-              <div class="screen-shot">
-                <img
-                  src="img/screen-stats.webp"
-                  width="520"
-                  height="1084"
-                  alt="Lift statistics for the back squat with personal record, volume and a progress chart"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <p class="screen-label">Record</p>
-              <h3>Lift stats</h3>
-              <p>
-                Personal record, total volume, average weight and set count for
-                any movement, with the whole history as a chart.
-              </p>
-            </article>
-
-            <article class="screen">
-              <div class="screen-shot">
-                <img
-                  src="img/screen-analytics.webp"
-                  width="520"
-                  height="1084"
-                  alt="Analytics showing training health, training load and plateau analysis"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <p class="screen-label">Read</p>
-              <h3>Analytics</h3>
-              <p>
-                Training load, consistency and the lifts that have stopped moving.
-                It says when to deload instead of leaving you to guess.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ benchmarks ============ -->
-      <section id="benchmarks" class="wrap band" aria-labelledby="bench-title">
-        <p class="eyebrow">The library</p>
-        <h2 id="bench-title" class="section-title">
-          81 workouts you already know by name
-        </h2>
-        <p class="section-copy">
-          The whole benchmark library ships inside the app. No download, no
-          subscription, no signal needed at the box.
-        </p>
-
-        <div class="bench-groups">
-          <div class="bench-group">
-            <p class="bench-key">The Girls <span class="count">21</span></p>
-            <ul class="bench-names">
-              <li>Fran</li><li>Grace</li><li>Isabel</li><li>Helen</li><li>Diane</li>
-              <li>Elizabeth</li><li>Jackie</li><li>Karen</li><li>Annie</li><li>Nancy</li>
-              <li>Cindy</li><li>Mary</li><li>Chelsea</li><li>Angie</li><li>Barbara</li>
-              <li>Nicole</li><li>Lynne</li><li>Amanda</li><li>Eva</li><li>Kelly</li>
-              <li>Linda</li>
-            </ul>
-          </div>
-
-          <div class="bench-group">
-            <p class="bench-key">The Heroes <span class="count">40</span></p>
-            <ul class="bench-names">
-              <li>Murph</li><li>DT</li><li>Nate</li><li>Michael</li><li>Joshie</li>
-              <li>Luce</li><li>Badger</li><li>Nutts</li><li>Randy</li><li>JT</li>
-              <li>Daniel</li><li>Jason</li><li>Whitten</li><li>Loredo</li><li>McGhee</li>
-              <li>Griff</li><li>Josh</li><li>Ryan</li><li>Jerry</li><li>Roy</li>
-              <li>Severin</li><li>Tommy V</li><li>Bradley</li><li>Holleyman</li><li>Manion</li>
-              <li>Blake</li><li>Hamilton</li><li>Hotshots 19</li><li>Arnie</li><li>Glen</li>
-              <li>Paul</li><li>Taylor</li><li>White</li><li>Small</li><li>Santora</li>
-              <li>Rahoi</li><li>Rankel</li><li>Collin</li><li>Weston</li><li>Zeus</li>
-            </ul>
-          </div>
-
-          <div class="bench-group">
-            <p class="bench-key">Named <span class="count">7</span></p>
-            <ul class="bench-names">
-              <li>Fight Gone Bad</li><li>Filthy Fifty</li><li>The Chief</li>
-              <li>King Kong</li><li>Kalsu</li><li>Acid Bath</li>
-              <li>Tabata Something Else</li>
-            </ul>
-          </div>
-
-          <div class="bench-group">
-            <p class="bench-key">The Open <span class="count">13</span></p>
-            <ul class="bench-names">
-              <li>12.1</li><li>13.1</li><li>14.5</li><li>16.5</li><li>17.1</li>
-              <li>18.1</li><li>19.1</li><li>20.1</li><li>21.1</li><li>22.1</li>
-              <li>23.1</li><li>24.1</li><li>24.2</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============ wrist ============ -->
-      <section class="dark-band" aria-labelledby="wrist-title">
-        <div class="wrap band wrist-grid">
+    <main id="main">
+      <!-- ================= hero ================= -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-grid">
           <div>
-            <p class="eyebrow">On the wrist, and off the grid</p>
-            <h2 id="wrist-title" class="section-title">
-              It follows you to the rig
-            </h2>
-            <p class="section-copy">
-              Start a workout, log sets and run a rest timer from your watch.
-              Sets you log while the phone is out of range are queued and sent
-              across when it comes back.
+            <p class="eyebrow rv">iOS · Android · Apple Watch · Wear OS</p>
+            <h1 id="hero-title" class="display">
+              <span class="rv" style="--d: 0.05s">Log the lift.</span>
+              <span class="rv" style="--d: 0.15s">Run the clock.</span>
+              <span class="rv" style="--d: 0.25s"><em class="hot">Keep the record.</em></span>
+            </h1>
+            <p class="lede rv" style="--d: 0.35s">
+              A training log for CrossFit, weightlifting and hybrid athletes. 81 benchmark WODs, timers for
+              EMOM, AMRAP, Tabata and For Time, and a personal record for every movement. It works offline,
+              and your data stays on your phone unless you back it up.
             </p>
-
-            <ul class="facts">
-              <li>
-                <span class="key">Offline</span>
-                <span class="val"
-                  >Everything works with no signal. Basements and garage gyms
-                  included.</span
-                >
-              </li>
-              <li>
-                <span class="key">Private</span>
-                <span class="val"
-                  >Training data lives on your device. Nothing is uploaded unless
-                  you turn on backup yourself.</span
-                >
-              </li>
-              <li>
-                <span class="key">Health</span>
-                <span class="val"
-                  >Workouts sync to Apple Health, so the rest of your health
-                  picture stays complete.</span
-                >
-              </li>
-              <li>
-                <span class="key">18 languages</span>
-                <span class="val"
-                  >The app is translated into 18 languages, with store listings
-                  in 22.</span
-                >
-              </li>
-            </ul>
+            <div class="stores rv" style="--d: 0.45s">
+              <a
+                class="btn primary"
+                href="https://apps.apple.com/app/id6760609857"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span><small>Download on the</small>App Store</span>
+                <span class="orb"><svg class="i" aria-hidden="true"><use href="#i-apple" /></svg></span>
+              </a>
+              <a
+                class="btn"
+                href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span><small>Get it on</small>Google Play</span>
+                <span class="orb"><svg class="i" aria-hidden="true"><use href="#i-gplay" /></svg></span>
+              </a>
+            </div>
+            <p class="hero-note rv" style="--d: 0.55s">
+              Free to use. Premium and PRO add analytics, backup and the AI coach.
+            </p>
           </div>
 
-          <div class="watches">
-            <figure class="watch">
+          <div class="stack">
+            <div class="phone p-left" style="--d: 0.35s">
               <img
-                src="img/watch-home.webp"
-                width="416"
-                height="496"
-                alt="Apple Watch screen with a Start Workout button"
-                loading="lazy"
+                src="img/ios-benchmarks.webp"
+                width="660"
+                height="1434"
+                alt="The benchmark library: Amanda, Angie and Annie, each with a Start Timer button"
                 decoding="async"
               />
-            </figure>
-            <figure class="watch">
+            </div>
+            <div class="phone p-right" style="--d: 0.5s">
               <img
-                src="img/watch-timer.webp"
-                width="416"
-                height="496"
-                alt="Apple Watch rest timer with one, two and three minute presets"
-                loading="lazy"
+                src="img/ios-stats.webp"
+                width="660"
+                height="1434"
+                alt="Progress for the snatch: estimated one-rep max, total volume and a chart"
                 decoding="async"
               />
-            </figure>
+            </div>
+            <div class="phone p-main" style="--d: 0.15s">
+              <img
+                src="img/ios-timer.webp"
+                width="660"
+                height="1434"
+                alt="A 12-minute EMOM running full screen with a large green clock"
+                fetchpriority="high"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- ============ plans ============ -->
-      <section id="plans" class="wrap band" aria-labelledby="plans-title">
-        <p class="eyebrow">Plans</p>
-        <h2 id="plans-title" class="section-title">Logging is free, and stays free</h2>
-        <p class="section-copy">
-          Two paid tiers add the things that need a server or a subscription
-          behind them. Prices are shown in the store for your country.
-        </p>
-
-        <div class="plans-grid">
-          <article class="plan">
-            <h3 class="plan-name">Free</h3>
-            <p class="plan-lead">Everything you need to keep a training log.</p>
-            <ul>
-              <li>Unlimited lifts, sets and history</li>
-              <li>All 81 benchmark WODs</li>
-              <li>EMOM, AMRAP, Tabata and For Time timers</li>
-              <li>Automatic personal records and 1RM</li>
-              <li>Three workout templates</li>
-              <li>Apple Watch and Wear OS</li>
-            </ul>
-          </article>
-
-          <article class="plan">
-            <h3 class="plan-name">Premium</h3>
-            <p class="plan-lead">
-              For athletes who plan blocks rather than sessions.
-            </p>
-            <ul>
-              <li>Unlimited templates</li>
-              <li>Multi-week programs</li>
-              <li>Advanced analytics and plateau detection</li>
-              <li>Cloud backup and restore</li>
-              <li>Data export</li>
-              <li>Apple Health sync and body composition</li>
-              <li>Warm-up generator and recovery dashboard</li>
-            </ul>
-          </article>
-
-          <article class="plan is-top">
-            <h3 class="plan-name">PRO</h3>
-            <p class="plan-lead">
-              Everything in Premium, plus coaching between sessions.
-            </p>
-            <ul>
-              <li>AI coach for suggestions and post-workout insight</li>
-              <li>Video demonstrations for 100+ movements</li>
-              <li>Live Activity on the lock screen</li>
-              <li>Form check</li>
-            </ul>
-          </article>
+      <!-- ================= ticker ================= -->
+      <div class="ticker" role="group" aria-label="Some of the 81 built-in benchmark WODs">
+        <div class="ticker-track">
+          <ul>
+            <li>Fran</li><li>Grace</li><li>Helen</li><li>Murph</li><li>Cindy</li><li>Diane</li><li>Isabel</li
+            ><li>DT</li><li>Karen</li><li>Annie</li><li>Nate</li><li>Jackie</li><li>Fight Gone Bad</li
+            ><li>Angie</li><li>Chelsea</li><li>JT</li><li>Barbara</li><li>Filthy Fifty</li><li>Linda</li
+            ><li>Michael</li><li>Eva</li><li>Kelly</li><li>Open 24.1</li>
+          </ul>
+          <ul aria-hidden="true">
+            <li>Fran</li><li>Grace</li><li>Helen</li><li>Murph</li><li>Cindy</li><li>Diane</li><li>Isabel</li
+            ><li>DT</li><li>Karen</li><li>Annie</li><li>Nate</li><li>Jackie</li><li>Fight Gone Bad</li
+            ><li>Angie</li><li>Chelsea</li><li>JT</li><li>Barbara</li><li>Filthy Fifty</li><li>Linda</li
+            ><li>Michael</li><li>Eva</li><li>Kelly</li><li>Open 24.1</li>
+          </ul>
         </div>
+      </div>
 
-        <p class="plans-note">
-          Subscriptions are handled by the App Store and Google Play, and can be
-          cancelled there at any time.
-        </p>
+      <div class="wrap">
+        <dl class="numbers">
+          <div class="rv"><dd>81</dd><dt>benchmark WODs, built in and offline</dt></div>
+          <div class="rv" style="--d: 0.08s"><dd>4</dd><dt>timer formats: EMOM, AMRAP, For Time, Tabata</dt></div>
+          <div class="rv" style="--d: 0.16s"><dd>18</dd><dt>languages in the app, 22 in the stores</dt></div>
+          <div class="rv" style="--d: 0.24s"><dd>4</dd><dt>platforms: iPhone, Android, Apple Watch, Wear OS</dt></div>
+        </dl>
+      </div>
+
+      <!-- ================= the app, a tour ================= -->
+      <section id="tour" class="band" aria-labelledby="tour-title">
+        <div class="wrap">
+          <header class="head">
+            <p class="eyebrow rv">Inside the app</p>
+            <h2 id="tour-title" class="display h2 rv" style="--d: 0.08s">Five screens,<br />one job each.</h2>
+            <p class="lede rv" style="--d: 0.16s">
+              Nothing here is a mockup. These are the app's own screens, captured from the current version.
+            </p>
+          </header>
+
+          <div class="tour rv soft">
+            <div class="tabs" role="tablist" aria-label="App screens" aria-orientation="vertical">
+              <button class="tab" role="tab" id="tab-timer" aria-controls="shot-timer" aria-selected="true">
+                <span class="n">01</span><span class="t">Timer</span>
+                <span class="d"><p><span>Run the clock. EMOM, AMRAP, For Time and Tabata, set up the way you train, with audio cues, a time cap and a full-screen clock you can read from across the gym.</span></p></span>
+              </button>
+              <button class="tab" role="tab" id="tab-benchmarks" aria-controls="shot-benchmarks" aria-selected="false" tabindex="-1">
+                <span class="n">02</span><span class="t">Benchmarks</span>
+                <span class="d"><p><span>81 benchmark WODs come with the app. Pick one and start its timer from the same card, then race your last attempt or your PR, round by round.</span></p></span>
+              </button>
+              <button class="tab" role="tab" id="tab-log" aria-controls="shot-log" aria-selected="false" tabindex="-1">
+                <span class="n">03</span><span class="t">Log</span>
+                <span class="d"><p><span>Every set, with weight, reps and a note. Filter by lifts or WODs.</span></p></span>
+              </button>
+              <button class="tab" role="tab" id="tab-progress" aria-controls="shot-progress" aria-selected="false" tabindex="-1">
+                <span class="n">04</span><span class="t">Progress</span>
+                <span class="d"><p><span>Estimated one-rep max from any rep scheme, total volume, average weight and set count for any movement, with the whole history as a chart.</span></p></span>
+              </button>
+              <button class="tab" role="tab" id="tab-analytics" aria-controls="shot-analytics" aria-selected="false" tabindex="-1">
+                <span class="n">05</span><span class="t">Analytics<span class="tour-tag">Premium</span></span>
+                <span class="d"><p><span>Training load, consistency and the lifts that have stopped moving. It tells you when to deload instead of leaving you to guess.</span></p></span>
+              </button>
+            </div>
+
+            <div>
+              <div class="stage">
+                <div class="phone on" id="shot-timer" role="tabpanel" aria-labelledby="tab-timer">
+                  <img src="img/ios-timer.webp" width="660" height="1434" loading="lazy" decoding="async" alt="A 12-minute EMOM running full screen with a large green clock" />
+                </div>
+                <div class="phone" id="shot-benchmarks" role="tabpanel" aria-labelledby="tab-benchmarks">
+                  <img src="img/ios-benchmarks.webp" width="660" height="1434" loading="lazy" decoding="async" alt="The benchmark library listing Amanda, Angie and Annie with Start Timer buttons" />
+                </div>
+                <div class="phone" id="shot-log" role="tabpanel" aria-labelledby="tab-log">
+                  <img src="img/ios-log.webp" width="660" height="1434" loading="lazy" decoding="async" alt="The Log tab: sessions grouped by day with sets, reps, weights and the best lift" />
+                </div>
+                <div class="phone" id="shot-progress" role="tabpanel" aria-labelledby="tab-progress">
+                  <img src="img/ios-stats.webp" width="660" height="1434" loading="lazy" decoding="async" alt="Progress for the snatch: estimated one-rep max, total volume, average weight, total sets and a chart" />
+                </div>
+                <div class="phone" id="shot-analytics" role="tabpanel" aria-labelledby="tab-analytics">
+                  <img src="img/ios-analytics.webp" width="660" height="1434" loading="lazy" decoding="async" alt="Analytics: training health score, training load and plateau analysis" />
+                </div>
+              </div>
+              <p class="tour-desc" id="tour-desc" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- ============ built with ============ -->
-      <section id="built" class="wrap band" aria-labelledby="built-title">
-        <p class="eyebrow">Engineering</p>
-        <h2 id="built-title" class="section-title">How it is built</h2>
-        <p class="section-copy">
-          One Kotlin Multiplatform codebase holds the data and domain layers.
-          Each platform keeps its own native UI, so nothing feels ported.
-        </p>
+      <!-- ================= library ================= -->
+      <section id="library" class="band alt" aria-labelledby="lib-title">
+        <div class="wrap">
+          <header class="head">
+            <p class="eyebrow rv">The library</p>
+            <h2 id="lib-title" class="display h2 rv" style="--d: 0.08s">81 workouts you already<br />know by name.</h2>
+            <p class="lede rv" style="--d: 0.16s">
+              The whole benchmark library ships inside the app. No download, no subscription, no signal needed
+              at the box.
+            </p>
+          </header>
 
-        <ul class="spec">
-          <li>
-            <span class="key">Shared</span>
-            <span class="val"
-              >Kotlin Multiplatform<span>·</span>Room<span>·</span>Koin<span>·</span
-              >Coroutines and Flow<span>·</span>Clean Architecture with use
-              cases</span
-            >
-          </li>
-          <li>
-            <span class="key">Android</span>
-            <span class="val"
-              >Jetpack Compose<span>·</span>Material 3<span>·</span
-              >WorkManager<span>·</span>Wear OS companion</span
-            >
-          </li>
-          <li>
-            <span class="key">iOS</span>
-            <span class="val"
-              >SwiftUI<span>·</span>SKIE for Kotlin interop<span>·</span
-              >WidgetKit and ActivityKit<span>·</span>watchOS companion with
-              HealthKit</span
-            >
-          </li>
-          <li>
-            <span class="key">Services</span>
-            <span class="val"
-              >Firebase Auth and Firestore<span>·</span>RevenueCat<span>·</span
-              >Gemini 2.5 Flash for the coach</span
-            >
-          </li>
-          <li>
-            <span class="key">Delivery</span>
-            <span class="val"
-              >Fastlane<span>·</span>GitHub Actions<span>·</span>Detekt<span
-                >·</span
-              >Maestro flows<span>·</span>unit tests on both platforms</span
-            >
-          </li>
-        </ul>
+          <div>
+            <div class="lib-row rv soft">
+              <div class="lib-key"><h3>The Girls</h3><span>21</span></div>
+              <ul class="chips">
+                <li>Fran</li><li>Grace</li><li>Isabel</li><li>Helen</li><li>Diane</li><li>Elizabeth</li><li>Jackie</li><li>Karen</li><li>Annie</li><li>Nancy</li><li>Cindy</li><li>Mary</li><li>Chelsea</li><li>Angie</li><li>Barbara</li><li>Nicole</li><li>Lynne</li><li>Amanda</li><li>Eva</li><li>Kelly</li><li>Linda</li>
+              </ul>
+            </div>
+            <div class="lib-row rv soft">
+              <div class="lib-key"><h3>The Heroes</h3><span>40</span></div>
+              <ul class="chips">
+                <li>Murph</li><li>DT</li><li>Nate</li><li>Michael</li><li>Joshie</li><li>Luce</li><li>Badger</li><li>Nutts</li><li>Randy</li><li>JT</li><li>Daniel</li><li>Jason</li><li>Whitten</li><li>Loredo</li><li>McGhee</li><li>Griff</li><li>Josh</li><li>Ryan</li><li>Jerry</li><li>Roy</li><li>Severin</li><li>Tommy V</li><li>Bradley</li><li>Holleyman</li><li>Manion</li><li>Blake</li><li>Hamilton</li><li>Hotshots 19</li><li>Arnie</li><li>Glen</li><li>Paul</li><li>Taylor</li><li>White</li><li>Small</li><li>Santora</li><li>Rahoi</li><li>Rankel</li><li>Collin</li><li>Weston</li><li>Zeus</li>
+              </ul>
+            </div>
+            <div class="lib-row rv soft">
+              <div class="lib-key"><h3>Named</h3><span>7</span></div>
+              <ul class="chips">
+                <li>Fight Gone Bad</li><li>Filthy Fifty</li><li>The Chief</li><li>King Kong</li><li>Kalsu</li><li>Acid Bath</li><li>Tabata Something Else</li>
+              </ul>
+            </div>
+            <div class="lib-row rv soft">
+              <div class="lib-key"><h3>The Open</h3><span>13</span></div>
+              <ul class="chips">
+                <li>12.1</li><li>13.1</li><li>14.5</li><li>16.5</li><li>17.1</li><li>18.1</li><li>19.1</li><li>20.1</li><li>21.1</li><li>22.1</li><li>23.1</li><li>24.1</li><li>24.2</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- ============ closing ============ -->
-      <section class="closing">
-        <div class="wrap band">
-          <h2 class="closing-title">Start with today's WOD.</h2>
-          <div class="store-row">
-            <a
-              class="store-btn filled"
-              href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="mdi mdi-google-play" aria-hidden="true"></i>
-              <span>
-                <span class="store-lead">Get it on</span>
-                <span class="store-name">Google Play</span>
-              </span>
+      <!-- ================= on the wrist ================= -->
+      <section id="wrist" class="band" aria-labelledby="wrist-title">
+        <div class="wrap wrist">
+          <div>
+            <p class="eyebrow rv">Apple Watch and Wear OS</p>
+            <h2 id="wrist-title" class="display h2 rv" style="--d: 0.08s; margin-top: 1.4rem">It follows you<br />to the rig.</h2>
+            <p class="lede rv" style="--d: 0.16s; margin-top: 1.4rem">
+              Start a workout, log sets and run a rest timer from your wrist, with a buzz for every interval.
+              Sets you log while the phone is out of range are queued and sent across when it comes back.
+            </p>
+            <ul class="facts rv soft" style="--d: 0.24s">
+              <li>
+                <svg class="i" aria-hidden="true"><use href="#i-timer" /></svg>
+                <div><b>Timers on the wrist.</b><p>EMOM, AMRAP, For Time and Tabata, plus a rest timer for the gaps between sets.</p></div>
+              </li>
+              <li>
+                <svg class="i" aria-hidden="true"><use href="#i-heartbeat" /></svg>
+                <div><b>Heart rate, never stored.</b><p>Shown while you train. The app doesn't keep it or upload it. On Apple Watch, Apple Health keeps it as it does for any workout.</p></div>
+              </li>
+              <li>
+                <svg class="i" aria-hidden="true"><use href="#i-lightning" /></svg>
+                <div><b>Start from the phone.</b><p>Begin a benchmark on the watch from your phone, and the result lands in your log.</p></div>
+              </li>
+            </ul>
+          </div>
+          <div class="wrist-visual rv soft" style="--d: 0.1s">
+            <div class="watch"><img src="img/watch-home.webp" width="422" height="514" loading="lazy" decoding="async" alt="Apple Watch home screen with a Start Workout button" /></div>
+            <div class="watch"><img src="img/watch-timer.webp" width="422" height="514" loading="lazy" decoding="async" alt="Apple Watch rest timer with 1:00, 1:30, 2:00 and 3:00 presets" /></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= around the workout ================= -->
+      <section id="more" class="band" style="padding-top: 0" aria-labelledby="more-title">
+        <div class="wrap">
+          <header class="head">
+            <p class="eyebrow rv">Around the workout</p>
+            <h2 id="more-title" class="display h2 rv" style="--d: 0.08s">Private by default.<br />Smart when you ask.</h2>
+          </header>
+
+          <div class="bento">
+            <div class="bezel rv soft">
+              <div class="core tile">
+                <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-wifi-slash" /></svg></span>
+                <h3>Works with no signal. Your data stays on your phone.</h3>
+                <p>Basements and garage gyms included. Nothing is uploaded unless you turn on backup yourself, and with Premium you can export your whole training history whenever you want.</p>
+              </div>
+            </div>
+            <div class="bezel top rv soft" style="--d: 0.08s">
+              <div class="core tile">
+                <div class="tile-head">
+                  <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-sparkle" /></svg></span>
+                  <span class="tag">PRO</span>
+                </div>
+                <h3>An AI coach that has read your log.</h3>
+                <p>Workout suggestions from your logged history, post-workout insight and recovery recommendations. It asks before it sends anything, and it's general guidance, not medical advice.</p>
+              </div>
+            </div>
+            <div class="bezel rv soft">
+              <div class="core tile">
+                <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-heartbeat" /></svg></span>
+                <h3>Apple Health, kept complete.</h3>
+                <p>Workouts sync to Apple Health, so the rest of your health picture stays in one place.</p>
+              </div>
+            </div>
+            <div class="bezel rv soft" style="--d: 0.08s">
+              <div class="core tile">
+                <div class="tile-head">
+                  <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-cloud-arrow-up" /></svg></span>
+                  <span class="tag">Premium</span>
+                </div>
+                <h3>Back up, restore, change phones.</h3>
+                <p>Manual cloud backup and restore under your own Apple or Google sign-in, so a new phone is one restore away.</p>
+              </div>
+            </div>
+            <div class="bezel rv soft" style="--d: 0.16s">
+              <div class="core tile">
+                <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-translate" /></svg></span>
+                <div class="langs" aria-hidden="true">
+                  <span>English</span><span>Español</span><span>Deutsch</span><span>Français</span><span>日本語</span><span>한국어</span><span>Português</span><span>Italiano</span><span>العربية</span><span>Русский</span>
+                </div>
+                <h3>In 18 languages.</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= plans ================= -->
+      <section id="plans" class="band alt" aria-labelledby="plans-title">
+        <div class="wrap">
+          <header class="head">
+            <p class="eyebrow rv">Plans</p>
+            <h2 id="plans-title" class="display h2 rv" style="--d: 0.08s">Logging is free,<br />and stays free.</h2>
+            <p class="lede rv" style="--d: 0.16s">
+              Two paid tiers add the things that need a server or a subscription behind them. Prices are shown in
+              the store for your country.
+            </p>
+          </header>
+
+          <div class="plans">
+            <div class="bezel rv soft">
+              <article class="core plan">
+                <h3>Free</h3>
+                <p class="lead">Everything you need to keep a training log.</p>
+                <ul>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Unlimited lifts, sets and history</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>All 81 benchmark WODs</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>EMOM, AMRAP, Tabata and For Time timers</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Automatic personal records and 1RM</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Three workout templates</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Apple Watch and Wear OS</li>
+                </ul>
+              </article>
+            </div>
+            <div class="bezel rv soft" style="--d: 0.08s">
+              <article class="core plan">
+                <h3>Premium</h3>
+                <p class="lead">For athletes who plan blocks rather than sessions.</p>
+                <ul>
+                  <li class="inc"><svg class="i" aria-hidden="true"><use href="#i-stack" /></svg>Everything in Free</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Unlimited templates</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Multi-week programs</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Advanced analytics and plateau detection</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Cloud backup and restore</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Data export</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Apple Health sync and body composition</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Warm-up generator and recovery dashboard</li>
+                </ul>
+              </article>
+            </div>
+            <div class="bezel top rv soft" style="--d: 0.16s">
+              <article class="core plan">
+                <h3>PRO</h3>
+                <p class="lead">Everything in Premium, plus coaching between sessions.</p>
+                <ul>
+                  <li class="inc"><svg class="i" aria-hidden="true"><use href="#i-stack" /></svg>Everything in Premium</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>AI coach for suggestions and post-workout insight</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Video demonstrations for 100+ movements</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Live Activity on the lock screen</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Form check</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+          <p class="plans-note">
+            New subscriptions start with a 3-day free trial. Subscriptions are handled by the App Store and
+            Google Play, and can be cancelled there at any time.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= built with ================= -->
+      <section id="built" class="band" aria-labelledby="built-title">
+        <div class="wrap built">
+          <div>
+            <p class="eyebrow rv">Engineering</p>
+            <h2 id="built-title" class="display h2 rv" style="--d: 0.08s; margin-top: 1.4rem">Native on both,<br />shared underneath.</h2>
+            <p class="lede rv" style="--d: 0.16s; margin-top: 1.4rem">
+              One Kotlin Multiplatform codebase holds the data and domain layers. Each platform keeps its own
+              native UI, so nothing feels ported.
+            </p>
+          </div>
+          <ul class="spec rv soft" style="--d: 0.12s">
+            <li>
+              <span class="k">Shared</span>
+              <span class="v"><span>Kotlin Multiplatform</span><span>Room</span><span>Koin</span><span>Coroutines and Flow</span><span>Clean Architecture</span></span>
+            </li>
+            <li>
+              <span class="k">Android</span>
+              <span class="v"><span>Jetpack Compose</span><span>Material 3</span><span>WorkManager</span><span>Wear OS companion</span></span>
+            </li>
+            <li>
+              <span class="k">iOS</span>
+              <span class="v"><span>SwiftUI</span><span>SKIE</span><span>WidgetKit</span><span>ActivityKit</span><span>watchOS with HealthKit</span></span>
+            </li>
+            <li>
+              <span class="k">Services</span>
+              <span class="v"><span>Firebase Auth and Firestore</span><span>RevenueCat</span><span>Gemini 2.5 Flash</span></span>
+            </li>
+            <li>
+              <span class="k">Delivery</span>
+              <span class="v"><span>Fastlane</span><span>Detekt</span><span>Maestro flows</span><span>Unit tests on both platforms</span></span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================= closing ================= -->
+      <section id="get" class="band closing" aria-labelledby="get-title">
+        <div class="wrap">
+          <h2 id="get-title" class="display rv">Start with today's WOD.</h2>
+          <p class="lede rv" style="--d: 0.08s">Free on iPhone and Android. Apple Watch and Wear OS come with it.</p>
+          <div class="stores rv" style="--d: 0.16s">
+            <a class="btn primary" href="https://apps.apple.com/app/id6760609857" target="_blank" rel="noopener noreferrer">
+              <span><small>Download on the</small>App Store</span>
+              <span class="orb"><svg class="i" aria-hidden="true"><use href="#i-apple" /></svg></span>
             </a>
-            <a
-              class="store-btn"
-              href="https://apps.apple.com/app/id6760609857"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="mdi mdi-apple" aria-hidden="true"></i>
-              <span>
-                <span class="store-lead">Download on the</span>
-                <span class="store-name">App Store</span>
-              </span>
+            <a class="btn" href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android" target="_blank" rel="noopener noreferrer">
+              <span><small>Get it on</small>Google Play</span>
+              <span class="orb"><svg class="i" aria-hidden="true"><use href="#i-gplay" /></svg></span>
             </a>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="page-footer">
-      <div class="wrap footer-inner">
-        <small>
-          WOD Tracker is built by
-          <a href="../">Manuel Lorenzo Parejo</a>. &copy; 2026.
-        </small>
-        <div class="footer-links">
-          <a
-            href="https://noloman.github.io/crossfit-tracker/privacy-policy.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Privacy policy</a
-          >
-          <a
-            href="https://noloman.github.io/crossfit-tracker/support.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Support</a
-          >
-          <a href="mailto:manulorenzop@gmail.com">Contact</a>
+    <footer class="foot">
+      <div class="wrap foot-in">
+        <span class="foot-brand">
+          <img src="img/icon-96.png" width="96" height="96" alt="" loading="lazy" />
+          <span>WOD Tracker, built by <a href="../">Manuel Lorenzo Parejo</a>. &copy; 2026</span>
+        </span>
+        <nav aria-label="Footer">
+          <a href="https://noloman.github.io/crossfit-tracker/privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a>
+          <a href="https://noloman.github.io/crossfit-tracker/support.html" target="_blank" rel="noopener noreferrer">Support</a>
+          <a href="mailto:manulorenzop+wodtracker@gmail.com?subject=WOD%20Tracker">Contact</a>
           <a href="../">Portfolio</a>
-        </div>
+        </nav>
       </div>
     </footer>
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "WOD Tracker: Gym Log",
-        "applicationCategory": "HealthApplication",
-        "operatingSystem": "iOS, Android, watchOS, Wear OS",
-        "url": "https://www.manulorenzo.me/wod-tracker/",
-        "description": "A training log for CrossFit, weightlifting and hybrid athletes. 81 benchmark WODs, EMOM, AMRAP, Tabata and For Time timers, automatic personal records, Apple Health sync and an AI coach.",
-        "author": {
-          "@type": "Person",
-          "name": "Manuel Lorenzo Parejo",
-          "url": "https://www.manulorenzo.me/"
-        }
-      }
-    </script>
-
     <script>
       (function () {
-        var clock = document.getElementById("clock");
-        var result = document.getElementById("board-result");
-        if (!clock) return;
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        var total = parseInt(clock.dataset.seconds, 10) || 0;
-
-        function format(seconds) {
-          var m = Math.floor(seconds / 60);
-          var s = Math.floor(seconds % 60);
-          return m + ":" + (s < 10 ? "0" : "") + s;
+        /* reveal on enter: IntersectionObserver, no scroll listeners */
+        var targets = document.querySelectorAll(".rv, .stack");
+        if (!("IntersectionObserver" in window) || reduce) {
+          targets.forEach(function (el) { el.classList.add("in"); });
+        } else {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add("in");
+                  io.unobserve(e.target);
+                }
+              });
+            },
+            { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+          );
+          targets.forEach(function (el) { io.observe(el); });
         }
 
-        function finish() {
-          clock.textContent = format(total);
-          if (result) result.classList.add("is-in");
+        /* menu */
+        var toggle = document.querySelector(".nav-toggle");
+        var menu = document.getElementById("menu");
+        function setMenu(open) {
+          menu.classList.toggle("open", open);
+          toggle.setAttribute("aria-expanded", String(open));
+          toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+          document.documentElement.classList.toggle("menu-open", open);
+          document.body.style.overflow = open ? "hidden" : "";
+          menu.inert = !open;
         }
+        menu.inert = true;
+        toggle.addEventListener("click", function () { setMenu(!menu.classList.contains("open")); });
+        menu.querySelectorAll("a").forEach(function (a) {
+          a.addEventListener("click", function () { setMenu(false); });
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && menu.classList.contains("open")) { setMenu(false); toggle.focus(); }
+        });
+        window.matchMedia("(min-width: 1061px)").addEventListener("change", function () { setMenu(false); });
 
-        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-        if (reduced.matches) {
-          finish();
-          return;
+        /* tour tabs */
+        var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+        var shots = Array.prototype.slice.call(document.querySelectorAll(".stage .phone"));
+        var desc = document.getElementById("tour-desc");
+        function select(i, focus) {
+          tabs.forEach(function (t, k) {
+            var on = k === i;
+            t.setAttribute("aria-selected", String(on));
+            t.tabIndex = on ? 0 : -1;
+            shots[k].classList.toggle("on", on);
+          });
+          desc.textContent = tabs[i].querySelector(".d p span").textContent;
+          if (focus) tabs[i].focus();
         }
-
-        var duration = 2600;
-        var started = null;
-
-        function step(now) {
-          if (started === null) started = now;
-          var t = Math.min((now - started) / duration, 1);
-          // Ease out, so the clock slows into its final time.
-          var eased = 1 - Math.pow(1 - t, 3);
-          clock.textContent = format(total * eased);
-          if (t < 1) {
-            requestAnimationFrame(step);
-          } else {
-            finish();
-          }
-        }
-
-        requestAnimationFrame(step);
+        tabs.forEach(function (t, i) {
+          t.addEventListener("click", function () { select(i, false); });
+          t.addEventListener("keydown", function (e) {
+            var n = tabs.length;
+            if (e.key === "ArrowDown" || e.key === "ArrowRight") { e.preventDefault(); select((i + 1) % n, true); }
+            if (e.key === "ArrowUp" || e.key === "ArrowLeft") { e.preventDefault(); select((i - 1 + n) % n, true); }
+            if (e.key === "Home") { e.preventDefault(); select(0, true); }
+            if (e.key === "End") { e.preventDefault(); select(n - 1, true); }
+          });
+        });
+        select(0, false);
       })();
     </script>
   </body>

@@ -1,0 +1,56 @@
+# WOD Tracker
+
+> WOD Tracker is a training log for CrossFit, weightlifting and hybrid athletes on iPhone,
+> Android, Apple Watch and Wear OS. It has 81 built-in benchmark WODs, timers for EMOM,
+> AMRAP, Tabata and For Time, and an automatic personal record and one-rep max for every
+> movement. It works offline, and training data stays on the device unless the user turns
+> on cloud backup.
+
+## What it does
+
+- **Timers**: EMOM, AMRAP, For Time and Tabata, set up the way the athlete trains, with
+  audio cues, a time cap, saved presets, a full-screen clock and a rest timer.
+- **Benchmark library**: 81 WODs that ship inside the app and work offline: 21 Girls,
+  40 Heroes, 7 named workouts and 13 CrossFit Open workouts. Each starts its timer from the
+  same card, and the athlete can race their last attempt or their PR round by round.
+- **Log**: every set with weight, reps and a note, filterable by lifts or WODs.
+- **Progress**: personal record, estimated one-rep max (Epley and Brzycki), total volume,
+  average weight and set count for any movement, with the full history as a chart.
+- **Analytics** (Premium): training load, consistency, plateau detection and deload advice.
+- **Watch**: Apple Watch and Wear OS companions run the timers, log sets and a rest timer.
+  Sets logged while the phone is out of range are queued and delivered when it reconnects.
+  Heart rate is shown during a workout and is never stored or uploaded by the app.
+- **AI coach** (PRO): workout suggestions from the logged history, post-workout insight and
+  recovery recommendations. Replies come from Google Gemini and the app asks before it sends
+  anything. General information only, not medical advice.
+
+## Platforms
+
+- iPhone and Apple Watch (SwiftUI, with Apple Health sync).
+- Android and Wear OS (Jetpack Compose).
+- 18 interface languages; store listings in 22.
+
+## Pricing
+
+- Free: unlimited lifts, sets and history, all 81 benchmark WODs, all timers, automatic
+  personal records and 1RM, three workout templates, Apple Watch and Wear OS.
+- Premium: unlimited templates, multi-week programs, advanced analytics and plateau
+  detection, cloud backup and restore, data export, Apple Health sync and body composition,
+  warm-up generator and recovery dashboard.
+- PRO: everything in Premium plus the AI coach, video demonstrations for 100+ movements, a
+  lock screen Live Activity and form check.
+- New subscriptions start with a 3-day free trial. Prices are set per country by the App
+  Store and Google Play.
+
+## Built by
+
+Manuel Lorenzo Parejo, as a one-person project. One Kotlin Multiplatform codebase holds the
+data and domain layers, and each platform keeps its own native UI.
+
+## Links
+
+- Home: https://www.manulorenzo.me/wod-tracker/
+- App Store: https://apps.apple.com/app/id6760609857
+- Google Play: https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android
+- Privacy policy: https://noloman.github.io/crossfit-tracker/privacy-policy.html
+- Support: https://noloman.github.io/crossfit-tracker/support.html
