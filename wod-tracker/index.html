@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fbfbfa" />
     <meta
       name="description"
       content="WOD Tracker is a training log for CrossFit, weightlifting and hybrid athletes. 81 benchmark WODs, EMOM/AMRAP/Tabata timers, personal records, Apple Watch and Wear OS. iOS and Android."
@@ -44,41 +45,44 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
-      rel="stylesheet"
-      integrity="sha384-HphS8cQyN+eYiJ5PMbzShG6qZdRtvHPVLPkYb8JwMkmNgaIxrFVDhQe3jIbq3EZ2"
-      crossorigin="anonymous"
-    />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
 
     <style>
       :root {
-        /* Chassis inherited from the portfolio */
-        --bg: #ffffff;
-        --section: #f6f7f9;
-        --ink: #111111;
-        --muted: #4f5663;
-        --quiet: #7a8190;
-        --line: #d9dde5;
-        --line-strong: #aeb5c2;
-        --radius: 8px;
-        --max: 1280px;
+        --bg: #fbfbfa;
+        --surface: #f4f3ef;
+        --text: #111111;
+        --body: #2f3437;
+        --muted: #6b6a66;
+        --line: #eaeaea;
 
         /* WOD Tracker brand, taken from the app's own theme */
-        --flame: #ff6b35; /* primary; decoration, and text on dark only */
-        --ember: #cc4a1a; /* accent text on white — passes AA */
-        --gold: #ffd700; /* personal records, on dark only */
+        --flame: #ff6b35; /* decoration, and text on dark mock-ups only */
+        --ember: #b8431a; /* accent text on light, AA on --bg and --surface */
+        --gold: #ffd700; /* personal records, inside the board mock-up only */
         --board: #12100f;
-        --board-hi: #1c1917;
         --board-line: #2e2724;
         --chalk: #f5f3f1;
         --chalk-quiet: #a39a94;
+
+        --max: 1120px;
+        --gutter: clamp(20px, 5vw, 40px);
+        --display: "Bricolage Grotesque", "Geist", -apple-system, sans-serif;
+        --sans: "Geist", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+          sans-serif;
+        --mono: "Geist Mono", "SF Mono", ui-monospace, Menlo, monospace;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        --rhythm: clamp(56px, 9vw, 96px);
       }
 
-      * {
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
@@ -86,19 +90,23 @@
 
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: 72px;
+        -webkit-text-size-adjust: 100%;
       }
 
       body {
         min-width: 320px;
         background: var(--bg);
-        color: var(--ink);
-        font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        line-height: 1.55;
+        color: var(--body);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.6;
         -webkit-font-smoothing: antialiased;
       }
 
       a {
         color: inherit;
+        text-decoration: none;
       }
 
       img {
@@ -106,203 +114,274 @@
         display: block;
       }
 
+      h1,
+      h2,
+      h3 {
+        text-wrap: balance;
+      }
+
+      p {
+        text-wrap: pretty;
+      }
+
       :focus-visible {
-        outline: 2px solid var(--ember);
+        outline: 2px solid var(--text);
         outline-offset: 3px;
-        border-radius: 2px;
+        border-radius: 3px;
+      }
+
+      .icon {
+        width: 1em;
+        height: 1em;
+        flex: none;
+        fill: currentColor;
       }
 
       .wrap {
-        width: min(var(--max), calc(100% - 3.5rem));
-        margin-inline: auto;
+        width: 100%;
+        max-width: calc(var(--max) + var(--gutter) * 2);
+        margin: 0 auto;
+        padding: 0 var(--gutter);
       }
 
-      .band {
-        padding-block: clamp(4rem, 8vw, 7.5rem);
+      .skip {
+        position: absolute;
+        left: 12px;
+        top: -48px;
+        padding: 8px 14px;
+        background: var(--text);
+        color: #fff;
+        border-radius: 6px;
+        font-size: 14px;
+        z-index: 20;
       }
 
-      /* ---------- shared type roles ---------- */
-
-      .display {
-        font-family: "Archivo", "Geist", sans-serif;
-        font-stretch: 112%;
-        font-weight: 800;
-        letter-spacing: -0.035em;
-        line-height: 1.02;
-      }
-
-      .mono {
-        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-variant-numeric: tabular-nums;
-      }
-
-      .eyebrow {
-        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.74rem;
-        font-weight: 500;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--ember);
-      }
-
-      .eyebrow.as-written {
-        text-transform: none;
-        letter-spacing: 0.1em;
-      }
-
-      .section-title {
-        font-family: "Archivo", "Geist", sans-serif;
-        font-stretch: 110%;
-        font-weight: 800;
-        letter-spacing: -0.035em;
-        line-height: 1.05;
-        font-size: clamp(2rem, 4.2vw, 3.1rem);
-        margin-top: 1rem;
-      }
-
-      .section-copy {
-        color: var(--muted);
-        font-size: 1.06rem;
-        max-width: 58ch;
-        margin-top: 1.1rem;
+      .skip:focus {
+        top: 12px;
       }
 
       /* ---------- header ---------- */
 
-      .page-header {
+      .site-header {
         position: sticky;
         top: 0;
-        z-index: 20;
-        background: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(18px);
-        border-bottom: 1px solid var(--line);
+        z-index: 10;
+        background: rgba(251, 251, 250, 0.82);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
       }
 
-      .nav-row {
-        min-height: 76px;
+      .nav {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 2rem;
+        gap: 16px;
+        height: 64px;
       }
 
-      .nav-brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        font-size: 0.95rem;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        text-decoration: none;
-        color: var(--muted);
+      .brand {
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: 1.125rem;
+        letter-spacing: -0.03em;
+        color: var(--text);
+        white-space: nowrap;
       }
 
-      .nav-brand i {
-        font-size: 1.1rem;
-      }
-
-      .nav-brand:hover {
-        color: var(--ink);
-      }
-
-      .nav-menu {
+      .nav-links {
         display: flex;
         align-items: center;
-        gap: 2rem;
+        gap: 4px;
       }
 
-      .nav-menu a {
-        font-size: 0.94rem;
-        font-weight: 500;
-        text-decoration: none;
-        color: var(--ink);
+      .nav-link {
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        color: var(--muted);
+        transition:
+          color 0.2s,
+          background-color 0.2s;
       }
 
-      .nav-menu a:hover {
-        color: var(--ember);
-      }
-
-      .nav-cta {
-        display: none;
+      .nav-link:hover {
+        color: var(--text);
+        background: var(--surface);
       }
 
       /* ---------- buttons ---------- */
 
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 6px;
+        background: var(--text);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+        transition:
+          background-color 0.2s,
+          transform 0.15s;
+      }
+
+      .nav-links .btn {
+        margin-left: 12px;
+      }
+
+      .btn:hover,
+      .store-btn:hover {
+        background: #333;
+      }
+
+      .btn:active,
+      .store-btn:active {
+        transform: scale(0.98);
+      }
+
       .store-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.9rem;
-        margin-top: 2.2rem;
+        gap: 12px;
+        margin-top: 32px;
       }
 
       .store-btn {
         display: inline-flex;
         align-items: center;
-        gap: 0.8rem;
-        min-width: 208px;
-        padding: 0.8rem 1.4rem;
-        border: 1px solid var(--ink);
-        border-radius: var(--radius);
-        text-decoration: none;
-        background: var(--bg);
-        color: var(--ink);
+        gap: 12px;
+        min-width: 188px;
+        padding: 10px 18px 10px 16px;
+        border-radius: 8px;
+        background: var(--text);
+        color: #fff;
         transition:
-          background 0.15s ease,
-          color 0.15s ease;
+          background-color 0.2s,
+          transform 0.15s;
       }
 
-      .store-btn i {
-        font-size: 1.6rem;
-        line-height: 1;
+      .store-btn .icon {
+        font-size: 26px;
       }
 
-      .store-btn .store-lead {
+      .store-lead {
         display: block;
-        font-size: 0.7rem;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--quiet);
+        font-size: 11px;
+        line-height: 1.3;
+        color: #c4c3be;
       }
 
-      .store-btn .store-name {
+      .store-name {
         display: block;
-        font-size: 1.02rem;
+        font-size: 1rem;
         font-weight: 600;
-        letter-spacing: -0.02em;
+        line-height: 1.25;
+        letter-spacing: -0.01em;
       }
 
-      .store-btn.filled {
-        background: var(--ink);
-        color: #fff;
-        border-color: var(--ink);
+      /* ---------- shared type ---------- */
+
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1.4;
+        color: var(--muted);
       }
 
-      .store-btn.filled .store-lead {
-        color: #b7bcc6;
+      .eyebrow::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--flame);
+        flex: none;
       }
 
-      .store-btn:hover {
-        background: var(--ember);
-        border-color: var(--ember);
-        color: #fff;
+      .section {
+        padding-block: var(--rhythm);
       }
 
-      .store-btn:hover .store-lead {
-        color: #ffd9c9;
+      .surface {
+        background: var(--surface);
+        border-block: 1px solid var(--line);
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+        gap: 16px 48px;
+        align-items: end;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--text);
+      }
+
+      .section-title {
+        margin-top: 14px;
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: clamp(1.9rem, 4vw, 2.5rem);
+        line-height: 1.1;
+        letter-spacing: -0.035em;
+        color: var(--text);
+      }
+
+      .section-copy {
+        max-width: 65ch;
+        color: var(--muted);
       }
 
       /* ---------- hero ---------- */
 
+      .hero {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(17, 17, 17, 0.13) 1px,
+          transparent 1.2px
+        );
+        background-size: 22px 22px;
+        -webkit-mask-image: radial-gradient(
+          ellipse 70% 80% at 25% 30%,
+          #000 0%,
+          transparent 75%
+        );
+        mask-image: radial-gradient(
+          ellipse 70% 80% at 25% 30%,
+          #000 0%,
+          transparent 75%
+        );
+        pointer-events: none;
+      }
+
       .hero-grid {
+        position: relative;
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
-        gap: clamp(2.5rem, 6vw, 6rem);
+        gap: clamp(40px, 6vw, 80px);
         align-items: center;
+        padding-top: clamp(56px, 10vw, 120px);
+        padding-bottom: clamp(56px, 9vw, 104px);
       }
 
       .hero-title {
-        font-size: clamp(2.6rem, 5vw, 4.25rem);
-        margin-top: 1.4rem;
+        margin-top: 24px;
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: clamp(2.5rem, 5.6vw, 4.25rem);
+        line-height: 1;
+        letter-spacing: -0.045em;
+        color: var(--text);
       }
 
       .hero-title .beat {
@@ -310,28 +389,29 @@
       }
 
       .hero-copy {
-        color: var(--muted);
-        font-size: 1.12rem;
         max-width: 52ch;
-        margin-top: 1.6rem;
+        margin-top: 28px;
+        font-size: 1.125rem;
+        color: var(--muted);
       }
 
       .hero-note {
-        margin-top: 1.4rem;
-        font-size: 0.82rem;
-        color: var(--quiet);
+        margin-top: 20px;
+        font-size: 13px;
+        color: var(--muted);
       }
 
-      /* ---------- the board (hero signature) ---------- */
+      /* ---------- the board (product mock-up, stays dark) ---------- */
 
       .board {
         position: relative;
         overflow: hidden;
-        background: linear-gradient(170deg, var(--board-hi), var(--board));
+        background: var(--board);
         border: 1px solid var(--board-line);
-        border-radius: 14px;
-        padding: clamp(1.6rem, 3vw, 2.4rem);
+        border-radius: 16px;
+        padding: clamp(24px, 3vw, 36px);
         color: var(--chalk);
+        box-shadow: 0 8px 28px rgba(60, 50, 30, 0.12);
       }
 
       .board::before {
@@ -339,48 +419,47 @@
         position: absolute;
         inset: 0 0 auto 0;
         height: 3px;
-        background: linear-gradient(90deg, var(--flame), var(--ember));
+        background: var(--flame);
       }
 
       .board-head {
         display: flex;
         justify-content: space-between;
-        gap: 1rem;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
+        gap: 16px;
+        font-family: var(--mono);
+        font-size: 12px;
       }
 
       .board-head .left {
         color: var(--flame);
       }
 
-      .board-head .right {
+      .board-head .right,
+      .board-scheme,
+      .board-moves .load,
+      .board-clock .label,
+      .board-caption {
         color: var(--chalk-quiet);
       }
 
       .board-name {
-        font-family: "Archivo", sans-serif;
-        font-stretch: 115%;
-        font-weight: 800;
-        letter-spacing: -0.04em;
-        line-height: 1;
+        margin-top: 18px;
+        font-family: var(--display);
+        font-weight: 700;
         font-size: clamp(2.6rem, 5.6vw, 3.6rem);
-        margin-top: 1.1rem;
+        line-height: 1;
+        letter-spacing: -0.045em;
       }
 
       .board-scheme {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 1.02rem;
-        letter-spacing: 0.06em;
-        color: var(--chalk-quiet);
-        margin-top: 0.45rem;
+        margin-top: 8px;
+        font-family: var(--mono);
+        font-size: 1rem;
       }
 
       .board-moves {
         list-style: none;
-        margin-top: 1.5rem;
+        margin-top: 24px;
         border-top: 1px solid var(--board-line);
       }
 
@@ -388,10 +467,9 @@
         display: flex;
         align-items: baseline;
         justify-content: space-between;
-        gap: 1rem;
-        padding: 0.7rem 0;
+        gap: 16px;
+        padding: 11px 0;
         border-bottom: 1px solid var(--board-line);
-        font-size: 1rem;
       }
 
       .board-moves .move {
@@ -399,42 +477,37 @@
       }
 
       .board-moves .load {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.9rem;
-        color: var(--chalk-quiet);
+        font-family: var(--mono);
+        font-size: 0.875rem;
       }
 
       .board-clock {
-        margin-top: 1.8rem;
+        margin-top: 28px;
       }
 
       .board-clock .label {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.68rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--chalk-quiet);
+        font-family: var(--mono);
+        font-size: 12px;
       }
 
       .clock {
         display: block;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
+        margin-top: 2px;
+        font-family: var(--mono);
         font-variant-numeric: tabular-nums;
-        font-weight: 700;
+        font-weight: 500;
         font-size: clamp(3.4rem, 8vw, 4.8rem);
-        letter-spacing: -0.03em;
+        letter-spacing: -0.04em;
         line-height: 1.05;
-        margin-top: 0.15rem;
       }
 
       .board-result {
         display: flex;
         align-items: center;
-        gap: 0.6rem;
-        margin-top: 0.9rem;
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.86rem;
-        letter-spacing: 0.04em;
+        gap: 10px;
+        margin-top: 14px;
+        font-family: var(--mono);
+        font-size: 0.8125rem;
         color: var(--gold);
         opacity: 0;
         transform: translateY(6px);
@@ -457,24 +530,8 @@
       }
 
       .board-caption {
-        margin-top: 0.9rem;
-        font-size: 0.8rem;
-        color: var(--quiet);
-      }
-
-      /* ---------- dark bands ---------- */
-
-      .dark-band {
-        background: var(--board);
-        color: var(--chalk);
-      }
-
-      .dark-band .eyebrow {
-        color: var(--flame);
-      }
-
-      .dark-band .section-copy {
-        color: #b9b1ac;
+        margin-top: 14px;
+        font-size: 13px;
       }
 
       /* ---------- screens ---------- */
@@ -482,90 +539,85 @@
       .screens-rail {
         display: grid;
         grid-auto-flow: column;
-        grid-auto-columns: minmax(200px, 1fr);
-        gap: 1.6rem;
-        margin-top: 3rem;
+        grid-auto-columns: minmax(196px, 1fr);
+        gap: 24px;
+        margin-top: 48px;
+        padding-bottom: 16px;
         overflow-x: auto;
-        padding-bottom: 1rem;
         scroll-snap-type: x mandatory;
         overscroll-behavior-x: contain;
       }
 
       .screen {
-        scroll-snap-align: start;
         min-width: 0;
+        scroll-snap-align: start;
       }
 
       .screen-shot {
-        background: #1a1020;
-        border: 1px solid var(--board-line);
-        border-radius: 12px;
         overflow: hidden;
-        padding-top: 1.1rem;
-        padding-inline: 1.1rem;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        box-shadow: 0 12px 32px rgba(60, 50, 30, 0.1);
       }
 
       .screen-shot img {
         width: 100%;
         height: auto;
-        border-radius: 10px 10px 0 0;
       }
 
       .screen-label {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--flame);
-        margin-top: 1.3rem;
+        margin-top: 20px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .screen h3,
+      .plan-name {
+        font-family: var(--display);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        color: var(--text);
       }
 
       .screen h3 {
-        font-family: "Archivo", sans-serif;
-        font-stretch: 110%;
-        font-weight: 700;
-        letter-spacing: -0.025em;
-        font-size: 1.18rem;
-        margin-top: 0.3rem;
+        margin-top: 2px;
+        font-size: 1.25rem;
       }
 
-      .screen p {
-        color: #b9b1ac;
-        font-size: 0.94rem;
-        margin-top: 0.45rem;
+      .screen p:last-child {
+        margin-top: 8px;
+        font-size: 0.9375rem;
+        color: var(--muted);
       }
 
       /* ---------- benchmarks ---------- */
 
-      .bench-groups {
-        margin-top: 3rem;
-        border-top: 1px solid var(--line);
-      }
-
       .bench-group {
         display: grid;
         grid-template-columns: 190px minmax(0, 1fr);
-        gap: 2.5rem;
-        padding: 1.6rem 0;
+        gap: 8px 48px;
+        padding: 24px 0;
         border-bottom: 1px solid var(--line);
       }
 
       .bench-key {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.76rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
       }
 
       .bench-key .count {
         display: block;
-        font-family: "Archivo", sans-serif;
-        font-stretch: 115%;
-        font-weight: 800;
+        margin-top: 2px;
+        font-family: var(--display);
+        font-weight: 700;
         font-size: 2rem;
-        letter-spacing: -0.04em;
+        line-height: 1.1;
+        letter-spacing: -0.035em;
         color: var(--ember);
-        margin-top: 0.2rem;
       }
 
       .bench-names {
@@ -573,22 +625,18 @@
         display: flex;
         flex-wrap: wrap;
         align-items: baseline;
-        gap: 0.35rem 0.9rem;
+        gap: 6px 14px;
       }
 
       .bench-names li {
-        font-family: "Archivo", sans-serif;
-        font-stretch: 106%;
-        font-weight: 600;
-        font-size: 1.02rem;
-        letter-spacing: -0.015em;
-        color: var(--ink);
+        font-weight: 500;
+        color: var(--text);
         white-space: nowrap;
       }
 
       .bench-names li::after {
         content: "·";
-        margin-left: 0.9rem;
+        margin-left: 14px;
         color: var(--flame);
         font-weight: 700;
       }
@@ -602,205 +650,199 @@
       .wrist-grid {
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-        gap: clamp(2.5rem, 6vw, 5rem);
+        gap: clamp(40px, 6vw, 80px);
         align-items: center;
+      }
+
+      .wrist-grid .section-title {
+        font-size: clamp(1.9rem, 4vw, 2.5rem);
+      }
+
+      .wrist-grid .section-copy {
+        margin-top: 16px;
       }
 
       .watches {
         display: flex;
-        gap: 1.4rem;
+        gap: 20px;
         justify-content: center;
       }
 
       .watch {
-        background: #000;
-        border: 1px solid #3a3330;
-        border-radius: 34px;
-        padding: 6px;
-        max-width: 190px;
         flex: 1 1 0;
+        max-width: 190px;
+        padding: 6px;
+        background: #000;
+        border: 1px solid var(--line);
+        border-radius: 34px;
+        box-shadow: 0 12px 32px rgba(60, 50, 30, 0.14);
       }
 
       .watch img {
         width: 100%;
+        height: auto;
         border-radius: 28px;
       }
 
-      .facts {
+      /* label / value rows, shared by the wrist facts and the build spec */
+
+      .facts,
+      .spec {
         list-style: none;
-        margin-top: 2.4rem;
-        border-top: 1px solid var(--board-line);
+        border-top: 1px solid var(--line);
       }
 
-      .facts li {
+      .facts {
+        margin-top: 32px;
+      }
+
+      .spec {
+        margin-top: 8px;
+      }
+
+      .facts li,
+      .spec li {
         display: grid;
-        grid-template-columns: 132px minmax(0, 1fr);
-        gap: 1.6rem;
-        padding: 1rem 0;
-        border-bottom: 1px solid var(--board-line);
+        grid-template-columns: 160px minmax(0, 1fr);
+        gap: 8px 32px;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--line);
+        align-items: baseline;
       }
 
-      .facts .key {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.72rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--flame);
-        padding-top: 0.18rem;
+      .facts .key,
+      .spec .key {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
       }
 
-      .facts .val {
-        color: #d5cfcb;
-        font-size: 0.98rem;
+      .facts .val,
+      .spec .val {
+        color: var(--text);
+      }
+
+      .spec .val span {
+        display: inline-block; /* gives the line a break opportunity at each separator */
+        padding-inline: 8px;
+        color: var(--muted);
       }
 
       /* ---------- plans ---------- */
 
-      .plans-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0;
-        margin-top: 3rem;
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
+      .plans {
+        margin-top: 8px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
       }
 
       .plan {
-        padding: 2rem 1.8rem 2.2rem;
-        border-right: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: 20px 48px;
+        padding: 32px;
       }
 
-      .plan:last-child {
-        border-right: 0;
-      }
-
-      .plan-name {
-        font-family: "Archivo", sans-serif;
-        font-stretch: 115%;
-        font-weight: 800;
-        font-size: 1.5rem;
-        letter-spacing: -0.03em;
-      }
-
-      .plan-lead {
-        color: var(--muted);
-        font-size: 0.92rem;
-        margin-top: 0.4rem;
-        min-height: 2.8em;
-      }
-
-      .plan ul {
-        list-style: none;
-        margin-top: 1.2rem;
+      .plan + .plan {
         border-top: 1px solid var(--line);
       }
 
-      .plan li {
-        padding: 0.55rem 0;
-        border-bottom: 1px solid var(--line);
-        font-size: 0.94rem;
-        color: var(--ink);
-      }
-
-      .plan li:last-child {
-        border-bottom: 0;
-      }
-
       .plan.is-top {
-        background: var(--section);
+        background: var(--surface);
+      }
+
+      .plan-name {
+        font-size: 1.5rem;
       }
 
       .plan.is-top .plan-name {
         color: var(--ember);
       }
 
-      .plans-note {
-        margin-top: 1.4rem;
-        font-size: 0.85rem;
-        color: var(--quiet);
+      .plan-lead {
+        margin-top: 6px;
+        max-width: 32ch;
+        color: var(--muted);
+        font-size: 0.9375rem;
       }
 
-      /* ---------- build ---------- */
-
-      .spec {
+      .plan ul {
         list-style: none;
-        margin-top: 3rem;
-        border-top: 1px solid var(--line);
+        columns: 2;
+        column-gap: 32px;
       }
 
-      .spec li {
-        display: grid;
-        grid-template-columns: 190px minmax(0, 1fr);
-        gap: 2.5rem;
-        padding: 1.15rem 0;
+      .plan li {
+        break-inside: avoid;
+        padding: 9px 0;
         border-bottom: 1px solid var(--line);
-        align-items: baseline;
+        font-size: 0.9375rem;
+        color: var(--text);
       }
 
-      .spec .key {
-        font-family: "JetBrains Mono", ui-monospace, monospace;
-        font-size: 0.76rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--ember);
-      }
-
-      .spec .val {
-        font-size: 1rem;
-        color: var(--ink);
-      }
-
-      .spec .val span {
-        color: var(--quiet);
-        padding-inline: 0.5rem;
+      .plans-note {
+        margin-top: 20px;
+        font-size: 13px;
+        color: var(--muted);
       }
 
       /* ---------- closing ---------- */
 
-      .closing {
-        background: var(--section);
-        border-top: 1px solid var(--line);
-      }
-
       .closing-title {
-        font-family: "Archivo", sans-serif;
-        font-stretch: 112%;
-        font-weight: 800;
-        letter-spacing: -0.04em;
-        line-height: 1.02;
-        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        font-family: var(--display);
+        font-weight: 700;
+        font-size: clamp(2.2rem, 5.6vw, 3.75rem);
+        line-height: 1;
+        letter-spacing: -0.045em;
+        color: var(--text);
       }
 
       /* ---------- footer ---------- */
 
-      .page-footer {
+      .site-footer {
         border-top: 1px solid var(--line);
       }
 
       .footer-inner {
-        min-height: 78px;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1.5rem;
         flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 24px;
+        padding-block: 28px;
+        font-size: 13px;
         color: var(--muted);
-        font-size: 0.88rem;
-        padding-block: 1.2rem;
+      }
+
+      .footer-inner a {
+        transition: color 0.2s;
+      }
+
+      .footer-inner a:hover {
+        color: var(--text);
       }
 
       .footer-links {
         display: flex;
         flex-wrap: wrap;
-        gap: 1.8rem;
+        gap: 8px 20px;
       }
 
-      .footer-links a {
-        text-decoration: none;
+      /* ---------- scroll reveal (hidden only once JS is running) ---------- */
+
+      .js .reveal {
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 0.6s var(--ease),
+          transform 0.6s var(--ease);
+        transition-delay: calc(var(--i, 0) * 60ms);
       }
 
-      .footer-links a:hover {
-        color: var(--ember);
+      .js .reveal.in {
+        opacity: 1;
+        transform: none;
       }
 
       /* ---------- responsive ---------- */
@@ -808,66 +850,45 @@
       @media (max-width: 1000px) {
         .hero-grid,
         .wrist-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .plans-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: minmax(0, 1fr);
         }
 
         .plan {
-          border-right: 0;
-          border-bottom: 1px solid var(--line);
-        }
-
-        .plan:last-child {
-          border-bottom: 0;
-        }
-
-        .plan-lead {
-          min-height: 0;
+          grid-template-columns: minmax(0, 1fr);
         }
       }
 
       @media (max-width: 820px) {
-        .nav-menu a:not(.nav-cta) {
+        .nav-link {
           display: none;
         }
 
-        .nav-cta {
-          display: inline-block;
-          border: 1px solid var(--ink);
-          border-radius: var(--radius);
-          padding: 0.45rem 0.95rem;
-          font-weight: 600;
+        .nav-links .btn {
+          margin-left: 0;
+        }
+
+        .section-head {
+          grid-template-columns: minmax(0, 1fr);
         }
       }
 
       @media (max-width: 700px) {
-        .wrap {
-          width: min(var(--max), calc(100% - 2rem));
-        }
-
         .bench-group,
-        .spec li,
-        .facts li {
-          grid-template-columns: 1fr;
-          gap: 0.7rem;
+        .facts li,
+        .spec li {
+          grid-template-columns: minmax(0, 1fr);
         }
 
-        .bench-key .count {
-          display: inline;
-          margin-left: 0.5rem;
-          font-size: 1.3rem;
+        .plan {
+          padding: 24px 20px;
+        }
+
+        .plan ul {
+          columns: 1;
         }
 
         .store-btn {
           width: 100%;
-          min-width: 0;
-        }
-
-        .watches {
-          gap: 1rem;
         }
       }
 
@@ -876,27 +897,44 @@
           scroll-behavior: auto;
         }
 
-        .board-result {
-          transition: none;
+        .js .reveal {
+          opacity: 1;
+          transform: none;
+        }
+
+        * {
+          transition-duration: 0s !important;
         }
       }
     </style>
   </head>
 
   <body>
-    <header class="page-header">
-      <nav class="wrap nav-row" aria-label="Main">
-        <a class="nav-brand" href="../">
-          <i class="mdi mdi-arrow-left"></i>
-          Manuel Lorenzo Parejo
-        </a>
-        <div class="nav-menu">
-          <a href="#screens">Screens</a>
-          <a href="#benchmarks">Benchmarks</a>
-          <a href="#plans">Plans</a>
-          <a href="#built">Built with</a>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-play" viewBox="0 0 24 24">
+        <path
+          d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"
+        />
+      </symbol>
+      <symbol id="i-apple" viewBox="0 0 24 24">
+        <path
+          d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"
+        />
+      </symbol>
+    </svg>
+
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="wrap nav" aria-label="Main">
+        <a class="brand" href="#top">WOD Tracker</a>
+        <div class="nav-links">
+          <a class="nav-link" href="#screens">Screens</a>
+          <a class="nav-link" href="#benchmarks">Benchmarks</a>
+          <a class="nav-link" href="#plans">Plans</a>
+          <a class="nav-link" href="#built">Built with</a>
           <a
-            class="nav-cta"
+            class="btn"
             href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
             target="_blank"
             rel="noopener noreferrer"
@@ -906,104 +944,113 @@
       </nav>
     </header>
 
-    <main>
+    <main id="main">
       <!-- ============ hero ============ -->
-      <section class="wrap band hero-grid" aria-labelledby="hero-title">
-        <div>
-          <p class="eyebrow as-written">iOS · Android · Apple Watch · Wear OS</p>
-          <h1 id="hero-title" class="display hero-title">
-            <span class="beat">Log the lift.</span>
-            <span class="beat">Run the clock.</span>
-            <span class="beat">Keep the record.</span>
-          </h1>
-          <p class="hero-copy">
-            WOD Tracker is a training log for CrossFit, weightlifting and hybrid
-            athletes. 81 benchmark WODs, timers for EMOM, AMRAP, Tabata and For
-            Time, and a personal record for every movement you train. It works
-            offline, and your data stays on your phone unless you back it up.
-          </p>
+      <section id="top" class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-grid">
+          <div>
+            <p class="eyebrow reveal">iOS · Android · Apple Watch · Wear OS</p>
+            <h1 id="hero-title" class="hero-title reveal" style="--i: 1">
+              <span class="beat">Log the lift.</span>
+              <span class="beat">Run the clock.</span>
+              <span class="beat">Keep the record.</span>
+            </h1>
+            <p class="hero-copy reveal" style="--i: 2">
+              WOD Tracker is a training log for CrossFit, weightlifting and
+              hybrid athletes. 81 benchmark WODs, timers for EMOM, AMRAP, Tabata
+              and For Time, and a personal record for every movement you train.
+              It works offline, and your data stays on your phone unless you
+              back it up.
+            </p>
 
-          <div class="store-row">
-            <a
-              class="store-btn filled"
-              href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="mdi mdi-google-play" aria-hidden="true"></i>
-              <span>
-                <span class="store-lead">Get it on</span>
-                <span class="store-name">Google Play</span>
-              </span>
-            </a>
-            <a
-              class="store-btn"
-              href="https://apps.apple.com/app/id6760609857"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="mdi mdi-apple" aria-hidden="true"></i>
-              <span>
-                <span class="store-lead">Download on the</span>
-                <span class="store-name">App Store</span>
-              </span>
-            </a>
+            <div class="store-row reveal" style="--i: 3">
+              <a
+                class="store-btn"
+                href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg class="icon" aria-hidden="true"><use href="#i-play" /></svg>
+                <span>
+                  <span class="store-lead">Get it on</span>
+                  <span class="store-name">Google Play</span>
+                </span>
+              </a>
+              <a
+                class="store-btn"
+                href="https://apps.apple.com/app/id6760609857"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg class="icon" aria-hidden="true"><use href="#i-apple" /></svg>
+                <span>
+                  <span class="store-lead">Download on the</span>
+                  <span class="store-name">App Store</span>
+                </span>
+              </a>
+            </div>
+
+            <p class="hero-note reveal" style="--i: 4">
+              Free to use. Premium and PRO add analytics, backup and the AI coach.
+            </p>
           </div>
 
-          <p class="hero-note">
-            Free to use. Premium and PRO add analytics, backup and the AI coach.
-          </p>
-        </div>
-
-        <div>
-          <figure class="board">
-            <div class="board-head">
-              <span class="left">The board</span>
-              <span class="right">For time</span>
-            </div>
-            <p class="board-name">Fran</p>
-            <p class="board-scheme">21 – 15 – 9</p>
-            <ul class="board-moves">
-              <li>
-                <span class="move">Thruster</span>
-                <span class="load">95 lb / 43 kg</span>
-              </li>
-              <li>
-                <span class="move">Pull-up</span>
-                <span class="load">bodyweight</span>
-              </li>
-            </ul>
-            <div class="board-clock">
-              <span class="label">Elapsed</span>
-              <span
-                class="clock"
-                id="clock"
-                data-seconds="222"
-                role="img"
-                aria-label="Workout clock finishing at three minutes forty-two seconds"
-                >0:00</span
-              >
-            </div>
-            <p class="board-result" id="board-result">
-              <span class="dot" aria-hidden="true"></span>
-              Personal record — 14 seconds faster
-            </p>
-            <figcaption class="board-caption">
-              Fran, written the way a box writes it on the wall.
-            </figcaption>
-          </figure>
+          <div class="reveal" style="--i: 2">
+            <figure class="board">
+              <div class="board-head">
+                <span class="left">The board</span>
+                <span class="right">For time</span>
+              </div>
+              <p class="board-name">Fran</p>
+              <p class="board-scheme">21 – 15 – 9</p>
+              <ul class="board-moves">
+                <li>
+                  <span class="move">Thruster</span>
+                  <span class="load">95 lb / 43 kg</span>
+                </li>
+                <li>
+                  <span class="move">Pull-up</span>
+                  <span class="load">bodyweight</span>
+                </li>
+              </ul>
+              <div class="board-clock">
+                <span class="label">Elapsed</span>
+                <span
+                  class="clock"
+                  id="clock"
+                  data-seconds="222"
+                  role="img"
+                  aria-label="Workout clock finishing at three minutes forty-two seconds"
+                  >0:00</span
+                >
+              </div>
+              <p class="board-result" id="board-result">
+                <span class="dot" aria-hidden="true"></span>
+                Personal record — 14 seconds faster
+              </p>
+              <figcaption class="board-caption">
+                Fran, written the way a box writes it on the wall.
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 
       <!-- ============ screens ============ -->
-      <section id="screens" class="dark-band" aria-labelledby="screens-title">
-        <div class="wrap band">
-          <p class="eyebrow">Inside the app</p>
-          <h2 id="screens-title" class="section-title">Five screens, one job each</h2>
-          <p class="section-copy">
-            Nothing here is a mockup. These are the app's own screens, the ones
-            you land on between sets.
-          </p>
+      <section id="screens" class="surface" aria-labelledby="screens-title">
+        <div class="wrap section">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow">Inside the app</p>
+              <h2 id="screens-title" class="section-title">
+                Five screens, one job each
+              </h2>
+            </div>
+            <p class="section-copy">
+              Nothing here is a mockup. These are the app's own screens, the ones
+              you land on between sets.
+            </p>
+          </div>
 
           <div
             class="screens-rail"
@@ -1011,7 +1058,7 @@
             tabindex="0"
             aria-label="App screenshots, scroll sideways"
           >
-            <article class="screen">
+            <article class="screen reveal">
               <div class="screen-shot">
                 <img
                   src="img/screen-lifts.webp"
@@ -1030,7 +1077,7 @@
               </p>
             </article>
 
-            <article class="screen">
+            <article class="screen reveal" style="--i: 1">
               <div class="screen-shot">
                 <img
                   src="img/screen-timer.webp"
@@ -1049,7 +1096,7 @@
               </p>
             </article>
 
-            <article class="screen">
+            <article class="screen reveal" style="--i: 2">
               <div class="screen-shot">
                 <img
                   src="img/screen-benchmarks.webp"
@@ -1068,7 +1115,7 @@
               </p>
             </article>
 
-            <article class="screen">
+            <article class="screen reveal" style="--i: 3">
               <div class="screen-shot">
                 <img
                   src="img/screen-stats.webp"
@@ -1087,7 +1134,7 @@
               </p>
             </article>
 
-            <article class="screen">
+            <article class="screen reveal" style="--i: 4">
               <div class="screen-shot">
                 <img
                   src="img/screen-analytics.webp"
@@ -1110,18 +1157,22 @@
       </section>
 
       <!-- ============ benchmarks ============ -->
-      <section id="benchmarks" class="wrap band" aria-labelledby="bench-title">
-        <p class="eyebrow">The library</p>
-        <h2 id="bench-title" class="section-title">
-          81 workouts you already know by name
-        </h2>
-        <p class="section-copy">
-          The whole benchmark library ships inside the app. No download, no
-          subscription, no signal needed at the box.
-        </p>
+      <section id="benchmarks" class="wrap section" aria-labelledby="bench-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">The library</p>
+            <h2 id="bench-title" class="section-title">
+              81 workouts you already know by name
+            </h2>
+          </div>
+          <p class="section-copy">
+            The whole benchmark library ships inside the app. No download, no
+            subscription, no signal needed at the box.
+          </p>
+        </div>
 
         <div class="bench-groups">
-          <div class="bench-group">
+          <div class="bench-group reveal">
             <p class="bench-key">The Girls <span class="count">21</span></p>
             <ul class="bench-names">
               <li>Fran</li><li>Grace</li><li>Isabel</li><li>Helen</li><li>Diane</li>
@@ -1132,7 +1183,7 @@
             </ul>
           </div>
 
-          <div class="bench-group">
+          <div class="bench-group reveal">
             <p class="bench-key">The Heroes <span class="count">40</span></p>
             <ul class="bench-names">
               <li>Murph</li><li>DT</li><li>Nate</li><li>Michael</li><li>Joshie</li>
@@ -1146,7 +1197,7 @@
             </ul>
           </div>
 
-          <div class="bench-group">
+          <div class="bench-group reveal">
             <p class="bench-key">Named <span class="count">7</span></p>
             <ul class="bench-names">
               <li>Fight Gone Bad</li><li>Filthy Fifty</li><li>The Chief</li>
@@ -1155,7 +1206,7 @@
             </ul>
           </div>
 
-          <div class="bench-group">
+          <div class="bench-group reveal">
             <p class="bench-key">The Open <span class="count">13</span></p>
             <ul class="bench-names">
               <li>12.1</li><li>13.1</li><li>14.5</li><li>16.5</li><li>17.1</li>
@@ -1167,9 +1218,9 @@
       </section>
 
       <!-- ============ wrist ============ -->
-      <section class="dark-band" aria-labelledby="wrist-title">
-        <div class="wrap band wrist-grid">
-          <div>
+      <section class="surface" aria-labelledby="wrist-title">
+        <div class="wrap section wrist-grid">
+          <div class="reveal">
             <p class="eyebrow">On the wrist, and off the grid</p>
             <h2 id="wrist-title" class="section-title">
               It follows you to the rig
@@ -1212,7 +1263,7 @@
             </ul>
           </div>
 
-          <div class="watches">
+          <div class="watches reveal" style="--i: 2">
             <figure class="watch">
               <img
                 src="img/watch-home.webp"
@@ -1238,18 +1289,26 @@
       </section>
 
       <!-- ============ plans ============ -->
-      <section id="plans" class="wrap band" aria-labelledby="plans-title">
-        <p class="eyebrow">Plans</p>
-        <h2 id="plans-title" class="section-title">Logging is free, and stays free</h2>
-        <p class="section-copy">
-          Two paid tiers add the things that need a server or a subscription
-          behind them. Prices are shown in the store for your country.
-        </p>
+      <section id="plans" class="wrap section" aria-labelledby="plans-title">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Plans</p>
+            <h2 id="plans-title" class="section-title">
+              Logging is free, and stays free
+            </h2>
+          </div>
+          <p class="section-copy">
+            Two paid tiers add the things that need a server or a subscription
+            behind them. Prices are shown in the store for your country.
+          </p>
+        </div>
 
-        <div class="plans-grid">
+        <div class="plans reveal">
           <article class="plan">
-            <h3 class="plan-name">Free</h3>
-            <p class="plan-lead">Everything you need to keep a training log.</p>
+            <div>
+              <h3 class="plan-name">Free</h3>
+              <p class="plan-lead">Everything you need to keep a training log.</p>
+            </div>
             <ul>
               <li>Unlimited lifts, sets and history</li>
               <li>All 81 benchmark WODs</li>
@@ -1261,10 +1320,12 @@
           </article>
 
           <article class="plan">
-            <h3 class="plan-name">Premium</h3>
-            <p class="plan-lead">
-              For athletes who plan blocks rather than sessions.
-            </p>
+            <div>
+              <h3 class="plan-name">Premium</h3>
+              <p class="plan-lead">
+                For athletes who plan blocks rather than sessions.
+              </p>
+            </div>
             <ul>
               <li>Unlimited templates</li>
               <li>Multi-week programs</li>
@@ -1277,10 +1338,12 @@
           </article>
 
           <article class="plan is-top">
-            <h3 class="plan-name">PRO</h3>
-            <p class="plan-lead">
-              Everything in Premium, plus coaching between sessions.
-            </p>
+            <div>
+              <h3 class="plan-name">PRO</h3>
+              <p class="plan-lead">
+                Everything in Premium, plus coaching between sessions.
+              </p>
+            </div>
             <ul>
               <li>AI coach for suggestions and post-workout insight</li>
               <li>Video demonstrations for 100+ movements</li>
@@ -1297,15 +1360,24 @@
       </section>
 
       <!-- ============ built with ============ -->
-      <section id="built" class="wrap band" aria-labelledby="built-title">
-        <p class="eyebrow">Engineering</p>
-        <h2 id="built-title" class="section-title">How it is built</h2>
-        <p class="section-copy">
-          One Kotlin Multiplatform codebase holds the data and domain layers.
-          Each platform keeps its own native UI, so nothing feels ported.
-        </p>
+      <section
+        id="built"
+        class="wrap section"
+        style="padding-top: 0"
+        aria-labelledby="built-title"
+      >
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Engineering</p>
+            <h2 id="built-title" class="section-title">How it is built</h2>
+          </div>
+          <p class="section-copy">
+            One Kotlin Multiplatform codebase holds the data and domain layers.
+            Each platform keeps its own native UI, so nothing feels ported.
+          </p>
+        </div>
 
-        <ul class="spec">
+        <ul class="spec reveal">
           <li>
             <span class="key">Shared</span>
             <span class="val"
@@ -1348,17 +1420,17 @@
       </section>
 
       <!-- ============ closing ============ -->
-      <section class="closing">
-        <div class="wrap band">
+      <section class="surface">
+        <div class="wrap section reveal">
           <h2 class="closing-title">Start with today's WOD.</h2>
           <div class="store-row">
             <a
-              class="store-btn filled"
+              class="store-btn"
               href="https://play.google.com/store/apps/details?id=me.manulorenzo.crossfittracker.android"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i class="mdi mdi-google-play" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true"><use href="#i-play" /></svg>
               <span>
                 <span class="store-lead">Get it on</span>
                 <span class="store-name">Google Play</span>
@@ -1370,7 +1442,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i class="mdi mdi-apple" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true"><use href="#i-apple" /></svg>
               <span>
                 <span class="store-lead">Download on the</span>
                 <span class="store-name">App Store</span>
@@ -1381,11 +1453,12 @@
       </section>
     </main>
 
-    <footer class="page-footer">
+    <footer class="site-footer">
       <div class="wrap footer-inner">
         <small>
-          WOD Tracker is built by
-          <a href="../">Manuel Lorenzo Parejo</a>. &copy; 2026.
+          Made by
+          <a href="https://www.manulorenzo.me/">Manuel Lorenzo Parejo</a>.
+          &copy; 2026.
         </small>
         <div class="footer-links">
           <a
@@ -1401,7 +1474,7 @@
             >Support</a
           >
           <a href="mailto:manulorenzop@gmail.com">Contact</a>
-          <a href="../">Portfolio</a>
+          <a href="/">&larr; All work</a>
         </div>
       </div>
     </footer>
@@ -1465,6 +1538,31 @@
         }
 
         requestAnimationFrame(step);
+      })();
+    </script>
+
+    <script>
+      (function () {
+        var els = document.querySelectorAll(".reveal");
+        if (!("IntersectionObserver" in window)) {
+          els.forEach(function (el) {
+            el.classList.add("in");
+          });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            });
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+        );
+        els.forEach(function (el) {
+          io.observe(el);
+        });
       })();
     </script>
   </body>

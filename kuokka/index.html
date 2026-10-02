@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fbfbfa" />
     <title>Kuokka — a Hacker News reader for Android and iOS</title>
     <meta
       name="description"
@@ -37,7 +38,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link
@@ -45,23 +46,58 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/kuokka.css" />
+    <noscript
+      ><style>
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      </style></noscript
+    >
     <style>
       /* ---------- hero ---------- */
 
       .hero {
+        position: relative;
         display: grid;
         grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-        gap: 3.5rem;
+        gap: 56px;
         align-items: center;
-        padding: 5rem 0 5.5rem;
+        padding: clamp(48px, 9vw, 96px) 0 clamp(56px, 9vw, 96px);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: -64px;
+        bottom: 0;
+        left: 50%;
+        width: 100vw;
+        transform: translateX(-50%);
+        background-image: radial-gradient(
+          rgba(17, 17, 17, 0.13) 1px,
+          transparent 1.2px
+        );
+        background-size: 22px 22px;
+        -webkit-mask-image: radial-gradient(
+          ellipse 70% 80% at 25% 30%,
+          #000 0%,
+          transparent 75%
+        );
+        mask-image: radial-gradient(
+          ellipse 70% 80% at 25% 30%,
+          #000 0%,
+          transparent 75%
+        );
+        pointer-events: none;
       }
 
       .hero h1 {
-        font-size: clamp(2.6rem, 5.6vw, 4rem);
-        font-weight: 800;
+        font-size: clamp(2.5rem, 6.2vw, 4.25rem);
+        line-height: 1;
         letter-spacing: -0.045em;
-        line-height: 1.02;
-        margin-top: 1.1rem;
+        margin-top: 20px;
       }
 
       .hero h1 .accent {
@@ -69,37 +105,36 @@
       }
 
       .lede {
+        max-width: 34em;
+        margin-top: 24px;
+        font-size: 1.125rem;
         color: var(--muted);
-        font-size: 1.14rem;
-        max-width: 34rem;
-        margin-top: 1.4rem;
       }
 
       .cta-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 2rem;
+        gap: 12px;
+        margin-top: 32px;
       }
 
       .hero-meta {
-        font-family: "Geist Mono", ui-monospace, monospace;
-        font-size: 0.8rem;
-        color: var(--quiet);
-        margin-top: 1.6rem;
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem 0.9rem;
+        gap: 4px 14px;
+        margin-top: 24px;
         list-style: none;
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--muted);
       }
 
       .hero-meta li + li::before {
         content: "·";
-        margin-right: 0.9rem;
-        color: var(--line-strong);
+        margin-right: 14px;
       }
 
-      /* ---------- device stack ---------- */
+      /* ---------- device frames ---------- */
 
       .shots {
         position: relative;
@@ -110,11 +145,11 @@
       }
 
       .device {
-        border-radius: 26px;
-        border: 1px solid var(--line-strong);
-        background: #fff;
         overflow: hidden;
-        box-shadow: 0 22px 55px -30px rgba(20, 21, 26, 0.55);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: var(--surface);
+        box-shadow: 0 12px 32px rgba(60, 50, 30, 0.1);
       }
 
       .device img {
@@ -122,34 +157,31 @@
       }
 
       .shots .device-front {
-        width: 258px;
         position: relative;
         z-index: 2;
+        width: 258px;
       }
 
       .shots .device-back {
-        width: 210px;
         position: absolute;
+        z-index: 1;
         right: 2%;
         bottom: 8%;
-        z-index: 1;
-        opacity: 0.97;
+        width: 210px;
       }
 
-      /* ---------- feature feed ---------- */
+      /* ---------- feature rows ---------- */
 
       .feed {
         list-style: none;
-        margin-top: 2.75rem;
-        border-top: 1px solid var(--line-strong);
       }
 
       .feed-row {
         display: grid;
-        grid-template-columns: 2.6rem minmax(0, 1fr);
-        gap: 1.4rem;
+        grid-template-columns: 40px minmax(0, 1fr);
+        gap: 16px;
         align-items: start;
-        padding: 1.5rem 0;
+        padding: 24px 0;
         border-bottom: 1px solid var(--line);
       }
 
@@ -157,15 +189,14 @@
         display: flex;
         align-items: baseline;
         flex-wrap: wrap;
-        gap: 0.7rem;
+        gap: 4px 12px;
       }
 
       .rank {
-        font-family: "Geist Mono", ui-monospace, monospace;
-        font-size: 0.95rem;
-        font-weight: 500;
-        color: var(--quiet);
-        padding-top: 0.15rem;
+        padding-top: 4px;
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--muted);
       }
 
       .feed-row:nth-child(-n + 3) .rank {
@@ -173,94 +204,96 @@
       }
 
       .feed-row h3 {
-        font-size: 1.22rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
+        font-size: 1.25rem;
+        line-height: 1.25;
+        letter-spacing: -0.03em;
       }
 
       .feed-row p {
-        color: var(--muted);
-        margin-top: 0.4rem;
         max-width: 44rem;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.9375rem;
       }
 
-      .row-meta {
-        font-family: "Geist Mono", ui-monospace, monospace;
-        font-size: 0.78rem;
-        color: var(--quiet);
-        margin-top: 0.7rem;
+      .feed-row .row-meta {
+        margin-top: 12px;
+        font-family: var(--mono);
+        font-size: 12px;
       }
 
-      .pill {
-        font-family: "Geist Mono", ui-monospace, monospace;
-        font-size: 0.7rem;
-        font-weight: 500;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--orange-ink);
-        background: var(--orange-tint);
-        border: 1px solid #ffd9bd;
-        padding: 0.28rem 0.6rem;
-        border-radius: 999px;
-        white-space: nowrap;
-        transform: translateY(-1px);
+      .tag {
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1;
+        padding: 5px 8px;
+        border-radius: 5px;
+        background: var(--surface);
+        color: var(--muted);
+      }
+
+      .tag.premium {
+        background: var(--yellow-bg);
+        color: var(--yellow-fg);
       }
 
       .fact-strip {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.5rem 3rem;
-        margin-top: 2.75rem;
-      }
-
-      .fact {
-        border-left: 2px solid var(--orange);
-        padding-left: 1.1rem;
+        gap: 24px 48px;
+        margin-top: 32px;
+        padding: 24px 28px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
       }
 
       .fact dt {
-        font-family: "Geist Mono", ui-monospace, monospace;
-        font-size: 0.74rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--quiet);
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
       }
 
       .fact dd {
-        margin-top: 0.35rem;
-        font-size: 1rem;
-        color: var(--ink);
+        margin-top: 6px;
+        font-size: 0.9375rem;
+        color: var(--text);
       }
 
-      /* ---------- split showcase ---------- */
+      /* ---------- showcase ---------- */
 
       .showcase {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 3rem;
-        margin-top: 3rem;
+        gap: 16px;
+        margin-top: 32px;
       }
 
       .showcase-item {
         display: grid;
         grid-template-columns: 170px minmax(0, 1fr);
-        gap: 1.75rem;
+        gap: 28px;
         align-items: center;
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
       }
 
       .showcase-item h3 {
-        font-size: 1.3rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
+        font-size: 1.375rem;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
       }
 
       .showcase-item p {
+        margin-top: 10px;
         color: var(--muted);
-        margin-top: 0.55rem;
+        font-size: 0.9375rem;
       }
 
       .showcase-item .device {
-        border-radius: 20px;
+        border-radius: 24px;
       }
 
       .showcase-item .device img {
@@ -273,150 +306,158 @@
 
       .stack-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.25rem;
-        margin-top: 3rem;
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+        gap: 16px;
+        margin-top: 32px;
       }
 
       .stack-card {
-        background: var(--paper);
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        padding: 1.6rem;
         display: flex;
         flex-direction: column;
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #fff;
       }
 
       .stack-card.is-shared {
-        border-color: #ffd0ac;
-        background: linear-gradient(180deg, var(--orange-tint) 0%, #fff 62%);
+        grid-row: span 2;
+        padding: 32px;
       }
 
       .stack-card .stack-head {
         display: flex;
         align-items: center;
-        gap: 0.6rem;
-        font-family: "Geist Mono", ui-monospace, monospace;
-        font-size: 0.75rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--quiet);
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
       }
 
-      .stack-card.is-shared .stack-head {
+      .stack-card.is-shared .stack-head i {
         color: var(--orange-ink);
       }
 
       .stack-card h3 {
-        font-size: 1.18rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        margin-top: 0.75rem;
+        font-size: 1.5rem;
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        margin-top: 16px;
       }
 
-      .stack-card p {
+      .stack-card p:not(.stack-head) {
+        margin-top: 10px;
         color: var(--muted);
-        font-size: 0.98rem;
-        margin-top: 0.55rem;
+        font-size: 0.9375rem;
       }
 
       .chips {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.4rem;
-        margin-top: 1.35rem;
+        gap: 6px;
+        margin-top: auto;
+        padding-top: 20px;
         list-style: none;
       }
 
       .chips li {
-        font-family: "Geist Mono", ui-monospace, monospace;
-        font-size: 0.75rem;
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1;
+        padding: 5px 8px;
+        border-radius: 5px;
+        background: var(--surface);
         color: var(--muted);
-        background: rgba(255, 255, 255, 0.75);
-        border: 1px solid var(--line);
-        border-radius: 6px;
-        padding: 0.25rem 0.5rem;
+      }
+
+      .stack-card.is-shared h3 {
+        font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+        line-height: 1.05;
+        letter-spacing: -0.035em;
+      }
+
+      .stack-card.is-shared p:not(.stack-head) {
+        font-size: 1.0625rem;
       }
 
       .stack-note {
-        margin-top: 2rem;
-        font-size: 1rem;
-        color: var(--muted);
         max-width: 46rem;
+        margin-top: 32px;
+        color: var(--muted);
       }
 
       /* ---------- privacy ---------- */
 
       .privacy-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 2.5rem;
-        margin-top: 3rem;
+        margin-top: 8px;
       }
 
-      .privacy-item i {
-        font-size: 1.5rem;
-        color: var(--indigo);
+      .privacy-item {
+        display: grid;
+        grid-template-columns: 20px minmax(0, 4fr) minmax(0, 7fr);
+        gap: 8px 20px;
+        padding: 24px 0;
+        border-bottom: 1px solid var(--line);
       }
 
       .privacy-item h3 {
-        font-size: 1.08rem;
-        font-weight: 700;
-        margin-top: 0.7rem;
+        font-size: 1.25rem;
+        line-height: 1.25;
+        letter-spacing: -0.03em;
+      }
+
+      .privacy-item i {
+        font-size: 1.25rem;
+        line-height: 1.25;
+        color: var(--muted);
       }
 
       .privacy-item p {
         color: var(--muted);
-        margin-top: 0.45rem;
+        font-size: 0.9375rem;
       }
 
       .privacy-more {
-        margin-top: 2.5rem;
-        font-size: 0.98rem;
+        max-width: 46rem;
+        margin-top: 28px;
         color: var(--muted);
       }
 
       .privacy-more a {
-        color: var(--indigo);
-        text-underline-offset: 2px;
+        color: var(--text);
+        border-bottom: 1px solid var(--line);
+        transition: border-color 0.2s;
+      }
+
+      .privacy-more a:hover {
+        border-color: var(--text);
       }
 
       /* ---------- closing cta ---------- */
 
       .closing {
-        background: var(--ink);
-        color: #fff;
+        background: var(--surface);
+        border-top: 1px solid var(--line);
       }
 
       .closing .wrap {
-        padding: 5rem 0;
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
-        gap: 2.5rem;
+        gap: 32px;
         align-items: center;
+        padding-block: clamp(56px, 9vw, 96px);
       }
 
       .closing h2 {
         font-size: clamp(1.9rem, 4vw, 2.5rem);
-        font-weight: 800;
-        letter-spacing: -0.035em;
         line-height: 1.1;
+        letter-spacing: -0.035em;
       }
 
       .closing p {
-        color: #b6bbc9;
-        margin-top: 0.85rem;
         max-width: 34rem;
-      }
-
-      .closing .store-button {
-        background: #fff;
-        color: var(--ink);
-        border-color: #fff;
-      }
-
-      .closing .store-button:hover {
-        background: #e9ebf0;
+        margin-top: 12px;
+        color: var(--muted);
       }
 
       .closing .cta-row {
@@ -428,14 +469,13 @@
       @media (max-width: 1020px) {
         .hero {
           grid-template-columns: 1fr;
-          gap: 3rem;
-          padding: 3.5rem 0 4rem;
+          gap: 48px;
         }
 
         .shots {
           min-height: 0;
           justify-content: flex-start;
-          padding-bottom: 1rem;
+          padding-bottom: 16px;
         }
 
         .shots .device-front {
@@ -448,29 +488,22 @@
           left: 200px;
         }
 
-        .stack-grid,
-        .privacy-grid {
+        .stack-grid {
           grid-template-columns: 1fr;
         }
 
-        .privacy-grid {
-          gap: 2rem;
-        }
-
-        .showcase {
-          gap: 2.25rem;
+        .stack-card.is-shared {
+          grid-row: auto;
         }
       }
 
       @media (max-width: 760px) {
         .hero-meta {
           flex-direction: column;
-          gap: 0.35rem;
         }
 
         .hero-meta li + li::before {
-          content: "";
-          margin: 0;
+          content: none;
         }
 
         .shots .device-back {
@@ -482,8 +515,8 @@
         }
 
         .feed-row {
-          grid-template-columns: 1.8rem minmax(0, 1fr);
-          gap: 0.9rem;
+          grid-template-columns: 24px minmax(0, 1fr);
+          gap: 12px;
         }
 
         .fact-strip,
@@ -491,9 +524,18 @@
           grid-template-columns: 1fr;
         }
 
+        .privacy-item {
+          grid-template-columns: 20px minmax(0, 1fr);
+        }
+
+        .privacy-item p {
+          grid-column: 2;
+        }
+
         .showcase-item {
           grid-template-columns: minmax(0, 1fr);
-          gap: 1.25rem;
+          gap: 20px;
+          padding: 24px;
         }
 
         .showcase-item .device {
@@ -502,7 +544,6 @@
 
         .closing .wrap {
           grid-template-columns: 1fr;
-          padding: 3.75rem 0;
         }
       }
     </style>
@@ -510,7 +551,6 @@
 
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="top-rule"></div>
 
     <header class="site-header">
       <nav class="nav wrap" aria-label="Primary">
@@ -558,7 +598,7 @@
                 </span>
               </a>
               <a
-                class="store-button ghost"
+                class="store-button"
                 href="https://play.google.com/store/apps/details?id=me.manulorenzo.hackernewskmp"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -673,7 +713,7 @@
               <div>
                 <div class="row-title">
                   <h3>Offline reading</h3>
-                  <span class="pill">Premium</span>
+                  <span class="tag premium">Premium</span>
                 </div>
                 <p>
                   Save stories before you leave and read them on the train, on a
@@ -701,7 +741,7 @@
               <div>
                 <div class="row-title">
                   <h3>For You</h3>
-                  <span class="pill">Premium</span>
+                  <span class="tag premium">Premium</span>
                 </div>
                 <p>
                   Recommendations built from what you actually open — your
@@ -992,15 +1032,15 @@
 
     <footer class="site-footer">
       <div class="footer-inner wrap">
-        <small
-          >Built by Manuel Lorenzo Parejo. Not affiliated with
-          Y&nbsp;Combinator.</small
-        >
+        <div class="footer-meta">
+          <small>Not affiliated with Y&nbsp;Combinator.</small>
+          <small>Made by <a href="https://www.manulorenzo.me/">Manuel Lorenzo Parejo</a></small>
+        </div>
         <div class="footer-links">
           <a href="privacy/">Privacy</a>
           <a href="terms/">Terms</a>
           <a href="support/">Support</a>
-          <a href="/">Portfolio</a>
+          <a href="/">&larr; All work</a>
           <a href="mailto:manulorenzop@gmail.com">Contact</a>
         </div>
       </div>

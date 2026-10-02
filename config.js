@@ -82,6 +82,9 @@ window.PorfolioConfig = {
     },
     {
       name: "WOD Tracker",
+      image: "wod-tracker/img/screen-timer.webp",
+      imageAlt: "WOD Tracker timer screen with EMOM, AMRAP and Tabata presets",
+      summary: "A training log for CrossFit and weightlifting: 81 benchmark WODs, interval timers, automatic PRs and watch companions.",
       type: "iOS & Android",
       link: "/wod-tracker/",
       description:
@@ -89,6 +92,9 @@ window.PorfolioConfig = {
     },
     {
       name: "Kuokka \u2014 Hacker News Reader",
+      image: "kuokka/assets/shot-stories.png",
+      imageAlt: "Kuokka story list showing top Hacker News posts",
+      summary: "A Hacker News client with keyword watchlists, on-device summaries, reader mode and offline reading.",
       type: "Android \u00b7 iOS",
       link: "/kuokka/",
       description:
@@ -96,6 +102,9 @@ window.PorfolioConfig = {
     },
     {
       name: "Stressi",
+      image: "stressi/assets/01-body-state-hero.png",
+      imageAlt: "Stressi daily Body State score of 64",
+      summary: "Turns HRV, sleep and resting heart rate into one daily score, all on device. No account, no cloud.",
       type: "Android & iOS",
       link: "/stressi/",
       description:
@@ -109,6 +118,9 @@ window.PorfolioConfig = {
     },
     {
       name: "AnywhereRoles \u2014 Mobile App",
+      image: "anywhereroles/assets/shot-jobs.webp",
+      imageAlt: "AnywhereRoles jobs list with search and filters",
+      summary: "Native Android and iOS apps on a shared Kotlin Multiplatform core: remote roles scored by fit, plus an application tracker.",
       ownBackend: true,
       type: "Android & iOS",
       link: "/anywhereroles/",

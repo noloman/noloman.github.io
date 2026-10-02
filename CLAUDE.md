@@ -21,28 +21,35 @@ templating, served as a single-page site with no build step.
 
 - `skills[]` — each needs an `area` of `"backend"` or `"mobile"`. The Stack section groups by this
   and renders backend first; anything with an unrecognised `area` is dropped from the page.
-- `backendWorks[]` — the "Services" section. A `null` `link` renders as private: hollow status
-  marker, a `Private` tag, and no outbound link. `type` is shown as a short stack tag, so keep it
+- `backendWorks[]` — the "Backend" group in Work. A `null` `link` renders as private: a `Private`
+  tag and no outbound link. `type` is shown as a short stack tag, so keep it
   to a few words.
-- `works[]` — the "Products" section. `type` is optional; without it the platform is inferred from
+- `works[]` — the "Products" group in Work. Add `image` (+ `imageAlt`) to get a bento card with a phone
+  screenshot; optional `summary` is a one-line blurb used on the card instead of `description`. `type` is optional; without it the platform is inferred from
   the link (Play Store, App Store, otherwise Web). Set `ownBackend: true` on anything served by
-  the Spring Boot service shown in the hero diagram.
+  the private Spring Boot service; it gets a "Runs on my backend" tag.
 
 ## Design system
 
-Positioning is backend-first: the site leads with backend work and frames mobile as background.
-Keep that hierarchy when adding sections.
+Simple, light, editorial. Positioning is still backend-first: the Work section lists backend
+before products, and the Stack section lists backend before mobile. Keep that order when adding
+content.
 
-- Single committed dark theme. There is no light mode and no theme toggle; all colors come from
-  the custom properties on `:root`.
-- Sodium-amber (`--amber`) is the only accent — spend it on the hero diagram, eyebrows, status
-  markers and hover states. `--steel` is structural, not an accent.
-- Type: **Archivo** (display and body, variable width axis) and **IBM Plex Mono** (all labels,
-  tags, nav and data), both from Google Fonts.
-- The hero topology diagram is hand-authored inline SVG on a 400x356 viewBox. Pulse paths carry
-  `pathLength="100"` so one dot traverses each path in the same time regardless of its length.
+- Single light theme (no dark mode, no toggle). All colors are custom properties on `:root`: warm
+  off-white `--bg`, charcoal text, `--muted` for secondary text, `--line` hairlines.
+- No accent color. The only color is the pastel tags (`.tag.private` yellow, `.tag.own` blue).
+- Type: **Bricolage Grotesque** (700, tight tracking) for headings, **Geist** for body, **Geist Mono**
+  for labels and tags, all from Google Fonts. Swap the heading face via `--display`.
+- Layout is a single 960px column. Backend work and the stack are hairline-divided rows (`.row`).
+  Products with an `image` render as a bento grid of cards (`.card`, pattern 4/2/2/4 columns of 6);
+  products without one fall back to rows. The hero has a faint dot-grid backdrop.
 - Icons are an inline `<svg><symbol>` sprite at the top of `<body>`, referenced via `<use>`. There
-  is no icon font — do not reintroduce one for a handful of glyphs.
+  is no icon font.
+- Scroll-reveal is the `.reveal` class plus one `IntersectionObserver` in `mounted()`; stagger with
+  `style="--i: n"`.
+- The app landing pages (`anywhereroles/`, `kuokka/`, `stressi/`, `wod-tracker/`) use the same system. Each
+  keeps ONE brand accent (blue, orange, indigo, flame) for small markers only; dark appears only inside
+  product mock-ups. Their footers carry "Made by Manuel Lorenzo Parejo" and a "← All work" link.
 - Quality floor: responsive to 320px, visible `:focus-visible` rings, and
   `prefers-reduced-motion` respected.
 
@@ -67,7 +74,7 @@ Enabled linters: prettier, checkov, renovate, taplo, trufflehog, git-diff-check
 All dependencies are loaded via CDN (no package.json):
 
 - Vue.js 2.x (jsDelivr)
-- Google Fonts: Archivo, IBM Plex Mono
+- Google Fonts: Instrument Serif, Geist, Geist Mono
 
 ## Security
 
