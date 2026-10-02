@@ -47,9 +47,9 @@ content.
   is no icon font.
 - Scroll-reveal is the `.reveal` class plus one `IntersectionObserver` in `mounted()`; stagger with
   `style="--i: n"`.
-- The app landing pages (`anywhereroles/`, `kuokka/`, `stressi/`, `wod-tracker/`) use the same system. Each
-  keeps ONE brand accent (blue, orange, indigo, flame) for small markers only; dark appears only inside
-  product mock-ups. Their footers carry "Made by Manuel Lorenzo Parejo" and a "← All work" link.
+- The AnywhereRoles, Kuokka and Stressi landing pages use the same system. Each keeps ONE brand accent
+  (blue, orange, indigo) for small markers only; dark appears only inside product mock-ups. The WOD
+  Tracker page (`wod-tracker/`) is deliberately its own dark design with self-hosted fonts. Their footers carry "Made by Manuel Lorenzo Parejo" and a "← All work" link.
 - Quality floor: responsive to 320px, visible `:focus-visible` rings, and
   `prefers-reduced-motion` respected.
 

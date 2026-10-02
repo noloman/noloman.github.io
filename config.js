@@ -82,7 +82,7 @@ window.PorfolioConfig = {
     },
     {
       name: "WOD Tracker",
-      image: "wod-tracker/img/screen-timer.webp",
+      image: "wod-tracker/img/ios-timer.webp",
       imageAlt: "WOD Tracker timer screen with EMOM, AMRAP and Tabata presets",
       summary: "A training log for CrossFit and weightlifting: 81 benchmark WODs, interval timers, automatic PRs and watch companions.",
       type: "iOS & Android",
