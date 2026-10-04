@@ -4,7 +4,7 @@
 > Android, Apple Watch and Wear OS. It has 81 built-in benchmark WODs, timers for EMOM,
 > AMRAP, Tabata and For Time, and an automatic personal record and one-rep max for every
 > movement. It works offline, and training data stays on the device unless the user turns
-> on cloud backup.
+> on cloud backup or asks the AI coach.
 
 ## What it does
 
@@ -16,7 +16,7 @@
 - **Log**: every set with weight, reps and a note, filterable by lifts or WODs.
 - **Progress**: personal record, estimated one-rep max (Epley and Brzycki), total volume,
   average weight and set count for any movement, with the full history as a chart.
-- **Analytics** (Premium): training load, consistency, plateau detection and deload advice.
+- **Analytics** (Premium): training health, training load, consistency, plateau detection and strength ratios.
 - **Watch**: Apple Watch and Wear OS companions run the timers, log sets and a rest timer.
   Sets logged while the phone is out of range are queued and delivered when it reconnects.
   Heart rate is shown during a workout and is never stored or uploaded by the app.
@@ -28,19 +28,19 @@
 
 - iPhone and Apple Watch (SwiftUI, with Apple Health sync).
 - Android and Wear OS (Jetpack Compose).
-- 18 interface languages; store listings in 22.
+- 19 interface languages (including Traditional Chinese); store listings in 22.
 
 ## Pricing
 
 - Free: unlimited lifts, sets and history, all 81 benchmark WODs, all timers, automatic
-  personal records and 1RM, three workout templates, Apple Watch and Wear OS.
+  personal records and 1RM, three workout templates, data export (CSV or JSON) and restore,
+  a lock screen Live Activity on iPhone, Apple Watch and Wear OS.
 - Premium: unlimited templates, multi-week programs, advanced analytics and plateau
-  detection, cloud backup and restore, data export, Apple Health sync and body composition,
-  warm-up generator and recovery dashboard.
-- PRO: everything in Premium plus the AI coach, video demonstrations for 100+ movements, a
-  lock screen Live Activity and form check.
-- New subscriptions start with a 3-day free trial. Prices are set per country by the App
-  Store and Google Play.
+  detection, cloud backup and auto-sync, Timer Studio, voice logging, supersets and circuits,
+  Apple Health sync and body composition, warm-up generator and recovery dashboard.
+- PRO: everything in Premium plus the AI coach, animated exercise demos and form check.
+- A free trial applies when the store offers one for your account. Prices are set per country
+  by the App Store and Google Play.
 
 ## Built by
 

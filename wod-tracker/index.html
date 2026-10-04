@@ -1238,7 +1238,7 @@
             <p class="lede rv" style="--i: 6">
               A training log for CrossFit, weightlifting and hybrid athletes. 81 benchmark WODs, timers for
               EMOM, AMRAP, Tabata and For Time, and a personal record for every movement. It works offline,
-              and your data stays on your phone unless you back it up.
+              and your data stays on your phone unless you back it up or ask the AI coach.
             </p>
             <div class="stores rv" style="--i: 8">
               <a
@@ -1271,7 +1271,7 @@
                 src="img/ios-benchmarks.webp"
                 width="660"
                 height="1434"
-                alt="The benchmark library: Amanda, Angie and Annie, each with a Start Timer button"
+                alt="The Benchmarks list on the Train tab: Amanda, Angie and Annie, each with a Start Timer button"
                 decoding="async"
               />
             </div>
@@ -1280,7 +1280,7 @@
                 src="img/ios-stats.webp"
                 width="660"
                 height="1434"
-                alt="Progress for the snatch: estimated one-rep max, total volume and a chart"
+                alt="Progress for the snatch: estimated one-rep max, total volume, average weight, total sets, a chart and the start of the PR board"
                 decoding="async"
               />
             </div>
@@ -1289,7 +1289,7 @@
                 src="img/ios-timer.webp"
                 width="660"
                 height="1434"
-                alt="A 12-minute EMOM running full screen with a large green clock"
+                alt="A 12-minute EMOM running full screen: a large green clock at 0:48 in a ring, round 2 of 12, next up work 1:00, and a hold-to-finish button"
                 fetchpriority="high"
               />
             </div>
@@ -1319,7 +1319,7 @@
         <dl class="numbers">
           <div class="rv"><dd>81</dd><dt>benchmark WODs, built in and offline</dt></div>
           <div class="rv" style="--i: 1"><dd>4</dd><dt>timer formats: EMOM, AMRAP, For Time, Tabata</dt></div>
-          <div class="rv" style="--i: 3"><dd>18</dd><dt>languages in the app, 22 in the stores</dt></div>
+          <div class="rv" style="--i: 3"><dd>19</dd><dt>languages in the app, 22 in the stores</dt></div>
           <div class="rv" style="--i: 4"><dd>4</dd><dt>platforms: iPhone, Android, Apple Watch, Wear OS</dt></div>
         </dl>
       </div>
@@ -1339,7 +1339,7 @@
             <div class="tabs" role="tablist" aria-label="App screens" aria-orientation="vertical">
               <button class="tab" role="tab" id="tab-timer" aria-controls="shot-timer" aria-selected="true">
                 <span class="n">01</span><span class="t">Timer</span>
-                <span class="d"><p><span>Run the clock. EMOM, AMRAP, For Time and Tabata, set up the way you train, with audio cues, a time cap and a full-screen clock you can read from across the gym.</span></p></span>
+                <span class="d"><p><span>Run the clock. EMOM, AMRAP, For Time and Tabata, set up the way you train, with audio cues, a time cap and a full-screen clock you can read from across the gym. It changes colour with each phase and shows your round and what is next.</span></p></span>
               </button>
               <button class="tab" role="tab" id="tab-benchmarks" aria-controls="shot-benchmarks" aria-selected="false" tabindex="-1">
                 <span class="n">02</span><span class="t">Benchmarks</span>
@@ -1347,34 +1347,34 @@
               </button>
               <button class="tab" role="tab" id="tab-log" aria-controls="shot-log" aria-selected="false" tabindex="-1">
                 <span class="n">03</span><span class="t">Log</span>
-                <span class="d"><p><span>Every set, with weight, reps and a note. Filter by lifts or WODs.</span></p></span>
+                <span class="d"><p><span>Every set, with weight, reps and a note, and your WOD scores in the same list. Filter by All, Lifts or WODs.</span></p></span>
               </button>
               <button class="tab" role="tab" id="tab-progress" aria-controls="shot-progress" aria-selected="false" tabindex="-1">
                 <span class="n">04</span><span class="t">Progress</span>
-                <span class="d"><p><span>Estimated one-rep max from any rep scheme, total volume, average weight and set count for any movement, with the whole history as a chart.</span></p></span>
+                <span class="d"><p><span>Estimated one-rep max from any rep scheme, total volume, average weight and set count for any movement, with the whole history as a chart and a PR board below it.</span></p></span>
               </button>
               <button class="tab" role="tab" id="tab-analytics" aria-controls="shot-analytics" aria-selected="false" tabindex="-1">
                 <span class="n">05</span><span class="t">Analytics<span class="tag yellow tour-tag">Premium</span></span>
-                <span class="d"><p><span>Training load, consistency and the lifts that have stopped moving. It tells you when to deload instead of leaving you to guess.</span></p></span>
+                <span class="d"><p><span>Training health, training load, consistency, the lifts that have stopped moving and strength ratios. It flags when load is climbing so you can deload instead of guessing.</span></p></span>
               </button>
             </div>
 
             <div>
               <div class="stage">
                 <div class="phone on" id="shot-timer" role="tabpanel" aria-labelledby="tab-timer">
-                  <img src="img/ios-timer.webp" width="660" height="1434" loading="lazy" decoding="async" alt="A 12-minute EMOM running full screen with a large green clock" />
+                  <img src="img/ios-timer.webp" width="660" height="1434" loading="lazy" decoding="async" alt="A 12-minute EMOM running full screen: a large green clock at 0:48 in a ring, round 2 of 12, next up work 1:00, and a hold-to-finish button" />
                 </div>
                 <div class="phone" id="shot-benchmarks" role="tabpanel" aria-labelledby="tab-benchmarks">
-                  <img src="img/ios-benchmarks.webp" width="660" height="1434" loading="lazy" decoding="async" alt="The benchmark library listing Amanda, Angie and Annie with Start Timer buttons" />
+                  <img src="img/ios-benchmarks.webp" width="660" height="1434" loading="lazy" decoding="async" alt="The Benchmarks list on the Train tab: Amanda, Angie and Annie, each with a Start Timer button" />
                 </div>
                 <div class="phone" id="shot-log" role="tabpanel" aria-labelledby="tab-log">
-                  <img src="img/ios-log.webp" width="660" height="1434" loading="lazy" decoding="async" alt="The Log tab: sessions grouped by day with sets, reps, weights and the best lift" />
+                  <img src="img/ios-log.webp" width="660" height="1434" loading="lazy" decoding="async" alt="The Log tab with an All, Lifts and WODs filter: sessions grouped by day with each set's weight and reps, the best lift and a PR badge" />
                 </div>
                 <div class="phone" id="shot-progress" role="tabpanel" aria-labelledby="tab-progress">
-                  <img src="img/ios-stats.webp" width="660" height="1434" loading="lazy" decoding="async" alt="Progress for the snatch: estimated one-rep max, total volume, average weight, total sets and a chart" />
+                  <img src="img/ios-stats.webp" width="660" height="1434" loading="lazy" decoding="async" alt="Progress for the snatch: estimated one-rep max, total volume, average weight, total sets, a chart and the start of the PR board" />
                 </div>
                 <div class="phone" id="shot-analytics" role="tabpanel" aria-labelledby="tab-analytics">
-                  <img src="img/ios-analytics.webp" width="660" height="1434" loading="lazy" decoding="async" alt="Analytics: training health score, training load and plateau analysis" />
+                  <img src="img/ios-analytics.webp" width="660" height="1434" loading="lazy" decoding="async" alt="Analytics: training health score, training load, plateau analysis and strength ratios" />
                 </div>
               </div>
               <p class="tour-desc" id="tour-desc" aria-live="polite"></p>
@@ -1450,8 +1450,8 @@
             </ul>
           </div>
           <div class="wrist-visual rv" style="--i: 2">
-            <div class="watch"><img src="img/watch-home.webp" width="422" height="514" loading="lazy" decoding="async" alt="Apple Watch home screen with a Start Workout button" /></div>
-            <div class="watch"><img src="img/watch-timer.webp" width="422" height="514" loading="lazy" decoding="async" alt="Apple Watch rest timer with 1:00, 1:30, 2:00 and 3:00 presets" /></div>
+            <div class="watch"><img src="img/watch-home.webp" width="416" height="496" loading="lazy" decoding="async" alt="Apple Watch home screen with a Start Workout button" /></div>
+            <div class="watch"><img src="img/watch-timer.webp" width="416" height="496" loading="lazy" decoding="async" alt="Apple Watch running a 12-round EMOM: work phase, round 1 of 12, 0:54 on the clock and a pause button" /></div>
           </div>
         </div>
       </section>
@@ -1469,7 +1469,7 @@
               <div class="tile">
                 <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-wifi-slash" /></svg></span>
                 <h3>Works with no signal. Your data stays on your phone.</h3>
-                <p>Basements and garage gyms included. Nothing is uploaded unless you turn on backup yourself, and with Premium you can export your whole training history whenever you want.</p>
+                <p>Basements and garage gyms included. Nothing is uploaded unless you turn on backup or ask the AI coach, and you can export your whole training history as CSV or JSON whenever you want, on any plan.</p>
               </div>
             </div>
             <div class="bezel top rv" style="--i: 1">
@@ -1496,16 +1496,16 @@
                   <span class="tag yellow">Premium</span>
                 </div>
                 <h3>Back up, restore, change phones.</h3>
-                <p>Manual cloud backup and restore under your own Apple or Google sign-in, so a new phone is one restore away.</p>
+                <p>Cloud backup and auto-sync under your own Apple or Google sign-in are Premium. Restoring a backup and exporting your history are free on every plan, so a new phone is one restore away.</p>
               </div>
             </div>
             <div class="bezel rv" style="--i: 3">
               <div class="tile">
                 <span class="ico"><svg class="i" aria-hidden="true"><use href="#i-translate" /></svg></span>
                 <div class="langs" aria-hidden="true">
-                  <span>English</span><span>Español</span><span>Deutsch</span><span>Français</span><span>日本語</span><span>한국어</span><span>Português</span><span>Italiano</span><span>العربية</span><span>Русский</span>
+                  <span>English</span><span>Español</span><span>Deutsch</span><span>Français</span><span>日本語</span><span>한국어</span><span>Português</span><span>Italiano</span><span>العربية</span><span>Русский</span><span>繁體中文</span>
                 </div>
-                <h3>In 18 languages.</h3>
+                <h3>In 19 languages.</h3>
               </div>
             </div>
           </div>
@@ -1536,6 +1536,8 @@
                   <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Automatic personal records and 1RM</li>
                   <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Three workout templates</li>
                   <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Apple Watch and Wear OS</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Data export and restore</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Live Activity on the lock screen (iPhone)</li>
                 </ul>
               </article>
             </div>
@@ -1548,10 +1550,11 @@
                   <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Unlimited templates</li>
                   <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Multi-week programs</li>
                   <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Advanced analytics and plateau detection</li>
-                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Cloud backup and restore</li>
-                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Data export</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Cloud backup and auto-sync</li>
                   <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Apple Health sync and body composition</li>
                   <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Warm-up generator and recovery dashboard</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Timer Studio for the full-screen clock</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Voice logging, supersets and circuits</li>
                 </ul>
               </article>
             </div>
@@ -1562,15 +1565,14 @@
                 <ul>
                   <li class="inc"><svg class="i" aria-hidden="true"><use href="#i-stack" /></svg>Everything in Premium</li>
                   <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>AI coach for suggestions and post-workout insight</li>
-                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Video demonstrations for 100+ movements</li>
-                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Live Activity on the lock screen</li>
-                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Form check</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Animated exercise demos</li>
+                  <li><svg class="i" aria-hidden="true"><use href="#i-check" /></svg>Form check for your lifts</li>
                 </ul>
               </article>
             </div>
           </div>
           <p class="plans-note">
-            New subscriptions start with a 3-day free trial. Subscriptions are handled by the App Store and
+            A free trial applies when the store offers one for your account. Subscriptions are handled by the App Store and
             Google Play, and can be cancelled there at any time.
           </p>
         </div>
@@ -1602,7 +1604,7 @@
             </li>
             <li>
               <span class="k">Services</span>
-              <span class="v"><span>Firebase Auth and Firestore</span><span>RevenueCat</span><span>Gemini 2.5 Flash</span></span>
+              <span class="v"><span>Firebase Auth and Firestore</span><span>RevenueCat</span><span>Gemini 3.5 Flash-Lite</span></span>
             </li>
             <li>
               <span class="k">Delivery</span>
