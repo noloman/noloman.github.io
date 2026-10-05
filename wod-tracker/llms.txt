@@ -37,7 +37,7 @@
   a lock screen Live Activity on iPhone, Apple Watch and Wear OS.
 - Premium: unlimited templates, multi-week programs, advanced analytics and plateau
   detection, cloud backup and auto-sync, Timer Studio, voice logging, supersets and circuits,
-  Apple Health sync and body composition, warm-up generator and recovery dashboard.
+  Apple Health sync and body composition, warm-up generator and recovery dashboard, alternate app icons.
 - PRO: everything in Premium plus the AI coach, animated exercise demos and form check.
 - A free trial applies when the store offers one for your account. Prices are set per country
   by the App Store and Google Play.
