@@ -416,6 +416,11 @@
           border-color 0.25s,
           box-shadow 0.25s;
       }
+      .card:nth-child(5) {
+        grid-column: span 6;
+        flex-direction: row;
+        gap: 32px;
+      }
       .card:nth-child(1),
       .card:nth-child(4) {
         grid-column: span 4;
@@ -478,7 +483,8 @@
         transition: transform 0.5s var(--ease);
       }
       .card:nth-child(1) .shot,
-      .card:nth-child(4) .shot {
+      .card:nth-child(4) .shot,
+      .card:nth-child(5) .shot {
         align-self: flex-end;
         margin-top: 24px;
         width: 220px;

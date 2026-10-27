@@ -81,6 +81,16 @@ window.PorfolioConfig = {
         "A web app for finding remote work opportunities. Browse remote job listings, filter by role and category, save interesting positions, and apply directly from the browser.",
     },
     {
+      name: "Quickspan",
+      image: "quickspan/shot-quick-add.webp",
+      imageAlt: "Quickspan quick add turning \u201cGym every Mon and Thu at 7pm\u201d into a repeating event",
+      summary: "A private Android calendar you type or speak into. 12 languages, no account, no ads, no tracking.",
+      type: "Android",
+      link: "https://quickspan.app",
+      description:
+        "A private calendar for Android phones, foldables and tablets that you type or speak into: write \u201cGym every Mon and Thu at 7pm\u201d and it becomes an event. Works in 12 languages, with no account, no ads and no tracking, and a one-time Pro purchase. Version 0.2.0 is live on Google Play.",
+    },
+    {
       name: "WOD Tracker",
       image: "wod-tracker/img/ios-timer.webp",
       imageAlt: "WOD Tracker timer screen with EMOM, AMRAP and Tabata presets",
