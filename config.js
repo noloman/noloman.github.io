@@ -82,13 +82,13 @@ window.PorfolioConfig = {
     },
     {
       name: "Quickspan",
-      image: "quickspan/shot-quick-add.webp",
-      imageAlt: "Quickspan quick add turning \u201cGym every Mon and Thu at 7pm\u201d into a repeating event",
+      image: "quickspan/shot-quick-add-label.webp",
+      imageAlt: "Quickspan quick add turning \u201cPick up parcel Thursday 10am #errands\u201d into an event with the errands label",
       summary: "A private Android calendar you type or speak into. 12 languages, no account, no ads, no tracking.",
       type: "Android",
       link: "https://quickspan.app",
       description:
-        "A private calendar for Android phones, foldables and tablets that you type or speak into: write \u201cGym every Mon and Thu at 7pm\u201d and it becomes an event. Works in 12 languages, with no account, no ads and no tracking, and a one-time Pro purchase. Version 0.2.0 is live on Google Play.",
+        "A private calendar for Android phones, foldables and tablets that you type or speak into: write \u201cGym every Mon and Thu at 7pm\u201d and it becomes an event. Version 0.5.1 adds #labels with their own colours, saved views, guests with Yes / Maybe / No answers, up to five reminders per event and opt-in crash reports. Weather in the week view and subscribed calendar links stay off until you turn them on. Quick add understands 12 languages and the app speaks 23, with no account, no ads and no tracking, and a one-time Pro purchase. On Google Play.",
     },
     {
       name: "WOD Tracker",
