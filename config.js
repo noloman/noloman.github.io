@@ -76,7 +76,7 @@ window.PorfolioConfig = {
     {
       name: "Agentic AI, zero to job-ready",
       type: "Course",
-      link: "https://agentic-ai-course-co2.pages.dev/",
+      link: "https://course.nulltwenty.com/",
       description:
         "A course and a 427-page book for developers on building AI agents by writing the loop yourself, then adding tools, memory, retrieval, evals, security and a shipped capstone. Examples use the Claude API in Python. Early access at $29; chapters 00\u201302 are free to read.",
     },
