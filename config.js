@@ -74,6 +74,13 @@ window.PorfolioConfig = {
         "A macOS menu-bar utility that shows the keyboard shortcuts of whatever app you're using. Hold ⌘ for a glance at every shortcut grouped by menu, click any row to run it, search when you need one fast, and add custom cheat sheets for apps like Vim and tmux.",
     },
     {
+      name: "Agentic AI, zero to job-ready",
+      type: "Course",
+      link: "https://agentic-ai-course-co2.pages.dev/",
+      description:
+        "A course and a 427-page book for developers on building AI agents by writing the loop yourself, then adding tools, memory, retrieval, evals, security and a shipped capstone. Examples use the Claude API in Python. Early access at $29; chapters 00\u201302 are free to read.",
+    },
+    {
       name: "Anywhere Roles",
       ownBackend: true,
       link: "https://anywhereroles.com",
