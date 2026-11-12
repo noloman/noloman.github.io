@@ -81,6 +81,13 @@ window.PorfolioConfig = {
         "A course and a 427-page book for developers on building AI agents by writing the loop yourself, then adding tools, memory, retrieval, evals, security and a shipped capstone. Examples use the Claude API in Python. Early access at $29; chapters 00\u201302 are free to read.",
     },
     {
+      name: "Small Models, Real Phones",
+      type: "Course",
+      link: "https://small-models-real-phones.pages.dev/",
+      description:
+        "A 46-lesson course for mobile developers on fine-tuning a small language model and running it on a Pixel and an iPhone with no network. Every number in it was measured on the real devices. Early access; lessons 01\u201310 are free to read.",
+    },
+    {
       name: "Anywhere Roles",
       ownBackend: true,
       link: "https://anywhereroles.com",
