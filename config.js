@@ -88,7 +88,7 @@ window.PorfolioConfig = {
       type: "Android",
       link: "https://quickspan.app",
       description:
-        "A private calendar for Android phones, foldables and tablets that you type or speak into: write \u201cGym every Mon and Thu at 7pm\u201d and it becomes an event. It shows the Google, Exchange and other calendars already on your phone, with labels, saved views and up to five reminders per event. Typed quick add in 12 languages, no account, no ads, no tracking, crash reports only if you say yes, and a one-time Pro purchase. Version 0.5.2 is live on Google Play.",
+        "A private calendar for Android phones, foldables and tablets that you type or speak into: write \u201cGym every Mon and Thu at 7pm\u201d and it becomes an event. It shows the Google, Exchange and other calendars already on your phone, with labels, saved views and up to five reminders per event. Place suggestions for an event\u2019s location come from your own places, plus your phone\u2019s place search if you turn it on. Typed quick add in 12 languages, no account, no ads, no tracking, crash reports only if you say yes, and a one-time Pro purchase. Version 0.5.3 is live on Google Play.",
     },
     {
       name: "WOD Tracker",
