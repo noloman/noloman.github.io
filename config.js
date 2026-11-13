@@ -91,11 +91,11 @@ window.PorfolioConfig = {
       name: "Quickspan",
       image: "quickspan/shot-quick-add.webp",
       imageAlt: "Quickspan quick add turning \u201cGym every Mon and Thu at 7pm\u201d into a repeating event",
-      summary: "A private Android calendar you type or speak into, beside the Google and Outlook calendars already on your phone. No account, no ads, no tracking.",
-      type: "Android",
+      summary: "A private calendar for Android and Windows that you type into (or speak, on Android), beside your Google, Outlook and iCloud calendars. No account, no ads, no tracking.",
+      type: "Android & Windows",
       link: "https://quickspan.app",
       description:
-        "A private calendar for Android phones, foldables and tablets that you type or speak into: write \u201cGym every Mon and Thu at 7pm\u201d and it becomes an event. It shows the Google, Exchange and other calendars already on your phone, with labels, saved views and up to five reminders per event. Typed quick add in 12 languages, no account, no ads, no tracking, crash reports only if you say yes, and a one-time Pro purchase. Version 0.5.2 is live on Google Play.",
+        "A private calendar for Android phones, foldables and tablets that you type or speak into: write \u201cGym every Mon and Thu at 7pm\u201d and it becomes an event. It shows the Google, Exchange and other calendars already on your phone, with labels, saved views and up to five reminders per event. Typed quick add in 12 languages, no account, no ads, no tracking, crash reports only if you say yes, and a one-time Pro purchase. Version 0.5.2 is live on Google Play. The Windows app (Compose Multiplatform, on the Microsoft Store) brings the same quick add to the PC: a global hotkey (Ctrl+Shift+Space) adds an event from any app, it syncs Google, Microsoft 365 / Outlook.com, iCloud and CalDAV calendars, and Pro is a one-time licence key sold on quickspan.app, not in the Store.",
     },
     {
       name: "WOD Tracker",
