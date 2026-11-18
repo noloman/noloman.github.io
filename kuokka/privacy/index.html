@@ -138,7 +138,7 @@
             <tr>
               <td>Firebase Analytics and Crashlytics</td>
               <td>
-                Anonymous usage events and crash diagnostics, and only if you
+                Usage events and crash diagnostics, and only if you
                 allow them. Kuokka asks on first run and the choice lives under
                 Account, where you can change it at any time.
               </td>
@@ -148,7 +148,17 @@
               <td>
                 Purchase and entitlement state, so a Premium purchase is
                 recognised on the device. It receives a store transaction
-                identifier, never your payment details.
+                identifier, never your payment details. It also receives a few
+                aggregate counters about the upgrade screen: the date you first
+                saw it, how many times (up to ten), which part of the app
+                opened it, the date you first tapped to buy, and how many times
+                you cancelled (up to five). They are kept with the same
+                identifier RevenueCat uses for your purchase, which is derived
+                from your Hacker News username if you are logged in, and they
+                are not covered by the analytics switch because they let us
+                see whether the upgrade screen works at all. They contain no
+                reading history, no article or comment content and no free
+                text.
               </td>
             </tr>
             <tr>
@@ -185,8 +195,10 @@
         <h2>Your choices</h2>
         <ul>
           <li>
-            <strong>Analytics:</strong> turn anonymous analytics and crash
-            reporting on or off under Account.
+            <strong>Analytics:</strong> turn Firebase analytics and crash
+            reporting on or off under Account. The upgrade-screen counters
+            above are separate; to have them deleted, email the address under
+            Contact.
           </li>
           <li>
             <strong>AI provider:</strong> remove your API key in Settings and
