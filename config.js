@@ -74,6 +74,13 @@ window.PorfolioConfig = {
         "A macOS menu-bar utility that shows the keyboard shortcuts of whatever app you're using. Hold ⌘ for a glance at every shortcut grouped by menu, click any row to run it, search when you need one fast, and add custom cheat sheets for apps like Vim and tmux.",
     },
     {
+      name: "Agentic AI, zero to job-ready",
+      type: "Course",
+      link: "https://agentic-ai.nulltwenty.com/",
+      description:
+        "A course and a 427-page book for developers on building AI agents by writing the loop yourself, then adding tools, memory, retrieval, evals, security and a shipped capstone. Examples use the Claude API in Python. Early access at $29; chapters 00\u201302 are free to read.",
+    },
+    {
       name: "Anywhere Roles",
       ownBackend: true,
       link: "https://anywhereroles.com",
@@ -88,7 +95,7 @@ window.PorfolioConfig = {
       type: "Android & Windows",
       link: "https://quickspan.app",
       description:
-        "A private calendar for Android phones, foldables and tablets that you type or speak into: write \u201cGym every Mon and Thu at 7pm\u201d and it becomes an event. It shows the Google, Exchange and other calendars already on your phone, with labels, saved views and up to five reminders per event. Typed quick add in 12 languages, no account, no ads, no tracking, crash reports only if you say yes, and a one-time Pro purchase. Version 0.5.2 is live on Google Play. The Windows app (Compose Multiplatform, on the Microsoft Store) brings the same quick add to the PC: a global hotkey (Ctrl+Shift+Space) adds an event from any app, it syncs Google, Microsoft 365 / Outlook.com, iCloud and CalDAV calendars, and Pro is a one-time licence key sold on quickspan.app, not in the Store.",
+        "A private calendar for Android phones, foldables and tablets that you type or speak into: write \u201cGym every Mon and Thu at 7pm\u201d and it becomes an event. It shows the Google, Exchange and other calendars already on your phone, with labels, saved views and up to five reminders per event. Place suggestions for an event\u2019s location come from your own places, plus your phone\u2019s place search if you turn it on. Typed quick add, no account, no ads, no tracking, crash reports only if you say yes, and a one-time Pro purchase. Version 0.5.3 is live on Google Play. The Windows app (Compose Multiplatform, on the Microsoft Store) brings the same quick add to the PC: a global hotkey (Ctrl+Shift+Space) adds an event from any app, it syncs Google, Microsoft 365 / Outlook.com, iCloud and CalDAV calendars, and Pro is a one-time licence key sold on quickspan.app, not in the Store.",
     },
     {
       name: "WOD Tracker",
