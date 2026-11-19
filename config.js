@@ -83,9 +83,9 @@ window.PorfolioConfig = {
     {
       name: "Kotlin Multiplatform: from zero to production",
       type: "Course",
-      link: "https://8954369651852.gumroad.com/l/bvawll",
+      link: "https://8954369651852.gumroad.com/l/bvawll/KMPLAUNCH",
       description:
-        "A course for Android developers on taking one Kotlin code base to a real Android app and a real iOS app, then shipping both and keeping them healthy. You build Peek, a Hacker News reader for Android, iOS and desktop, with a tested solution for every module. 18 modules and 4 appendices as a 263-page PDF, an EPUB and an offline web version, with deep chapters on Swift interop, releasing to both stores and production habits. $79.",
+        "A course for Android developers on taking one Kotlin code base to a real Android app and a real iOS app, then shipping both and keeping them healthy. You build Peek, a Hacker News reader for Android, iOS and desktop, with a tested solution for every module. 18 modules and 4 appendices as a 263-page PDF, an EPUB and an offline web version, with deep chapters on Swift interop, releasing to both stores and production habits. Launch price $59 instead of $79 for the first 100 buyers, with code KMPLAUNCH applied automatically.",
     },
     {
       name: "Anywhere Roles",
