@@ -81,6 +81,13 @@ window.PorfolioConfig = {
         "A course and a 427-page book for developers on building AI agents by writing the loop yourself, then adding tools, memory, retrieval, evals, security and a shipped capstone. Examples use the Claude API in Python. Early access at $29; chapters 00\u201302 are free to read.",
     },
     {
+      name: "Kotlin Multiplatform: from zero to production",
+      type: "Course",
+      link: "https://8954369651852.gumroad.com/l/bvawll",
+      description:
+        "A course for Android developers on taking one Kotlin code base to a real Android app and a real iOS app, then shipping both and keeping them healthy. You build Peek, a Hacker News reader for Android, iOS and desktop, with a tested solution for every module. 18 modules and 4 appendices as a 263-page PDF, an EPUB and an offline web version, with deep chapters on Swift interop, releasing to both stores and production habits. $79.",
+    },
+    {
       name: "Anywhere Roles",
       ownBackend: true,
       link: "https://anywhereroles.com",
